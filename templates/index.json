@@ -97,6 +97,18 @@
       },
       "block_order": ["pr1", "pr2", "pr3"]
     },
+    "blume_rewards": {
+      "type": "blume-rewards",
+      "settings": {
+        "title": "Blume Rewards"
+      }
+    },
+    "blume_newsletter": {
+      "type": "blume-newsletter",
+      "settings": {
+        "title": "Join the club."
+      }
+    },
     "blume_community": {
       "type": "blume-community",
       "settings": {
@@ -114,6 +126,8 @@
     "real_results",
     "blume_benefits",
     "blume_prompts",
+    "blume_rewards",
+    "blume_newsletter",
     "blume_community"
   ]
 }

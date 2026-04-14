@@ -1,0 +1,113 @@
+{%- style -%}
+  .blume-rewards {
+    padding: 100px 0;
+    background: var(--blume-cream);
+    text-align: center;
+  }
+  .rewards-card {
+    background: #fff;
+    padding: 60px;
+    border-radius: 12px;
+    max-width: 900px;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    gap: 60px;
+    border: 1px solid #eee;
+  }
+  .rewards-content {
+    text-align: left;
+    flex: 1;
+  }
+  .rewards-content h2 {
+    font-size: 36px;
+    color: var(--blume-blue);
+    margin-bottom: 20px;
+  }
+  .rewards-image {
+    flex: 0 0 250px;
+  }
+  .rewards-image img {
+    width: 100%;
+    height: auto;
+  }
+  @media (max-width: 768px) {
+    .rewards-card { flex-direction: column-reverse; padding: 40px 20px; gap: 30px; text-align: center; }
+    .rewards-content { text-align: center; }
+    .rewards-image { flex: 0 0 auto; width: 150px; }
+  }
+{%- endstyle -%}
+
+<section class="blume-rewards">
+  <div class="modern-container">
+    <div class="rewards-card animate-fade-up">
+      <div class="rewards-content">
+        <h2>{{ section.settings.title }}</h2>
+        <div class="modern-subtitle">{{ section.settings.text }}</div>
+        <div style="display: flex; gap: 15px; flex-wrap: wrap; margin-top: 30px; {% if section.settings.center_mobile %}justify-content: center;{% endif %}">
+          <a href="{{ section.settings.link_1 }}" class="modern-btn">{{ section.settings.btn_1_label }}</a>
+          <a href="{{ section.settings.link_2 }}" class="modern-btn modern-btn-secondary" style="background: transparent; border: none; text-decoration: underline;">{{ section.settings.btn_2_label }}</a>
+        </div>
+      </div>
+      <div class="rewards-image">
+        {%- if section.settings.image != blank -%}
+          {{ section.settings.image | image_url: width: 500 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          {{ 'lifestyle-2' | placeholder_svg_tag: 'placeholder-svg' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blume Rewards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Blume Rewards"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Earn Blume Bucks on every order. Redeem for free shipping, free products, and exclusive early access to our newest launches.</p>"
+    },
+    {
+      "type": "text",
+      "id": "btn_1_label",
+      "label": "Button 1 Label",
+      "default": "JOIN NOW"
+    },
+    {
+      "type": "url",
+      "id": "link_1",
+      "label": "Button 1 Link"
+    },
+    {
+      "type": "text",
+      "id": "btn_2_label",
+      "label": "Button 2 Label",
+      "default": "LEARN MORE"
+    },
+    {
+      "type": "url",
+      "id": "link_2",
+      "label": "Button 2 Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Rewards Icon/Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Rewards"
+    }
+  ]
+}
+{% endschema %}

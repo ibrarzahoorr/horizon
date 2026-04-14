@@ -1,0 +1,114 @@
+{%- style -%}
+  .blume-newsletter {
+    background-color: var(--blume-soft-blue);
+    padding: 100px 0;
+    text-align: center;
+  }
+  .blume-newsletter h2 {
+    font-size: 42px;
+    color: var(--blume-blue);
+    margin-bottom: 20px;
+    font-weight: 600;
+  }
+  .blume-newsletter p {
+    font-size: 1.1rem;
+    color: var(--blume-blue);
+    margin-bottom: 40px;
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .newsletter-form-container {
+    max-width: 500px;
+    margin: 0 auto;
+    position: relative;
+    display: flex;
+    gap: 10px;
+  }
+  .newsletter-input {
+    flex: 1;
+    padding: 15px 25px;
+    border: 1px solid var(--blume-blue);
+    border-radius: 4px;
+    font-family: inherit;
+    font-size: 16px;
+  }
+  .newsletter-submit {
+    background: var(--blume-blue);
+    color: #fff;
+    border: none;
+    padding: 0 30px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-weight: 600;
+    text-transform: uppercase;
+    transition: var(--transition-smooth);
+  }
+  .newsletter-submit:hover {
+    opacity: 0.9;
+  }
+  @media (max-width: 576px) {
+    .newsletter-form-container { flex-direction: column; }
+    .newsletter-submit { padding: 15px; }
+  }
+{%- endstyle -%}
+
+<section class="blume-newsletter">
+  <div class="modern-container">
+    <h2>{{ section.settings.title }}</h2>
+    <p>{{ section.settings.text }}</p>
+    
+    {%- form 'customer', id: 'BlumeNewsletterForm' -%}
+      <input type="hidden" name="contact[tags]" value="newsletter">
+      <div class="newsletter-form-container">
+        <input
+          id="NewsletterForm-{{ section.id }}"
+          type="email"
+          name="contact[email]"
+          class="newsletter-input"
+          value="{{ form.email }}"
+          aria-required="true"
+          autocorrect="off"
+          autocapitalize="off"
+          autocomplete="email"
+          placeholder="Email Address"
+          required
+        >
+        <button type="submit" class="newsletter-submit" name="commit" id="Subscribe">
+          JOIN THE CLUB
+        </button>
+      </div>
+      {%- if form.errors -%}
+        <div style="margin-top: 20px; color: red;">{{ form.errors.translated_fields.email | capitalize }} {{ form.errors.messages.email }}</div>
+      {%- endif -%}
+      {%- if form.posted_successfully? -%}
+        <div style="margin-top: 20px; color: var(--blume-blue); font-weight: 600;">Thanks for subscribing! Check your inbox for your 10% off code.</div>
+      {%- endif -%}
+    {%- endform -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blume Newsletter",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Join the club."
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Sign up for 10% off your first order and stay up to date on new launches, tips and tricks."
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Newsletter"
+    }
+  ]
+}
+{% endschema %}

@@ -1,97 +1,116 @@
 {%- style -%}
   .blume-hero-wrapper {
-    background-color: var(--blume-soft-blue);
-    padding: 60px 0;
+    background-color: var(--blume-light-blue);
+    padding: 0;
     overflow: hidden;
+    display: flex;
+    align-items: stretch;
+    min-height: 80vh;
   }
-  .blume-hero-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 40px;
+  .blume-hero-content-side {
+    flex: 0 0 45%;
     display: flex;
     align-items: center;
-    gap: 40px;
+    justify-content: flex-end;
+    padding: 60px 80px;
+    background-color: var(--blume-light-blue);
   }
-  .blume-hero-text {
-    flex: 1;
-    max-width: 500px;
-  }
-  .blume-hero-image {
-    flex: 1.2;
+  .blume-hero-media-side {
+    flex: 0 0 55%;
     position: relative;
+    background-color: var(--blume-light-blue);
   }
-  .blume-hero-image img {
+  .blume-hero-media-side img.main-img {
     width: 100%;
-    height: auto;
+    height: 100%;
+    object-fit: cover;
     display: block;
   }
   .signature-overlay {
     position: absolute;
-    top: -20px;
-    right: 20px;
-    width: 150px;
-    z-index: 2;
+    top: 50px;
+    left: 10%;
+    width: 250px;
+    z-index: 5;
+    transform: rotate(-10deg);
+    pointer-events: none;
   }
-  .blume-hero h1 {
-    font-size: clamp(2.5rem, 5vw, 4rem);
-    line-height: 1.1;
-    margin-bottom: 25px;
-    color: var(--blume-blue);
-    font-weight: 500;
+  .hero-text-container {
+    max-width: 500px;
   }
-  .blume-hero .subtitle {
-    font-size: 1.1rem;
+  .hero-text-container h1 {
+    font-size: clamp(2.8rem, 4.5vw, 4.2rem);
+    line-height: 1;
     margin-bottom: 30px;
     color: var(--blume-blue);
-    opacity: 0.8;
+  }
+  .hero-text-container .subtitle {
+    font-size: 1.1rem;
+    line-height: 1.5;
+    margin-bottom: 35px;
+    color: var(--blume-blue);
+    opacity: 0.9;
   }
   .stars-row {
-    margin-top: 15px;
+    margin-top: 25px;
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 8px;
     font-size: 14px;
     color: var(--blume-blue);
+    font-weight: 600;
+  }
+  .stars-row .stars {
+    color: #ffb800;
+    font-size: 18px;
+  }
+  @media (max-width: 1200px) {
+    .blume-hero-content-side { padding: 60px 40px; }
   }
   @media (max-width: 991px) {
-    .blume-hero-container {
-      flex-direction: column;
-      text-align: center;
-      padding: 0 20px;
-    }
-    .blume-hero-text {
-      max-width: 100%;
-    }
+    .blume-hero-wrapper { flex-direction: column; }
+    .blume-hero-content-side, .blume-hero-media-side { flex: auto; width: 100%; }
+    .blume-hero-content-side { justify-content: center; text-align: center; order: 2; padding: 60px 20px; }
+    .blume-hero-media-side { order: 1; min-height: 50vh; }
+    .signature-overlay { width: 150px; left: 50%; transform: translateX(-50%) rotate(-10deg); top: 20px; }
+    .btn-offset-wrapper { margin-left: auto; margin-right: auto; }
   }
 {%- endstyle -%}
 
 <section class="blume-hero-wrapper">
-  <div class="blume-hero-container">
-    <div class="blume-hero-text animate-fade-up">
-      <h1>{{ section.settings.title }}</h1>
+  <div class="blume-hero-content-side">
+    <div class="hero-text-container animate-fade-up">
+      <h1 class="hero-heading">{{ section.settings.title }}</h1>
       <div class="subtitle">{{ section.settings.text }}</div>
-      <a href="{{ section.settings.link }}" class="modern-btn">{{ section.settings.button_label }}</a>
+      
+      <div class="btn-offset-wrapper">
+        <div class="btn-offset-bg"></div>
+        <a href="{{ section.settings.link }}" class="modern-btn offset">{{ section.settings.button_label }}</a>
+      </div>
+
       <div class="stars-row">
-        <span>★★★★★</span>
-        <span>Over 5,000+ 5-star reviews</span>
+        <span>{{ section.settings.reviews_text }}</span>
+        <span class="stars">★★★★★</span>
       </div>
     </div>
-    <div class="blume-hero-image">
-      {%- if section.settings.image != blank -%}
-        {{ section.settings.image | image_url: width: 1200 | image_tag: loading: 'eager' }}
-      {%- else -%}
-        {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
-      {%- endif -%}
-      {%- if section.settings.signature != blank -%}
-        <img src="{{ section.settings.signature | image_url: width: 300 }}" class="signature-overlay" alt="Signature">
-      {%- endif -%}
-    </div>
+  </div>
+  
+  <div class="blume-hero-media-side">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 1600 | image_tag: class: 'main-img', loading: 'eager' }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg main-img' }}
+    {%- endif -%}
+    
+    {%- if section.settings.signature != blank -%}
+      {{ section.settings.signature | image_url: width: 500 | image_tag: class: 'signature-overlay', alt: 'Signature' }}
+    {%- endif -%}
   </div>
 </section>
 
 {% schema %}
 {
-  "name": "Blume Hero",
+  "name": "Blume Hero Refined",
   "settings": [
     {
       "type": "text",
@@ -103,7 +122,7 @@
       "type": "richtext",
       "id": "text",
       "label": "Text",
-      "default": "<p>Gently remove surface impurities and excess oil for a clean and hydrated glow.</p>"
+      "default": "<p>Pearl Drip calms redness, replenishes moisture, and leaves sensitive, acne-prone skin soft, balanced, and glowing.</p>"
     },
     {
       "type": "text",
@@ -117,19 +136,25 @@
       "label": "Button Link"
     },
     {
+      "type": "text",
+      "id": "reviews_text",
+      "label": "Reviews Subtext",
+      "default": "5000+ 5 star reviews"
+    },
+    {
       "type": "image_picker",
       "id": "image",
-      "label": "Main Image"
+      "label": "Main Image (Model + Product)"
     },
     {
       "type": "image_picker",
       "id": "signature",
-      "label": "Signature Overlay"
+      "label": "Handwriting Signature Overlay"
     }
   ],
   "presets": [
     {
-      "name": "Blume Hero"
+      "name": "Blume Hero Refined"
     }
   ]
 }
