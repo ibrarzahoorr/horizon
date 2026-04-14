@@ -99,8 +99,48 @@
         "text": "<p>Gently remove surface impurities and excess oil for a clean and hydrated glow.</p>",
         "button_label": "SHOP NOW",
         "link": "",
+        "reviews_text": "5000+ 5 star reviews",
         "image": "shopify://shop_images/blume-pearl-toner1.png"
       }
+    },
+    "blume_trust_bar_bkybWJ": {
+      "type": "blume-trust-bar",
+      "blocks": {
+        "logo_rpnMRW": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Frame_1.png",
+            "alt_text": ""
+          }
+        },
+        "logo_CrDTA9": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Frame_2.png",
+            "alt_text": ""
+          }
+        },
+        "logo_jyha6p": {
+          "type": "logo",
+          "settings": {
+            "alt_text": ""
+          }
+        },
+        "logo_eJtRm3": {
+          "type": "logo",
+          "settings": {
+            "alt_text": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_rpnMRW",
+        "logo_CrDTA9",
+        "logo_jyha6p",
+        "logo_eJtRm3"
+      ],
+      "name": "Blume Trust Bar",
+      "settings": {}
     },
     "product_list_fa6P9H": {
       "type": "product-list",
@@ -282,71 +322,6 @@
         "carousel_on_mobile": false,
         "max_products": 8,
         "columns": 4,
-<<<<<<< HEAD
-        "footer_btn_label": "Shop All Best Sellers"
-      },
-      "blocks": {
-        "p1": { "type": "product", "settings": { "title": "Meltdown Acne Oil", "sale_tag": "" } },
-        "p2": { "type": "product", "settings": { "title": "Daydreamer Face Wash", "sale_tag": "" } },
-        "p3": { "type": "product", "settings": { "title": "Cloud 9 Moisturizer", "sale_tag": "" } },
-        "p4": { "type": "product", "settings": { "title": "Superpower Serum", "sale_tag": "" } }
-      },
-      "block_order": ["p1", "p2", "p3", "p4"]
-    },
-    "dermo_rec": {
-      "type": "blume-dermo-rec",
-      "settings": {
-        "title": "Dermatologist Recommended"
-      }
-    },
-    "real_results": {
-      "type": "before-after",
-      "settings": {
-        "title": "Real results, real skin."
-      }
-    },
-    "blume_benefits": {
-      "type": "blume-benefits",
-      "settings": {
-        "title": "We make spring, all natural skincare."
-      },
-      "blocks": {
-        "b1": { "type": "benefit", "settings": { "icon": "🌱", "text": "VEGAN" } },
-        "b2": { "type": "benefit", "settings": { "icon": "🐰", "text": "CRUELTY FREE" } },
-        "b3": { "type": "benefit", "settings": { "icon": "♻️", "text": "RECYCLABLE" } },
-        "b4": { "type": "benefit", "settings": { "icon": "✨", "text": "NO FILLERS" } }
-      },
-      "block_order": ["b1", "b2", "b3", "b4"]
-    },
-    "blume_prompts": {
-      "type": "blume-prompts",
-      "settings": {
-        "title": "What are you looking for today?"
-      },
-      "blocks": {
-        "pr1": { "type": "prompt", "settings": { "text": "I want to brighten skin" } },
-        "pr2": { "type": "prompt", "settings": { "text": "I want blue and discoloration" } },
-        "pr3": { "type": "prompt", "settings": { "text": "I want dry skin" } }
-      },
-      "block_order": ["pr1", "pr2", "pr3"]
-    },
-    "blume_rewards": {
-      "type": "blume-rewards",
-      "settings": {
-        "title": "Blume Rewards"
-      }
-    },
-    "blume_newsletter": {
-      "type": "blume-newsletter",
-      "settings": {
-        "title": "Join the club."
-      }
-    },
-    "blume_community": {
-      "type": "blume-community",
-      "settings": {
-        "title": "Let's Keep it real"
-=======
         "mobile_columns": "2",
         "mobile_card_size": "60cqw",
         "columns_gap": 8,
@@ -359,28 +334,13 @@
         "color_scheme": "scheme-1",
         "padding-block-start": 48,
         "padding-block-end": 48
->>>>>>> 0b0cadeeb8d78936e60a323dd7db4ef904611954
       }
     }
   },
   "order": [
-<<<<<<< HEAD
-    "blume_hero",
-    "blume_trust_bar",
-    "best_bundles",
-    "shop_by_skin_type",
-    "best_sellers",
-    "dermo_rec",
-    "real_results",
-    "blume_benefits",
-    "blume_prompts",
-    "blume_rewards",
-    "blume_newsletter",
-    "blume_community"
-=======
     "hero_jVaWmY",
     "blume_hero_H7Ky7C",
+    "blume_trust_bar_bkybWJ",
     "product_list_fa6P9H"
->>>>>>> 0b0cadeeb8d78936e60a323dd7db4ef904611954
   ]
 }
