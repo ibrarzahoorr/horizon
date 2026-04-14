@@ -1,0 +1,82 @@
+<section class="modern-section" style="background: {{ section.settings.bg_color }};">
+  <div class="modern-container">
+    <div style="text-align: center; margin-bottom: 60px;">
+      {%- if section.settings.tag != blank -%}
+        <span class="routine-tag">{{ section.settings.tag }}</span>
+      {%- endif -%}
+      <h2 class="modern-title">{{ section.settings.title }}</h2>
+    </div>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px;">
+      {%- for block in section.blocks -%}
+        <div class="glass-box" style="text-align: center;" {{ block.shopify_attributes }}>
+          <div style="font-size: 3rem; margin-bottom: 20px;">{{ block.settings.icon }}</div>
+          <h3 style="font-size: 24px; margin-bottom: 15px;">{{ block.settings.title }}</h3>
+          <p class="modern-subtitle" style="margin: 0;">{{ block.settings.text }}</p>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Ingredient Spotlight",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#faf7f2"
+    },
+    {
+      "type": "text",
+      "id": "tag",
+      "label": "Tag",
+      "default": "Clean Ingredients"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "The good stuff only."
+    }
+  ],
+  "blocks": [
+    {
+      "type": "ingredient",
+      "name": "Ingredient",
+      "settings": [
+        {
+          "type": "text",
+          "id": "icon",
+          "label": "Emoji/Icon",
+          "default": "🌿"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Name",
+          "default": "Hyaluronic Acid"
+        },
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Description",
+          "default": "Holds 1000x its weight in water for plump, hydrated skin."
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Ingredient Spotlight",
+      "blocks": [
+        { "type": "ingredient", "settings": { "icon": "💧", "title": "Squalane" } },
+        { "type": "ingredient", "settings": { "icon": "🍊", "title": "Vitamin C" } },
+        { "type": "ingredient", "settings": { "icon": "🍵", "title": "Green Tea" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

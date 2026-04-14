@@ -1,0 +1,105 @@
+<section class="modern-section" style="background: {{ section.settings.bg_color }};">
+  <div class="modern-container">
+    {%- if section.settings.title != blank -%}
+      <h2 class="modern-title" style="text-align: center;">{{ section.settings.title }}</h2>
+    {%- endif -%}
+    {%- if section.settings.text != blank -%}
+      <div class="modern-subtitle" style="text-align: center; margin-left: auto; margin-right: auto;">
+        {{ section.settings.text }}
+      </div>
+    {%- endif -%}
+
+    <div class="concern-grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" class="concern-item" {{ block.shopify_attributes }}>
+          <div class="concern-image-wrapper">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 400 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <p class="concern-title">{{ block.settings.title }}</p>
+        </a>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.button_label != blank -%}
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="{{ section.settings.button_link }}" class="modern-btn">{{ section.settings.button_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Shop by Concern",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#faf7f2"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Shop by Concern"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Targeted solutions for your specific skin needs.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Footer Button",
+      "default": "See All Solutions"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Footer Button Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "concern",
+      "name": "Concern",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Icon/Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Acne & Blemishes"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Shop by Concern",
+      "blocks": [
+        { "type": "concern", "settings": { "title": "Acne" } },
+        { "type": "concern", "settings": { "title": "Dryness" } },
+        { "type": "concern", "settings": { "title": "Aging" } },
+        { "type": "concern", "settings": { "title": "Redness" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

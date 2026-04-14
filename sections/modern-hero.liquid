@@ -1,0 +1,169 @@
+{%- style -%}
+  #ModernHero-{{ section.id }} {
+    position: relative;
+    min-height: {{ section.settings.height_desktop }}vh;
+    display: flex;
+    align-items: center;
+    justify-content: {{ section.settings.content_alignment }};
+    overflow: hidden;
+  }
+
+  .hero-bg-media {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+  }
+
+  .hero-bg-media img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .modern-hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 600px;
+    margin: 40px;
+  }
+
+  @media (max-width: 768px) {
+    #ModernHero-{{ section.id }} {
+      min-height: {{ section.settings.height_mobile }}vh;
+      justify-content: center;
+      text-align: center;
+    }
+    .modern-hero-content {
+      margin: 20px;
+    }
+  }
+{%- endstyle -%}
+
+<section id="ModernHero-{{ section.id }}" class="modern-hero">
+  <div class="hero-bg-media">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2800 | image_tag: 
+        loading: 'eager',
+        sizes: '100vw',
+        widths: '375, 550, 750, 1100, 1500, 1780, 2000, 3000, 3840'
+      }}
+    {%- else -%}
+      {{ 'lifestyle-1' | placeholder_svg_tag: 'placeholder-svg' }}
+    {%- endif -%}
+  </div>
+
+  <div class="modern-hero-content glass-box animate-fade-up">
+    {%- if section.settings.subheading != blank -%}
+      <p class="routine-tag">{{ section.settings.subheading }}</p>
+    {%- endif -%}
+    
+    <h1 class="modern-title">{{ section.settings.title }}</h1>
+    
+    {%- if section.settings.text != blank -%}
+      <div class="modern-subtitle">
+        {{ section.settings.text }}
+      </div>
+    {%- endif -%}
+
+    <div class="hero-btns" style="display: flex; gap: 15px; flex-wrap: wrap; {% if section.settings.content_alignment == 'center' %}justify-content: center;{% endif %}">
+      {%- if section.settings.button_label_1 != blank -%}
+        <a href="{{ section.settings.button_link_1 }}" class="modern-btn">{{ section.settings.button_label_1 }}</a>
+      {%- endif -%}
+      {%- if section.settings.button_label_2 != blank -%}
+        <a href="{{ section.settings.button_link_2 }}" class="modern-btn modern-btn-secondary">{{ section.settings.button_label_2 }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Modern Hero",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background image"
+    },
+    {
+      "type": "range",
+      "id": "height_desktop",
+      "min": 50,
+      "max": 100,
+      "step": 10,
+      "unit": "vh",
+      "label": "Desktop height",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "height_mobile",
+      "min": 30,
+      "max": 100,
+      "step": 10,
+      "unit": "vh",
+      "label": "Mobile height",
+      "default": 70
+    },
+    {
+      "type": "select",
+      "id": "content_alignment",
+      "label": "Content alignment",
+      "options": [
+        { "value": "flex-start", "label": "Left" },
+        { "value": "center", "label": "Center" },
+        { "value": "flex-end", "label": "Right" }
+      ],
+      "default": "flex-start"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "Subheading",
+      "default": "New Arrival"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Clean Beauty, Elevated"
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Discover our latest collection designed for your unique skin needs.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label_1",
+      "label": "Button 1 label",
+      "default": "Shop Now"
+    },
+    {
+      "type": "url",
+      "id": "button_link_1",
+      "label": "Button 1 link"
+    },
+    {
+      "type": "text",
+      "id": "button_label_2",
+      "label": "Button 2 label",
+      "default": "Take the Quiz"
+    },
+    {
+      "type": "url",
+      "id": "button_link_2",
+      "label": "Button 2 link"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Modern Hero"
+    }
+  ]
+}
+{% endschema %}

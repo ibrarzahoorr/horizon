@@ -1,0 +1,97 @@
+<section class="modern-section" style="background: {{ section.settings.bg_color }};">
+  <div class="modern-container">
+    <div style="text-align: center; margin-bottom: 50px;">
+      <h2 class="modern-title">{{ section.settings.title }}</h2>
+      <div class="modern-subtitle" style="margin-left: auto; margin-right: auto;">{{ section.settings.text }}</div>
+    </div>
+
+    <div style="display: flex; gap: 40px; align-items: center;">
+      <div style="flex: 1; position: relative;">
+        <div style="display: flex; gap: 20px;">
+          <div style="flex: 1;">
+            {%- if section.settings.image_before != blank -%}
+              {{ section.settings.image_before | image_url: width: 600 | image_tag: loading: 'lazy', style: 'border-radius: 20px; width: 100%;' }}
+              <span class="routine-tag" style="position: absolute; bottom: 20px; left: 20px;">Before</span>
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+          <div style="flex: 1; position: relative;">
+            {%- if section.settings.image_after != blank -%}
+              {{ section.settings.image_after | image_url: width: 600 | image_tag: loading: 'lazy', style: 'border-radius: 20px; width: 100%;' }}
+              <span class="routine-tag" style="position: absolute; bottom: 20px; left: 20px; background: #4CAF50;">After</span>
+            {%- else -%}
+              {{ 'image' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+      
+      <div style="flex: 0 0 350px;" class="glass-box">
+        <div style="color: #FFD700; font-size: 24px; margin-bottom: 15px;">★★★★★</div>
+        <p style="font-style: italic; font-size: 18px; line-height: 1.6; margin-bottom: 20px;">"{{ section.settings.quote }}"</p>
+        <p style="font-weight: 700; margin: 0;">- {{ section.settings.author }}</p>
+        <p class="modern-subtitle" style="font-size: 14px; margin-top: 5px;">{{ section.settings.author_meta }}</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Before & After",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Real results, real skin."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>See the transformation after 12 weeks of using our Core Routine.</p>"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_before",
+      "label": "Before Image"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_after",
+      "label": "After Image"
+    },
+    {
+      "type": "textarea",
+      "id": "quote",
+      "label": "Quote",
+      "default": "I never thought my skin could look this clear without makeup. This routine changed everything for me!"
+    },
+    {
+      "type": "text",
+      "id": "author",
+      "label": "Author Name",
+      "default": "Sarah J."
+    },
+    {
+      "type": "text",
+      "id": "author_meta",
+      "label": "Author Meta",
+      "default": "Verified Customer"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Before & After"
+    }
+  ]
+}
+{% endschema %}

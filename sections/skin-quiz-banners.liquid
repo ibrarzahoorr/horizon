@@ -1,0 +1,71 @@
+<section class="modern-section">
+  <div class="modern-container">
+    <div class="glass-box" style="display: flex; align-items: center; justify-content: space-between; gap: 40px; padding: 60px; background: {{ section.settings.bg_color }};">
+      <div style="flex: 1;">
+        <h2 class="modern-title" style="margin-bottom: 20px;">{{ section.settings.title }}</h2>
+        <div class="modern-subtitle" style="margin-bottom: 30px;">{{ section.settings.text }}</div>
+        <a href="{{ section.settings.link }}" class="modern-btn">{{ section.settings.button_label }}</a>
+      </div>
+      <div style="flex: 1; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;">
+        {%- if section.settings.image_1 != blank -%}
+          {{ section.settings.image_1 | image_url: width: 400 | image_tag: loading: 'lazy', style: 'border-radius: 15px;' }}
+        {%- endif -%}
+        {%- if section.settings.image_2 != blank -%}
+          {{ section.settings.image_2 | image_url: width: 400 | image_tag: loading: 'lazy', style: 'border-radius: 15px;' }}
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Skin Quiz Banner",
+  "settings": [
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Inner Background",
+      "default": "#fdeae7"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Find your perfect match."
+    },
+    {
+      "type": "richtext",
+      "id": "text",
+      "label": "Text",
+      "default": "<p>Take our 2-minute skin quiz to build your custom routine and save 15%.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "Button Label",
+      "default": "Take the Quiz"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "Button Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_1",
+      "label": "Right Side Image 1"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_2",
+      "label": "Right Side Image 2"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Skin Quiz Banner"
+    }
+  ]
+}
+{% endschema %}
