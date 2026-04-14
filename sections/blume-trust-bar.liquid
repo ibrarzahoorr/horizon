@@ -1,25 +1,98 @@
-<div class="trust-bar">
-  <div class="modern-container" style="display: flex; justify-content: space-around; align-items: center; width: 100%; flex-wrap: wrap; gap: 30px;">
-    {%- if section.blocks.size > 0 -%}
-      {%- for block in section.blocks -%}
-        {%- if block.settings.image != blank -%}
-          <img src="{{ block.settings.image | image_url: height: 40 }}" class="trust-logo" alt="{{ block.settings.alt_text | default: 'Trust Logo' }}">
-        {%- else -%}
-          <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">LOGO</span>
-        {%- endif -%}
-      {%- endfor -%}
-    {%- else -%}
-      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">ALLURE</span>
-      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">COVETEUR</span>
-      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">VOGUE</span>
-      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">FORBES</span>
-    {%- endif -%}
+{%- style -%}
+  .trust-bar-slider {
+    padding: 40px 0;
+    background: #fff;
+    border-top: 1px solid #eee;
+    border-bottom: 1px solid #eee;
+    overflow: hidden;
+    position: relative;
+  }
+  .marquee-container {
+    display: flex;
+    overflow: hidden;
+    user-select: none;
+    gap: 80px;
+  }
+  .marquee-content {
+    flex-shrink: 0;
+    display: flex;
+    justify-content: space-around;
+    min-width: 100%;
+    gap: 80px;
+    animation: marquee-scroll 30s linear infinite;
+  }
+  .trust-logo-img {
+    height: 25px;
+    width: auto;
+    opacity: 0.5;
+    filter: grayscale(1);
+    transition: opacity 0.3s;
+  }
+  .trust-logo-img:hover {
+    opacity: 1;
+    filter: grayscale(0);
+  }
+  @keyframes marquee-scroll {
+    from { transform: translateX(0); }
+    to { transform: translateX(calc(-100% - 80px)); }
+  }
+  @media (max-width: 768px) {
+    .marquee-content { gap: 40px; }
+    @keyframes marquee-scroll {
+      from { transform: translateX(0); }
+      to { transform: translateX(calc(-100% - 40px)); }
+    }
+  }
+{%- endstyle -%}
+
+<div class="trust-bar-slider">
+  <div class="marquee-container">
+    <div class="marquee-content">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="trust-logo-item" {{ block.shopify_attributes }}>
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: height: 60 }}" class="trust-logo-img" alt="{{ block.settings.alt_text | default: 'Press Logo' }}">
+            {%- else -%}
+              <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">PRESS LOGO</span>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">ALLURE</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">VOGUE</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">FORBES</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">COVETEUR</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">GLAMOUR</span>
+      {%- endif -%}
+    </div>
+    
+    {% comment %} Duplicate for infinite scroll {% endcomment %}
+    <div class="marquee-content" aria-hidden="true">
+      {%- if section.blocks.size > 0 -%}
+        {%- for block in section.blocks -%}
+          <div class="trust-logo-item">
+            {%- if block.settings.image != blank -%}
+              <img src="{{ block.settings.image | image_url: height: 60 }}" class="trust-logo-img" alt="">
+            {%- else -%}
+              <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">PRESS LOGO</span>
+            {%- endif -%}
+          </div>
+        {%- endfor -%}
+      {%- else -%}
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">ALLURE</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">VOGUE</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">FORBES</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">COVETEUR</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">GLAMOUR</span>
+      {%- endif -%}
+    </div>
   </div>
 </div>
 
 {% schema %}
 {
-  "name": "Blume Trust Bar",
+  "name": "Blume Trust Slider",
   "settings": [],
   "blocks": [
     {
@@ -41,8 +114,9 @@
   ],
   "presets": [
     {
-      "name": "Blume Trust Bar",
+      "name": "Blume Trust Slider",
       "blocks": [
+        { "type": "logo" },
         { "type": "logo" },
         { "type": "logo" },
         { "type": "logo" },
