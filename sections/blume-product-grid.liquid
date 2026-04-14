@@ -1,0 +1,206 @@
+{%- style -%}
+  .blume-grid-wrapper {
+    padding: 80px 0;
+    background: {{ section.settings.bg_color }};
+  }
+  .section-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .section-header h2 {
+    font-size: 48px;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: 700;
+    color: var(--blume-blue);
+    -webkit-text-stroke: 1px var(--blume-blue);
+    color: transparent;
+  }
+  .slider-arrows {
+    position: absolute;
+    right: 40px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    gap: 15px;
+  }
+  .slider-arrow {
+    width: 40px;
+    height: 40px;
+    border: 1px solid var(--blume-blue);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    background: #fff;
+    color: var(--blume-blue);
+    transition: var(--transition-smooth);
+  }
+  .slider-arrow:hover {
+    background: var(--blume-blue);
+    color: #fff;
+  }
+  .blume-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: 30px;
+  }
+  @media (max-width: 991px) {
+    .blume-grid { grid-template-columns: repeat(2, 1fr); }
+    .slider-arrows { display: none; }
+  }
+  @media (max-width: 576px) {
+    .blume-grid { grid-template-columns: 1fr; }
+  }
+  .blume-card-title {
+    margin: 15px 0 5px;
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--blume-blue);
+  }
+  .blume-card-sub {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    display: block;
+  }
+{%- endstyle -%}
+
+<section class="blume-grid-wrapper">
+  <div class="modern-container">
+    <div class="section-header">
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.show_arrows -%}
+        <div class="slider-arrows">
+          <div class="slider-arrow">←</div>
+          <div class="slider-arrow">→</div>
+        </div>
+      {%- endif -%}
+    </div>
+
+    <div class="blume-grid">
+      {%- for block in section.blocks -%}
+        <div class="blume-card" {{ block.shopify_attributes }}>
+          <div class="blume-card-image">
+            {%- if block.settings.image != blank -%}
+              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+            {%- else -%}
+              {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+            {%- endif -%}
+            {%- if block.settings.sale_tag != blank -%}
+              <span class="blume-badge">{{ block.settings.sale_tag }}</span>
+            {%- endif -%}
+          </div>
+          <h3 class="blume-card-title">{{ block.settings.title }}</h3>
+          <span class="blume-card-sub">{{ block.settings.price }}</span>
+          <a href="{{ block.settings.link }}" class="modern-btn" style="width: 100%;">{{ block.settings.button_label | default: 'SHOP NOW' }}</a>
+        </div>
+      {%- endfor -%}
+    </div>
+
+    {%- if section.settings.footer_btn_label != blank -%}
+      <div style="text-align: center; margin-top: 50px;">
+        <a href="{{ section.settings.footer_btn_link }}" class="modern-btn" style="background: transparent; color: var(--blume-blue); padding: 5px 0; border: none; border-bottom: 2px solid var(--blume-blue); border-radius: 0;">{{ section.settings.footer_btn_label }}</a>
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blume Product Grid",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "BEST BUNDLES"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "label": "Columns On Desktop",
+      "default": 3
+    },
+    {
+      "type": "boolean",
+      "id": "show_arrows",
+      "label": "Show Slider Arrows",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "footer_btn_label",
+      "label": "Footer Link Text"
+    },
+    {
+      "type": "url",
+      "id": "footer_btn_link",
+      "label": "Footer Link"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "Product",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Product Image"
+        },
+        {
+          "type": "text",
+          "id": "sale_tag",
+          "label": "Sale Badge Text",
+          "default": "SAVE 15%"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Product Title",
+          "default": "The Essentials Kit"
+        },
+        {
+          "type": "text",
+          "id": "price",
+          "label": "Price/Subtext",
+          "default": "Starting at $45"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Product Link"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "SHOP NOW"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Product Grid",
+      "blocks": [
+        { "type": "product" },
+        { "type": "product" },
+        { "type": "product" }
+      ]
+    }
+  ]
+}
+{% endschema %}

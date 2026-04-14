@@ -1,0 +1,114 @@
+{%- style -%}
+  .prompt-wrapper {
+    padding: 80px 0;
+    text-align: center;
+    background: #fff;
+  }
+  .prompt-header {
+    margin-bottom: 50px;
+    position: relative;
+    display: inline-block;
+  }
+  .prompt-header h2 {
+    font-size: 32px;
+    color: var(--blume-blue);
+  }
+  .flower-icon {
+    position: absolute;
+    top: -30px;
+    right: -40px;
+    width: 60px;
+  }
+  .prompt-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 30px;
+  }
+  .prompt-card {
+    background: #fff;
+    border: 1px solid #eee;
+    padding: 40px 20px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--blume-blue);
+    font-weight: 500;
+    font-size: 18px;
+    transition: var(--transition-smooth);
+    display: block;
+  }
+  .prompt-card:hover {
+    background: var(--blume-soft-blue);
+    border-color: var(--blume-soft-blue);
+    transform: translateY(-5px);
+  }
+  @media (max-width: 768px) {
+    .prompt-grid { grid-template-columns: 1fr; }
+  }
+{%- endstyle -%}
+
+<section class="prompt-wrapper">
+  <div class="modern-container">
+    <div class="prompt-header">
+      <h2>{{ section.settings.title }}</h2>
+      {%- if section.settings.icon != blank -%}
+        <img src="{{ section.settings.icon | image_url: width: 100 }}" class="flower-icon" alt="icon">
+      {%- endif -%}
+    </div>
+
+    <div class="prompt-grid">
+      {%- for block in section.blocks -%}
+        <a href="{{ block.settings.link }}" class="prompt-card" {{ block.shopify_attributes }}>
+          {{ block.settings.text }}
+        </a>
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blume Prompt Cards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "What are you looking for today?"
+    },
+    {
+      "type": "image_picker",
+      "id": "icon",
+      "label": "Decorative Icon"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "prompt",
+      "name": "Prompt",
+      "settings": [
+        {
+          "type": "text",
+          "id": "text",
+          "label": "Prompt Text",
+          "default": "I want to brighten skin"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "Link"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Prompt Cards",
+      "blocks": [
+        { "type": "prompt", "settings": { "text": "I want to brighten skin" } },
+        { "type": "prompt", "settings": { "text": "I want blue and discoloration" } },
+        { "type": "prompt", "settings": { "text": "I want dry skin" } }
+      ]
+    }
+  ]
+}
+{% endschema %}

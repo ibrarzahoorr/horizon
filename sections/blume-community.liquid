@@ -1,0 +1,100 @@
+{%- style -%}
+  .community-wrapper {
+    position: relative;
+    padding: 120px 0;
+    overflow: hidden;
+    min-height: 500px;
+    display: flex;
+    align-items: center;
+  }
+  .community-bg {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    z-index: 1;
+  }
+  .community-bg img {
+    width: 100%; height: 100%; object-fit: cover;
+  }
+  .community-content {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    color: var(--blume-blue);
+  }
+  .community-content h2 {
+    font-size: 36px;
+    margin-bottom: 25px;
+  }
+  .community-content p {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    margin-bottom: 30px;
+  }
+  .community-link {
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 5px;
+    color: var(--blume-blue);
+    cursor: pointer;
+  }
+{%- endstyle -%}
+
+<section class="community-wrapper">
+  <div class="community-bg">
+    {%- if section.settings.image != blank -%}
+      {{ section.settings.image | image_url: width: 2800 | image_tag: loading: 'lazy' }}
+    {%- else -%}
+      <div style="background: var(--blume-soft-blue); width: 100%; height: 100%;"></div>
+    {%- endif -%}
+  </div>
+  <div class="modern-container">
+    <div class="community-content animate-fade-up">
+      <h2>{{ section.settings.title }}</h2>
+      <p>{{ section.settings.text }}</p>
+      {%- if section.settings.link_label != blank -%}
+        <a href="{{ section.settings.link }}" class="community-link">{{ section.settings.link_label }}</a>
+      {%- endif -%}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Blume Community",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Let's Keep it real"
+    },
+    {
+      "type": "textarea",
+      "id": "text",
+      "label": "Text",
+      "default": "Everything starts with your skin. From acne to aging, we're with you every step of the way."
+    },
+    {
+      "type": "text",
+      "id": "link_label",
+      "label": "Link Label",
+      "default": "Learn More"
+    },
+    {
+      "type": "url",
+      "id": "link",
+      "label": "Link"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Background Image"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Community"
+    }
+  ]
+}
+{% endschema %}

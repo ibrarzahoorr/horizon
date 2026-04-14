@@ -1,0 +1,54 @@
+<div class="trust-bar">
+  <div class="modern-container" style="display: flex; justify-content: space-around; align-items: center; width: 100%; flex-wrap: wrap; gap: 30px;">
+    {%- if section.blocks.size > 0 -%}
+      {%- for block in section.blocks -%}
+        {%- if block.settings.image != blank -%}
+          <img src="{{ block.settings.image | image_url: height: 40 }}" class="trust-logo" alt="{{ block.settings.alt_text | default: 'Trust Logo' }}">
+        {%- else -%}
+          <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">LOGO</span>
+        {%- endif -%}
+      {%- endfor -%}
+    {%- else -%}
+      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">ALLURE</span>
+      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">COVETEUR</span>
+      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">VOGUE</span>
+      <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">FORBES</span>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Blume Trust Bar",
+  "settings": [],
+  "blocks": [
+    {
+      "type": "logo",
+      "name": "Logo",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Logo Image"
+        },
+        {
+          "type": "text",
+          "id": "alt_text",
+          "label": "Alt Text"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Trust Bar",
+      "blocks": [
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" },
+        { "type": "logo" }
+      ]
+    }
+  ]
+}
+{% endschema %}
