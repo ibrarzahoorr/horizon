@@ -59,11 +59,22 @@ html {
 
 /* Typography */
 .modern-title {
+  font-family: 'Fraunces', serif;
   font-size: clamp(2rem, 5vw, 4rem);
-  font-weight: 500;
+  font-weight: 700;
   line-height: 1.1;
-  margin-bottom: 20px;
-  letter-spacing: -0.02em;
+  margin-bottom: 30px;
+  color: var(--blume-blue);
+}
+
+.modern-title.hollow {
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  -webkit-text-stroke: 1.5px var(--blume-blue);
+  color: transparent;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
 }
 
 .modern-subtitle {
@@ -162,20 +173,49 @@ html {
 
 /* Product Cards */
 .blume-card {
-  background: #fff;
-  padding: 15px;
-  border-radius: 8px;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
   text-align: center;
+  transition: var(--transition-smooth);
 }
 
 .blume-card-image {
-  background: #f4f4f4;
-  margin-bottom: 20px;
+  background: #aecbdd; /* Match hero blue */
+  padding: 20px;
   position: relative;
   aspect-ratio: 1;
   display: flex;
   align-items: center;
   justify-content: center;
+  overflow: hidden;
+}
+
+.blume-card-content {
+  background: var(--blume-peach);
+  padding: 25px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.blume-badge {
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  background: #a11414; /* Darker red from image */
+  color: #fff;
+  width: 55px;
+  height: 55px;
+  border-radius: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 13px;
+  line-height: 1.1;
+  z-index: 3;
 }
 
 .blume-card-image img {

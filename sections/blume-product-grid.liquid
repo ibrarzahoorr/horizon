@@ -1,21 +1,12 @@
 {%- style -%}
-  .blume-grid-wrapper {
-    padding: 80px 0;
+  .blume-grid-wrapper-{{ section.id }} {
+    padding: 100px 0;
     background: {{ section.settings.bg_color }};
   }
   .section-header {
     text-align: center;
-    margin-bottom: 50px;
+    margin-bottom: 60px;
     position: relative;
-  }
-  .section-header h2 {
-    font-size: 48px;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: 700;
-    color: var(--blume-blue);
-    -webkit-text-stroke: 1px var(--blume-blue);
-    color: transparent;
   }
   .slider-arrows {
     position: absolute;
@@ -26,71 +17,88 @@
     gap: 15px;
   }
   .slider-arrow {
-    width: 40px;
-    height: 40px;
+    width: 44px;
+    height: 44px;
     border: 1px solid var(--blume-blue);
     border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background: #fff;
-    color: var(--blume-blue);
-    transition: var(--transition-smooth);
-  }
-  .slider-arrow:hover {
     background: var(--blume-blue);
     color: #fff;
+    transition: var(--transition-smooth);
+    font-size: 20px;
+  }
+  .slider-arrow:hover {
+    background: transparent;
+    color: var(--blume-blue);
   }
   .blume-grid {
     display: grid;
     grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
     gap: 30px;
   }
+  .modern-title {
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    margin-bottom: 30px;
+    color: var(--blume-blue);
+  }
+  .modern-title.hollow {
+    font-family: 'Outfit', sans-serif;
+    font-size: clamp(2.5rem, 6vw, 5rem);
+    font-weight: 800;
+    -webkit-text-stroke: 1.5px var(--blume-blue);
+    color: transparent;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+  .blume-card-title {
+    font-family: 'Fraunces', serif;
+    font-weight: 700;
+    font-size: clamp(1.2rem, 2vw, 1.8rem);
+    color: var(--blume-blue);
+    line-height: 1.2;
+    margin: 0;
+    min-height: 2.4em; /* Keep titles aligned */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .blume-card-sub {
+    font-size: 14px;
+    color: var(--blume-blue);
+    opacity: 0.8;
+  }
+  .price-row {
+    margin-top: 10px;
+    font-weight: 600;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+    color: var(--blume-blue);
+  }
+  .compare-price {
+    text-decoration: line-through;
+    opacity: 0.5;
+    font-weight: 400;
+  }
   @media (max-width: 991px) {
-    .blume-grid { grid-template-columns: repeat(2, 1fr); }
+    .blume-grid { grid-template-columns: repeat(2, 1fr); gap: 20px; }
     .slider-arrows { display: none; }
   }
   @media (max-width: 576px) {
     .blume-grid { grid-template-columns: 1fr; }
   }
-  .blume-card {
-    background: #fff;
-    padding: 15px;
-    border-radius: 8px;
-    text-align: center;
-    transition: var(--transition-smooth);
-    border: 1px solid transparent;
-  }
-  .blume-card:hover {
-    transform: translateY(-8px);
-    box-shadow: 0 15px 30px rgba(0,30,48,0.08);
-    border-color: #eee;
-  }
-  .blume-card-image {
-    font-size: 14px;
-    color: var(--text-light);
-    margin-bottom: 15px;
-    display: block;
-  }
-  .blume-card-title {
-    margin: 15px 0 5px;
-    font-weight: 600;
-    font-size: 18px;
-    color: var(--blume-blue);
-  }
-  .blume-card-sub {
-    font-size: 14px;
-    color: var(--text-light);
-    margin-bottom: 15px;
-    display: block;
-  }
 {%- endstyle -%}
 
-<section class="blume-grid-wrapper">
+<section class="blume-grid-wrapper-{{ section.id }}">
   <div class="modern-container">
     <div class="section-header">
-      <h2>{{ section.settings.title }}</h2>
+      <h2 class="modern-title {% if section.settings.hollow_title %}hollow{% endif %}">{{ section.settings.title }}</h2>
       {%- if section.settings.show_arrows -%}
         <div class="slider-arrows">
           <div class="slider-arrow">←</div>
@@ -104,17 +112,30 @@
         <div class="blume-card" {{ block.shopify_attributes }}>
           <div class="blume-card-image">
             {%- if block.settings.image != blank -%}
-              {{ block.settings.image | image_url: width: 600 | image_tag: loading: 'lazy' }}
+              {{ block.settings.image | image_url: width: 800 | image_tag: loading: 'lazy', style: 'width: 100%; height: 100%; object-fit: contain;' }}
             {%- else -%}
               {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
             {%- endif -%}
+            
             {%- if block.settings.sale_tag != blank -%}
-              <span class="blume-badge">{{ block.settings.sale_tag }}</span>
+              <span class="blume-badge">
+                {{ block.settings.sale_tag | split: ' ' | first }}<br>
+                {{ block.settings.sale_tag | split: ' ' | last }}
+              </span>
             {%- endif -%}
           </div>
-          <h3 class="blume-card-title">{{ block.settings.title }}</h3>
-          <span class="blume-card-sub">{{ block.settings.price }}</span>
-          <a href="{{ block.settings.link }}" class="modern-btn" style="width: 100%;">{{ block.settings.button_label | default: 'SHOP NOW' }}</a>
+          
+          <div class="blume-card-content">
+            <h3 class="blume-card-title">{{ block.settings.title }}</h3>
+            <span class="blume-card-sub">{{ block.settings.subtitle }}</span>
+            <div class="price-row">
+              {%- if block.settings.compare_price != blank -%}
+                <span class="compare-price">{{ block.settings.compare_price }}</span>
+              {%- endif -%}
+              <span class="current-price">{{ block.settings.price }}</span>
+            </div>
+            <a href="{{ block.settings.link }}" class="modern-btn" style="width: 100%; margin-top: 15px;">{{ block.settings.button_label | default: 'SHOP NOW' }}</a>
+          </div>
         </div>
       {%- endfor -%}
     </div>
@@ -129,7 +150,7 @@
 
 {% schema %}
 {
-  "name": "Blume Product Grid",
+  "name": "Blume Bundles Grid",
   "settings": [
     {
       "type": "text",
@@ -142,6 +163,12 @@
       "id": "bg_color",
       "label": "Background Color",
       "default": "#ffffff"
+    },
+    {
+      "type": "boolean",
+      "id": "hollow_title",
+      "label": "Use Hollow Title Style",
+      "default": true
     },
     {
       "type": "range",
@@ -183,19 +210,31 @@
           "type": "text",
           "id": "sale_tag",
           "label": "Sale Badge Text",
-          "default": "SAVE 15%"
+          "default": "53% OFF"
         },
         {
           "type": "text",
           "id": "title",
-          "label": "Product Title",
-          "default": "The Essentials Kit"
+          "label": "Bundle Title",
+          "default": "Ultimate Clear Skin Edit"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle",
+          "default": "Fight Breakouts. Fade Marks. Stay Clear."
         },
         {
           "type": "text",
           "id": "price",
-          "label": "Price/Subtext",
-          "default": "Starting at $45"
+          "label": "Current Price",
+          "default": "Rs.27,200.00"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Compare at Price",
+          "default": "Rs.54,800.00"
         },
         {
           "type": "url",
@@ -213,11 +252,11 @@
   ],
   "presets": [
     {
-      "name": "Blume Product Grid",
+      "name": "Blume Bundles Grid",
       "blocks": [
-        { "type": "product" },
-        { "type": "product" },
-        { "type": "product" }
+        { "type": "product", "settings": { "title": "Ultimate Clear Skin Edit", "sale_tag": "53% OFF" } },
+        { "type": "product", "settings": { "title": "Clear Skin Kit: Acne Essentials", "sale_tag": "36% OFF" } },
+        { "type": "product", "settings": { "title": "The Fresh Face Edit", "sale_tag": "30% OFF" } }
       ]
     }
   ]
