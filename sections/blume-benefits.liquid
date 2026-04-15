@@ -18,20 +18,22 @@
     min-height: 500px;
   }
   .benefits-images img {
-    width: 80%;
+    width: 100%;
     height: auto;
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
   }
   .benefits-content {
     flex: 1;
+    position: relative;
+    z-index: 2;
   }
   .benefits-content h2 {
-    font-size: 36px;
+    font-family: 'Fraunces', serif;
+    font-size: clamp(2rem, 4vw, 3rem);
     margin-bottom: 40px;
     color: var(--blume-blue);
-    line-height: 1.2;
-    max-width: 450px;
+    line-height: 1.1;
   }
   .benefit-list {
     list-style: none;

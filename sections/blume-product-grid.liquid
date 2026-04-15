@@ -54,6 +54,25 @@
   @media (max-width: 576px) {
     .blume-grid { grid-template-columns: 1fr; }
   }
+  .blume-card {
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    text-align: center;
+    transition: var(--transition-smooth);
+    border: 1px solid transparent;
+  }
+  .blume-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 15px 30px rgba(0,30,48,0.08);
+    border-color: #eee;
+  }
+  .blume-card-image {
+    font-size: 14px;
+    color: var(--text-light);
+    margin-bottom: 15px;
+    display: block;
+  }
   .blume-card-title {
     margin: 15px 0 5px;
     font-weight: 600;

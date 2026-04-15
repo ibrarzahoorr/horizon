@@ -1,90 +1,121 @@
 {%- style -%}
-  .trust-bar-slider {
-    padding: 40px 0;
-    background: #fff;
+  .trust-bar-slider-{{ section.id }} {
+    padding: {{ section.settings.padding_top }}px 0 {{ section.settings.padding_bottom }}px;
+    background: {{ section.settings.bg_color }};
     border-top: 1px solid #eee;
     border-bottom: 1px solid #eee;
     overflow: hidden;
     position: relative;
+    display: flex;
+    align-items: center;
   }
-  .marquee-container {
+  .marquee-container-{{ section.id }} {
     display: flex;
     overflow: hidden;
     user-select: none;
-    gap: 80px;
+    gap: {{ section.settings.gap }}px;
+    width: 100%;
   }
-  .marquee-content {
+  .marquee-content-{{ section.id }} {
     flex-shrink: 0;
     display: flex;
+    align-items: center; /* Center vertically */
     justify-content: space-around;
     min-width: 100%;
-    gap: 80px;
-    animation: marquee-scroll 30s linear infinite;
+    gap: {{ section.settings.gap }}px;
+    animation: marquee-scroll-{{ section.id }} {{ section.settings.speed }}s linear infinite;
   }
-  .trust-logo-img {
-    height: 25px;
-    width: auto;
-    opacity: 0.5;
-    filter: grayscale(1);
-    transition: opacity 0.3s;
+  .trust-logo-item-{{ section.id }} {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
   }
-  .trust-logo-img:hover {
+  .trust-logo-img-{{ section.id }} {
+    max-width: {{ section.settings.logo_width }}px;
+    height: auto;
+    max-height: {{ section.settings.logo_height }}px;
+    object-fit: contain;
+    opacity: {{ section.settings.logo_opacity | divided_by: 100.0 }};
+    {% if section.settings.grayscale %}
+      filter: grayscale(1);
+    {% endif %}
+    transition: all 0.3s ease;
+  }
+  .trust-logo-img-{{ section.id }}:hover {
     opacity: 1;
     filter: grayscale(0);
+    transform: scale(1.05);
   }
-  @keyframes marquee-scroll {
+  @keyframes marquee-scroll-{{ section.id }} {
     from { transform: translateX(0); }
-    to { transform: translateX(calc(-100% - 80px)); }
+    to { transform: translateX(calc(-100% - {{ section.settings.gap }}px)); }
   }
   @media (max-width: 768px) {
-    .marquee-content { gap: 40px; }
-    @keyframes marquee-scroll {
+    .trust-bar-slider-{{ section.id }} {
+      padding: {{ section.settings.padding_top | divided_by: 2 }}px 0 {{ section.settings.padding_bottom | divided_by: 2 }}px;
+    }
+    .marquee-content-{{ section.id }} { 
+      gap: {{ section.settings.gap | divided_by: 2 }}px; 
+    }
+    .trust-logo-img-{{ section.id }} {
+      max-width: {{ section.settings.logo_width | times: 0.7 }}px;
+      max-height: {{ section.settings.logo_height | times: 0.7 }}px;
+    }
+    @keyframes marquee-scroll-{{ section.id }} {
       from { transform: translateX(0); }
-      to { transform: translateX(calc(-100% - 40px)); }
+      to { transform: translateX(calc(-100% - {{ section.settings.gap | divided_by: 2 }}px)); }
     }
   }
 {%- endstyle -%}
 
-<div class="trust-bar-slider">
-  <div class="marquee-container">
-    <div class="marquee-content">
+<div class="trust-bar-slider-{{ section.id }}">
+  <div class="marquee-container-{{ section.id }}">
+    <div class="marquee-content-{{ section.id }}">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
-          <div class="trust-logo-item" {{ block.shopify_attributes }}>
+          <div class="trust-logo-item-{{ section.id }}" {{ block.shopify_attributes }}>
             {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: height: 60 }}" class="trust-logo-img" alt="{{ block.settings.alt_text | default: 'Press Logo' }}">
+              <img src="{{ block.settings.image | image_url: width: 400 }}" 
+                   class="trust-logo-img-{{ section.id }}" 
+                   alt="{{ block.settings.alt_text | default: 'Partner Logo' }}"
+                   width="{{ block.settings.image.width }}"
+                   height="{{ block.settings.image.height }}"
+                   loading="lazy">
             {%- else -%}
-              <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">PRESS LOGO</span>
+              <span style="opacity: 0.3; font-weight: 700; font-size: 20px; white-space: nowrap;">LOGO {{ forloop.index }}</span>
             {%- endif -%}
           </div>
         {%- endfor -%}
       {%- else -%}
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">ALLURE</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">VOGUE</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">FORBES</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">COVETEUR</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">GLAMOUR</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO A</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO B</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO C</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO D</span>
       {%- endif -%}
     </div>
     
-    {% comment %} Duplicate for infinite scroll {% endcomment %}
-    <div class="marquee-content" aria-hidden="true">
+    <div class="marquee-content-{{ section.id }}" aria-hidden="true">
       {%- if section.blocks.size > 0 -%}
         {%- for block in section.blocks -%}
-          <div class="trust-logo-item">
+          <div class="trust-logo-item-{{ section.id }}">
             {%- if block.settings.image != blank -%}
-              <img src="{{ block.settings.image | image_url: height: 60 }}" class="trust-logo-img" alt="">
+              <img src="{{ block.settings.image | image_url: width: 400 }}" 
+                   class="trust-logo-img-{{ section.id }}" 
+                   alt=""
+                   width="{{ block.settings.image.width }}"
+                   height="{{ block.settings.image.height }}"
+                   loading="lazy">
             {%- else -%}
-              <span style="opacity: 0.3; font-weight: 700; font-size: 20px;">PRESS LOGO</span>
+              <span style="opacity: 0.3; font-weight: 700; font-size: 20px; white-space: nowrap;">LOGO {{ forloop.index }}</span>
             {%- endif -%}
           </div>
         {%- endfor -%}
       {%- else -%}
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">ALLURE</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">VOGUE</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">FORBES</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">COVETEUR</span>
-        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">GLAMOUR</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO A</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO B</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO C</span>
+        <span style="opacity: 0.2; font-weight: 700; font-size: 24px;">LOGO D</span>
       {%- endif -%}
     </div>
   </div>
@@ -93,7 +124,102 @@
 {% schema %}
 {
   "name": "Blume Trust Slider",
-  "settings": [],
+  "settings": [
+    {
+      "type": "header",
+      "content": "Appearance"
+    },
+    {
+      "type": "color",
+      "id": "bg_color",
+      "label": "Background Color",
+      "default": "#ffffff"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Top",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "px",
+      "label": "Padding Bottom",
+      "default": 40
+    },
+    {
+      "type": "header",
+      "content": "Logo Settings"
+    },
+    {
+      "type": "range",
+      "id": "logo_width",
+      "min": 50,
+      "max": 300,
+      "step": 10,
+      "unit": "px",
+      "label": "Logo Max Width",
+      "default": 150
+    },
+    {
+      "type": "range",
+      "id": "logo_height",
+      "min": 20,
+      "max": 150,
+      "step": 5,
+      "unit": "px",
+      "label": "Logo Max Height",
+      "default": 40
+    },
+    {
+      "type": "range",
+      "id": "gap",
+      "min": 20,
+      "max": 150,
+      "step": 10,
+      "unit": "px",
+      "label": "Gap between logos",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "logo_opacity",
+      "min": 10,
+      "max": 100,
+      "step": 10,
+      "unit": "%",
+      "label": "Logo Opacity",
+      "default": 50
+    },
+    {
+      "type": "checkbox",
+      "id": "grayscale",
+      "label": "Enable Grayscale",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "Animation"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 5,
+      "max": 60,
+      "step": 5,
+      "unit": "s",
+      "label": "Animation Speed (Seconds)",
+      "default": 30
+    }
+  ],
   "blocks": [
     {
       "type": "logo",

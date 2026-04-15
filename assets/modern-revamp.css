@@ -26,6 +26,10 @@ body {
   letter-spacing: -0.01em;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 /* Animations */
 @keyframes fadeInUp {
   from { opacity: 0; transform: translateY(20px); }
@@ -38,7 +42,7 @@ body {
 
 /* Section Containers */
 .modern-section {
-  padding: 80px 0;
+  padding: 100px 0;
   overflow: hidden;
 }
 
