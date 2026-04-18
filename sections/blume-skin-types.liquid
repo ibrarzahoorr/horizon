@@ -56,7 +56,7 @@
     transition: transform 0.4s ease;
   }
   .skin-type-item {
-    flex: 0 0 calc(20% - 13px);
+    flex: 0 0 calc(var(--item-width) - var(--gap-adjust));
     position: relative;
     border-radius: 12px;
     overflow: hidden;
@@ -84,13 +84,10 @@
   }
   @media (max-width: 1200px) {
     .skin-type-item {
-      flex: 0 0 calc(25% - 12px);
+      flex: 0 0 calc(var(--item-width) - var(--gap-adjust));
     }
   }
   @media (max-width: 991px) {
-    .skin-type-item {
-      flex: 0 0 calc(33.333% - 11px);
-    }
     .skin-type-title {
       font-size: 32px;
     }
@@ -111,14 +108,32 @@
     .skin-type-title {
       font-size: 28px;
     }
+    .skin-type-arrows {
+      display: flex;
+      margin-top: 16px;
+    }
+    .skin-type-arrow {
+      width: 40px;
+      height: 40px;
+    }
+    .skin-type-arrow svg {
+      width: 16px;
+      height: 16px;
+    }
   }
 {%- endstyle -%}
 
-<section class="skin-type-wrapper" data-section-id="{{ section.id }}">
+{%- liquid
+  assign columns = section.settings.columns
+  assign item_width = 100 | divided_by: columns
+  assign gap_adjust = 16 | times: columns | minus: 16 | divided_by: columns
+-%}
+
+<section class="skin-type-wrapper" data-section-id="{{ section.id }}" style="--item-width: {{ item_width }}%; --gap-adjust: {{ gap_adjust }}px;">
   <div class="modern-container">
     <div class="skin-type-header">
       <h2 class="skin-type-title">{{ section.settings.title }}</h2>
-      {%- if section.blocks.size > 5 -%}
+      {%- if section.blocks.size > 2 -%}
         <div class="skin-type-arrows">
           <button class="skin-type-arrow skin-type-arrow-prev" aria-label="Previous">
             <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -165,9 +180,10 @@
   const totalItems = items.length;
   
   function getVisibleItems() {
-    if (window.innerWidth >= 1200) return 5;
-    if (window.innerWidth >= 992) return 4;
-    if (window.innerWidth >= 768) return 3;
+    const columns = {{ section.settings.columns }};
+    if (window.innerWidth >= 1200) return columns;
+    if (window.innerWidth >= 992) return Math.min(columns, 4);
+    if (window.innerWidth >= 768) return Math.min(columns, 3);
     return 2;
   }
   
@@ -215,6 +231,15 @@
       "id": "title",
       "label": "Section Title",
       "default": "SHOP BY SKIN TYPE"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards per row",
+      "min": 2,
+      "max": 6,
+      "step": 0.5,
+      "default": 5
     },
     {
       "type": "color",
