@@ -170,6 +170,56 @@
         "speed": 30
       }
     },
+    "best_bundles_LkC8e3": {
+      "type": "best-bundles",
+      "blocks": {
+        "bundle_dbLAn8": {
+          "type": "bundle",
+          "settings": {
+            "product": "",
+            "title": "Ultimate Clear Skin Edit",
+            "subtitle": "Fight Breakouts. Fade Marks. Stay Clear.",
+            "discount_percent": "53",
+            "compare_price": "Rs.54,400.00",
+            "sale_price": "Rs.26,900.00",
+            "button_label": "SHOP NOW"
+          }
+        },
+        "bundle_37xi6x": {
+          "type": "bundle",
+          "settings": {
+            "product": "",
+            "title": "Clear Skin Kit: Acne Essentials",
+            "subtitle": "Leave Hormonal Acne Behind and Get Clear Skin",
+            "discount_percent": "36",
+            "compare_price": "Rs.37,400.00",
+            "sale_price": "Rs.21,300.00",
+            "button_label": "SHOP NOW"
+          }
+        },
+        "bundle_jYDqCc": {
+          "type": "bundle",
+          "settings": {
+            "product": "",
+            "title": "The Fresh Face Edit",
+            "subtitle": "Your First Routine, Done Right",
+            "discount_percent": "30",
+            "compare_price": "Rs.22,400.00",
+            "sale_price": "Rs.15,600.00",
+            "button_label": "SHOP NOW"
+          }
+        }
+      },
+      "block_order": [
+        "bundle_dbLAn8",
+        "bundle_37xi6x",
+        "bundle_jYDqCc"
+      ],
+      "name": "Best Bundles",
+      "settings": {
+        "heading": "BEST BUNDLES"
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -369,6 +419,7 @@
     "hero_jVaWmY",
     "blume_hero_H7Ky7C",
     "blume_trust_bar_bkybWJ",
+    "best_bundles_LkC8e3",
     "product_list_fa6P9H"
   ]
 }
