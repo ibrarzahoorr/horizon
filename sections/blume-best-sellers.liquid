@@ -256,13 +256,21 @@
   assign columns = section.settings.columns
   assign item_width = 100 | divided_by: columns
   assign gap_adjust = 20 | times: columns | minus: 20 | divided_by: columns
+  
+  # Count total products to show
+  if section.settings.collection != blank
+    assign collection_products = section.settings.collection.products | where: 'available', true
+    assign product_count = collection_products.size | at_most: section.settings.products_limit
+  else
+    assign product_count = section.blocks.size
+  endif
 -%}
 
 <section class="best-sellers-wrapper" data-section-id="{{ section.id }}" style="--item-width: {{ item_width }}%; --gap-adjust: {{ gap_adjust }}px;">
   <div class="modern-container">
     <div class="best-sellers-header">
       <h2 class="best-sellers-title">{{ section.settings.title }}</h2>
-      {%- if section.blocks.size > 2 -%}
+      {%- if product_count > 2 -%}
         <div class="best-sellers-arrows">
           <button class="best-sellers-arrow best-sellers-arrow-prev" aria-label="Previous">
             <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -276,9 +284,8 @@
 
     <div class="best-sellers-slider">
       <div class="best-sellers-track" id="best-sellers-track-{{ section.id }}">
-        {%- if section.settings.collection != blank -%}
-          {%- assign products_to_show = section.settings.collection.products | limit: section.settings.products_limit -%}
-          {%- for product in products_to_show -%}
+        {%- if section.settings.collection != blank and section.settings.collection.products.size > 0 -%}
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
             <div class="best-seller-card">
               <a href="{{ product.url }}" class="best-seller-image-wrapper">
                 {%- if product.featured_image != blank -%}
