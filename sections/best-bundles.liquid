@@ -2,6 +2,19 @@
 
 {%- assign layout = section.settings.layout_style -%}
 {%- assign block_count = section.blocks.size -%}
+{%- assign zoom_enabled = section.settings.enable_center_zoom -%}
+{%- assign zoom_scale   = section.settings.center_zoom_scale | divided_by: 100.0 -%}
+{%- assign zoom_hover   = section.settings.center_zoom_hover | divided_by: 100.0 -%}
+{%- assign zoom_lift    = section.settings.center_lift_px -%}
+
+<style>
+  #best-bundles-{{ section.id }} {
+    --bb-zoom:       {{ zoom_scale }};
+    --bb-zoom-hover: {{ zoom_hover }};
+    --bb-lift:       {{ zoom_lift }}px;
+    --bb-zoom-on:    {% if zoom_enabled %}1{% else %}0{% endif %};
+  }
+</style>
 
 <section
   class="best-bundles-section"
@@ -204,6 +217,48 @@
       "id": "show_dots",
       "label": "Show Dot Indicators",
       "default": true
+    },
+    {
+      "type": "header",
+      "content": "Center Image Zoom"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_center_zoom",
+      "label": "Enable Center Card Zoom",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "center_zoom_scale",
+      "label": "Zoom Level (default state)",
+      "info": "100 = no zoom, 112 = 12% zoom",
+      "min": 100,
+      "max": 150,
+      "step": 1,
+      "default": 112,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "center_zoom_hover",
+      "label": "Zoom Level on Hover",
+      "info": "Should be higher than default zoom",
+      "min": 100,
+      "max": 160,
+      "step": 1,
+      "default": 118,
+      "unit": "%"
+    },
+    {
+      "type": "range",
+      "id": "center_lift_px",
+      "label": "Center Card Lift (px)",
+      "info": "How many px the center card rises above others",
+      "min": 0,
+      "max": 40,
+      "step": 2,
+      "default": 8
     }
   ],
   "blocks": [

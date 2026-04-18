@@ -94,16 +94,23 @@
   transform: scale(1.04);
 }
 
-/* ── Center Featured Card (grid-only, 3 items) ─────── */
+/* ── Center Featured Card ──────────────────────────── */
+/* Zoom values are driven by CSS vars set inline from schema settings:
+   --bb-zoom        default zoom scale  (e.g. 1.12)
+   --bb-zoom-hover  hover zoom scale    (e.g. 1.18)
+   --bb-lift        card lift in px     (e.g. 8px)
+   --bb-zoom-on     1 = enabled, 0 = disabled
+*/
 .bundle-card--featured {
   position: relative;
   z-index: 2;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
-  transform: translateY(-8px);
+  transform: translateY(calc(-1 * var(--bb-lift, 8px) * var(--bb-zoom-on, 1)));
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .bundle-card--featured:hover {
-  transform: translateY(-14px);
+  transform: translateY(calc(-1 * (var(--bb-lift, 8px) + 6px) * var(--bb-zoom-on, 1)));
   box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
 }
 
@@ -112,12 +119,12 @@
 }
 
 .bundle-card--featured .bundle-card__img {
-  transform: scale(1.12);
+  transform: scale(calc(1 + (var(--bb-zoom, 1.12) - 1) * var(--bb-zoom-on, 1)));
   transform-origin: center center;
 }
 
 .bundle-card--featured:hover .bundle-card__img {
-  transform: scale(1.18);
+  transform: scale(calc(1 + (var(--bb-zoom-hover, 1.18) - 1) * var(--bb-zoom-on, 1)));
 }
 
 /* ── Discount Badge ────────────────────────────────── */
