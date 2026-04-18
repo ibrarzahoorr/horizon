@@ -240,14 +240,10 @@
    SLIDER LAYOUT
    =================================================== */
 .best-bundles-slider-wrapper {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  position: relative;
+  width: 100%;
 }
 
 .best-bundles-track-outer {
-  flex: 1;
   overflow: hidden;
   border-radius: 12px;
 }
@@ -262,31 +258,6 @@
 .bb-slide {
   flex: 0 0 calc((100% - 48px) / 3);
   min-width: 0;
-}
-
-/* ── Arrows ────────────────────────────────────────── */
-.bb-arrow {
-  flex-shrink: 0;
-  width: 48px;
-  height: 48px;
-  border-radius: 50%;
-  border: 2px solid #0d1b3e;
-  background: #ffffff;
-  color: #0d1b3e;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  transition: background 0.2s ease, color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 2px 8px rgba(0,0,0,0.08);
-  z-index: 2;
-}
-
-.bb-arrow:hover {
-  background: #0d1b3e;
-  color: #ffffff;
-  transform: scale(1.08);
-  box-shadow: 0 4px 16px rgba(13,27,62,0.25);
 }
 
 /* ── Dots ──────────────────────────────────────────── */
@@ -354,9 +325,4 @@
   }
 
   .bb-slide { flex: 0 0 100%; }
-
-  .bb-arrow {
-    width: 38px;
-    height: 38px;
-  }
 }

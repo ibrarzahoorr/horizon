@@ -29,11 +29,6 @@
     {%- else -%}
       {%- comment %} ── SLIDER LAYOUT ── {% endcomment %}
       <div class="best-bundles-slider-wrapper">
-
-        <button class="bb-arrow bb-arrow--prev" aria-label="Previous bundle" data-target="best-bundles-{{ section.id }}">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-        </button>
-
         <div class="best-bundles-track-outer">
           <div class="best-bundles-track" id="bb-track-{{ section.id }}">
             {% for block in section.blocks %}
@@ -44,11 +39,6 @@
             {% endfor %}
           </div>
         </div>
-
-        <button class="bb-arrow bb-arrow--next" aria-label="Next bundle" data-target="best-bundles-{{ section.id }}">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-        </button>
-
       </div>
 
       {%- if section.settings.show_dots -%}
@@ -79,40 +69,58 @@
 
   if (layout !== 'slider') return;
 
-  const track        = document.getElementById('bb-track-{{ section.id }}');
-  const slides       = track ? track.querySelectorAll('.bb-slide') : [];
-  const dotsWrap     = document.getElementById('bb-dots-{{ section.id }}');
-  const dots         = dotsWrap ? dotsWrap.querySelectorAll('.bb-dot') : [];
-  const prevBtn      = sectionEl.querySelector('.bb-arrow--prev');
-  const nextBtn      = sectionEl.querySelector('.bb-arrow--next');
+  const track    = document.getElementById('bb-track-{{ section.id }}');
+  const slides   = track ? Array.from(track.querySelectorAll('.bb-slide')) : [];
+  const dotsWrap = document.getElementById('bb-dots-{{ section.id }}');
+  const dots     = dotsWrap ? dotsWrap.querySelectorAll('.bb-dot') : [];
 
   if (!track || slides.length === 0) return;
 
-  let current   = 0;
+  let current    = 0;
   let slideTimer = null;
-  const visibleCount = window.innerWidth < 600 ? 1 : window.innerWidth < 960 ? 2 : 3;
-  const maxIndex = Math.max(0, slides.length - visibleCount);
+
+  function getVisible() {
+    if (window.innerWidth < 600) return 1;
+    if (window.innerWidth < 960) return 2;
+    return 3;
+  }
+
+  function updateCenterZoom() {
+    const vis = getVisible();
+    slides.forEach((s, i) => {
+      const card = s.querySelector('.bundle-card');
+      if (!card) return;
+      // Center index among visible slides
+      const centerIndex = current + Math.floor(vis / 2);
+      if (vis === 3 && i === centerIndex) {
+        card.classList.add('bundle-card--featured');
+      } else {
+        card.classList.remove('bundle-card--featured');
+      }
+    });
+  }
 
   function goTo(index) {
+    const vis      = getVisible();
+    const maxIndex = Math.max(0, slides.length - vis);
     current = Math.max(0, Math.min(index, maxIndex));
+
     const slideWidth = slides[0].offsetWidth;
     const gap = 24;
     track.style.transform = 'translateX(-' + (current * (slideWidth + gap)) + 'px)';
 
     dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+    updateCenterZoom();
   }
 
-  function next() { goTo(current >= maxIndex ? 0 : current + 1); }
-  function prev() { goTo(current <= 0 ? maxIndex : current - 1); }
-
-  if (nextBtn) nextBtn.addEventListener('click', function() { resetTimer(); next(); });
-  if (prevBtn) prevBtn.addEventListener('click', function() { resetTimer(); prev(); });
+  function next() {
+    const vis      = getVisible();
+    const maxIndex = Math.max(0, slides.length - vis);
+    goTo(current >= maxIndex ? 0 : current + 1);
+  }
 
   dots.forEach(function(dot) {
-    dot.addEventListener('click', function() {
-      resetTimer();
-      goTo(parseInt(dot.dataset.index, 10));
-    });
+    dot.addEventListener('click', function() { resetTimer(); goTo(parseInt(dot.dataset.index, 10)); });
   });
 
   // Touch / Swipe support
@@ -120,7 +128,12 @@
   track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
   track.addEventListener('touchend', function(e) {
     const diff = startX - e.changedTouches[0].clientX;
-    if (Math.abs(diff) > 40) { resetTimer(); diff > 0 ? next() : prev(); }
+    const vis = getVisible();
+    const maxIndex = Math.max(0, slides.length - vis);
+    if (Math.abs(diff) > 40) {
+      resetTimer();
+      diff > 0 ? next() : goTo(current <= 0 ? maxIndex : current - 1);
+    }
   }, { passive: true });
 
   function startTimer() {
@@ -133,9 +146,10 @@
     startTimer();
   }
 
+  // Init
+  updateCenterZoom();
   startTimer();
 
-  // Recalculate on resize
   window.addEventListener('resize', function() { goTo(current); });
 })();
 </script>
