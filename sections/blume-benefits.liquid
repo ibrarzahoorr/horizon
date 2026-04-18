@@ -94,9 +94,9 @@
         <ul class="benefit-list">
           {%- for block in section.blocks -%}
             <li class="benefit-item" {{ block.shopify_attributes }}>
-              {%- if block.settings.icon_image != blank -%}
+              {%- if block.settings.image != blank -%}
                 <span class="benefit-icon">
-                  {{ block.settings.icon_image | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.text }}
+                  {{ block.settings.image | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.text }}
                 </span>
               {%- endif -%}
               <span>{{ block.settings.text }}</span>
@@ -132,19 +132,19 @@
   ],
   "blocks": [
     {
-      "type": "benefit",
+      "type": "callout",
       "name": "Call Out",
       "settings": [
         {
           "type": "image_picker",
-          "id": "icon_image",
-          "label": "Icon",
+          "id": "image",
+          "label": "Image",
           "info": "Upload SVG or PNG icon (40x40px recommended)"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Bullet Point",
+          "label": "Text",
           "default": "Vegan"
         }
       ]
@@ -154,11 +154,11 @@
     {
       "name": "Blume Benefits",
       "blocks": [
-        { "type": "benefit", "settings": { "text": "Vegan" } },
-        { "type": "benefit", "settings": { "text": "Certified Clean" } },
-        { "type": "benefit", "settings": { "text": "Women Owned" } },
-        { "type": "benefit", "settings": { "text": "Climate Neutral" } },
-        { "type": "benefit", "settings": { "text": "Plastic Neutral" } }
+        { "type": "callout", "settings": { "text": "Vegan" } },
+        { "type": "callout", "settings": { "text": "Certified Clean" } },
+        { "type": "callout", "settings": { "text": "Women Owned" } },
+        { "type": "callout", "settings": { "text": "Climate Neutral" } },
+        { "type": "callout", "settings": { "text": "Plastic Neutral" } }
       ]
     }
   ]
