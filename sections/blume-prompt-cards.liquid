@@ -79,6 +79,7 @@
     height: 14px;
     opacity: 0;
     transition: opacity 0.2s;
+    color: #fff;
   }
   .prompt-card.active .prompt-card-checkbox svg {
     opacity: 1;
@@ -239,7 +240,13 @@
             </div>
             <div class="prompt-card-text">{{ block.settings.question }}</div>
           </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
 
+    <div class="prompt-results-container">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'prompt_card' -%}
           <div class="prompt-result" data-result-id="{{ block.id }}">
             <div class="prompt-result-inner">
               <div class="prompt-result-image">
