@@ -3,32 +3,37 @@
     padding: 80px 0;
     background: #f8f9fa;
   }
+  .dermo-container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
   .dermo-split {
     display: flex;
     align-items: center;
-    gap: 60px;
+    justify-content: space-between;
+    gap: 80px;
   }
   .dermo-content {
-    flex: 1;
-    max-width: 500px;
+    flex: 0 0 45%;
+    text-align: left;
   }
   .dermo-content h3 {
     font-family: var(--font-heading--family);
-    font-size: 42px;
+    font-size: 40px;
     font-weight: 600;
     margin-bottom: 25px;
     color: #1a3a5c;
     line-height: 1.2;
   }
   .dermo-quote {
-    font-size: 18px;
+    font-size: 17px;
     line-height: 1.7;
     color: #1a3a5c;
     margin-bottom: 30px;
-    font-style: italic;
   }
   .dermo-doctor-name {
-    font-size: 16px;
+    font-size: 14px;
     font-weight: 700;
     color: #1a3a5c;
     text-transform: uppercase;
@@ -36,24 +41,35 @@
     margin-bottom: 5px;
   }
   .dermo-doctor-role {
-    font-size: 15px;
+    font-size: 14px;
     color: #555;
   }
   .dermo-image {
-    flex: 1;
-    max-width: 500px;
+    flex: 0 0 50%;
+    display: flex;
+    justify-content: flex-end;
   }
   .dermo-image img {
     width: 100%;
+    max-width: 450px;
     height: auto;
     display: block;
+    object-fit: cover;
   }
   @media (max-width: 991px) {
     .dermo-split {
       flex-direction: column;
       gap: 40px;
     }
-    .dermo-content, .dermo-image {
+    .dermo-content {
+      flex: 1;
+      text-align: center;
+    }
+    .dermo-image {
+      flex: 1;
+      justify-content: center;
+    }
+    .dermo-image img {
       max-width: 100%;
     }
     .dermo-content h3 {
@@ -63,7 +79,7 @@
 {%- endstyle -%}
 
 <section class="dermo-wrapper">
-  <div class="modern-container">
+  <div class="dermo-container">
     <div class="dermo-split">
       <div class="dermo-content">
         <h3>{{ section.settings.title }}</h3>
