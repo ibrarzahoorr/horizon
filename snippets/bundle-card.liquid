@@ -1,0 +1,69 @@
+{%- assign product = all_products[block.settings.product] -%}
+{%- assign img_src = '' -%}
+{%- if block.settings.custom_image != blank -%}
+  {%- assign img_src = block.settings.custom_image | image_url: width: 600 -%}
+{%- elsif product.featured_image -%}
+  {%- assign img_src = product.featured_image | image_url: width: 600 -%}
+{%- endif -%}
+
+{%- assign is_center = false -%}
+{%- if layout == 'grid' and total == 3 and index == 2 -%}
+  {%- assign is_center = true -%}
+{%- endif -%}
+
+<div
+  class="bundle-card{% if is_center %} bundle-card--featured{% endif %}"
+  {{ block.shopify_attributes }}
+>
+  <a class="bundle-card__image-link" href="{{ product.url | default: '#' }}">
+    <div class="bundle-card__image-wrap">
+      {%- if img_src != '' -%}
+        <img
+          src="{{ img_src }}"
+          alt="{{ block.settings.title | default: product.title | escape }}"
+          width="600"
+          height="450"
+          loading="lazy"
+          class="bundle-card__img"
+        >
+      {%- else -%}
+        <div class="bundle-card__img-placeholder"></div>
+      {%- endif -%}
+
+      {%- if block.settings.discount_percent != blank and block.settings.discount_percent != '0' -%}
+        <div class="bundle-card__badge">
+          {{ block.settings.discount_percent }}%<br>OFF
+        </div>
+      {%- endif -%}
+    </div>
+  </a>
+
+  <div class="bundle-card__body">
+    <h3 class="bundle-card__title">
+      <a href="{{ product.url | default: '#' }}">
+        {{ block.settings.title | default: product.title | default: 'Bundle' }}
+      </a>
+    </h3>
+
+    {%- if block.settings.subtitle != blank -%}
+      <p class="bundle-card__subtitle">{{ block.settings.subtitle }}</p>
+    {%- endif -%}
+
+    <div class="bundle-card__pricing">
+      {%- if block.settings.compare_price != blank -%}
+        <span class="bundle-card__original">{{ block.settings.compare_price }}</span>
+      {%- endif -%}
+      {%- if block.settings.sale_price != blank -%}
+        <span class="bundle-card__sale">{{ block.settings.sale_price }}</span>
+      {%- endif -%}
+    </div>
+
+    <a
+      href="{{ product.url | default: '#' }}"
+      class="bundle-card__btn"
+      aria-label="Shop {{ block.settings.title | default: product.title }}"
+    >
+      {{ block.settings.button_label | default: 'SHOP NOW' }}
+    </a>
+  </div>
+</div>

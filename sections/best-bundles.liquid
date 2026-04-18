@@ -1,83 +1,144 @@
 {{ 'best-bundles.css' | asset_url | stylesheet_tag }}
 
-<section class="best-bundles-section" id="best-bundles-{{ section.id }}">
+{%- assign layout = section.settings.layout_style -%}
+{%- assign block_count = section.blocks.size -%}
+
+<section
+  class="best-bundles-section"
+  id="best-bundles-{{ section.id }}"
+  data-section-id="{{ section.id }}"
+  data-layout="{{ layout }}"
+  data-auto-slide="{{ section.settings.auto_slide }}"
+  data-slide-interval="{{ section.settings.slide_interval | times: 1000 }}"
+>
   <div class="best-bundles-container">
 
     <h2 class="best-bundles-heading">
       {{ section.settings.heading | default: 'BEST BUNDLES' }}
     </h2>
 
-    <div class="best-bundles-grid">
-      {% for block in section.blocks %}
-        {% assign product = all_products[block.settings.product] %}
-        <div class="bundle-card" {{ block.shopify_attributes }}>
+    {%- if layout == 'grid' -%}
+      {%- comment %} ── GRID LAYOUT ── {% endcomment %}
+      <div class="best-bundles-grid best-bundles-grid--{{ block_count }}">
+        {% for block in section.blocks %}
+          {%- assign product = all_products[block.settings.product] -%}
+          {% render 'bundle-card', block: block, product: product, index: forloop.index, total: block_count %}
+        {% endfor %}
+      </div>
 
-          <a class="bundle-card__image-link" href="{{ product.url }}">
-            <div class="bundle-card__image-wrap">
-              {% if product.featured_image %}
-                <img
-                  src="{{ product.featured_image | image_url: width: 600 }}"
-                  alt="{{ product.featured_image.alt | escape }}"
-                  width="600"
-                  height="500"
-                  loading="lazy"
-                  class="bundle-card__img"
-                >
-              {% elsif block.settings.custom_image %}
-                <img
-                  src="{{ block.settings.custom_image | image_url: width: 600 }}"
-                  alt="{{ block.settings.title | escape }}"
-                  width="600"
-                  height="500"
-                  loading="lazy"
-                  class="bundle-card__img"
-                >
-              {% endif %}
+    {%- else -%}
+      {%- comment %} ── SLIDER LAYOUT ── {% endcomment %}
+      <div class="best-bundles-slider-wrapper">
 
-              {% assign discount = block.settings.discount_percent %}
-              {% if discount != blank and discount != '0' %}
-                <div class="bundle-card__badge">
-                  {{ discount }}%<br>OFF
-                </div>
-              {% endif %}
-            </div>
-          </a>
+        <button class="bb-arrow bb-arrow--prev" aria-label="Previous bundle" data-target="best-bundles-{{ section.id }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+        </button>
 
-          <div class="bundle-card__body">
-            <h3 class="bundle-card__title">
-              <a href="{{ product.url }}">
-                {{ block.settings.title | default: product.title }}
-              </a>
-            </h3>
-
-            {% if block.settings.subtitle != blank %}
-              <p class="bundle-card__subtitle">{{ block.settings.subtitle }}</p>
-            {% endif %}
-
-            <div class="bundle-card__pricing">
-              {% if block.settings.compare_price != blank %}
-                <span class="bundle-card__original">{{ block.settings.compare_price }}</span>
-              {% endif %}
-              {% if block.settings.sale_price != blank %}
-                <span class="bundle-card__sale">{{ block.settings.sale_price }}</span>
-              {% endif %}
-            </div>
-
-            <a
-              href="{{ product.url }}"
-              class="bundle-card__btn"
-              aria-label="Shop {{ block.settings.title | default: product.title }}"
-            >
-              {{ block.settings.button_label | default: 'SHOP NOW' }}
-            </a>
+        <div class="best-bundles-track-outer">
+          <div class="best-bundles-track" id="bb-track-{{ section.id }}">
+            {% for block in section.blocks %}
+              {%- assign product = all_products[block.settings.product] -%}
+              <div class="bb-slide">
+                {% render 'bundle-card', block: block, product: product, index: forloop.index, total: block_count %}
+              </div>
+            {% endfor %}
           </div>
-
         </div>
-      {% endfor %}
-    </div>
+
+        <button class="bb-arrow bb-arrow--next" aria-label="Next bundle" data-target="best-bundles-{{ section.id }}">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+        </button>
+
+      </div>
+
+      {%- if section.settings.show_dots -%}
+        <div class="bb-dots" id="bb-dots-{{ section.id }}">
+          {% for block in section.blocks %}
+            <button
+              class="bb-dot{% if forloop.first %} is-active{% endif %}"
+              aria-label="Go to slide {{ forloop.index }}"
+              data-index="{{ forloop.index0 }}"
+            ></button>
+          {% endfor %}
+        </div>
+      {%- endif -%}
+
+    {%- endif -%}
 
   </div>
 </section>
+
+<script>
+(function() {
+  const sectionEl = document.getElementById('best-bundles-{{ section.id }}');
+  if (!sectionEl) return;
+
+  const layout       = sectionEl.dataset.layout;
+  const autoSlide    = sectionEl.dataset.autoSlide === 'true';
+  const interval     = parseInt(sectionEl.dataset.slideInterval, 10) || 4000;
+
+  if (layout !== 'slider') return;
+
+  const track        = document.getElementById('bb-track-{{ section.id }}');
+  const slides       = track ? track.querySelectorAll('.bb-slide') : [];
+  const dotsWrap     = document.getElementById('bb-dots-{{ section.id }}');
+  const dots         = dotsWrap ? dotsWrap.querySelectorAll('.bb-dot') : [];
+  const prevBtn      = sectionEl.querySelector('.bb-arrow--prev');
+  const nextBtn      = sectionEl.querySelector('.bb-arrow--next');
+
+  if (!track || slides.length === 0) return;
+
+  let current   = 0;
+  let slideTimer = null;
+  const visibleCount = window.innerWidth < 600 ? 1 : window.innerWidth < 960 ? 2 : 3;
+  const maxIndex = Math.max(0, slides.length - visibleCount);
+
+  function goTo(index) {
+    current = Math.max(0, Math.min(index, maxIndex));
+    const slideWidth = slides[0].offsetWidth;
+    const gap = 24;
+    track.style.transform = 'translateX(-' + (current * (slideWidth + gap)) + 'px)';
+
+    dots.forEach((d, i) => d.classList.toggle('is-active', i === current));
+  }
+
+  function next() { goTo(current >= maxIndex ? 0 : current + 1); }
+  function prev() { goTo(current <= 0 ? maxIndex : current - 1); }
+
+  if (nextBtn) nextBtn.addEventListener('click', function() { resetTimer(); next(); });
+  if (prevBtn) prevBtn.addEventListener('click', function() { resetTimer(); prev(); });
+
+  dots.forEach(function(dot) {
+    dot.addEventListener('click', function() {
+      resetTimer();
+      goTo(parseInt(dot.dataset.index, 10));
+    });
+  });
+
+  // Touch / Swipe support
+  let startX = 0;
+  track.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, { passive: true });
+  track.addEventListener('touchend', function(e) {
+    const diff = startX - e.changedTouches[0].clientX;
+    if (Math.abs(diff) > 40) { resetTimer(); diff > 0 ? next() : prev(); }
+  }, { passive: true });
+
+  function startTimer() {
+    if (!autoSlide) return;
+    slideTimer = setInterval(next, interval);
+  }
+
+  function resetTimer() {
+    clearInterval(slideTimer);
+    startTimer();
+  }
+
+  startTimer();
+
+  // Recalculate on resize
+  window.addEventListener('resize', function() { goTo(current); });
+})();
+</script>
 
 {% schema %}
 {
@@ -90,6 +151,45 @@
       "id": "heading",
       "label": "Section Heading",
       "default": "BEST BUNDLES"
+    },
+    {
+      "type": "header",
+      "content": "Layout"
+    },
+    {
+      "type": "select",
+      "id": "layout_style",
+      "label": "Layout Style",
+      "options": [
+        { "value": "grid",   "label": "Grid (static, best for 3 items)" },
+        { "value": "slider", "label": "Slider / Carousel" }
+      ],
+      "default": "slider"
+    },
+    {
+      "type": "header",
+      "content": "Slider Options"
+    },
+    {
+      "type": "checkbox",
+      "id": "auto_slide",
+      "label": "Enable Auto-Slide",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "slide_interval",
+      "label": "Auto-Slide Interval (seconds)",
+      "min": 2,
+      "max": 10,
+      "step": 1,
+      "default": 4
+    },
+    {
+      "type": "checkbox",
+      "id": "show_dots",
+      "label": "Show Dot Indicators",
+      "default": true
     }
   ],
   "blocks": [
@@ -145,6 +245,12 @@
   "presets": [
     {
       "name": "Best Bundles",
+      "settings": {
+        "layout_style": "slider",
+        "auto_slide": true,
+        "slide_interval": 4,
+        "show_dots": true
+      },
       "blocks": [
         {
           "type": "bundle",
