@@ -73,7 +73,7 @@
   position: relative;
   overflow: hidden;
   background: #d8e9f5;
-  aspect-ratio: 4 / 3;
+  aspect-ratio: 1 / 1;
 }
 
 .bundle-card__img {
@@ -115,7 +115,7 @@
 }
 
 .bundle-card--featured .bundle-card__image-wrap {
-  aspect-ratio: 3 / 2.4;
+  aspect-ratio: 1 / 1;
 }
 
 .bundle-card--featured .bundle-card__img {
@@ -312,7 +312,7 @@
     transform: translateY(-4px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.12);
   }
-  .bundle-card--featured .bundle-card__image-wrap { aspect-ratio: 4 / 3; }
+  .bundle-card--featured .bundle-card__image-wrap { aspect-ratio: 1 / 1; }
   .bundle-card--featured .bundle-card__img { transform: scale(1); }
   .bundle-card--featured:hover .bundle-card__img { transform: scale(1.04); }
 
