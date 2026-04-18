@@ -1,0 +1,457 @@
+{%- style -%}
+  .prompt-cards-wrapper {
+    padding: 80px 0;
+    background: {{ section.settings.background_color }};
+    position: relative;
+  }
+  .prompt-cards-header {
+    text-align: center;
+    margin-bottom: 50px;
+    position: relative;
+  }
+  .prompt-cards-title {
+    font-family: var(--font-heading--family);
+    font-size: 42px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    margin-bottom: 10px;
+    line-height: 1.2;
+  }
+  .prompt-cards-badge {
+    position: absolute;
+    top: -20px;
+    right: 10%;
+    width: 100px;
+    height: 100px;
+    background: {{ section.settings.badge_background }};
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 12px;
+    font-weight: 600;
+    color: {{ section.settings.badge_color }};
+    text-align: center;
+    line-height: 1.3;
+    transform: rotate(15deg);
+    border: 2px solid {{ section.settings.badge_color }};
+  }
+  .prompt-cards-grid {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .prompt-card {
+    background: #fff;
+    border: 2px solid #e0e0e0;
+    border-radius: 12px;
+    padding: 24px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    position: relative;
+  }
+  .prompt-card:hover {
+    border-color: {{ section.settings.accent_color }};
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .prompt-card.active {
+    border-color: {{ section.settings.accent_color }};
+    background: {{ section.settings.active_background }};
+  }
+  .prompt-card-checkbox {
+    width: 24px;
+    height: 24px;
+    border: 2px solid #1a3a5c;
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+    transition: all 0.2s;
+  }
+  .prompt-card.active .prompt-card-checkbox {
+    background: #1a3a5c;
+    color: #fff;
+  }
+  .prompt-card-checkbox svg {
+    width: 14px;
+    height: 14px;
+    opacity: 0;
+    transition: opacity 0.2s;
+  }
+  .prompt-card.active .prompt-card-checkbox svg {
+    opacity: 1;
+  }
+  .prompt-card-text {
+    font-size: 18px;
+    font-weight: 500;
+    color: #1a3a5c;
+    line-height: 1.4;
+  }
+  .prompt-card-star {
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    opacity: 0;
+    transition: opacity 0.3s;
+  }
+  .prompt-card.active .prompt-card-star {
+    opacity: 1;
+  }
+  .prompt-result {
+    display: none;
+    background: #fff;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 40px rgba(0,0,0,0.1);
+    margin-top: 40px;
+    animation: fadeInUp 0.5s ease;
+  }
+  .prompt-result.active {
+    display: block;
+  }
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  .prompt-result-inner {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    min-height: 400px;
+  }
+  .prompt-result-image {
+    background: linear-gradient(135deg, #e8f4fc 0%, #d4ebf7 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .prompt-result-image img {
+    max-width: 100%;
+    max-height: 350px;
+    object-fit: contain;
+  }
+  .prompt-result-content {
+    padding: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .prompt-result-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #666;
+    margin-bottom: 16px;
+  }
+  .prompt-result-title {
+    font-family: var(--font-heading--family);
+    font-size: 32px;
+    font-weight: 600;
+    color: #1a3a5c;
+    margin-bottom: 20px;
+    line-height: 1.3;
+  }
+  .prompt-result-description {
+    font-size: 16px;
+    color: #555;
+    line-height: 1.6;
+    margin-bottom: 24px;
+  }
+  .prompt-result-price {
+    font-size: 24px;
+    font-weight: 600;
+    color: #1a3a5c;
+    margin-bottom: 24px;
+  }
+  .prompt-result-btn {
+    display: inline-block;
+    background: #1a3a5c;
+    color: #fff;
+    text-decoration: none;
+    padding: 16px 32px;
+    border-radius: 8px;
+    font-weight: 600;
+    transition: background 0.2s;
+    text-align: center;
+  }
+  .prompt-result-btn:hover {
+    background: #0f1428;
+  }
+  @media (max-width: 991px) {
+    .prompt-cards-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .prompt-result-inner {
+      grid-template-columns: 1fr;
+    }
+    .prompt-result-content {
+      padding: 40px;
+    }
+  }
+  @media (max-width: 576px) {
+    .prompt-cards-grid {
+      grid-template-columns: 1fr;
+    }
+    .prompt-cards-title {
+      font-size: 32px;
+    }
+    .prompt-cards-badge {
+      width: 70px;
+      height: 70px;
+      font-size: 10px;
+      right: 5%;
+    }
+  }
+{%- endstyle -%}
+
+<section class="prompt-cards-wrapper" data-section-id="{{ section.id }}">
+  <div class="modern-container">
+    <div class="prompt-cards-header">
+      <h2 class="prompt-cards-title">{{ section.settings.title }}</h2>
+      {%- if section.settings.show_badge -%}
+        <div class="prompt-cards-badge">{{ section.settings.badge_text }}</div>
+      {%- endif -%}
+    </div>
+
+    <div class="prompt-cards-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'prompt_card' -%}
+          <div class="prompt-card" data-card-id="{{ block.id }}" {{ block.shopify_attributes }}>
+            <svg class="prompt-card-star" viewBox="0 0 40 40" fill="none">
+              <path d="M20 0L24.5 15.5L40 20L24.5 24.5L20 40L15.5 24.5L0 20L15.5 15.5L20 0Z" fill="#FFB6C1"/>
+            </svg>
+            <div class="prompt-card-checkbox">
+              <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="2 7 5.5 10.5 12 4"></polyline>
+              </svg>
+            </div>
+            <div class="prompt-card-text">{{ block.settings.question }}</div>
+          </div>
+
+          <div class="prompt-result" data-result-id="{{ block.id }}">
+            <div class="prompt-result-inner">
+              <div class="prompt-result-image">
+                {%- if block.settings.product_image != blank -%}
+                  {{ block.settings.product_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.product_title }}
+                {%- elsif block.settings.product != blank and block.settings.product.featured_image != blank -%}
+                  {{ block.settings.product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: block.settings.product.title }}
+                {%- else -%}
+                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {%- endif -%}
+              </div>
+              <div class="prompt-result-content">
+                <div class="prompt-result-label">{{ section.settings.result_label }}</div>
+                <h3 class="prompt-result-title">
+                  {%- if block.settings.product_title != blank -%}
+                    {{ block.settings.product_title }}
+                  {%- elsif block.settings.product != blank -%}
+                    {{ block.settings.product.title }}
+                  {%- else -%}
+                    Product Title
+                  {%- endif -%}
+                </h3>
+                <p class="prompt-result-description">{{ block.settings.product_description }}</p>
+                <div class="prompt-result-price">
+                  {%- if block.settings.product != blank -%}
+                    {{ block.settings.product.price | money }}
+                  {%- else -%}
+                    $0.00
+                  {%- endif -%}
+                </div>
+                <a href="{%- if block.settings.product != blank -%}{{ block.settings.product.url }}{%- else -%}#{%- endif -%}" class="prompt-result-btn">
+                  {{ section.settings.button_text }}
+                </a>
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+    </div>
+  </div>
+</section>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+    const cards = section.querySelectorAll('.prompt-card');
+    
+    cards.forEach(card => {
+      card.addEventListener('click', function() {
+        const cardId = this.dataset.cardId;
+        const result = section.querySelector('[data-result-id="' + cardId + '"]');
+        
+        // Toggle active state
+        const isActive = this.classList.contains('active');
+        
+        // Close all other cards and results
+        cards.forEach(c => c.classList.remove('active'));
+        section.querySelectorAll('.prompt-result').forEach(r => r.classList.remove('active'));
+        
+        // If this card wasn't active, activate it
+        if (!isActive) {
+          this.classList.add('active');
+          if (result) {
+            result.classList.add('active');
+            // Smooth scroll to result
+            result.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+          }
+        }
+      });
+    });
+  });
+</script>
+
+{% schema %}
+{
+  "name": "Blume Prompt Cards",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "What are you looking for today?"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_badge",
+      "label": "Show Badge",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "badge_text",
+      "label": "Badge Text",
+      "default": "CHECK ALL THAT APPLY!"
+    },
+    {
+      "type": "text",
+      "id": "result_label",
+      "label": "Result Label",
+      "default": "WE RECOMMEND"
+    },
+    {
+      "type": "text",
+      "id": "button_text",
+      "label": "Button Text",
+      "default": "Shop Now"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Cards per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 3
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Accent Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "active_background",
+      "label": "Active Card Background",
+      "default": "#f8f9fa"
+    },
+    {
+      "type": "color",
+      "id": "badge_background",
+      "label": "Badge Background",
+      "default": "#FFD4C7"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Text Color",
+      "default": "#1a3a5c"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "prompt_card",
+      "name": "Prompt Card",
+      "settings": [
+        {
+          "type": "text",
+          "id": "question",
+          "label": "Question Text",
+          "default": "I have acne prone skin"
+        },
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Select Product"
+        },
+        {
+          "type": "text",
+          "id": "product_title",
+          "label": "Custom Product Title (optional)"
+        },
+        {
+          "type": "textarea",
+          "id": "product_description",
+          "label": "Product Description",
+          "default": "Powerful blend of clean ingredients to clear skin, without compromising hydration."
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Custom Product Image (optional)"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Prompt Cards",
+      "blocks": [
+        {
+          "type": "prompt_card",
+          "settings": {
+            "question": "I have acne prone skin"
+          }
+        },
+        {
+          "type": "prompt_card",
+          "settings": {
+            "question": "I have scars and discoloration"
+          }
+        },
+        {
+          "type": "prompt_card",
+          "settings": {
+            "question": "I have dry, dull skin"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
