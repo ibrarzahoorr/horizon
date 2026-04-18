@@ -176,7 +176,7 @@
         "bundle_dbLAn8": {
           "type": "bundle",
           "settings": {
-            "product": "",
+            "product": "the-ultimate-clear-skin-edit",
             "title": "Ultimate Clear Skin Edit",
             "subtitle": "Fight Breakouts. Fade Marks. Stay Clear.",
             "discount_percent": "53",
@@ -188,7 +188,7 @@
         "bundle_37xi6x": {
           "type": "bundle",
           "settings": {
-            "product": "",
+            "product": "clear-skin-kit-3",
             "title": "Clear Skin Kit: Acne Essentials",
             "subtitle": "Leave Hormonal Acne Behind and Get Clear Skin",
             "discount_percent": "36",
@@ -217,7 +217,15 @@
       ],
       "name": "Best Bundles",
       "settings": {
-        "heading": "BEST BUNDLES"
+        "heading": "BEST BUNDLES",
+        "layout_style": "slider",
+        "auto_slide": true,
+        "slide_interval": 4,
+        "show_dots": true,
+        "enable_center_zoom": true,
+        "center_zoom_scale": 117,
+        "center_zoom_hover": 138,
+        "center_lift_px": 2
       }
     },
     "product_list_fa6P9H": {
