@@ -87,12 +87,35 @@
     overflow: hidden;
     margin-bottom: 16px;
   }
+  .featured-product-image-wrapper a {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
   .featured-product-image-wrapper img {
     width: 100%;
     height: 100%;
     object-fit: contain;
     padding: 30px;
     display: block;
+    transition: opacity 0.3s ease;
+  }
+  .featured-product-image-wrapper .product-image-primary {
+    position: absolute;
+    top: 0;
+    left: 0;
+  }
+  .featured-product-image-wrapper .product-image-secondary {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+  }
+  .featured-product-image-wrapper:hover .product-image-primary {
+    opacity: 0;
+  }
+  .featured-product-image-wrapper:hover .product-image-secondary {
+    opacity: 1;
   }
   .featured-product-badges {
     position: absolute;
@@ -258,9 +281,14 @@
           <div class="featured-product-image-wrapper">
             <a href="{{ product.url }}">
               {%- if product.featured_image != blank -%}
-                {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+                {{ product.featured_image | image_url: width: 600 | image_tag: class: 'product-image-primary', loading: 'lazy', alt: product.title }}
               {%- else -%}
-                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg product-image-primary' }}
+              {%- endif -%}
+              {%- if product.images[1] != blank -%}
+                {{ product.images[1] | image_url: width: 600 | image_tag: class: 'product-image-secondary', loading: 'lazy', alt: product.title }}
+              {%- elsif product.featured_image != blank -%}
+                {{ product.featured_image | image_url: width: 600 | image_tag: class: 'product-image-secondary', loading: 'lazy', alt: product.title }}
               {%- endif -%}
             </a>
             

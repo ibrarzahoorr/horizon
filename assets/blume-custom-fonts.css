@@ -1,0 +1,20 @@
+/* Import serif font similar to the reference image */
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&display=swap');
+
+/* Apply serif font to all headings */
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6,
+.font-heading,
+[class*="heading"],
+[class*="title"] {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif !important;
+}
+
+/* Also apply to specific Blume sections */
+.blume-skin-types-title,
+.blume-hero-title,
+.featured-products-title,
+.dermo-title,
+.benefits-content h2 {
+  font-family: 'Cormorant Garamond', Georgia, 'Times New Roman', serif !important;
+}

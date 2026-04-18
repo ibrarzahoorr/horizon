@@ -28,6 +28,7 @@
     {%- render 'meta-tags' -%}
     {%- render 'stylesheets' -%}
     {%- render 'fonts' -%}
+    {{ 'blume-custom-fonts.css' | asset_url | stylesheet_tag }}
     {%- render 'scripts' -%}
     {%- render 'theme-styles-variables' -%}
     {%- render 'color-schemes' -%}
