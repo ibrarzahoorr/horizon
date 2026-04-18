@@ -343,6 +343,17 @@
         "shop_all_link": ""
       }
     },
+    "blume_dermo_rec_trx6yw": {
+      "type": "blume-dermo-rec",
+      "name": "Blume Dermo Section",
+      "settings": {
+        "title": "Dermatologist Recommended",
+        "text": "<p>Gently remove surface impurities and excess oil for a clean and hydrated glow. Our products are formulated with derma“Blume products focus on hydration to protect the skin barrier, yet also deliver gentle active ingredients to benefit the skin. Blume’s emphasis on moisturizing ingredients and gentle actives means you get the most out of each product.”tologists to ensure safety and efficacy.</p>",
+        "link_label": "LEARN MORE",
+        "link": "",
+        "image": "shopify://shop_images/Image_9.png"
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -545,6 +556,7 @@
     "best_bundles_LkC8e3",
     "blume_skin_types_fHdRBf",
     "blume_best_sellers_CghRgw",
+    "blume_dermo_rec_trx6yw",
     "product_list_fa6P9H"
   ]
 }
