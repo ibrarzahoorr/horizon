@@ -37,12 +37,15 @@
   }
   .hero-text-container {
     max-width: 500px;
+    display: flex;
+    flex-direction: column;
   }
   .hero-text-container h1 {
     font-size: clamp(2.8rem, 4.5vw, 4.2rem);
     line-height: 1;
     margin-bottom: 30px;
     color: var(--blume-blue);
+    order: 1;
   }
   .hero-text-container .subtitle {
     font-size: 1.1rem;
@@ -50,19 +53,15 @@
     margin-bottom: 35px;
     color: var(--blume-blue);
     opacity: 0.9;
+    order: 2;
   }
-  .hero-text-container {
-    display: flex;
-    flex-direction: column;
-  }
-  .hero-text-container .hero-heading { order: 1; }
-  .hero-text-container .subtitle { order: 2; }
-  .hero-text-container .btn-offset-wrapper { order: 3; }
-  .hero-text-container .stars-row { order: 4; }
-  /* Fix offset button display */
+  /* Offset Button Style */
   .btn-offset-wrapper {
     position: relative;
     display: inline-block;
+    margin-top: 0;
+    margin-bottom: 25px;
+    order: 3;
   }
   .btn-offset-bg {
     position: absolute;
@@ -84,20 +83,23 @@
     text-decoration: none;
     font-weight: 700;
     border-radius: 4px;
-    border: 1px solid var(--blume-blue);
+    border: 2px solid var(--blume-blue);
     text-transform: uppercase;
     letter-spacing: 0.1em;
     font-size: 14px;
     text-align: center;
+    white-space: nowrap;
   }
   .stars-row {
-    margin-top: 25px;
+    margin-top: 0;
+    margin-bottom: 30px;
     display: flex;
     align-items: center;
     gap: 8px;
     font-size: 14px;
     color: var(--blume-blue);
     font-weight: 600;
+    order: 4;
   }
   .stars-row .stars {
     color: #ffb800;
@@ -125,15 +127,24 @@
       object-position: center top;
     }
     .signature-overlay { width: 150px; left: 50%; transform: translateX(-50%) rotate(-10deg); top: 20px; }
-    .btn-offset-wrapper { margin: 0 auto 20px; }
-    .stars-row { justify-content: center; margin-bottom: 25px; margin-top: 0; }
-    .hero-text-container h1 { margin-bottom: 20px; }
-    .hero-text-container .subtitle { margin-bottom: 0; }
-    /* Mobile order: Button -> Reviews -> Title -> Description */
-    .hero-text-container .btn-offset-wrapper { order: 1; }
-    .hero-text-container .stars-row { order: 2; }
-    .hero-text-container .hero-heading { order: 3; }
-    .hero-text-container .subtitle { order: 4; }
+    .btn-offset-wrapper { 
+      margin: 0 auto 20px; 
+      order: 1;
+    }
+    .stars-row { 
+      justify-content: center; 
+      margin-bottom: 25px; 
+      margin-top: 0; 
+      order: 2;
+    }
+    .hero-text-container h1 { 
+      margin-bottom: 20px; 
+      order: 3;
+    }
+    .hero-text-container .subtitle { 
+      margin-bottom: 0; 
+      order: 4;
+    }
   }
 {%- endstyle -%}
 
