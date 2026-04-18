@@ -256,21 +256,13 @@
   assign columns = section.settings.columns
   assign item_width = 100 | divided_by: columns
   assign gap_adjust = 20 | times: columns | minus: 20 | divided_by: columns
-  
-  # Count total products to show
-  if section.settings.collection != blank
-    assign collection_products = section.settings.collection.products | where: 'available', true
-    assign product_count = collection_products.size | at_most: section.settings.products_limit
-  else
-    assign product_count = section.blocks.size
-  endif
 -%}
 
 <section class="best-sellers-wrapper" data-section-id="{{ section.id }}" style="--item-width: {{ item_width }}%; --gap-adjust: {{ gap_adjust }}px;">
   <div class="modern-container">
     <div class="best-sellers-header">
       <h2 class="best-sellers-title">{{ section.settings.title }}</h2>
-      {%- if product_count > 2 -%}
+      {%- if section.blocks.size > 2 or section.settings.collection != blank -%}
         <div class="best-sellers-arrows">
           <button class="best-sellers-arrow best-sellers-arrow-prev" aria-label="Previous">
             <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
@@ -284,124 +276,21 @@
 
     <div class="best-sellers-slider">
       <div class="best-sellers-track" id="best-sellers-track-{{ section.id }}">
-        {%- if section.settings.collection != blank and collection_products.size > 0 -%}
-          {%- for product in collection_products limit: section.settings.products_limit -%}
-            <div class="best-seller-card">
-              <a href="{{ product.url }}" class="best-seller-image-wrapper">
-                {%- if product.featured_image != blank -%}
-                  {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
-                {%- else -%}
-                  {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                {%- endif -%}
-                
-                {%- if product.metafields.custom.badge_1 != blank or product.metafields.custom.badge_2 != blank or product.metafields.custom.badge_3 != blank -%}
-                  <div class="best-seller-badges">
-                    {%- if product.metafields.custom.badge_1 != blank -%}
-                      {{ product.metafields.custom.badge_1 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                    {%- endif -%}
-                    {%- if product.metafields.custom.badge_2 != blank -%}
-                      {{ product.metafields.custom.badge_2 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                    {%- endif -%}
-                    {%- if product.metafields.custom.badge_3 != blank -%}
-                      {{ product.metafields.custom.badge_3 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
-                
-                <div class="best-seller-hover-btn">
-                  Add to cart - {{ product.price | money }}
-                </div>
-              </a>
-              
-              <div class="best-seller-info">
-                <h3 class="best-seller-title">{{ product.title }}</h3>
-                
-                {%- if product.metafields.reviews.rating.value != blank -%}
-                  <div class="best-seller-rating">
-                    <span class="best-seller-stars">
-                      {%- for i in (1..5) -%}
-                        {%- if i <= product.metafields.reviews.rating.value -%}
-                          ★
-                        {%- else -%}
-                          ☆
-                        {%- endif -%}
-                      {%- endfor -%}
-                    </span>
-                    <span class="best-seller-review-count">({{ product.metafields.reviews.rating_count | default: 0 }})</span>
-                  </div>
-                {%- endif -%}
-                
-                <p class="best-seller-description">{{ product.metafields.custom.short_description | default: product.description | strip_html | truncatewords: 12 }}</p>
-                
-                <div class="best-seller-price">
-                  {%- if product.compare_at_price > product.price -%}
-                    <span class="sale-price">{{ product.price | money }}</span>
-                    <span class="compare-price">{{ product.compare_at_price | money }}</span>
-                  {%- else -%}
-                    {{ product.price | money }}
-                  {%- endif -%}
-                </div>
-              </div>
-            </div>
+        {%- if section.settings.collection != blank -%}
+          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+            {%- assign badge_1 = product.metafields.custom.badge_1 -%}
+            {%- assign badge_2 = product.metafields.custom.badge_2 -%}
+            {%- assign custom_description = product.metafields.custom.short_description -%}
+            {%- render 'best-seller-card', product: product, badge_1: badge_1, badge_2: badge_2, custom_description: custom_description -%}
           {%- endfor -%}
         {%- else -%}
           {%- for block in section.blocks -%}
             {%- assign product = block.settings.product -%}
             {%- if product != blank -%}
-              <div class="best-seller-card" {{ block.shopify_attributes }}>
-                <a href="{{ product.url }}" class="best-seller-image-wrapper">
-                  {%- if product.featured_image != blank -%}
-                    {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
-                  {%- else -%}
-                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                  {%- endif -%}
-                  
-                  {%- if block.settings.badge_1 != blank or block.settings.badge_2 != blank -%}
-                    <div class="best-seller-badges">
-                      {%- if block.settings.badge_1 != blank -%}
-                        {{ block.settings.badge_1 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                      {%- endif -%}
-                      {%- if block.settings.badge_2 != blank -%}
-                        {{ block.settings.badge_2 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                      {%- endif -%}
-                    </div>
-                  {%- endif -%}
-                  
-                  <div class="best-seller-hover-btn">
-                    Add to cart - {{ product.price | money }}
-                  </div>
-                </a>
-                
-                <div class="best-seller-info">
-                  <h3 class="best-seller-title">{{ product.title }}</h3>
-                  
-                  {%- if product.metafields.reviews.rating.value != blank -%}
-                    <div class="best-seller-rating">
-                      <span class="best-seller-stars">
-                        {%- for i in (1..5) -%}
-                          {%- if i <= product.metafields.reviews.rating.value -%}
-                            ★
-                          {%- else -%}
-                            ☆
-                          {%- endif -%}
-                        {%- endfor -%}
-                      </span>
-                      <span class="best-seller-review-count">({{ product.metafields.reviews.rating_count | default: 0 }})</span>
-                    </div>
-                  {%- endif -%}
-                  
-                  <p class="best-seller-description">{{ block.settings.description | default: product.description | strip_html | truncatewords: 12 }}</p>
-                  
-                  <div class="best-seller-price">
-                    {%- if product.compare_at_price > product.price -%}
-                      <span class="sale-price">{{ product.price | money }}</span>
-                      <span class="compare-price">{{ product.compare_at_price | money }}</span>
-                    {%- else -%}
-                      {{ product.price | money }}
-                    {%- endif -%}
-                  </div>
-                </div>
-              </div>
+              {%- assign badge_1 = block.settings.badge_1 -%}
+              {%- assign badge_2 = block.settings.badge_2 -%}
+              {%- assign custom_description = block.settings.description -%}
+              {%- render 'best-seller-card', product: product, badge_1: badge_1, badge_2: badge_2, custom_description: custom_description, block_attributes: block.shopify_attributes -%}
             {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
