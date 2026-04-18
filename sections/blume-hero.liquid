@@ -51,6 +51,14 @@
     color: var(--blume-blue);
     opacity: 0.9;
   }
+  .hero-text-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .hero-text-container .hero-heading { order: 1; }
+  .hero-text-container .subtitle { order: 2; }
+  .hero-text-container .btn-offset-wrapper { order: 3; }
+  .hero-text-container .stars-row { order: 4; }
   .stars-row {
     margin-top: 25px;
     display: flex;
@@ -70,19 +78,37 @@
   @media (max-width: 991px) {
     .blume-hero-wrapper { flex-direction: column; }
     .blume-hero-content-side, .blume-hero-media-side { flex: auto; width: 100%; }
-    .blume-hero-content-side { justify-content: center; text-align: center; order: 2; padding: 60px 20px; }
-    .blume-hero-media-side { order: 1; min-height: 50vh; }
+    .blume-hero-content-side { 
+      justify-content: center; 
+      text-align: center; 
+      order: 2; 
+      padding: 40px 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .blume-hero-media-side { order: 1; min-height: auto; }
+    .blume-hero-media-side img.main-img {
+      height: auto;
+      aspect-ratio: 1/1;
+      object-fit: cover;
+      object-position: center top;
+    }
     .signature-overlay { width: 150px; left: 50%; transform: translateX(-50%) rotate(-10deg); top: 20px; }
-    .btn-offset-wrapper { margin-left: auto; margin-right: auto; }
+    .btn-offset-wrapper { margin: 0 auto 20px; }
+    .stars-row { justify-content: center; margin-bottom: 25px; margin-top: 0; }
+    .hero-text-container h1 { margin-bottom: 20px; }
+    .hero-text-container .subtitle { margin-bottom: 0; }
+    /* Mobile order: Button -> Reviews -> Title -> Description */
+    .hero-text-container .btn-offset-wrapper { order: 1; }
+    .hero-text-container .stars-row { order: 2; }
+    .hero-text-container .hero-heading { order: 3; }
+    .hero-text-container .subtitle { order: 4; }
   }
 {%- endstyle -%}
 
 <section class="blume-hero-wrapper">
   <div class="blume-hero-content-side">
     <div class="hero-text-container animate-fade-up">
-      <h1 class="hero-heading">{{ section.settings.title }}</h1>
-      <div class="subtitle">{{ section.settings.text }}</div>
-      
       <div class="btn-offset-wrapper">
         <div class="btn-offset-bg"></div>
         <a href="{{ section.settings.link }}" class="modern-btn offset">{{ section.settings.button_label }}</a>
@@ -92,6 +118,9 @@
         <span>{{ section.settings.reviews_text }}</span>
         <span class="stars">★★★★★</span>
       </div>
+
+      <h1 class="hero-heading">{{ section.settings.title }}</h1>
+      <div class="subtitle">{{ section.settings.text }}</div>
     </div>
   </div>
   
