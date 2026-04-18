@@ -222,7 +222,7 @@
         "auto_slide": true,
         "slide_interval": 4,
         "show_dots": true,
-        "enable_center_zoom": true,
+        "enable_center_zoom": false,
         "center_zoom_scale": 112,
         "center_zoom_hover": 138,
         "center_lift_px": 2
