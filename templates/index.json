@@ -289,31 +289,31 @@
         "arrow_color": "#ffffff"
       }
     },
-    "blume_best_sellers_ng4qzB": {
+    "blume_best_sellers_CghRgw": {
       "type": "blume-best-sellers",
       "blocks": {
-        "product_TTm3pc": {
+        "product_K4T4ab": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_hRw6Qg": {
+        "product_9qwkJr": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_XFFBG4": {
+        "product_VXepBn": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_hWfQLg": {
+        "product_gUtERX": {
           "type": "product",
           "settings": {
             "product": "",
@@ -322,10 +322,10 @@
         }
       },
       "block_order": [
-        "product_TTm3pc",
-        "product_hRw6Qg",
-        "product_XFFBG4",
-        "product_hWfQLg"
+        "product_K4T4ab",
+        "product_9qwkJr",
+        "product_VXepBn",
+        "product_gUtERX"
       ],
       "name": "Blume Best Sellers",
       "settings": {
@@ -544,7 +544,7 @@
     "blume_trust_bar_bkybWJ",
     "best_bundles_LkC8e3",
     "blume_skin_types_fHdRBf",
-    "blume_best_sellers_ng4qzB",
+    "blume_best_sellers_CghRgw",
     "product_list_fa6P9H"
   ]
 }
