@@ -295,10 +295,12 @@
       "settings": {
         "title": "BEST SELLERS",
         "collection": "frontpage",
-        "products_limit": 4,
+        "products_limit": 12,
         "columns": 4,
         "background_color": "#faf5f0",
-        "title_color": "#1a3a5c"
+        "title_color": "#1a3a5c",
+        "show_view_all": true,
+        "view_all_text": "Shop All Products"
       }
     },
     "blume_dermo_rec_trx6yw": {
