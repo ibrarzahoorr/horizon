@@ -23,7 +23,7 @@
   </a>
   
   <div class="best-seller-info">
-    <h3 class="best-seller-title">{{ product.title }}</h3>
+    <h3 class="best-seller-title">{{ display_title | default: product.title }}</h3>
     
     {%- if product.metafields.reviews.rating.value != blank -%}
       <div class="best-seller-rating">
