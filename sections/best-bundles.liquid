@@ -1,0 +1,183 @@
+{{ 'best-bundles.css' | asset_url | stylesheet_tag }}
+
+<section class="best-bundles-section" id="best-bundles-{{ section.id }}">
+  <div class="best-bundles-container">
+
+    <h2 class="best-bundles-heading">
+      {{ section.settings.heading | default: 'BEST BUNDLES' }}
+    </h2>
+
+    <div class="best-bundles-grid">
+      {% for block in section.blocks %}
+        {% assign product = all_products[block.settings.product] %}
+        <div class="bundle-card" {{ block.shopify_attributes }}>
+
+          <a class="bundle-card__image-link" href="{{ product.url }}">
+            <div class="bundle-card__image-wrap">
+              {% if product.featured_image %}
+                <img
+                  src="{{ product.featured_image | image_url: width: 600 }}"
+                  alt="{{ product.featured_image.alt | escape }}"
+                  width="600"
+                  height="500"
+                  loading="lazy"
+                  class="bundle-card__img"
+                >
+              {% elsif block.settings.custom_image %}
+                <img
+                  src="{{ block.settings.custom_image | image_url: width: 600 }}"
+                  alt="{{ block.settings.title | escape }}"
+                  width="600"
+                  height="500"
+                  loading="lazy"
+                  class="bundle-card__img"
+                >
+              {% endif %}
+
+              {% assign discount = block.settings.discount_percent %}
+              {% if discount != blank and discount != '0' %}
+                <div class="bundle-card__badge">
+                  {{ discount }}%<br>OFF
+                </div>
+              {% endif %}
+            </div>
+          </a>
+
+          <div class="bundle-card__body">
+            <h3 class="bundle-card__title">
+              <a href="{{ product.url }}">
+                {{ block.settings.title | default: product.title }}
+              </a>
+            </h3>
+
+            {% if block.settings.subtitle != blank %}
+              <p class="bundle-card__subtitle">{{ block.settings.subtitle }}</p>
+            {% endif %}
+
+            <div class="bundle-card__pricing">
+              {% if block.settings.compare_price != blank %}
+                <span class="bundle-card__original">{{ block.settings.compare_price }}</span>
+              {% endif %}
+              {% if block.settings.sale_price != blank %}
+                <span class="bundle-card__sale">{{ block.settings.sale_price }}</span>
+              {% endif %}
+            </div>
+
+            <a
+              href="{{ product.url }}"
+              class="bundle-card__btn"
+              aria-label="Shop {{ block.settings.title | default: product.title }}"
+            >
+              {{ block.settings.button_label | default: 'SHOP NOW' }}
+            </a>
+          </div>
+
+        </div>
+      {% endfor %}
+    </div>
+
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Best Bundles",
+  "tag": "section",
+  "class": "section-best-bundles",
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "Section Heading",
+      "default": "BEST BUNDLES"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "bundle",
+      "name": "Bundle Card",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "Product"
+        },
+        {
+          "type": "image_picker",
+          "id": "custom_image",
+          "label": "Custom Image (overrides product image)"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title (overrides product title)"
+        },
+        {
+          "type": "text",
+          "id": "subtitle",
+          "label": "Subtitle / Short Description"
+        },
+        {
+          "type": "text",
+          "id": "discount_percent",
+          "label": "Discount % (e.g. 53)",
+          "placeholder": "53"
+        },
+        {
+          "type": "text",
+          "id": "compare_price",
+          "label": "Original Price (e.g. Rs.54,400.00)"
+        },
+        {
+          "type": "text",
+          "id": "sale_price",
+          "label": "Sale Price (e.g. Rs.26,900.00)"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "Button Label",
+          "default": "SHOP NOW"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Best Bundles",
+      "blocks": [
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Ultimate Clear Skin Edit",
+            "subtitle": "Fight Breakouts. Fade Marks. Stay Clear.",
+            "discount_percent": "53",
+            "compare_price": "Rs.54,400.00",
+            "sale_price": "Rs.26,900.00"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "Clear Skin Kit: Acne Essentials",
+            "subtitle": "Leave Hormonal Acne Behind and Get Clear Skin",
+            "discount_percent": "36",
+            "compare_price": "Rs.37,400.00",
+            "sale_price": "Rs.21,300.00"
+          }
+        },
+        {
+          "type": "bundle",
+          "settings": {
+            "title": "The Fresh Face Edit",
+            "subtitle": "Your First Routine, Done Right",
+            "discount_percent": "30",
+            "compare_price": "Rs.22,400.00",
+            "sale_price": "Rs.15,600.00"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

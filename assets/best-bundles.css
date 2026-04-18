@@ -1,0 +1,226 @@
+/* ===================================================
+   BEST BUNDLES SECTION
+   =================================================== */
+
+.best-bundles-section {
+  padding: 60px 20px 80px;
+  background: #ffffff;
+}
+
+.best-bundles-container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* ── Outlined Heading ──────────────────────────────── */
+.best-bundles-heading {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: clamp(2.5rem, 6vw, 5rem);
+  font-weight: 800;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0 0 50px;
+  color: transparent;
+  -webkit-text-stroke: 2px #c8c8d4;
+  text-stroke: 2px #c8c8d4;
+  line-height: 1.1;
+}
+
+/* ── Grid ──────────────────────────────────────────── */
+.best-bundles-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+/* ── Card ──────────────────────────────────────────── */
+.bundle-card {
+  display: flex;
+  flex-direction: column;
+  border-radius: 12px;
+  overflow: hidden;
+  background: #ffffff;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.06);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.bundle-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
+
+/* ── Image Wrapper ─────────────────────────────────── */
+.bundle-card__image-link {
+  display: block;
+  text-decoration: none;
+}
+
+.bundle-card__image-wrap {
+  position: relative;
+  overflow: hidden;
+  background: #d8e9f5;
+  aspect-ratio: 4 / 3;
+}
+
+.bundle-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+
+.bundle-card:hover .bundle-card__img {
+  transform: scale(1.04);
+}
+
+/* ── Discount Badge ────────────────────────────────── */
+.bundle-card__badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: #cc1f1a;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  text-align: center;
+  letter-spacing: 0.04em;
+  line-height: 1.2;
+  width: 58px;
+  height: 58px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* ── Card Body ─────────────────────────────────────── */
+.bundle-card__body {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 20px 20px 24px;
+  background: #fdf5ec; /* warm cream — matches reference */
+  gap: 8px;
+}
+
+/* First card uses a different background similar to reference */
+.bundle-card:nth-child(1) .bundle-card__body {
+  background: #f5f7ff;
+}
+
+.bundle-card:nth-child(3) .bundle-card__body {
+  background: #fef3f0;
+}
+
+/* ── Title ─────────────────────────────────────────── */
+.bundle-card__title {
+  font-family: 'Inter', 'Helvetica Neue', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0d1b3e;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.bundle-card__title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.bundle-card__title a:hover {
+  text-decoration: underline;
+}
+
+/* ── Subtitle ──────────────────────────────────────── */
+.bundle-card__subtitle {
+  font-size: 0.88rem;
+  color: #4a4a6a;
+  margin: 0;
+  line-height: 1.5;
+  text-align: center;
+}
+
+/* ── Pricing ───────────────────────────────────────── */
+.bundle-card__pricing {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 4px;
+}
+
+.bundle-card__original {
+  font-size: 0.82rem;
+  color: #9a9ab0;
+  text-decoration: line-through;
+}
+
+.bundle-card__sale {
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: #0d1b3e;
+}
+
+/* ── Button ────────────────────────────────────────── */
+.bundle-card__btn {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  padding: 14px 20px;
+  background: #0d1b3e;
+  color: #ffffff;
+  font-family: 'Inter', sans-serif;
+  font-size: 0.82rem;
+  font-weight: 800;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 4px;
+  transition: background 0.2s ease, transform 0.15s ease;
+}
+
+.bundle-card__btn:hover {
+  background: #1a2f5e;
+  transform: translateY(-1px);
+}
+
+.bundle-card__btn:active {
+  transform: translateY(0);
+}
+
+/* ── Responsive ────────────────────────────────────── */
+@media (max-width: 900px) {
+  .best-bundles-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .best-bundles-section {
+    padding: 40px 16px 60px;
+  }
+
+  .best-bundles-heading {
+    margin-bottom: 32px;
+  }
+
+  .best-bundles-grid {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+
+  .bundle-card__body {
+    text-align: center;
+  }
+
+  .bundle-card__pricing {
+    justify-content: center;
+  }
+}
