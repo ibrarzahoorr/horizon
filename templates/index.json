@@ -416,6 +416,41 @@
         "image": "shopify://shop_images/5H8A2794_1.jpg"
       }
     },
+    "blume_prompts_VmwNm9": {
+      "type": "blume-prompts",
+      "blocks": {
+        "prompt_LgXYRP": {
+          "type": "prompt",
+          "settings": {
+            "text": "I want to brighten skin",
+            "link": ""
+          }
+        },
+        "prompt_XmmHdx": {
+          "type": "prompt",
+          "settings": {
+            "text": "I want blue and discoloration",
+            "link": ""
+          }
+        },
+        "prompt_hXmUbm": {
+          "type": "prompt",
+          "settings": {
+            "text": "I want dry skin",
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "prompt_LgXYRP",
+        "prompt_XmmHdx",
+        "prompt_hXmUbm"
+      ],
+      "name": "Blume Prompt Cards",
+      "settings": {
+        "title": "What are you looking for today?"
+      }
+    },
     "blume_newsletter_j8pKjU": {
       "type": "blume-newsletter",
       "name": "Blume Newsletter",
@@ -630,6 +665,7 @@
     "blume_dermo_rec_trx6yw",
     "177650600311afedaf",
     "blume_benefits_QMGww6",
+    "blume_prompts_VmwNm9",
     "blume_newsletter_j8pKjU",
     "product_list_fa6P9H"
   ]
