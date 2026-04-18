@@ -119,12 +119,12 @@
 }
 
 .bundle-card--featured .bundle-card__img {
-  transform: scale(calc(1 + (var(--bb-zoom, 1.12) - 1) * var(--bb-zoom-on, 1)));
+  transform: scale(calc(1 + (var(--bb-zoom, 1.03) - 1) * var(--bb-zoom-on, 1)));
   transform-origin: center center;
 }
 
 .bundle-card--featured:hover .bundle-card__img {
-  transform: scale(calc(1 + (var(--bb-zoom-hover, 1.18) - 1) * var(--bb-zoom-on, 1)));
+  transform: scale(calc(1 + (var(--bb-zoom-hover, 1.06) - 1) * var(--bb-zoom-on, 1)));
 }
 
 /* ── Discount Badge ────────────────────────────────── */
