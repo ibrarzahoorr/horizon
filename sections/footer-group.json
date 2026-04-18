@@ -11,6 +11,56 @@
   "type": "footer",
   "name": "Footer",
   "sections": {
+    "blume_footer_ndbHPe": {
+      "type": "blume-footer",
+      "blocks": {
+        "menu_column_zARqHR": {
+          "type": "menu_column",
+          "settings": {
+            "title": "Shop",
+            "menu": "footer_menu_shop"
+          }
+        },
+        "menu_column_BkNeDG": {
+          "type": "menu_column",
+          "settings": {
+            "title": "Learn",
+            "menu": "footer_menu_learn"
+          }
+        },
+        "menu_column_W4t9FH": {
+          "type": "menu_column",
+          "settings": {
+            "title": "Contact",
+            "menu": "footer_menu_contact"
+          }
+        }
+      },
+      "block_order": [
+        "menu_column_zARqHR",
+        "menu_column_BkNeDG",
+        "menu_column_W4t9FH"
+      ],
+      "name": "Blume Footer",
+      "settings": {
+        "show_logo": true,
+        "logo": "shopify://shop_images/blume-logo-1-inverse.png",
+        "newsletter_title": "Get Updates & More",
+        "email_placeholder": "Your Email",
+        "submit_text": "SUBMIT",
+        "show_socials": true,
+        "facebook_url": "",
+        "instagram_url": "",
+        "tiktok_url": "",
+        "twitter_url": "",
+        "youtube_url": "",
+        "email_1": "hi@blume.com",
+        "email_2": "press@blume.com",
+        "email_3": "wholesale@blume.com",
+        "copyright_text": "Blume is in no way affiliated with Judy Blume",
+        "credit_text": "Site by The Couch"
+      }
+    },
     "footer_m9NzUG": {
       "type": "footer",
       "blocks": {
@@ -115,9 +165,9 @@
             "width": "fill",
             "custom_width": 100,
             "inherit_color_scheme": true,
+            "color_scheme": "",
             "heading": "",
             "heading_preset": "h3",
-            "color_scheme": "",
             "border_style": "all",
             "border_width": 1,
             "border_radius": 100,
@@ -139,6 +189,7 @@
         "group_H6VpwJ",
         "email_signup_crihX7"
       ],
+      "disabled": true,
       "name": "t:names.footer",
       "settings": {
         "section_width": "page-width",
@@ -193,6 +244,7 @@
         "footer_policy_list_VCdnpa",
         "social_links_Ew63Kq"
       ],
+      "disabled": true,
       "name": "t:names.utilities",
       "settings": {
         "section_width": "page-width",
@@ -205,6 +257,7 @@
     }
   },
   "order": [
+    "blume_footer_ndbHPe",
     "footer_m9NzUG",
     "footer_utilities_jLGE8U"
   ]

@@ -406,40 +406,62 @@
     "blume_benefits_QMGww6": {
       "type": "blume-benefits",
       "blocks": {
-        "benefit_ATNHkc": {
-          "type": "benefit",
+        "callout_NcWH4U": {
+          "type": "callout",
           "settings": {
-            "text": "VEGAN"
+            "image": "shopify://shop_images/Vegan.svg",
+            "text": "Vegan"
           }
         },
-        "benefit_JMcF78": {
-          "type": "benefit",
+        "callout_T9eK3T": {
+          "type": "callout",
           "settings": {
-            "text": "CRUELTY FREE"
+            "image": "shopify://shop_images/Certified_Clean.svg",
+            "text": "certified clean"
           }
         },
-        "benefit_zUqyBP": {
-          "type": "benefit",
+        "callout_kq9nej": {
+          "type": "callout",
           "settings": {
-            "text": "RECYCLABLE"
+            "image": "shopify://shop_images/WOC_1.png",
+            "text": "women owned"
           }
         },
-        "benefit_t9zLGp": {
-          "type": "benefit",
+        "callout_kBgM7q": {
+          "type": "callout",
           "settings": {
-            "text": "NO FILLERS"
+            "image": "shopify://shop_images/Vector_2.svg",
+            "text": "Climate Neutral"
+          }
+        },
+        "callout_6iAmHd": {
+          "type": "callout",
+          "settings": {
+            "image": "shopify://shop_images/Plastic_Neutral.svg",
+            "text": "Plastic Neutral"
           }
         }
       },
       "block_order": [
-        "benefit_ATNHkc",
-        "benefit_JMcF78",
-        "benefit_zUqyBP",
-        "benefit_t9zLGp"
+        "callout_NcWH4U",
+        "callout_T9eK3T",
+        "callout_kq9nej",
+        "callout_kBgM7q",
+        "callout_6iAmHd"
       ],
       "name": "Blume Benefits Section",
       "settings": {
-        "title": "We make spring, all natural skincare."
+        "title": "We make spring, all natural skincare.",
+        "description": "Made with nature's best ingredients — Blume's products are powerful but gentle and always easy to use. Our promise: high performance essentials that safe for sensitive skin, always.",
+        "image": "shopify://shop_images/5H8A2794_1.jpg"
+      }
+    },
+    "blume_newsletter_j8pKjU": {
+      "type": "blume-newsletter",
+      "name": "Blume Newsletter",
+      "settings": {
+        "title": "Join the club.",
+        "text": "Sign up for 10% off your first order and stay up to date on new launches, tips and tricks."
       }
     },
     "product_list_fa6P9H": {
@@ -647,6 +669,7 @@
     "blume_dermo_rec_trx6yw",
     "177650600311afedaf",
     "blume_benefits_QMGww6",
+    "blume_newsletter_j8pKjU",
     "product_list_fa6P9H"
   ]
 }
