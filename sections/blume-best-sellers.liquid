@@ -284,8 +284,8 @@
 
     <div class="best-sellers-slider">
       <div class="best-sellers-track" id="best-sellers-track-{{ section.id }}">
-        {%- if section.settings.collection != blank and section.settings.collection.products.size > 0 -%}
-          {%- for product in section.settings.collection.products limit: section.settings.products_limit -%}
+        {%- if section.settings.collection != blank and collection_products.size > 0 -%}
+          {%- for product in collection_products limit: section.settings.products_limit -%}
             <div class="best-seller-card">
               <a href="{{ product.url }}" class="best-seller-image-wrapper">
                 {%- if product.featured_image != blank -%}
