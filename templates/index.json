@@ -228,6 +228,62 @@
         "center_lift_px": 2
       }
     },
+    "blume_skin_types_fHdRBf": {
+      "type": "blume-skin-types",
+      "blocks": {
+        "type_WffUHq": {
+          "type": "type",
+          "settings": {
+            "image": "shopify://shop_images/Image_5_28ae3a32-8b6f-49b2-807e-8bf7d99e909e.png",
+            "title": "Dark Spots",
+            "link": "shopify://collections/product-for-dark-spots"
+          }
+        },
+        "type_perVUj": {
+          "type": "type",
+          "settings": {
+            "image": "shopify://shop_images/Image_7_34c5609f-8a46-4342-87c8-847b0ff94436.png",
+            "title": "Sensitive Skin",
+            "link": "shopify://collections/best-selling-products-for-sensitive-skin"
+          }
+        },
+        "type_F4x8B3": {
+          "type": "type",
+          "settings": {
+            "image": "shopify://shop_images/Image-4_29400d62-539e-4549-af9c-f93c455ecf46.png",
+            "title": "Dry Skin",
+            "link": "shopify://collections/best-selling-products-for-dry-skin"
+          }
+        },
+        "type_kbcQC6": {
+          "type": "type",
+          "settings": {
+            "image": "shopify://shop_images/Image-3_29b1cd37-73a6-47ea-8d8b-ff3ff6eaabd9.png",
+            "title": "Pores",
+            "link": ""
+          }
+        },
+        "type_cqXVFq": {
+          "type": "type",
+          "settings": {
+            "image": "shopify://shop_images/Image_4_36bbec40-e344-47ea-ab10-76af4697eca2.png",
+            "title": "Acne-Prone",
+            "link": "shopify://collections/best-selling-products-for-acne"
+          }
+        }
+      },
+      "block_order": [
+        "type_WffUHq",
+        "type_perVUj",
+        "type_F4x8B3",
+        "type_kbcQC6",
+        "type_cqXVFq"
+      ],
+      "name": "Blume Skin Types",
+      "settings": {
+        "title": "SHOP BY SKIN TYPE"
+      }
+    },
     "product_list_fa6P9H": {
       "type": "product-list",
       "blocks": {
@@ -428,6 +484,7 @@
     "blume_hero_H7Ky7C",
     "blume_trust_bar_bkybWJ",
     "best_bundles_LkC8e3",
+    "blume_skin_types_fHdRBf",
     "product_list_fa6P9H"
   ]
 }
