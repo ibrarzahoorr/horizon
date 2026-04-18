@@ -105,12 +105,13 @@
   position: relative;
   z-index: 2;
   box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
-  transform: translateY(calc(-1 * var(--bb-lift, 8px) * var(--bb-zoom-on, 1)));
+  transform: scale(calc(1 + (var(--bb-zoom, 1.05) - 1) * var(--bb-zoom-on, 1))) translateY(calc(-1 * var(--bb-lift, 8px) * var(--bb-zoom-on, 1)));
+  transform-origin: center bottom;
   transition: transform 0.35s ease, box-shadow 0.35s ease;
 }
 
 .bundle-card--featured:hover {
-  transform: translateY(calc(-1 * (var(--bb-lift, 8px) + 6px) * var(--bb-zoom-on, 1)));
+  transform: scale(calc(1 + (var(--bb-zoom-hover, 1.08) - 1) * var(--bb-zoom-on, 1))) translateY(calc(-1 * (var(--bb-lift, 8px) + 6px) * var(--bb-zoom-on, 1)));
   box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
 }
 
@@ -119,12 +120,11 @@
 }
 
 .bundle-card--featured .bundle-card__img {
-  transform: scale(calc(1 + (var(--bb-zoom, 1.03) - 1) * var(--bb-zoom-on, 1)));
-  transform-origin: center center;
+  transform: scale(1);
 }
 
 .bundle-card--featured:hover .bundle-card__img {
-  transform: scale(calc(1 + (var(--bb-zoom-hover, 1.06) - 1) * var(--bb-zoom-on, 1)));
+  transform: scale(1.04);
 }
 
 /* ── Discount Badge ────────────────────────────────── */
