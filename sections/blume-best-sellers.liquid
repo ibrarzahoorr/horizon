@@ -249,26 +249,15 @@
 
     <div class="best-sellers-slider">
       <div class="best-sellers-track" id="best-sellers-track-{{ section.id }}">
-        {%- for block in section.blocks -%}
-          {%- assign product = block.settings.product -%}
-          {%- if product != blank -%}
-            <div class="best-seller-card" {{ block.shopify_attributes }}>
+        {%- if section.settings.collection != blank -%}
+          {%- assign products_to_show = section.settings.collection.products | limit: section.settings.products_limit -%}
+          {%- for product in products_to_show -%}
+            <div class="best-seller-card">
               <a href="{{ product.url }}" class="best-seller-image-wrapper">
                 {%- if product.featured_image != blank -%}
                   {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
                 {%- else -%}
                   {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
-                {%- endif -%}
-                
-                {%- if block.settings.badge_1 != blank or block.settings.badge_2 != blank -%}
-                  <div class="best-seller-badges">
-                    {%- if block.settings.badge_1 != blank -%}
-                      {{ block.settings.badge_1 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                    {%- endif -%}
-                    {%- if block.settings.badge_2 != blank -%}
-                      {{ block.settings.badge_2 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
-                    {%- endif -%}
-                  </div>
                 {%- endif -%}
                 
                 <div class="best-seller-hover-btn">
@@ -294,7 +283,7 @@
                   </div>
                 {%- endif -%}
                 
-                <p class="best-seller-description">{{ block.settings.description | default: product.description | strip_html | truncatewords: 12 }}</p>
+                <p class="best-seller-description">{{ product.description | strip_html | truncatewords: 12 }}</p>
                 
                 <div class="best-seller-price">
                   {%- if product.compare_at_price > product.price -%}
@@ -306,8 +295,68 @@
                 </div>
               </div>
             </div>
-          {%- endif -%}
-        {%- endfor -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for block in section.blocks -%}
+            {%- assign product = block.settings.product -%}
+            {%- if product != blank -%}
+              <div class="best-seller-card" {{ block.shopify_attributes }}>
+                <a href="{{ product.url }}" class="best-seller-image-wrapper">
+                  {%- if product.featured_image != blank -%}
+                    {{ product.featured_image | image_url: width: 600 | image_tag: loading: 'lazy', alt: product.title }}
+                  {%- else -%}
+                    {{ 'product-1' | placeholder_svg_tag: 'placeholder-svg' }}
+                  {%- endif -%}
+                  
+                  {%- if block.settings.badge_1 != blank or block.settings.badge_2 != blank -%}
+                    <div class="best-seller-badges">
+                      {%- if block.settings.badge_1 != blank -%}
+                        {{ block.settings.badge_1 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
+                      {%- endif -%}
+                      {%- if block.settings.badge_2 != blank -%}
+                        {{ block.settings.badge_2 | image_url: width: 100 | image_tag: class: 'best-seller-badge', alt: 'Badge' }}
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                  
+                  <div class="best-seller-hover-btn">
+                    Add to cart - {{ product.price | money }}
+                  </div>
+                </a>
+                
+                <div class="best-seller-info">
+                  <h3 class="best-seller-title">{{ product.title }}</h3>
+                  
+                  {%- if product.metafields.reviews.rating.value != blank -%}
+                    <div class="best-seller-rating">
+                      <span class="best-seller-stars">
+                        {%- for i in (1..5) -%}
+                          {%- if i <= product.metafields.reviews.rating.value -%}
+                            ★
+                          {%- else -%}
+                            ☆
+                          {%- endif -%}
+                        {%- endfor -%}
+                      </span>
+                      <span class="best-seller-review-count">({{ product.metafields.reviews.rating_count | default: 0 }})</span>
+                    </div>
+                  {%- endif -%}
+                  
+                  <p class="best-seller-description">{{ block.settings.description | default: product.description | strip_html | truncatewords: 12 }}</p>
+                  
+                  <div class="best-seller-price">
+                    {%- if product.compare_at_price > product.price -%}
+                      <span class="sale-price">{{ product.price | money }}</span>
+                      <span class="compare-price">{{ product.compare_at_price | money }}</span>
+                    {%- else -%}
+                      {{ product.price | money }}
+                    {%- endif -%}
+                  </div>
+                </div>
+              </div>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
       </div>
     </div>
 
@@ -386,6 +435,21 @@
       "id": "title",
       "label": "Section Title",
       "default": "BEST SELLERS"
+    },
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "Select Collection",
+      "info": "Choose a collection to show products automatically. Leave empty to use individual product blocks below."
+    },
+    {
+      "type": "range",
+      "id": "products_limit",
+      "label": "Number of products to show",
+      "min": 4,
+      "max": 20,
+      "step": 1,
+      "default": 8
     },
     {
       "type": "range",
