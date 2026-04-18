@@ -289,58 +289,16 @@
         "arrow_color": "#ffffff"
       }
     },
-    "blume_best_sellers_CghRgw": {
-      "type": "blume-best-sellers",
-      "blocks": {
-        "product_K4T4ab": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "description": ""
-          }
-        },
-        "product_9qwkJr": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "description": ""
-          }
-        },
-        "product_VXepBn": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "description": ""
-          }
-        },
-        "product_gUtERX": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "description": ""
-          }
-        }
-      },
-      "block_order": [
-        "product_K4T4ab",
-        "product_9qwkJr",
-        "product_VXepBn",
-        "product_gUtERX"
-      ],
-      "name": "Blume Best Sellers",
+    "blume_featured_products_gbNWaq": {
+      "type": "blume-featured-products",
+      "name": "Blume Featured Products",
       "settings": {
         "title": "BEST SELLERS",
         "collection": "frontpage",
-        "products_limit": 8,
+        "products_limit": 4,
         "columns": 4,
         "background_color": "#faf5f0",
-        "title_color": "#1a3a5c",
-        "arrow_background": "#1a3a5c",
-        "arrow_color": "#ffffff",
-        "button_background": "#0a1f3d",
-        "button_color": "#ffffff",
-        "shop_all_text": "Shop All Products",
-        "shop_all_link": ""
+        "title_color": "#1a3a5c"
       }
     },
     "blume_dermo_rec_trx6yw": {
@@ -666,7 +624,7 @@
     "blume_trust_bar_bkybWJ",
     "best_bundles_LkC8e3",
     "blume_skin_types_fHdRBf",
-    "blume_best_sellers_CghRgw",
+    "blume_featured_products_gbNWaq",
     "blume_dermo_rec_trx6yw",
     "177650600311afedaf",
     "blume_benefits_QMGww6",
