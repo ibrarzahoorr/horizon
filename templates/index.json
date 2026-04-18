@@ -285,8 +285,8 @@
         "columns": 3.5,
         "background_color": "#f5f0eb",
         "title_color": "#1a3a5c",
-        "arrow_background": "#1a3a5c",
-        "arrow_color": "#ffffff"
+        "arrow_background": "#ffffff",
+        "arrow_color": "#1d3686"
       }
     },
     "blume_featured_products_gbNWaq": {
