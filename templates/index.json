@@ -289,31 +289,31 @@
         "arrow_color": "#ffffff"
       }
     },
-    "blume_best_sellers_ng4qzB": {
+    "blume_best_sellers_CghRgw": {
       "type": "blume-best-sellers",
       "blocks": {
-        "product_TTm3pc": {
+        "product_K4T4ab": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_hRw6Qg": {
+        "product_9qwkJr": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_XFFBG4": {
+        "product_VXepBn": {
           "type": "product",
           "settings": {
             "product": "",
             "description": ""
           }
         },
-        "product_hWfQLg": {
+        "product_gUtERX": {
           "type": "product",
           "settings": {
             "product": "",
@@ -322,10 +322,10 @@
         }
       },
       "block_order": [
-        "product_TTm3pc",
-        "product_hRw6Qg",
-        "product_XFFBG4",
-        "product_hWfQLg"
+        "product_K4T4ab",
+        "product_9qwkJr",
+        "product_VXepBn",
+        "product_gUtERX"
       ],
       "name": "Blume Best Sellers",
       "settings": {
@@ -341,6 +341,17 @@
         "button_color": "#ffffff",
         "shop_all_text": "Shop All Products",
         "shop_all_link": ""
+      }
+    },
+    "blume_dermo_rec_trx6yw": {
+      "type": "blume-dermo-rec",
+      "name": "Blume Dermo Section",
+      "settings": {
+        "title": "Dermatologist Recommended",
+        "text": "<p>Gently remove surface impurities and excess oil for a clean and hydrated glow. Our products are formulated with derma“Blume products focus on hydration to protect the skin barrier, yet also deliver gentle active ingredients to benefit the skin. Blume’s emphasis on moisturizing ingredients and gentle actives means you get the most out of each product.”tologists to ensure safety and efficacy.</p>",
+        "link_label": "LEARN MORE",
+        "link": "",
+        "image": "shopify://shop_images/Image_9.png"
       }
     },
     "product_list_fa6P9H": {
@@ -544,7 +555,8 @@
     "blume_trust_bar_bkybWJ",
     "best_bundles_LkC8e3",
     "blume_skin_types_fHdRBf",
-    "blume_best_sellers_ng4qzB",
+    "blume_best_sellers_CghRgw",
+    "blume_dermo_rec_trx6yw",
     "product_list_fa6P9H"
   ]
 }

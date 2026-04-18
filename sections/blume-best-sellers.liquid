@@ -273,22 +273,7 @@
             {%- assign badge_1 = product.metafields.custom.badge_1 -%}
             {%- assign badge_2 = product.metafields.custom.badge_2 -%}
             {%- assign custom_description = product.metafields.custom.short_description -%}
-            {%- assign display_title = product.title -%}
-            
-            {%- if section.settings.enable_custom_overrides -%}
-              {%- for block in section.blocks -%}
-                {%- if block.type == 'product_override' and block.settings.target_product.id == product.id -%}
-                  {%- if block.settings.custom_title != blank -%}
-                    {%- assign display_title = block.settings.custom_title -%}
-                  {%- endif -%}
-                  {%- if block.settings.custom_description != blank -%}
-                    {%- assign custom_description = block.settings.custom_description -%}
-                  {%- endif -%}
-                {%- endif -%}
-              {%- endfor -%}
-            {%- endif -%}
-            
-            {%- render 'best-seller-card', product: product, badge_1: badge_1, badge_2: badge_2, custom_description: custom_description, display_title: display_title -%}
+            {%- render 'best-seller-card', product: product, badge_1: badge_1, badge_2: badge_2, custom_description: custom_description -%}
           {%- endfor -%}
         {%- else -%}
           {%- for block in section.blocks -%}
@@ -450,48 +435,12 @@
       "type": "url",
       "id": "shop_all_link",
       "label": "Shop All Button Link"
-    },
-    {
-      "type": "header",
-      "content": "Collection Product Overrides",
-      "info": "Override product titles and descriptions when using a collection"
-    },
-    {
-      "type": "checkbox",
-      "id": "enable_custom_overrides",
-      "label": "Enable custom title/description overrides",
-      "default": false,
-      "info": "Turn this on to use the overrides below"
     }
   ],
   "blocks": [
     {
-      "type": "product_override",
-      "name": "Product Title/Description Override",
-      "settings": [
-        {
-          "type": "product",
-          "id": "target_product",
-          "label": "Target Product",
-          "info": "Select the product from collection to override"
-        },
-        {
-          "type": "text",
-          "id": "custom_title",
-          "label": "Custom Title",
-          "info": "Leave blank to use original product title"
-        },
-        {
-          "type": "textarea",
-          "id": "custom_description",
-          "label": "Custom Description",
-          "info": "Leave blank to use original product description"
-        }
-      ]
-    },
-    {
       "type": "product",
-      "name": "Product (Individual Mode)",
+      "name": "Product",
       "settings": [
         {
           "type": "product",
