@@ -281,7 +281,12 @@
       ],
       "name": "Blume Skin Types",
       "settings": {
-        "title": "SHOP BY SKIN TYPE"
+        "title": "SHOP BY SKIN TYPE",
+        "columns": 3.5,
+        "background_color": "#f5f0eb",
+        "title_color": "#1a3a5c",
+        "arrow_background": "#1a3a5c",
+        "arrow_color": "#ffffff"
       }
     },
     "product_list_fa6P9H": {
