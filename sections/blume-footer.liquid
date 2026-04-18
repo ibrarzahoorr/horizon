@@ -1,0 +1,368 @@
+{%- style -%}
+  .blume-footer {
+    background: #0a1f3d;
+    padding: 60px 0 30px;
+    color: #fff;
+  }
+  .blume-footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+  }
+  .blume-footer-logo {
+    margin-bottom: 50px;
+  }
+  .blume-footer-logo svg,
+  .blume-footer-logo img {
+    height: 30px;
+    width: auto;
+  }
+  .blume-footer-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 60px;
+    margin-bottom: 60px;
+  }
+  .blume-footer-column h4 {
+    font-family: var(--font-heading--family);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #fff;
+  }
+  .blume-footer-links {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .blume-footer-links li {
+    margin-bottom: 12px;
+  }
+  .blume-footer-links a {
+    color: #fff;
+    text-decoration: none;
+    font-size: 14px;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+  .blume-footer-links a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .blume-footer-newsletter h4 {
+    font-family: var(--font-heading--family);
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 25px;
+    color: #fff;
+  }
+  .blume-footer-form {
+    display: flex;
+    border-bottom: 1px solid rgba(255,255,255,0.3);
+    margin-bottom: 25px;
+  }
+  .blume-footer-form input {
+    flex: 1;
+    background: transparent;
+    border: none;
+    padding: 12px 0;
+    color: #fff;
+    font-size: 14px;
+    outline: none;
+  }
+  .blume-footer-form input::placeholder {
+    color: rgba(255,255,255,0.6);
+  }
+  .blume-footer-form button {
+    background: transparent;
+    border: none;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    cursor: pointer;
+    padding: 12px 0;
+  }
+  .blume-footer-socials {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  .blume-footer-socials a {
+    color: #fff;
+    font-size: 20px;
+    opacity: 0.9;
+    transition: opacity 0.2s;
+  }
+  .blume-footer-socials a:hover {
+    opacity: 1;
+  }
+  .blume-footer-emails {
+    font-size: 14px;
+    line-height: 1.8;
+  }
+  .blume-footer-emails a {
+    color: #fff;
+    text-decoration: none;
+    display: block;
+    opacity: 0.9;
+  }
+  .blume-footer-emails a:hover {
+    opacity: 1;
+    text-decoration: underline;
+  }
+  .blume-footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 30px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    font-size: 12px;
+    color: rgba(255,255,255,0.6);
+  }
+  .blume-footer-bottom a {
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+  }
+  @media (max-width: 991px) {
+    .blume-footer-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+    }
+  }
+  @media (max-width: 576px) {
+    .blume-footer-grid {
+      grid-template-columns: 1fr;
+    }
+    .blume-footer-bottom {
+      flex-direction: column;
+      gap: 15px;
+      text-align: center;
+    }
+  }
+{%- endstyle -%}
+
+<footer class="blume-footer">
+  <div class="blume-footer-container">
+    {%- if section.settings.show_logo -%}
+      <div class="blume-footer-logo">
+        {%- if section.settings.logo != blank -%}
+          {{ section.settings.logo | image_url: width: 200 | image_tag: loading: 'lazy' }}
+        {%- else -%}
+          <svg width="100" height="30" viewBox="0 0 100 30" fill="white">
+            <text x="0" y="22" font-family="Arial" font-size="24" font-weight="bold">BLUME</text>
+          </svg>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    <div class="blume-footer-grid">
+      {%- for block in section.blocks -%}
+        {%- if block.type == 'menu_column' -%}
+          <div class="blume-footer-column" {{ block.shopify_attributes }}>
+            <h4>{{ block.settings.title }}</h4>
+            <ul class="blume-footer-links">
+              {%- for link in block.settings.menu.links -%}
+                <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+      {%- endfor -%}
+
+      <div class="blume-footer-newsletter">
+        <h4>{{ section.settings.newsletter_title }}</h4>
+        <form class="blume-footer-form" action="/contact#contact_form" method="post">
+          <input type="email" name="contact[email]" placeholder="{{ section.settings.email_placeholder }}" required>
+          <button type="submit">{{ section.settings.submit_text }}</button>
+        </form>
+
+        {%- if section.settings.show_socials -%}
+          <div class="blume-footer-socials">
+            {%- if section.settings.facebook_url != blank -%}
+              <a href="{{ section.settings.facebook_url }}" target="_blank" aria-label="Facebook">{% render 'icon-facebook' %}</a>
+            {%- endif -%}
+            {%- if section.settings.instagram_url != blank -%}
+              <a href="{{ section.settings.instagram_url }}" target="_blank" aria-label="Instagram">{% render 'icon-instagram' %}</a>
+            {%- endif -%}
+            {%- if section.settings.tiktok_url != blank -%}
+              <a href="{{ section.settings.tiktok_url }}" target="_blank" aria-label="TikTok">{% render 'icon-tiktok' %}</a>
+            {%- endif -%}
+            {%- if section.settings.twitter_url != blank -%}
+              <a href="{{ section.settings.twitter_url }}" target="_blank" aria-label="Twitter">{% render 'icon-twitter' %}</a>
+            {%- endif -%}
+            {%- if section.settings.youtube_url != blank -%}
+              <a href="{{ section.settings.youtube_url }}" target="_blank" aria-label="YouTube">{% render 'icon-youtube' %}</a>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+
+        <div class="blume-footer-emails">
+          {%- if section.settings.email_1 != blank -%}
+            <a href="mailto:{{ section.settings.email_1 }}">{{ section.settings.email_1 }}</a>
+          {%- endif -%}
+          {%- if section.settings.email_2 != blank -%}
+            <a href="mailto:{{ section.settings.email_2 }}">{{ section.settings.email_2 }}</a>
+          {%- endif -%}
+          {%- if section.settings.email_3 != blank -%}
+            <a href="mailto:{{ section.settings.email_3 }}">{{ section.settings.email_3 }}</a>
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+
+    <div class="blume-footer-bottom">
+      <span>{{ section.settings.copyright_text }}</span>
+      {%- if section.settings.credit_text != blank -%}
+        <span>{{ section.settings.credit_text }}</span>
+      {%- endif -%}
+    </div>
+  </div>
+</footer>
+
+{% schema %}
+{
+  "name": "Blume Footer",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_logo",
+      "label": "Show Logo",
+      "default": true
+    },
+    {
+      "type": "image_picker",
+      "id": "logo",
+      "label": "Logo"
+    },
+    {
+      "type": "header",
+      "content": "Newsletter"
+    },
+    {
+      "type": "text",
+      "id": "newsletter_title",
+      "label": "Newsletter Title",
+      "default": "Get Updates & More"
+    },
+    {
+      "type": "text",
+      "id": "email_placeholder",
+      "label": "Email Placeholder",
+      "default": "Your Email"
+    },
+    {
+      "type": "text",
+      "id": "submit_text",
+      "label": "Submit Button Text",
+      "default": "SUBMIT"
+    },
+    {
+      "type": "header",
+      "content": "Social Links"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_socials",
+      "label": "Show Social Icons",
+      "default": true
+    },
+    {
+      "type": "url",
+      "id": "facebook_url",
+      "label": "Facebook URL"
+    },
+    {
+      "type": "url",
+      "id": "instagram_url",
+      "label": "Instagram URL"
+    },
+    {
+      "type": "url",
+      "id": "tiktok_url",
+      "label": "TikTok URL"
+    },
+    {
+      "type": "url",
+      "id": "twitter_url",
+      "label": "Twitter URL"
+    },
+    {
+      "type": "url",
+      "id": "youtube_url",
+      "label": "YouTube URL"
+    },
+    {
+      "type": "header",
+      "content": "Contact Emails"
+    },
+    {
+      "type": "text",
+      "id": "email_1",
+      "label": "Email 1",
+      "default": "hi@blume.com"
+    },
+    {
+      "type": "text",
+      "id": "email_2",
+      "label": "Email 2",
+      "default": "press@blume.com"
+    },
+    {
+      "type": "text",
+      "id": "email_3",
+      "label": "Email 3",
+      "default": "wholesale@blume.com"
+    },
+    {
+      "type": "header",
+      "content": "Bottom Bar"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "Copyright Text",
+      "default": "Blume is in no way affiliated with Judy Blume"
+    },
+    {
+      "type": "text",
+      "id": "credit_text",
+      "label": "Credit Text",
+      "default": "Site by The Couch"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "menu_column",
+      "name": "Menu Column",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Column Title",
+          "default": "Shop"
+        },
+        {
+          "type": "link_list",
+          "id": "menu",
+          "label": "Menu"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Footer",
+      "blocks": [
+        { "type": "menu_column", "settings": { "title": "Shop" } },
+        { "type": "menu_column", "settings": { "title": "Learn" } },
+        { "type": "menu_column", "settings": { "title": "Contact" } }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": ["footer"]
+  }
+}
+{% endschema %}
