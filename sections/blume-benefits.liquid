@@ -1,9 +1,9 @@
 {%- style -%}
   .benefits-wrapper {
     position: relative;
-    padding: 120px 0;
+    padding: 100px 0;
     overflow: hidden;
-    background-color: #fdf5ef;
+    background-color: #faf5f0;
   }
   .benefits-container {
     display: flex;
@@ -13,56 +13,73 @@
     z-index: 1;
   }
   .benefits-images {
-    flex: 1;
+    flex: 0 0 50%;
     position: relative;
-    min-height: 500px;
   }
   .benefits-images img {
     width: 100%;
     height: auto;
-    border-radius: 20px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+    display: block;
   }
   .benefits-content {
-    flex: 1;
+    flex: 0 0 45%;
     position: relative;
     z-index: 2;
   }
   .benefits-content h2 {
-    font-family: 'Fraunces', serif;
-    font-size: clamp(2rem, 4vw, 3rem);
-    margin-bottom: 40px;
-    color: var(--blume-blue);
-    line-height: 1.1;
+    font-family: var(--font-heading--family);
+    font-size: 36px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    color: #1a3a5c;
+    line-height: 1.2;
+  }
+  .benefits-description {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #555;
+    margin-bottom: 35px;
   }
   .benefit-list {
     list-style: none;
     padding: 0;
+    margin: 0;
   }
   .benefit-item {
     display: flex;
     align-items: center;
     gap: 15px;
-    margin-bottom: 25px;
-    color: var(--blume-blue);
-    font-weight: 500;
+    margin-bottom: 20px;
+    color: #1a3a5c;
+    font-weight: 600;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
   }
   .benefit-icon {
-    width: 24px;
-    height: 24px;
-    opacity: 0.8;
+    width: 40px;
+    height: 40px;
+    flex-shrink: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .benefit-icon img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
   }
   @media (max-width: 991px) {
     .benefits-container { flex-direction: column; gap: 40px; }
-    .abstract-shape { width: 100%; height: 40%; border-radius: 0 0 500px 500px; }
+    .benefits-images, .benefits-content { flex: 1; width: 100%; }
+    .benefits-content h2 { font-size: 28px; }
   }
 {%- endstyle -%}
 
 <section class="benefits-wrapper">
-  <div class="abstract-shape"></div>
   <div class="modern-container">
     <div class="benefits-container">
-      <div class="benefits-images animate-fade-up">
+      <div class="benefits-images">
         {%- if section.settings.image != blank -%}
           {{ section.settings.image | image_url: width: 800 | image_tag: loading: 'lazy' }}
         {%- else -%}
@@ -71,10 +88,17 @@
       </div>
       <div class="benefits-content">
         <h2>{{ section.settings.title }}</h2>
+        {%- if section.settings.description != blank -%}
+          <div class="benefits-description">{{ section.settings.description }}</div>
+        {%- endif -%}
         <ul class="benefit-list">
           {%- for block in section.blocks -%}
             <li class="benefit-item" {{ block.shopify_attributes }}>
-              <span class="benefit-icon">{{ block.settings.icon }}</span>
+              {%- if block.settings.icon_image != blank -%}
+                <span class="benefit-icon">
+                  {{ block.settings.icon_image | image_url: width: 80 | image_tag: loading: 'lazy', alt: block.settings.text }}
+                </span>
+              {%- endif -%}
               <span>{{ block.settings.text }}</span>
             </li>
           {%- endfor -%}
@@ -86,13 +110,19 @@
 
 {% schema %}
 {
-  "name": "Blume Benefits Section",
+  "name": "Blume Benefits",
   "settings": [
     {
       "type": "text",
       "id": "title",
       "label": "Heading",
-      "default": "We make spring, all natural skincare."
+      "default": "We make going all natural second nature."
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Made with nature's best ingredients — Blume's products are powerful but gentle and always easy to use. Our promise: high performance essentials that safe for sensitive skin, always."
     },
     {
       "type": "image_picker",
@@ -103,31 +133,32 @@
   "blocks": [
     {
       "type": "benefit",
-      "name": "Benefit",
+      "name": "Call Out",
       "settings": [
         {
-          "type": "text",
-          "id": "icon",
-          "label": "Emoji/Icon",
-          "default": "🌱"
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "Icon",
+          "info": "Upload SVG or PNG icon (40x40px recommended)"
         },
         {
           "type": "text",
           "id": "text",
-          "label": "Benefit text",
-          "default": "VEGAN"
+          "label": "Bullet Point",
+          "default": "Vegan"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "Blume Benefits Section",
+      "name": "Blume Benefits",
       "blocks": [
-        { "type": "benefit", "settings": { "icon": "🌱", "text": "VEGAN" } },
-        { "type": "benefit", "settings": { "icon": "🐰", "text": "CRUELTY FREE" } },
-        { "type": "benefit", "settings": { "icon": "♻️", "text": "RECYCLABLE" } },
-        { "type": "benefit", "settings": { "icon": "✨", "text": "NO FILLERS" } }
+        { "type": "benefit", "settings": { "text": "Vegan" } },
+        { "type": "benefit", "settings": { "text": "Certified Clean" } },
+        { "type": "benefit", "settings": { "text": "Women Owned" } },
+        { "type": "benefit", "settings": { "text": "Climate Neutral" } },
+        { "type": "benefit", "settings": { "text": "Plastic Neutral" } }
       ]
     }
   ]
