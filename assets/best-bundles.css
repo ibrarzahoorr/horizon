@@ -32,6 +32,7 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 24px;
+  align-items: start;
 }
 
 /* ── Card ──────────────────────────────────────────── */
@@ -73,6 +74,34 @@
 
 .bundle-card:hover .bundle-card__img {
   transform: scale(1.04);
+}
+
+/* ── Center Card — Featured / Zoomed Image ─────────── */
+.bundle-card:nth-child(2) {
+  position: relative;
+  z-index: 2;
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.14);
+  transform: translateY(-8px);
+}
+
+.bundle-card:nth-child(2):hover {
+  transform: translateY(-14px);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.18);
+}
+
+/* Taller image area for center card */
+.bundle-card:nth-child(2) .bundle-card__image-wrap {
+  aspect-ratio: 3 / 2.4;
+}
+
+/* Image starts pre-zoomed on center card */
+.bundle-card:nth-child(2) .bundle-card__img {
+  transform: scale(1.12);
+  transform-origin: center center;
+}
+
+.bundle-card:nth-child(2):hover .bundle-card__img {
+  transform: scale(1.18);
 }
 
 /* ── Discount Badge ────────────────────────────────── */
@@ -199,6 +228,27 @@
 @media (max-width: 900px) {
   .best-bundles-grid {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  /* Reset center card elevation on tablet/mobile */
+  .bundle-card:nth-child(2) {
+    transform: none;
+  }
+
+  .bundle-card:nth-child(2):hover {
+    transform: translateY(-4px);
+  }
+
+  .bundle-card:nth-child(2) .bundle-card__image-wrap {
+    aspect-ratio: 4 / 3;
+  }
+
+  .bundle-card:nth-child(2) .bundle-card__img {
+    transform: scale(1);
+  }
+
+  .bundle-card:nth-child(2):hover .bundle-card__img {
+    transform: scale(1.04);
   }
 }
 
