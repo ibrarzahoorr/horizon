@@ -123,12 +123,28 @@
         "logo_jyha6p": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/Frame_3.png",
+            "alt_text": ""
+          }
+        },
+        "logo_kUtawV": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Frame_6.png",
+            "alt_text": ""
+          }
+        },
+        "logo_TUhanK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Frame_5.png",
             "alt_text": ""
           }
         },
         "logo_eJtRm3": {
           "type": "logo",
           "settings": {
+            "image": "shopify://shop_images/Frame_4.png",
             "alt_text": ""
           }
         }
@@ -137,10 +153,22 @@
         "logo_rpnMRW",
         "logo_CrDTA9",
         "logo_jyha6p",
+        "logo_kUtawV",
+        "logo_TUhanK",
         "logo_eJtRm3"
       ],
       "name": "Blume Trust Bar",
-      "settings": {}
+      "settings": {
+        "bg_color": "#ffffff",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "logo_width": 270,
+        "logo_height": 65,
+        "gap": 80,
+        "logo_opacity": 50,
+        "grayscale": true,
+        "speed": 30
+      }
     },
     "product_list_fa6P9H": {
       "type": "product-list",
