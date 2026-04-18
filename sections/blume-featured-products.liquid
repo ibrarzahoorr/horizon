@@ -6,15 +6,20 @@
   .featured-products-header {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     position: relative;
     margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .featured-products-title-wrapper {
+    flex: 1;
+    text-align: center;
   }
   .featured-products-nav {
-    position: absolute;
-    right: 0;
     display: flex;
     gap: 12px;
+    flex-shrink: 0;
   }
   .featured-products-nav-btn {
     width: 48px;
@@ -28,6 +33,7 @@
     align-items: center;
     justify-content: center;
     transition: all 0.2s;
+    flex-shrink: 0;
   }
   .featured-products-nav-btn:hover {
     background: #1a3a5c;
@@ -36,6 +42,20 @@
   .featured-products-nav-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+  @media (max-width: 576px) {
+    .featured-products-header {
+      justify-content: center;
+    }
+    .featured-products-title-wrapper {
+      order: 2;
+      width: 100%;
+    }
+    .featured-products-nav {
+      order: 1;
+      width: 100%;
+      justify-content: center;
+    }
   }
   .featured-products-slider {
     overflow: hidden;
@@ -50,7 +70,14 @@
     flex: 0 0 calc((100% - {{ section.settings.columns | minus: 1 }} * 20px) / {{ section.settings.columns }});
     text-decoration: none;
     color: inherit;
-    display: block;
+    display: flex;
+    flex-direction: column;
+  }
+  .featured-product-info {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
   }
   @media (max-width: 991px) {
     .featured-product-card {
@@ -154,9 +181,6 @@
     opacity: 1;
     transform: translateY(0);
   }
-  .featured-product-info {
-    text-align: center;
-  }
   .featured-product-title {
     font-family: var(--font-heading--family);
     font-size: 20px;
@@ -213,7 +237,7 @@
     cursor: pointer;
     border-radius: 4px;
     transition: all 0.2s;
-    margin-top: 12px;
+    margin-top: auto;
   }
   .featured-product-add-btn:hover {
     background: #1a3a5c;
@@ -259,7 +283,9 @@
 <section class="featured-products-wrapper" data-section-id="{{ section.id }}">
   <div class="modern-container">
     <div class="featured-products-header">
-      <h2 class="featured-products-title">{{ section.settings.title }}</h2>
+      <div class="featured-products-title-wrapper">
+        <h2 class="featured-products-title">{{ section.settings.title }}</h2>
+      </div>
       <div class="featured-products-nav">
         <button type="button" class="featured-products-nav-btn" data-nav="prev" aria-label="Previous">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
