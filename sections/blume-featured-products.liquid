@@ -5,20 +5,20 @@
   }
   .featured-products-header {
     display: flex;
-    flex-direction: column;
     align-items: center;
     justify-content: center;
     position: relative;
     margin-bottom: 40px;
-    gap: 20px;
   }
   .featured-products-title-wrapper {
     text-align: center;
+    flex: 1;
   }
   .featured-products-nav {
     display: flex;
     gap: 12px;
-    justify-content: center;
+    position: absolute;
+    right: 0;
   }
   .featured-products-nav-btn {
     width: 48px;
@@ -40,6 +40,19 @@
   .featured-products-nav-btn:disabled {
     opacity: 0.4;
     cursor: not-allowed;
+  }
+  @media (max-width: 768px) {
+    .featured-products-header {
+      flex-direction: column;
+      gap: 20px;
+    }
+    .featured-products-nav {
+      position: static;
+      order: 2;
+    }
+    .featured-products-title-wrapper {
+      order: 1;
+    }
   }
   .featured-products-slider {
     overflow: hidden;
