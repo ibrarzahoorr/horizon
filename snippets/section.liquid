@@ -19,8 +19,12 @@
       --section-min-height: {{ section.settings.section_height_custom }}svh;
     {% elsif section.settings.section_height == 'full-screen' %}
       --section-min-height: 100svh;
-    {% elsif section.settings.section_height != '' %}
-      --section-min-height: var(--section-height-{{ section.settings.section_height }});
+    {% elsif section.settings.section_height == 'small' %}
+      --section-min-height: 300px;
+    {% elsif section.settings.section_height == 'medium' %}
+      --section-min-height: 500px;
+    {% elsif section.settings.section_height == 'large' %}
+      --section-min-height: 700px;
     {% endif %}
 
     {% if section.settings.section_height != '' %}
