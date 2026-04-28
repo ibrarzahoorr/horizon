@@ -112,6 +112,14 @@
         --text-light: #001e30;
         --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
       }
+      body {
+        display: flex;
+        flex-direction: column;
+        min-height: 100vh;
+      }
+      main[role="main"] {
+        flex: 1 0 auto;
+      }
     </style>
 
     {% if template.suffix == 'waitlist' %}
