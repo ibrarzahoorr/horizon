@@ -118,6 +118,12 @@
       .shopify-app-block {
         background-color: var(--color-background, #ffffff);
       }
+      @media screen and (max-width: 767px) {
+        main[role="main"] {
+          padding-left: 12px;
+          padding-right: 12px;
+        }
+      }
     </style>
 
     {% if template.suffix == 'waitlist' %}
