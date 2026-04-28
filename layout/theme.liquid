@@ -100,6 +100,20 @@
     {{ 'bundle.css' | asset_url | stylesheet_tag }}
     {{ 'main.css' | asset_url | stylesheet_tag }}
 
+    <style>
+      :root {
+        --blume-blue: #001e30;
+        --blume-soft-blue: #d9e8f0;
+        --blume-light-blue: #aecbdd;
+        --blume-peach: #f9e8d4;
+        --blume-white: #ffffff;
+        --blume-cream: #faf7f2;
+        --text-dark: #001e30;
+        --text-light: #001e30;
+        --transition-smooth: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
+      }
+    </style>
+
     {% if template.suffix == 'waitlist' %}
       {% section 'header' %}
     {% endif %}
