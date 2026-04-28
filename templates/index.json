@@ -416,39 +416,57 @@
         "image": "shopify://shop_images/5H8A2794_1.jpg"
       }
     },
-    "blume_prompts_VmwNm9": {
-      "type": "blume-prompts",
+    "blume_prompt_cards_fBdeaw": {
+      "type": "blume-prompt-cards",
       "blocks": {
-        "prompt_LgXYRP": {
-          "type": "prompt",
+        "prompt_card_yxqEUJ": {
+          "type": "prompt_card",
           "settings": {
-            "text": "I want to brighten skin",
-            "link": ""
+            "question": "I have acne prone skin",
+            "product": "meltdown-acne-oil-3",
+            "product_title": "",
+            "product_description": "Powerful blend of clean ingredients to clear skin, without compromising hydration."
           }
         },
-        "prompt_XmmHdx": {
-          "type": "prompt",
+        "prompt_card_m7TVjh": {
+          "type": "prompt_card",
           "settings": {
-            "text": "I want blue and discoloration",
-            "link": ""
+            "question": "I have scars and discoloration",
+            "product": "",
+            "product_title": "",
+            "product_description": "Powerful blend of clean ingredients to clear skin, without compromising hydration."
           }
         },
-        "prompt_hXmUbm": {
-          "type": "prompt",
+        "prompt_card_ejjLL9": {
+          "type": "prompt_card",
           "settings": {
-            "text": "I want dry skin",
-            "link": ""
+            "question": "I have dry, dull skin",
+            "product": "",
+            "product_title": "",
+            "product_description": "Powerful blend of clean ingredients to clear skin, without compromising hydration."
           }
         }
       },
       "block_order": [
-        "prompt_LgXYRP",
-        "prompt_XmmHdx",
-        "prompt_hXmUbm"
+        "prompt_card_yxqEUJ",
+        "prompt_card_m7TVjh",
+        "prompt_card_ejjLL9"
       ],
+      "disabled": true,
       "name": "Blume Prompt Cards",
       "settings": {
-        "title": "What are you looking for today?"
+        "title": "What are you looking for today?",
+        "show_badge": true,
+        "badge_text": "CHECK ALL THAT APPLY!",
+        "result_label": "WE RECOMMEND",
+        "button_text": "Shop Now",
+        "columns": 3,
+        "background_color": "#faf5f0",
+        "title_color": "#1a3a5c",
+        "accent_color": "#1a3a5c",
+        "active_background": "#f8f9fa",
+        "badge_background": "#FFD4C7",
+        "badge_color": "#1a3a5c"
       }
     },
     "blume_newsletter_j8pKjU": {
@@ -665,7 +683,7 @@
     "blume_dermo_rec_trx6yw",
     "177650600311afedaf",
     "blume_benefits_QMGww6",
-    "blume_prompts_VmwNm9",
+    "blume_prompt_cards_fBdeaw",
     "blume_newsletter_j8pKjU",
     "product_list_fa6P9H"
   ]
