@@ -337,6 +337,33 @@
       })(window, document, 'script', 'dataLayer', 'GTM-TMQ8XSD');
     </script>
     <!-- End Google Tag Manager -->
-     
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        var images = document.querySelectorAll('img:not([loading])');
+        var vh = window.innerHeight || document.documentElement.clientHeight;
+        images.forEach(function(img) {
+          var rect = img.getBoundingClientRect();
+          if (rect.top > vh) {
+            img.setAttribute('loading', 'lazy');
+            img.setAttribute('fetchpriority', 'low');
+          } else {
+            img.setAttribute('loading', 'eager');
+            img.setAttribute('fetchpriority', 'high');
+          }
+          if (!img.hasAttribute('decoding')) {
+            img.setAttribute('decoding', 'async');
+          }
+        });
+        var iframes = document.querySelectorAll('iframe:not([loading])');
+        iframes.forEach(function(iframe) {
+          var rect = iframe.getBoundingClientRect();
+          if (rect.top > vh) {
+            iframe.setAttribute('loading', 'lazy');
+          }
+        });
+      });
+    </script>
+
 </body>
 </html>
