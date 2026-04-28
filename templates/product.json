@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main": {
@@ -166,11 +175,24 @@
               },
               "blocks": {}
             },
+            "review_D6iG6B": {
+              "type": "review",
+              "name": "t:names.product_review_stars",
+              "settings": {
+                "stars_style": "shaded",
+                "show_number": true,
+                "rating_color": "primary",
+                "type_preset": "paragraph",
+                "width": "100%",
+                "alignment": "left"
+              },
+              "blocks": {}
+            },
             "buy_buttons_eYQEYi": {
               "type": "buy-buttons",
               "settings": {
                 "stacking": true,
-                "show_pickup_availability": false,
+                "show_pickup_availability": true,
                 "gift_card_form": false,
                 "padding-block-start": 0,
                 "padding-block-end": 0,
@@ -207,7 +229,7 @@
               "type": "text",
               "name": "Product description",
               "settings": {
-                "text": "{{ closest.product.description }}",
+                "text": "<p>{{ closest.product.description }}</p>",
                 "width": "100%",
                 "max_width": "normal",
                 "alignment": "left",
@@ -233,6 +255,7 @@
           "block_order": [
             "group_icgrde",
             "variant_picker_R3rGDr",
+            "review_D6iG6B",
             "buy_buttons_eYQEYi",
             "text_aEtTtq"
           ]
@@ -390,84 +413,10 @@
         "padding-block-start": 48,
         "padding-block-end": 48
       }
-    },
-    "blume_product_subtitle": {
-      "type": "blume-product-subtitle",
-      "settings": {
-        "fallback_subtitle": "",
-        "text_color": "#1a3a5c"
-      }
-    },
-    "blume_product_badges": {
-      "type": "blume-product-badges",
-      "settings": {
-        "default_badges": "Clean, Vegan, Cruelty Free",
-        "badge_color": "#1a3a5c"
-      }
-    },
-    "blume_product_clinical": {
-      "type": "blume-product-clinical",
-      "settings": {
-        "title": "Consumer Perception Study",
-        "title_color": "#1a3a5c",
-        "accent_color": "#1a3a5c",
-        "background_color": "#faf5f0"
-      }
-    },
-    "blume_product_breakdown": {
-      "type": "blume-product-breakdown",
-      "settings": {
-        "title": "The Breakdown",
-        "title_color": "#1a3a5c",
-        "background_color": "#faf5f0"
-      }
-    },
-    "blume_product_how_to_use": {
-      "type": "blume-product-how-to-use",
-      "settings": {
-        "title": "How It's Done",
-        "title_color": "#1a3a5c",
-        "accent_color": "#1a3a5c",
-        "background_color": "#faf5f0"
-      }
-    },
-    "blume_product_ingredients": {
-      "type": "blume-product-ingredients",
-      "settings": {
-        "title": "Key Ingredients",
-        "title_color": "#1a3a5c",
-        "accent_color": "#1a3a5c",
-        "background_color": "#faf5f0"
-      }
-    },
-    "blume_product_routine": {
-      "type": "blume-product-routine",
-      "settings": {
-        "title": "Suggested Routine",
-        "title_color": "#1a3a5c",
-        "background_color": "#faf5f0",
-        "columns": 4
-      }
-    },
-    "blume_product_faq": {
-      "type": "blume-product-faq",
-      "settings": {
-        "title": "Frequently Asked Questions",
-        "title_color": "#1a3a5c",
-        "background_color": "#faf5f0"
-      }
     }
   },
   "order": [
     "main",
-    "blume_product_subtitle",
-    "blume_product_badges",
-    "blume_product_clinical",
-    "blume_product_breakdown",
-    "blume_product_how_to_use",
-    "blume_product_ingredients",
-    "blume_product_routine",
-    "blume_product_faq",
     "product_recommendations_qggXJq"
   ]
 }
