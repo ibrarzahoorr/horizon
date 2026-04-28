@@ -1,0 +1,160 @@
+
+
+<div class="qrdagf-slider-container">
+  <div class="qrdagf-slider"> 
+        {% for media in product.media %}
+		  {% if media.media_type == 'image' %}
+		    <img src="{{ media | image_url: width: 1200 }}" alt="{{ media.alt | escape }}">
+		  {% endif %}
+		{% endfor %}
+         
+  </div>
+
+  <button class="qrdagf-prev" onclick="grDagfPrevSlide()">❮</button>
+  <button class="qrdagf-next" onclick="grDagfNextSlide()">❯</button>
+
+  <!-- Thumbnails -->
+  <div class="qrdagf-thumbnails"></div>
+</div>
+<style>  
+.qrdagf-slider-container {
+  position: relative;
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  overflow: hidden;
+} /* Main slider images */
+.qrdagf-slider img {
+  width: 100%;
+  display: none !important;
+}
+.qrdagf-slider img.qrdagf-active {
+  display: block !important;
+} /* Arrow buttons – white, circular */
+.qrdagf-slider-container button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background-color: #ffffff; /* white background */
+  color: #000000; /* black arrow icon */
+  border: 1px solid #ddd; /* subtle border */
+  font-size: 24px;
+  padding: 8px 12px;
+  border-radius: 100px; /* circular pill */
+  cursor: pointer;
+  user-select: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.qrdagf-slider-container button.qrdagf-prev {
+  left: 10px;
+}
+.qrdagf-slider-container button.qrdagf-next {
+  right: 10px;
+}
+.qrdagf-slider-container button:hover {
+  background-color: #f5f5f5;
+} /* Thumbnails container */
+.qrdagf-thumbnails {
+  margin-top: 10px;
+  display: grid;
+  grid-auto-flow: column;
+  grid-auto-columns: calc(100% / 8);
+  column-gap: 4px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding-bottom: 0;
+
+  /* Hide scrollbar */
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* IE/old Edge */
+}
+
+.qrdagf-thumbnails::-webkit-scrollbar {
+  display: none; /* Chrome, Safari */
+} /* Thumbnail images */
+.qrdagf-thumbnail {
+  width: 100%;
+  cursor: pointer;
+  opacity: 0.6;
+  border-radius: 4px;
+  border: 1px solid transparent;
+}
+.qrdagf-thumbnail.qrdagf-thumb-active {
+  opacity: 1;
+  border-color: #000;
+} /* Responsive: 5 columns on mobile */
+@media (max-width: 768px) {
+  .qrdagf-slider-container {
+    max-width: 100%;
+  }
+  .qrdagf-slider-container button {
+    font-size: 18px;
+    padding: 6px 10px;
+  }
+  .qrdagf-thumbnails {
+    grid-auto-columns: calc(100% / 5); /* 5 columns visible on mobile */
+  }
+}
+ 
+</style>
+
+<script>
+    let grDagfCurrentSlide = 0;
+    const grDagfSlides = document.querySelectorAll(".qrdagf-slider img");
+    const grDagfThumbContainer = document.querySelector(".qrdagf-thumbnails");
+
+    // Build thumbnails dynamically from slides
+    grDagfSlides.forEach((slide, index) => {
+      const thumb = document.createElement("img");
+      thumb.src = slide.src;
+      thumb.alt = slide.alt || `Thumbnail ${index + 1}`;
+      thumb.classList.add("qrdagf-thumbnail");
+      thumb.dataset.index = index;
+
+      thumb.addEventListener("click", () => {
+        grDagfCurrentSlide = index;
+        grDagfShowSlide(grDagfCurrentSlide);
+      });
+
+      grDagfThumbContainer.appendChild(thumb);
+    });
+
+    const grDagfThumbs = document.querySelectorAll(".qrdagf-thumbnail");
+
+    function grDagfShowSlide(index) {
+      grDagfSlides.forEach((slide, i) => {
+        slide.classList.toggle("qrdagf-active", i === index);
+      });
+
+      grDagfThumbs.forEach((thumb, i) => {
+        thumb.classList.toggle("qrdagf-thumb-active", i === index);
+      });
+
+      // Optional: auto-scroll thumbnails so active one stays in view
+      const activeThumb = grDagfThumbs[index];
+      if (activeThumb && grDagfThumbContainer) {
+        const containerRect = grDagfThumbContainer.getBoundingClientRect();
+        const thumbRect = activeThumb.getBoundingClientRect();
+
+        if (thumbRect.left < containerRect.left || thumbRect.right > containerRect.right) {
+          grDagfThumbContainer.scrollLeft += (thumbRect.left - containerRect.left) - containerRect.width / 4;
+        }
+      }
+    }
+
+    function grDagfNextSlide() {
+      grDagfCurrentSlide = (grDagfCurrentSlide + 1) % grDagfSlides.length;
+      grDagfShowSlide(grDagfCurrentSlide);
+    }
+
+    function grDagfPrevSlide() {
+      grDagfCurrentSlide = (grDagfCurrentSlide - 1 + grDagfSlides.length) % grDagfSlides.length;
+      grDagfShowSlide(grDagfCurrentSlide);
+    }
+
+    // Init
+    grDagfShowSlide(grDagfCurrentSlide);
+  </script>
+

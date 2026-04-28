@@ -1,0 +1,21 @@
+<div class='ph2 blog__header-tags rel z2 bg-w'>
+  <div class='container--xl mha fill x'>
+    <ul class='f jcs x aic blog__header-list'>
+
+      {% if current_tags %}
+        <li class='mx1 caps xsmall ls1 bold'>
+          <a href='/blogs/blume-university'>All</a>
+        </li>
+      {% else %}
+        <li class='mx1 caps xsmall ls1 bold active'>All</li>
+      {% endif %}
+      {% for tag in blog.all_tags %}
+        {% if current_tags contains tag %}
+          <li class='mx1 caps xsmall ls1 bold active'>{{ tag }}</li>
+        {% else %}
+          <li class='mx1 caps xsmall ls1 bold'>{{ tag | link_to_tag: tag }}</li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+</div>

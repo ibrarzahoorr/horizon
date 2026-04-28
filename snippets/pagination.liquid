@@ -1,0 +1,29 @@
+<div class="pagination px2 ac jcc f aic">
+  {% if paginate.previous.is_link %}
+    <a href="{{ paginate.previous.url }}">
+      <div class='real__controls-left bg-b cw inline-block f jcc aic rotate js-left-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+    </a>
+  {% endif %}
+  {{ paginate | default_pagination: next: '', previous: '' }}
+  {% if paginate.next.is_link %}
+    <a href="{{ paginate.next.url }}">
+      <div class='real__controls-right ml1 bg-b cw inline-block f jcc aic js-right-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+    </a>
+  {% endif %}
+</div>

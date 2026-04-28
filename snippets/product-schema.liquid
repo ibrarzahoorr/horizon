@@ -1,0 +1,32 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ product.title }}",
+    "image": [
+      "{{ product.featured_image | img_url: '200x200', crop: 'center' }}",
+      "{{ product.featured_image | img_url: '800x600', crop: 'center' }}",
+      "{{ product.featured_image | img_url: '1600x900', crop: 'center' }}"
+    ],
+    "description": "{{ product.description | escape | strip_newlines }}",
+    "sku": "{{ current_variant.sku }}",
+    "brand": {
+      "@type": "Brand",
+      "name": "Blume"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ product.metafields.junip.rating_average }}",
+      "reviewCount": "{{ product.metafields.junip.rating_count }}"
+    },
+    "offers": {
+      "@type": "Offer",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "http://schema.org/{%- if current_variant.available -%}InStock{%- else -%}OutOfStock{%- endif -%}",
+      "price": "{{ current_variant.price }}",
+      "priceCurrency": "{{ shop.currency }}",
+      "url": "{{ shop.url }}{{ current_variant.url }}"
+    }
+  }
+</script>

@@ -1,0 +1,58 @@
+<div class="newsletter__module f jcs px2  phm4 aic text-center rel z6" data-module="newsletter" data-section-id="{{ section.id }}" data-section-type="newsletter-signup-section" style="background-image: url('{{ section.settings.image | img_url: "2048x2048"  }}')">
+  <div class='container--xl fill-x mha pv2 newsletter__desktop'>
+    {% unless section.settings.heading == blank %}
+      <h2 class='px0 serif mx0'>{{ section.settings.heading | escape }}</h2>
+    {% endunless %}
+    {% unless section.settings.subheading == blank %}
+      <h5 class='container--s ls0'>{{ section.settings.subheading | escape }}</h5>
+    {% endunless %}
+    <div>
+      {% include 'newsletter-form' %}
+    </div>
+  </div>
+</div>
+<div class='container--xl fill-x mha px2  bg-w newsletter__module_mobile'>
+  {% unless section.settings.heading == blank %}
+    <h2 class='px0 serif mx0'>{{ section.settings.heading | escape }}</h2>
+  {% endunless %}
+  {% unless section.settings.subheading == blank %}
+    <h5 class='container--xs'>{{ section.settings.subheading | escape }}</h5>
+  {% endunless %}
+  <div>
+    {% include 'newsletter-form' %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Newsletter",
+    "class": "index-section newsletter-signup",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Subscribe to our newsletter"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "A short sentence describing what someone will receive by subscribing"
+      },
+      {
+        "type": "paragraph",
+        "content": "Any customers who sign up, will have an account created for them in Shopify. [View customers](/admin/customers?query=&accepts_marketing=1)"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      }
+    ],
+    "presets": [{
+      "name": "Newsletter",
+      "category": "Promotional"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,64 @@
+<div class='product__image ac rel'> 
+  <img src="{{ featured_image | img_url: '1400x' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+  <div class='product__image-slider js-pdp-hero-slideshow abs x y top left'>
+    {% for media in product.media %}
+      <div class="__frame x y abs fill" data-title="{{ media.alt }}">
+        {% include 'product-slideshow-media' %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class='product__image-thumbs __desktop js-pdp-hero-thumbs px05 f jcs aic abs  x bottom left p1'>
+    {% for media in product.media %}
+      {% if media.media_type == 'image' %}
+        <div class="product__image-thumbs-single js-thumbs mr05">
+          {%
+            include 'image' with
+            product: media.src,
+            size: '200x',
+            alt: media.alt | escape,
+            fill: true,
+            className: 'z0 js-priority'
+          %}
+        </div>
+      {% else %}
+        <div class="product__image-thumbs-single js-thumbs js-video-thumb mr05" data-media-id="{{ media.id }}">
+          {%
+            include 'image' with
+            product: media.preview_image,
+            size: '200x',
+            alt: media.alt | escape,
+            fill: true,
+            className: 'video-thumb z0 js-priority'
+          %}
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+</div>
+<div class='product__image-thumbs __mobile js-pdp-hero-thumbs px05 f jcs aic'>
+  {% for media in product.media %}
+    {% if media.media_type == 'image' %}
+      <div class="product__image-thumbs-single js-thumbs mr05">
+        {%
+          include 'image' with
+          product: media.src,
+          size: '200x',
+          alt: media.alt | escape,
+          fill: true,
+          className: 'z0 js-priority'
+        %}
+      </div>
+    {% else %}
+      <div class="product__image-thumbs-single js-thumbs js-video-thumb mr05" data-media-id="{{ media.id }}">
+        {%
+          include 'image' with
+          product: media.preview_image,
+          size: '200x',
+          alt: media.alt | escape,
+          fill: true,
+          className: 'video-thumb z0 js-priority'
+        %}
+      </div>
+    {% endif %}
+  {% endfor %}
+</div>

@@ -1,0 +1,21 @@
+{% if product.metafields.blume.included_products %}
+{% assign selected_handles = product.metafields.blume.included_products | split: '|'  %}
+  <section class='bg-p pv1 product__included pm60 rel ac'>
+    <div class='fill-x container--xl mha px2 phm4 rel z3'>
+      <h3 class='serif'>What's Included</h3>
+      <div class='f jcc fw collection__grid collection--{{selected_handles | size}}'>
+        {% for selected_handle in selected_handles %}
+          {% assign handle = selected_handle | remove: '["' | remove: '"]' %}
+          {% assign productItem = all_products[handle] %}
+          {% include 'collection-item',  product: productItem %}
+        {% endfor %}
+      </div>
+    </div>
+    <div class='why__organic_shape_right abs z1 bottom right co js-organic js-shape-one' data-module='shapeOne'>
+      {% include 'shape-one' %}
+    </div>
+    <div class='product__features-shape abs z2 top left co js-shape-two' data-module='shapeTwo'>
+      {% include 'shape-two' %}
+    </div>
+  </section>
+{% endif %}

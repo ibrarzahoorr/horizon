@@ -1,0 +1,59 @@
+<section class='rel' data-module='topiaRedeem'>
+  <div class='mxa rel '>
+    <div class='ac'>
+      <h2 class='cooper'>{{section.settings.heading}}</h2>
+    </div>
+    <div class='f jcb ais rel topia__redeem-wrapper' style='background-image: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/rainbow.jpg?50993)'>
+      {% for item in section.blocks %}
+        <div class='ac topia__redeem-single js-topia-redeem-single- rel'>
+          <h3 id='points{{forloop.index}}' class='h1-points mb0 mono js-pillar-value cgy pb0' data-points='{{item.settings.points}}'>0</h3>
+          <p class='caps mt0 pt0 mono'>points</p>
+          <div class='ac topia__redeem-pillars'>
+            <div class='topia__redeem-img rel'>
+              <img class='x lazyload' data-src='{{ item.settings.product_image | img_url: '600x' }}' alt='product image' />
+            </div>
+            <img class='rel topia__redeem-pillar x z2 lazyload' data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/topia-ped.png?50606' alt='pillar' />
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='abs x z2 bottom topia__redeem-clouds js-clouds left'>
+    <img class='rel z3 lazyload' data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/clouds.png?50767' alt='clouds' />
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Topia Redeem",
+    "max_blocks": 5,
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Redeem your BB’s for awesome stuff"
+      }
+    ],
+    "blocks": [{
+      "type": "list",
+      "name": "Product Redeem",
+      "settings": [
+        {
+          "type": "text",
+          "id": "points",
+          "label": "Point Value"
+        },
+        {
+          "type": "image_picker",
+          "id": "product_image",
+          "label": "Product Image"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "Topia Redeem",
+      "category": "Topia"
+    }]
+  }
+{% endschema %}

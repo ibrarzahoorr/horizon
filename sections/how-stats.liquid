@@ -1,0 +1,100 @@
+<section class='bg-w px2 pm60 pl100'>
+  <div class='container--xl mha rel z2'>
+    <div class='f fw jcc aic wrapper__inner'>
+      <div class='container--s mha ac'>
+        <h1 class='mx0 pt0 pv1 serif'>{{ section.settings.title }}</h1>
+      </div>
+    </div>
+    <div class='f fw jcb aic al wrapper__inner fill-x how__stats'>
+      <div class='px1'>
+        <div class='how__stats_single'>
+          <h1 class='bold outline mx0 px0'>{{ section.settings.stat_1 }}</h1>
+          <p>{{ section.settings.stat_1_description }}</p>
+        </div>
+      </div>
+      <div class='px1'>
+        <div class='how__stats_single'>
+          <h1 class='bold outline mx0 px0'>{{ section.settings.stat_2 }}</h1>
+          <p>{{ section.settings.stat_2_description }}</p>
+        </div>
+      </div>
+      <div class='px1'>
+        <div class='how__stats_single'>
+          <h1 class='bold outline mx0 px0'>{{ section.settings.stat_3 }}</h1>
+          <p>{{ section.settings.stat_3_description }}</p>
+        </div>
+      </div>
+      <div class='px1'>
+        <div class='how__stats_single'>
+          <h1 class='bold outline mx0 px0'>{{ section.settings.stat_4 }}</h1>
+          <p>{{ section.settings.stat_4_description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "How Stats",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don't wage.."
+      },
+      {
+        "type": "text",
+        "id": "stat_1",
+        "label": "Stat Value",
+        "default": "0"
+      },
+      {
+        "type": "text",
+        "id": "stat_1_description",
+        "label": "Stat Description",
+        "default": "Info about..."
+      },
+      {
+        "type": "text",
+        "id": "stat_2",
+        "label": "Stat Value",
+        "default": "0"
+      },
+      {
+        "type": "text",
+        "id": "stat_2_description",
+        "label": "Stat Description",
+        "default": "Info about..."
+      },
+      {
+        "type": "text",
+        "id": "stat_3",
+        "label": "Stat Value",
+        "default": "0"
+      },
+      {
+        "type": "text",
+        "id": "stat_3_description",
+        "label": "Stat Description",
+        "default": "Info about..."
+      },
+      {
+        "type": "text",
+        "id": "stat_4",
+        "label": "Stat Value",
+        "default": "0"
+      },
+      {
+        "type": "text",
+        "id": "stat_4_description",
+        "label": "Stat Description",
+        "default": "Info about..."
+      }
+    ],
+    "presets": [{
+      "name": "How Stats",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

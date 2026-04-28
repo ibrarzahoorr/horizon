@@ -1,0 +1,74 @@
+<!-- /snippets/social-sharing.liquid -->
+<div class="social-sharing f jcb">
+  <!-- {% if settings.share_facebook %}
+    <a target="_blank" href="//www.facebook.com/sharer.php?u={{ shop.url | append: share_permalink }}">
+      {% include 'icon-facebook' %}
+    </a>
+  {% endif %}
+  <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+    {% include 'icon-instagram' %}
+  </a>
+
+  {% if settings.share_twitter %}
+    <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
+    <a target="_blank" href="//twitter.com/share?text={{ share_title | url_param_escape }}&amp;url={{ shop.url | append: share_permalink }}">
+      {% include 'icon-twitter' %}
+    </a>
+  {% endif %}
+
+  {% if settings.share_pinterest %}
+    <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+      {% include 'icon-pinterest' %}
+    </a>
+  {% endif %}
+  <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+    {% include 'icon-messenger' %}
+  </a>
+  <a target="_blank" href="//pinterest.com/pin/create/button/?url={{ shop.url | append: share_permalink }}&amp;media={{ share_image | img_url: '1024x1024' }}&amp;description={{ share_title | url_param_escape }}">
+    {% include 'icon-youtube' %}
+  </a> -->
+
+  {% if settings.social_facebook_link != '' %}
+    <a target='_blank' href='{{settings.social_facebook_link}}'>
+      {% include 'icon-facebook' %}
+    </a>
+  {% endif %}
+  {% if settings.social_instagram_link != '' %}
+    <a target='_blank' href='{{settings.social_instagram_link}}'>
+      {% include 'icon-instagram' %}
+    </a>
+  {% endif %}
+  {% if settings.social_pinterest_link != '' %}
+    <a target='_blank' href='{{settings.social_pinterest_link}}'>
+      {% include 'icon-pinterest' %}
+    </a>
+  {% endif %} 
+  {% if settings.social_tiktok_link != '' %}
+    <a target='_blank' href='{{settings.social_tiktok_link}}'>
+      {% include 'icon-tiktok' %}
+    </a>
+  {% endif %}
+  {% if settings.social_twitter_link != '' %}
+    <a target='_blank' href='{{settings.social_twitter_link}}'>
+      {% include 'icon-twitter' %}
+    </a>
+  {% endif %}
+  {% if settings.social_youtube_link != '' %}
+    <a target='_blank' href='{{settings.social_youtube_link}}'>
+      {% include 'icon-youtube' %}
+    </a>
+  {% endif %}
+</div>
+<div class='header__mobile_contact  fill-x mt2'>
+  <div class='f jcb aie fill-x'>
+    <div>
+      <a class='small block' href='mailto:hi@blume.com'>hi@blume.com</a>
+      <a class='small block' href='mailto:press@blume.com'>press@blume.com</a>
+      <a class='small block' href='mailto:wholesale@blume.com'>wholesale@blume.com</a>
+      {% comment %}<a class='small block' href='tel:5558675309'>1 888-272-6718</a> {% endcomment %}
+    </div>
+    <div class='ar'>
+      <small class='cw site__by'>Site by <a href='https://thecouch.nyc' class='cw'>The Couch</a></small>
+    </div>
+  </div>
+</div>

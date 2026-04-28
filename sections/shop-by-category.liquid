@@ -1,0 +1,283 @@
+<style>
+ .flickity-enabled .shop-by-category img, .collection__item.shop-by-category img {
+    opacity: 1;
+    aspect-ratio: 1/1;
+    max-height: 360px !important;
+    min-height: 360px !important;
+  }
+
+  .collection-title{
+    position: absolute;
+    inset:0;
+    color: white;
+    font-size: 50px;
+    font-weight: 600;
+    text-align: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: 'value-serif-web';
+    font-weight: 900;
+    text-transform: none;
+    text-align: center;
+  }
+  .collection__slideshow .collection__item.shop-by-category {
+    max-width: calc(30% - 20px);
+    }
+
+  .shop-by-category{
+    .flickity-enabled .carousel-cell {
+      max-width: calc(30% - 20px) !important;
+    }
+  }
+
+  .slider-cta{
+      display: none !important;
+  }
+
+  @media screen and (max-width: 767px) {
+   .flickity-enabled  .shop-by-category img {
+      max-height: 120px !important;
+      min-height: 120px !important;
+      opacity: 1 !important;
+      aspect-ratio: 1/1 !important;
+    }
+
+    .collection__slideshow .collection__item.shop-by-category {
+      max-width: calc(33.33% - 20px);
+      }
+
+    .collection-title{ 
+      font-size: 20px;
+    }
+    .collection-heading{
+      font-size: 34px;
+    }
+    .shop-by-category .real__controls {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 0;
+      width: 100%;
+      bottom: 30px;
+    }
+
+    .slider-cta.style-button{
+      font-family: apercu-web;
+      transition: all .25s;
+      left: 30px;
+      position: absolute;
+      cursor: pointer;
+      padding: 8px 12px;
+      outline: none;
+      display: inline-block !important;
+      text-align: center;
+      border-radius: 2px;
+      font-size: 1rem;
+      border: 2px solid var(--dark-blue);
+      width: max-content;
+      background-color: var(--dark-blue);
+      color: #fff;
+      box-shadow: 8px 8px #fff;
+      font-weight: 600;
+      min-width: 120px;
+    }
+
+    .slider-cta.style-button:hover{
+      color: var(--pink-highlight);
+      box-shadow: 0 0 0 0 var(--pink-highlight);
+    }
+
+    .slider-cta.style-text{
+      display: block !important;
+      text-align: left;
+      left: 30px;
+      position: absolute;
+      color: var(--dark-blue);
+    }
+
+    .slider-cta.style-text:after{
+      transition: all .25s;
+      content: "";
+      position: absolute;
+      left: 0;
+      height: 1px;
+      width: 100%;
+      bottom: -1px;
+      background-color: var(--dark-blue);
+    }
+
+    .shop-by-category .real__controls>div{
+      width: 35px;
+      height: 35px;
+
+    }
+    .shop-by-category .real__controls>div svg{
+      width: 15px;
+      height: 15px;
+    }
+    .shop-by-category .container--xl {
+      padding-bottom:5em;
+    }
+  }
+
+
+</style>
+
+<div class='bg-lp rel home__featured-collection z3 shop-by-category' data-module='collectionSlideshowTwo'>
+  <div class='fill-x rel container--xl mha pv2  phm4 ac'>
+    {% if section.settings.title != blank %}
+      <h2 class='caps outline pt05 pb05 mt0 line-header mb0'>
+        <span class='rel z2 ph05 inline-block collection-heading'>{{ section.settings.title | escape }}</span>
+      </h2>
+    {% endif %}
+    <div class='real__controls ar abs top mr1 collection--c right z1 f jce aic'>
+      {% if section.settings.link_url != blank and section.settings.link_text != blank %}
+        <a href="{{ section.settings.link_url }}" class='slider-cta style-{{ section.settings.link_style }}'>{{ section.settings.link_text }}</a>
+      {% endif %}
+      <div class='real__controls-left bg-b cw inline-block f jcc aic rotate js-left-slides'>
+        <svg
+          width="9px"
+          height="15px"
+          viewBox="0 0 9 15">
+          <g
+            id="2019-Site-Updates"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd">
+            <polyline
+              id="Rectangle-11"
+              stroke='currentColor'
+              stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+      <div class='real__controls-right ml1 bg-b cw inline-block f jcc aic js-right-slides'>
+        <svg
+          width="9px"
+          height="15px"
+          viewBox="0 0 9 15">
+          <g
+            id="2019-Site-Updates"
+            stroke="none"
+            stroke-width="1"
+            fill="none"
+            fill-rule="evenodd">
+            <polyline
+              id="Rectangle-11"
+              stroke='currentColor'
+              stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+    </div>
+
+        <div class='collection__slideshow fill-x js-slideshow'>
+          {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+              {% assign collection = block.settings.collection %}
+          <div class='collection__item mb15 rel shop-by-category' data-module='collectionItem'>
+            <a href="{{ collection.url }}" class='abs z2 fill-x fill fill-y'></a>
+            {% if block.settings.image != blank %}
+               {{ block.settings.image | image_url: width: nil | image_tag: sizes: '50vw' }}
+            {% endif %}
+            <div class="collection-title caps">
+              {{ block.settings.title }}
+            </div>
+          </div>
+        {% endfor %}
+      {% endif %}
+        </div>
+
+    {% comment %} <div class='collection__slideshow fill-x js-slideshow'>
+      {% for collection in block.settings.collection %}
+        {{ collection.title }}
+      {% endfor %}
+    </div> {% endcomment %}
+    {% comment %} {%- assign collection = collections[section.settings.collection] -%}
+    <div class='collection__slideshow fill-x js-slideshow'>
+    {% for product in collection.products limit: 12 %}
+    {% include 'collection-item' with context: 'slideshow' %}
+    {% endfor %}
+    </div> {% endcomment %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Shop By Category",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "type": "header",
+        "content": "Mobile CTA Link"
+      },
+      {
+        "type": "text",
+        "id": "link_text",
+        "label": "Link Text"
+      },
+      {
+        "type": "url",
+        "id": "link_url",
+        "label": "Link URL"
+      },
+      {
+        "type": "select",
+        "id": "link_style",
+        "label": "Link Style",
+        "options": [
+          {
+            "value": "button",
+            "label": "Button"
+          },
+          {
+            "value": "text",
+            "label": "Text Link"
+          }
+        ],
+        "default": "text"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "collection",
+        "name": "Collection",
+        "settings": [
+          {
+            "id": "collection",
+            "type": "collection",
+            "label": "Collection"
+          },
+          {
+            "id": "title",
+            "type": "text",
+            "label": "Title",
+            "default": "Acne-Prone"
+          },
+          {
+            "id": "image",
+            "type": "image_picker",
+            "label": "Image"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Shop By Category",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}

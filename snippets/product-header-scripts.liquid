@@ -1,0 +1,30 @@
+<script type="application/ld+json">
+  {
+    "@context": "https://schema.org/",
+    "@type": "Product",
+    "name": "{{ social_title }}",
+    "image": [
+      "{{ social_product_img | img_url: '200x200', crop: 'center' }}",
+      "{{ social_product_img | img_url: '800x600', crop: 'center' }}",
+      "{{ social_product_img | img_url: '1600x900', crop: 'center' }}"
+    ],
+    "description": "{{ social_description }}",
+    "sku": "{{ product.sku }}",
+    "brand": {
+      "@type": "Brand",
+      "name": "Blume"
+    },
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "{{ product.metafields.junip.rating_average }}",
+      "reviewCount": "{{ product.metafields.junip.rating_count }}"
+    },
+    "offers": {
+      "@type": "Offer",
+      "itemCondition": "https://schema.org/NewCondition",
+      "availability": "{% if product.available %}InStock{% else %}OutOfStock{% endif %}",
+      "price": "{{ product.price }}",
+      "priceCurrency": "USD"
+    }
+  }
+</script>

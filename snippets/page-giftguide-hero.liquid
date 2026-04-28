@@ -1,0 +1,30 @@
+<div class="bg-lb px2 ptl160 o-h rel hero rel z0" id="top" data-module="hero">
+  <div class="gg-hero__blob abs z1">
+    <svg width="1024" height="462" viewBox="0 0 1024 462" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M665.477 351.492C847.194 333.811 988.393 250.807 1008.04 217.654L1024 0.321747L4.03612e-05 0.321657L0 462C49.522 446.447 61.6364 430.812 165.755 399.379C295.904 360.087 438.331 373.593 665.477 351.492Z" fill="{{ svg_color }}"/>
+    </svg>
+  </div>
+  <div class="gg-hero__container z2 rel">
+    <div class="container--xl mha">
+      <div class="gg-hero__content px05 container--s mha">
+        <div class="text-box">
+          {% if heading != blank %}
+            <h1 class="heading caps outline ac line-header mt0 mb0">{{ heading }}</h1>
+          {% endif %}
+          {% if subheading != blank %}
+            <p class="gg-hero__subheading mha serif rel">
+              <span class="sparkle l abs">✨</span>
+              {{ subheading }}
+              <span class="sparkle r abs">✨</span>
+            </p>
+          {% endif %}
+        </div>
+        {% if description != blank %}
+          <div class="gg-hero__description ac mt2">
+            {{ description }}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>

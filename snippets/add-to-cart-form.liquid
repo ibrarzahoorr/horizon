@@ -1,0 +1,253 @@
+{%- liquid 
+	assign non_subscription = 'in-the-clear, stargirl, hello-hydration, lets-face-it, self-care-bundle-2, glowy-skin' 
+-%}
+
+{% assign hide_subscription = false %}
+{% if non_subscription contains product.handle %}
+	{% assign hide_subscription = true %}
+{% endif %}
+
+
+{% assign is_meltdown = false %}
+{% if product.handle contains 'meltdown' %}
+  {% assign is_meltdown = true %}
+{% endif %}
+
+{%- liquid
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+{% assign buildBox = product.metafields.sf_build_a_box_toggl.toggle_box_availability %}
+<a href='/pages/build-a-box' class='{% if buildBox != 1 %}hidden{% endif %} btn bold btn__blue'>Build a Box</a>
+<form action="/cart/add" method="post" enctype="multipart/form-data" data-productid="{{ product.id }}" class="{% if buildBox == 1 %}hidden{% endif %} product-{{ product.handle }} product-form product-form-{{ section.id }}{% unless section.settings.show_variant_labels %} product-form--hide-variant-labels{% endunless %}" data-section="{{ section.id }}">
+  <div id="esc-oos-form"></div>
+ 
+ 
+  {% unless product.has_only_default_variant %}
+    {% for option in product.options_with_values %}
+      {% assign is_sold_out = false %}
+      <div class="size-selector {% if product.tags contains "__dropdown" %} hide {% endif %} js-options">
+        <fieldset
+          class='size-selector__fields f jcs aic'
+          id="SingleOptionSelector-{{ section.id }}-{{ forloop.index0 }}"
+          data-single-option-selector
+          data-index="option{{ option.position }}">
+          <div class='f jcs aic'>
+            {% for value in option.values %} 
+              {% for variant in product.variants %}
+                {% if value contains variant.title %}
+                  {% unless variant.available %}
+                    {% assign is_sold_out = true %} 
+                  {% endunless %}
+                  <div class='inline mr1'>
+                    <input type='radio' {% if variant.available %} {% else %} disabled {%  endif %} {% comment %} AMA- ADDED THIS CONDITION 11-4-2025  {% endcomment %}class='f jcs abs aic'
+                      id="{{ value | escape}}"
+                      value="{{ value | escape }}"
+                      data-price="{{ variant.price | money_without_trailing_zeros | remove: '<span class=money>' | remove: '</span>' }}"
+                      data-comparedat="{{ variant.compare_at_price | money_without_trailing_zeros | remove: '<span class=money>' | remove: '</span>' }}"
+                      {% if option.selected_value == value %}checked="checked"{% endif %} name='size' />
+                    <label class='bg-w f jcs aic' for='{{ value | escape }}'>{{value}}
+                      <img class='ml1 lazyload' data-src='{{ product.metafields.blume.variant_image }}' />
+                    </label>
+                  </div>
+                {% endif %}
+              {% endfor %}
+            {% unless is_sold_out %}
+            {% endunless %}
+            {% endfor %}
+          </div>
+        </fieldset>
+      </div>
+    {% endfor %}
+  {% endunless %}
+
+  <select name="id" class="no-js {% if product.tags contains "__dropdown" %}  {% else  %} hide {% endif %} js-product-selector" data-product-select {% if product.tags contains "__dropdown" %} style=" margin: 0 0 10px; max-width: 400px; background: #fff; "{% endif %}>
+    {% for variant in product.variants %}
+      <option
+        {% if variant == product.selected_or_first_available_variant %}selected="selected"{% endif %}
+        {% unless variant.available %}disabled="disabled"{% endunless %}å
+        value="{{ variant.id }}">
+          {{ variant.title }}
+      </option>
+    {% endfor %}
+  </select>
+  <div data-price-wrapper class='product__rc-price'>
+    <span data-product-price>
+      {{ current_variant.price | money }}
+    </span>
+  
+    {% if product.compare_at_price_max > product.price %}
+    <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+    <s data-compare-price>
+      {% if current_variant.compare_at_price > current_variant.price %}
+      {{ current_variant.compare_at_price | money }}
+      {% endif %}
+    </s>
+    {% endif %}
+  </div>
+
+  {% unless hide_subscription %}
+    {% if product.available %}
+      {% comment %} subscription_first: product.metafields.blume.subscription_first {% endcomment %}
+      {% render 'subscription-product' with subscription_first: false %}
+    {% endif %}
+  {% endunless %}
+  
+  {% comment %} ATC Actions {% endcomment %}
+  {% if product.available %}
+    {% comment %}
+    <div class='f jcs ais'>
+      <div class='product__quantity f jcb aic'>
+        <span class='js-qty-minus  bold ph1 pv05'>-</span>
+        <input type="number" id="Quantity-{{ section.id }}" name="quantity" class='js-quantity bold' value='1' min="1">
+        <span class='js-qty-plus  bold ph1 pv05'>+</span>
+      </div>
+      <button
+        type="submit"
+        name="add"
+        class='js-submit-cart btn ml05 btn__blue bold mt0 amaatcbtn'
+        data-add-to-cart
+        {% unless product.available %}disabled="disabled"{% endunless %}
+        {% if section_onboarding %}disabled="disabled"{% endif %}>
+          <span data-add-to-cart-text>
+            <span data-product-price>
+              {{ current_variant.price | money_without_trailing_zeros }}
+            </span>
+            {% if product.available %}
+              {{ 'products.product.add_to_cart' | t }}
+            {% else %}
+              {{ 'products.product.sold_out' | t }}
+            {% endif %}
+          </span>
+      </button>  
+    </div>
+    {% endcomment %}
+     
+
+     {% comment %}<div class="satisfaction-label">
+      <span><svg width="10" height="10" viewBox="0 0 10 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <circle cx="5.0625" cy="5" r="4.9375" fill="#001E42"/>
+      <path d="M2.59375 4.8025L4.37125 6.58L7.53125 3.42" stroke="white" stroke-linecap="round"/>
+      </svg>
+      100% Satisfaction Guarantee</span>
+    </div>{% endcomment %}
+{%- comment -%}
+    {% unless product.id == 10191511847105 %}
+      <div class="call-out-label">
+       <span class="bold">20% off </span> your order of $60+ Code: WELCOME20
+     
+    </div>
+      {% endunless %}  {%- endcomment -%}
+    {%- comment -%}
+    {% if is_meltdown %}
+      {% assign dropper_id = all_products['drop-101'].selected_or_first_available_variant.id %}
+      <div class="product__free-gift f aic">
+        <input class="js-freeGift" name="dropper" type="checkbox" value="{{ dropper_id }}" id="addDropper">
+        <label class="caps bold p1" for="addDropper"><span>Add a free dropper to your order for easier dispensing</span></label>
+      </div>
+    {% endif %}
+    {%- endcomment -%}
+  {% endif %}
+  {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+  {% comment %} Fixed ATC Module {% endcomment %}
+  {% if product.available %}
+  <div class='product__add-fix js-fix-add bg-w fix top left bg-w x f jcb aic z10'>
+    <div class='f jcb aic'>
+      <div class='product__add-image'>
+        <img class='block lazyload' data-src="{{ featured_image | img_url: '300' }}" alt="{{ featured_image.alt | escape }}"
+          data-product-featured-image>
+      </div>
+      <div class='product__add-info ml1 f jcs aic'>
+        <h4 class='serif pr1'>{{product.title}}</h4>
+        <div class='js-review-jump'>
+          {% render 'junip-product-summary', product: product %}
+        </div>
+      </div>
+    </div>
+    <div class='f jcb aic'>
+      <div class='px05'>
+        <div data-price-wrapper class='product__rc-price'>
+          <span data-product-price>
+            {{ current_variant.price | money }}
+          </span>
+  
+          {% if product.compare_at_price_max > product.price %}
+          <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+          <s data-compare-price>
+            {% if current_variant.compare_at_price > current_variant.price %}
+            {{ current_variant.compare_at_price | money }}
+            {% endif %}
+          </s>
+          {% endif %}
+        </div>
+      </div>
+      <div class='px05'>
+        {% if product.available %}
+          <div class='f jcs ais'>
+            <div class='product__quantity f jcb aic'>
+              <span class='js-qty-minus  bold ph1 pv05'>-</span>
+              <input type="number" id="Quantity-{{ section.id }}" name="quantity" class='js-quantity bold' value='1'
+                min="1">
+              <span class='js-qty-plus  bold ph1 pv05'>+</span>
+            </div>
+            <button type="submit" name="add" class='js-submit-cart btn btn__blue bold mt0 amaatcbtn' data-add-to-cart
+              {% unless product.available %}disabled="disabled" {% endunless %}
+              {% if section_onboarding %}disabled="disabled" {% endif %}>
+              <span data-add-to-cart-text>
+                {% if product.available %}
+                {{ 'products.product.add_to_cart' | t }}
+                {% else %}
+                {{ 'products.product.sold_out' | t }}
+                {% endif %}
+              </span>
+            </button>
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+
+    
+</form>
+<button onclick="addItemAma({{ product.selected_or_first_available_variant.id }},1);" style=" max-width: 390px; " class="btn btn__blue btn__dtact bold fill-x">Add to cart - {% if product.tags contains "__20off" %} <s style="font-size:12px;">{{ product.selected_or_first_available_variant.price  | money }} </s> {{ product.selected_or_first_available_variant.price |times: 0.8 | money }} {% else %} {{ product.selected_or_first_available_variant.price | money }} {% endif %}</button>
+      <script>
+      function addItemAma(variantId, quantity) {
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [{
+              id: variantId,
+              quantity: quantity
+            }]
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Item added to cart:', data);
+          // Optionally update cart count or show a success message
+        })
+        .catch(error => {
+          console.error('Error adding item to cart:', error);
+        });
+      }
+      </script>
+{% comment %}{% render 'ama-free-shipping-marker' %} {% endcomment %}
+    {% render 'ama-value-props' %}
+    {% render 'ama-order-upgrade' %}
+    {% render 'ama-featured-review' %}
+    {% render 'ama-before-after' %}
+    <!-- Insert QuadPay Widget -->
+    {% comment %} <div style="margin: 22px 0 10px 0;min-height:20px;">
+      <quadpay-widget size="80%" logoSize="80%" amount={{ current_variant.price | divided_by: 100.00 }}>
+      </quadpay-widget>
+    </div> {% endcomment %}
+  {% endif %}
+{% unless current_variant.available %}
+  <div class='mt1 backorder pt1'>
+    <h4 class='mb0 serif'>Sorry, {{ product.title }} is <span class=''>sold out</span></h4>
+  </div>
+{% endunless %}

@@ -1,0 +1,73 @@
+{% assign bg_image = 'color.jpg' | file_url %}
+<section class='box__cta pv2 pm60 pl100 pt160 rel z1' style='background-image: url({{bg_image}})'>
+  <div class='box__cta_float top right fill-x fill-y z2'>
+    <img class='top lazyload' data-src="{{ section.settings.image | img_url: '1800x' }}" />
+  </div>
+  <div class='container--xl mha px2  phm4 rel z2'>
+    <div class='f fw jcb aic'>
+      <div class='container--s'>
+        <p class='caps bold s1 px0 mx0 mb1'>{{ section.settings.subTitle }}</p>
+        <h2 class='mx0 serif pt0 pb05'>{{ section.settings.title }}</h2>
+        <p class='mb2'>{{ section.settings.description }}</p>
+        <a href="{{ section.settings.cta_link }}" class='btn btn__blue bold'>{{ section.settings.cta }}</a>
+        <p class='caps bold s1 pt1'>{{ section.settings.starting }}</p>
+      </div>
+    </div>
+  </div>
+
+</section>
+{% schema %}
+  {
+    "name": "Blume Build a Box",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "subTitle",
+        "label": "Sub Title",
+        "default": "Blume Box"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "The box that goes with your flow"
+      },
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "Description",
+        "default": "Your body's too busy to be worrying about buying tampons and pads. Build a Blume Box and we'll ship it to you whenever you want."
+      },
+      {
+        "id": "page",
+        "type": "page",
+        "label": "Page Link"
+      },
+      {
+        "id": "cta",
+        "type": "text",
+        "label": "Link CTA"
+      },
+      {
+        "id": "cta_link",
+        "type": "url",
+        "label": "Link CTA"
+      },
+      {
+        "id": "starting",
+        "type": "text",
+        "label": "Callout",
+        "default": "Starting at $10.99/Month"
+      }
+    ],
+    "presets": [{
+      "name": "Blume Build a Box",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,252 @@
+{% comment %}
+  * Add-to-cart section is based off the product-hero.liquid section with slight adjustments to the section settings
+  * Desktop styling and layout needs to be tweaked to match Blume Babies LP Figma
+  * Mobile styling and layout need adjustment to match Blume Babies LP Figma
+  * Similar to the add-to-cart-hero.liquid section, ATC functionality is working, however not with the cart drawer
+{% endcomment %}
+{%- liquid
+    assign product = section.settings.product
+    assign current_variant = product.selected_or_first_available_variant    
+-%}
+{% if product != blank %}
+  <section class='product__hero_bg {{ section.id }} rel'>
+        <div class='container--xl mha' data-section-id="{{ section.id }}" data-module="atcSection"
+          data-enable-history-state="true">
+
+          {% if section.settings.heading != blank %}
+            <div class="section-heading__{{ section.id }}">
+              <h2 class="serif">{{ section.settings.heading }}</h2>
+            </div>
+          {% endif %}
+
+        <script class='js-product-json' type='text/template'>
+            {
+              "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+              "product": {{ product | json }},
+              "sku": {{ current_variant.sku | json }},
+              "variants": [
+                {% for variant in product.variants %}
+                  {
+                  "id": {{ variant.id | json }},
+                  "title": {{ variant.title | json }},
+                  "price": {{ variant.price | json }},
+                  "available": {{ variant.available | json }},
+                  "sku": {{ variant.sku | json }},
+                  "option1": {{ variant.option1 | json }},
+                  "option2": {{ variant.option2 | json }},
+                  "option3": {{ variant.option3 | json }},
+                  "quantity": 1,
+                  "interval": "month",
+                  "intervalFreq": 1,
+                  "subscription": false,
+                  "discount": 0 
+                        }{% unless forloop.last %},{% endunless %}
+                {% endfor %}
+                ]
+       
+            }
+          </script> 
+          <div class='product__wrapper'>
+
+            {% if section.settings.product_image != blank %}
+              <div class="product__image ac rel">
+                <img src="{{ section.settings.product_image | image_url }}" alt="{{ product.title }}" style="opacity: 1; object-fit: cover; height: 100%; width: 100%;">
+              </div>
+            {% endif %}
+
+            <div class='product__description px2'>  
+              {% if section.settings.product_description != blank %}
+                <div class="rte">
+                  {{ section.settings.product_description }}
+                </div>
+              {% endif %}
+      
+              <div>
+                <div class='mt2 mb1'>
+                  {% include 'add-to-cart-form' %}
+                </div>
+              </div>
+            </div>
+          </div>
+      
+           {% unless product == empty %}
+            <script type="application/json" data-product-json>
+              {{ product | json }}
+            </script>
+          {% endunless %} 
+        </div>
+      </div>
+    </section>
+    {% style %}
+    .product__hero_bg.{{ section.id }}{
+      padding-top: 54px;
+      padding-bottom: 65px;
+      background-color: var(--cream-pink);
+    }
+
+    .section-heading__{{ section.id }}{
+      margin-bottom: 34px;
+      text-align: center;
+      padding: 0 0;
+      width: 100%;
+      max-width: 225px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .section-heading__{{ section.id }} h2{
+      margin: 0 0;
+    }
+
+    .section-heading__{{ section.id }} h2 p{
+      font-size: 26px;
+      line-height: 1.3em;
+      margin: 0 0;
+    }
+
+    .section-heading__{{ section.id }} h2 p strong{
+      font-family: 'New Kansas';
+      font-weight: 600;
+      font-style: normal;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__description{
+      background-color: var(--cream-pink);
+      padding-bottom: 0;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p:first-child{
+      margin-top: 0;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__image{
+      min-height: 430px;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__image img{
+      min-height: 430px;
+    }
+
+    .product__hero_bg.{{ section.id }} span[data-product-price]{
+      display: none;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p strong{
+        font-weight: 600;
+    }
+
+    .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p{
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 400;
+      line-height: 18px; /* 150% */
+      letter-spacing: -0.15px;
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p:first-child{
+        margin-top: 0;
+      }
+
+    @media (min-width: 56.26em){
+      .product__hero_bg.{{ section.id }}{
+        padding-top: 86px;
+        padding-bottom: 110px;
+        background-color: var(--cream-pink);
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper{
+        padding-top: 0;
+        min-height: 100%;
+        height: 100%;
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper .product__image{
+        top: 190px;
+        height: calc(100% - 300px);
+        min-height: auto !important;
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper .product__description{
+        padding-bottom: 0;
+      }
+
+      .section-heading__{{ section.id }} h2{
+        margin: 0 0;
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p{
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 1.5em;
+      }
+
+      .product__hero_bg.{{ section.id }} .product__wrapper .product__description .rte p:first-child{
+        margin-top: 0;
+      }
+
+      .section-heading__{{ section.id }}{
+        display: block;
+        margin-bottom: 54px;
+        text-align: center;
+        width: 100%; 
+        max-width: 100%;
+      }
+
+      .section-heading__{{ section.id }} h2 p{
+        font-size: 45px;
+        font-style: normal;
+        font-weight: 500;
+        line-height: 1.11em;
+        text-align: center;
+        margin: 0 0;
+      }
+    }
+
+    @media (min-width: 37.5em) and (max-width: 56.26em){
+      .section-heading__{{ section.id }} h2 p{
+        font-size: 36px;
+      }
+
+      .section-heading__{{ section.id }}{
+        display: block;
+        margin-bottom: 54px;
+        text-align: center;
+        width: 100%; 
+        max-width: 100%;
+      }
+    }
+    {% endstyle %}
+{% endif %}
+{% schema %}
+{
+    "name": "Add-to-Cart Section",
+    "settings": [
+        {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+        },
+        {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "richtext",
+            "id": "product_description",
+            "label": "Product Description"
+        },
+        {
+            "type": "image_picker",
+            "id": "product_image",
+            "label": "Product Image"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Add-to-Cart Section"
+        }
+    ]
+}
+{% endschema %}

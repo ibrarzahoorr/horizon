@@ -1,0 +1,60 @@
+<section class='pm100'>
+  <div class='container--l f jcb aic fw mxa px15'>
+    <div class='topia__saving-mobile rel'>
+      <img class="lazyload" data-src='{{ section.settings.image | img_url: '400x' }}' alt='savings image' />
+      <img class='abs top right lazyload' data-src='{{ section.settings.image_2 | img_url: '400x' }}' alt='savings image' />
+    </div>
+    <div class='container--s'>
+      <img class='topia__saving-desktop x lazyload' data-src='{{ section.settings.image_2 | img_url: '400x' }}' alt='savings image' />
+      <h2 class='cooper'>{{section.settings.heading}}</h2>
+      <p>{{section.settings.description}}</p>
+      <a href='https://blume.referralcandy.com/' target="_blank" class='caps  no-ajax btn btn__topia'>
+        <span class='rel z2'>Get your Code</span>
+        <video class='abs x y top left' muted autoplay loop>
+          <source src='{{ 'button_water.static.mp4' | asset_url }}' type='video/mp4'>
+        </video>
+      </a>
+    </div>
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Topia Savings",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Give 10%, Get $10"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "description",
+        "default": "Already share your love for Blume with your gal pals? Why not get something in return. Refer a friend and give them 10% off their first purchase, you’ll get $10 (1000 Blume bucks) in return."
+      },
+      {
+        "type": "text",
+        "id": "cta_code",
+        "label": "cta_code",
+        "default": "Get Your Code"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Paired Image"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_2",
+        "label": "Paired Image 2"
+      }
+    ],
+    "presets": [{
+      "name": "Topia Savings",
+      "category": "Topia"
+    }]
+  }
+{% endschema %}

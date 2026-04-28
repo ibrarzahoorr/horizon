@@ -1,0 +1,21 @@
+<section class='product__breakdown ac bg-p rel' data-module='animateIn'>
+  {% if product.metafields.blume.breakdown_image %}
+    <div class='container--xl mha pv2 pm60  rel z3 px15 js-animate'>
+      <div>
+        <h3 class='mx0 px0 ph15 pb025 mb1 serif animate s-in o-in'>The Breakdown</h3>
+      </div>
+      <div class='f fw jcb ais pv2'>
+        {% for icons in product.metafields.blume.breakdown_image %}
+          <div class='x px1 product__breakdown-single'>
+            <img class='x product__breakdown-icon s-in o-in animate transition-2 mb1 lazyload' data-src="{{product.metafields.blume.breakdown_image[forloop.index0]}}" />
+            <h4 class='caps mh05 ph05 mv05 bold s-in o-in animate transition-4 s1'>{{product.metafields.blume.breakdown_name[forloop.index0]}}</h4>
+            <p class='mb1 s-in o-in animate transition-6'>{{product.metafields.blume.breakdown_description[forloop.index0]}}</p>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+    <div class='why__organic_shape_right abs z1 top right co js-organic js-shape-one' data-module='shapeOne'>
+      {% include 'shape-one' %}
+    </div>
+  {% endif %}
+</section>

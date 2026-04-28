@@ -1,0 +1,41 @@
+<section class='bg-lp px2 rel o-h'>
+  <div class='container--xl mha'>
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div class='pv2 container--xs'>
+          <div class='testimonial__ single ac'>
+            <h6 class='caps mt1 ls1'>{{ block.settings.name }}</h6>
+            <p class='s16'>"{{ block.settings.quote }}"</p>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Testimonials",
+    "max_blocks": 6,
+    "blocks": [{
+      "type": "list",
+      "name": "Testimonial",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "textarea",
+          "id": "quote",
+          "label": "Quote"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "Testimonials",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

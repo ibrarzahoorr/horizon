@@ -1,0 +1,43 @@
+<div data-module='shopPage'>
+    <section class='bg-w px2 pm60  o-h rel f jcc aic hero__tall' data-module='pageHero'></section>
+    {% for block in section.blocks %}
+        {% assign collectionBlock = block.settings %}
+        <div class='bg-w rel'>
+            <div class='fill-x container--xl mha px2 ac'>
+                {%- assign collection = collections[collectionBlock.collection] -%}
+                <div class='f jcb fw collection__grid'>
+                    {% for product in collection.products limit: 24 %}
+                        {% include 'collection-item' %}
+                    {% endfor %}
+                    <div class='collection__item mb15 rel'></div>
+                </div>
+            </div>
+        </div>
+    {% endfor %}
+</div>
+
+{% schema %}
+{
+    "name": "Shop Collections",
+    "max_blocks": 5,
+    "blocks": [
+        {
+            "type": "list",
+            "name": "Collection",
+            "settings": [
+                {
+                    "id": "collection",
+                    "type": "collection",
+                    "label": "Collection"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Shop Collections",
+            "category": "Shop"
+        }
+    ]
+}
+{% endschema %} 

@@ -1,0 +1,38 @@
+<section class="page__landing-hero bg-lb px2 pm100 pl100 ptl160 o-h rel hero hero__tall tallest" id="top" data-module="hero">
+  <div class="landing-hero__container">
+    <div class='abs fill-x fill-y fill hero__image_background' style="background-image: url({{ section.settings.image | img_url: '1800x' }})"></div>
+    <div class='container--xl mha rel fill-y f aic z2 pv2'>
+      <div class="landing-hero__content container--m">
+        <h1 class="mt0 serif">{{ section.settings.heading }}</h1>
+        <p class="container--ms">{{ section.settings.description }}</p>
+      </div>      
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      }
+    ]
+  }
+{% endschema %}

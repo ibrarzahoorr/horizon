@@ -1,0 +1,48 @@
+{% for block in section.blocks %}
+    {% assign collectionBlock = block.settings %}
+    <div class='bg-w rel'>
+      <div class='fill-x container--xl mha pt2 pb2 ac'>
+        {% if collectionBlock.title != blank %}
+        <h2 class='caps outline line-header'>
+          <span class='rel z2 ph05 inline-block'>{{ collectionBlock.title | escape }}</span>
+        </h2>
+        {% endif %}
+  
+        {%- assign collection = collections[collectionBlock.collection] -%}
+        <div class='collection__grid-clean'>
+          {% for product in collection.products limit: 24 %}
+            {% include 'collection-item-update' %}
+          {% endfor %}
+          <div class='collection__item mb15 rel'></div>
+        </div>
+      </div>
+    </div>
+  {% endfor %}
+  
+  {% schema %}
+    {
+      "name": "Shop Collections Update",
+      "max_blocks": 5,
+      "blocks": [{
+        "type": "list",
+        "name": "Collection",
+        "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Bundle"
+        },
+        {
+          "id": "collection",
+          "type": "collection",
+          "label": "Collection"
+        }
+        ]
+      }],
+      "presets": [{
+        "name": "Shop Collections Update",
+        "category": "Shop"
+      }]
+    }
+  {% endschema %}

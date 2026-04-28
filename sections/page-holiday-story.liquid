@@ -1,0 +1,49 @@
+<div class="page-giftguide__story bg-lb rel">
+  {% include 'page-giftguide-story' with 
+    heading: section.settings.heading,
+    description: section.settings.description,
+    image: section.settings.image,
+    button_cta: section.settings.button_cta,
+    button_link: section.settings.button_link
+  %}
+</div>
+
+{% schema %}
+  {
+    "name": "Story",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Our Story"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description",
+        "default": "Building a female-forward future. For people who believe in the power of their choices."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "button_cta",
+        "label": "Button CTA",
+        "default": "Learn More"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button Link"
+      }
+    ]
+  }
+{% endschema %}

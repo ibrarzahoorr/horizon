@@ -1,0 +1,505 @@
+
+<div class='product__hero_bg bg-p rel js-product-hero' data-id="{{ product.selected_or_first_available_variant.id }}">
+  <div class='container--xl mha' data-section-id="{{ section.id }}" data-module="product"
+    data-enable-history-state="true">
+  <section class="srm-section">
+  <div class="srm-layout">
+    <div class="srm-media-col">
+      <div id="srm-media">
+        <div class="srm-box">
+          {% render 'ama-v2-product-media-slider' %}
+        </div>
+
+
+        <div style="padding: 10px 10px;border:1px solid gray;background:#fcfcfc;border-radius:10px;margin:20px 0;font-size: 19px;text-align: center;">I've never been more confident and comfortable in my own skin.</div>
+        <div class="lp1_sec_23" id="testimonials">
+            <div class="lp1_sec_23i">
+            </div>
+          </div>
+
+          <style>
+            .lp1_sec_23i {
+              width: 100%;    max-width: 600px;
+              height: 170px;
+              top: 0;
+              left: 0;
+              background-repeat: repeat-x;
+              background-size: auto 100%;
+              animation: slideCarousel 39s linear infinite;
+              background-image: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/acne-before-after-slider.png?v=1759167104);
+          }
+          @keyframes slideCarousel {
+                  0% {
+                    background-position: 0;
+                  }
+                  100% {
+                    background-position: -1200px;
+                  }
+                }
+            @media only screen and (max-width: 768px) {
+                  
+                  .lp1_sec_23i { width: 100%; height: 130px; }
+                  .lp1_sec_23i { animation: slideCarousel 30s linear infinite;  } 
+                }
+          </style>
+
+      </div>
+    </div>
+
+    <div class="srm-content-col">
+      <div id="srm-content">
+        <div class="srm-box">
+          <div class='product__description __desktop px2'>
+        <div> 
+          <div class="review_csk5" style="font-size:14px;"><img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/67be26b94b3eba7d9bbac13b_starshalf.svg?v=1768870464" style="width:75px;"> Rated 4.5 (3800+ Verified Reviews)</div>
+           
+        </div>
+        <h2 class='serif mx0 pv0 product__title  '>
+          Clear Skin Kit: Acne Essentials 
+        </h2>
+        <div class="  rte" style="margin:15px 0;" > 
+          <span style=" font-size: 13px; ">Your 3-Step Hormonal Acne Solution That Works in Just 3 Days</span>
+          </h2>
+            
+          <ul>
+            <li style=" font-size: 16px; "><strong>90 Day Trial: </strong> Less than $.80 / day</li>
+            <li style=" font-size: 16px; "><strong>Key Benefits: </strong> Cleanses, fights hormonal acne, hydrates skin</li>
+            <li style=" font-size: 16px; "><strong>Results in 90 days,</strong>  or your money back! No Questions Asked!</li>
+          </ul>
+          <br> 
+        </div>
+
+
+          <div class="sell-boxes">
+            {% render 'ama-csk-plan-picker' %}
+          </div>
+
+
+            <div class="bm-stocknote-v31">
+  <div class="bm-stocknote-v31__inner">
+    <div class="bm-stocknote-v31__head">
+      <div class="bm-stocknote-v31__icon">!</div>
+      <h3 class="bm-stocknote-v31__title">Low stock notice</h3>
+    </div>
+
+    <div class="bm-stocknote-v31__body">
+      <p>
+        <strong>Popular bundles can sell through quickly.</strong>
+        If this is on your list, it’s a good time to check out before it’s gone.
+        <br>
+        <strong>Tip:</strong> Subscribe so you don’t run low.
+      </p>
+    </div>
+  </div>
+</div>
+
+<style>
+  .bm-stocknote-v31,
+  .bm-stocknote-v31 * {
+    box-sizing: border-box;
+  }
+
+  .bm-stocknote-v31 {
+    --bm-stock-bg: #ffffff;
+    --bm-stock-text: #2f241f;
+    --bm-stock-muted: #6f645e;
+    --bm-stock-border: #eadbd1;
+    --bm-stock-accent: #de7c64;
+    --bm-stock-accent-soft: #fae5de;
+
+    width: 100%;
+    margin: 16px 0;
+  }
+
+  .bm-stocknote-v31__inner {
+    background: var(--bm-stock-bg);
+    border: 1px solid var(--bm-stock-border);
+    border-radius: 18px;
+    padding: 16px 16px 15px;
+  }
+
+  .bm-stocknote-v31__head {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+
+  .bm-stocknote-v31__icon {
+    width: 18px;
+    height: 18px;
+    border-radius: 999px;
+    background: var(--bm-stock-accent-soft);
+    color: var(--bm-stock-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 0 0 18px;
+    font-size: 14px;
+    font-weight: 800;
+    line-height: 1;
+}
+
+  .bm-stocknote-v31__title {
+    margin: 0;
+    color: var(--bm-stock-text);
+    font-size: 15px;
+    line-height: 1.15;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    font-weight: 700;
+  }
+
+  .bm-stocknote-v31__body {
+    color: var(--bm-stock-muted);
+    font-size: 14px;
+    line-height: 1.55;
+  }
+
+  .bm-stocknote-v31__body p {
+    margin: 0;font-size: 14px;
+  }
+
+  .bm-stocknote-v31__body strong {
+    color: var(--bm-stock-text);
+    font-weight: 700;
+  }
+
+  @media screen and (min-width: 750px) {
+        .bm-stocknote-v31__inner {
+        padding: 8px 8px 7px;
+        border-radius: 10px;
+    }
+
+    .bm-stocknote-v31__title {
+      font-size: 16px;
+    }
+
+    .bm-stocknote-v31__body {
+      font-size: 14px;
+    }
+  }
+</style>
+
+                
+
+        <div class="srm-accor">
+  <button class="accordionc" type="button">What's inside the kit?</button>
+  <div class="panel">
+    <p>Meet our hormonal acne fighting trio, bundled as a 3 step routine for a complete 90 day routine of our clean, results driven skin care routine.</p>
+    <p>1x Meltdown Acne Oil Treatment <br> 1x Meltdown Gel Cream with Ceramides <br> 1x Meltdown Daily Balancing Gel Cleanser</p>
+  </div>
+
+  <button class="accordionc" type="button">How to use?</button>
+  <div class="panel">
+    <p style="margin:10px 0;"><strong>3-Step Skincare Routine for Clear Skin</strong><br>
+      A must-have trio for achieving clear, acne-free skin, the Clear Skin Kit provides a comprehensive 3-step regimen to deeply cleanse (even the toughest dirt like makeup), effectively treat acne, and thoroughly hydrate the skin.
+    </p>
+    <ul>
+      <li style="font-size: 15px; background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Cleanser_with_Meltdown_Gel_Cleanser_200x.png) 0 0 no-repeat; background-size: 90px; padding: 0 10px 0 100px; margin: 10px 0; min-height: 90px; display: flex; flex-direction: column; justify-content: center;">
+        <strong>Step 1:</strong> Deep clean with Meltdown Gel Cleanser (6oz) Formulated with green tea leaf extract and salicylic acid to gently exfoliate, deeply clean, and smooth the skin.
+      </li>
+      <li style="font-size: 15px; background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/gel_cream_blume112_200x.png?v=1756948642) 0 0 no-repeat; background-size: 90px; padding: 0 10px 0 100px; margin: 10px 0; min-height: 90px; display: flex; flex-direction: column; justify-content: center;">
+        <strong>Step 2:</strong> Intensely hydrate with Meltdown Gel Cream (1.7oz) Infused with ceramides and pentavitin to provide 72 hours of hydration and skin barrier protection.
+      </li>
+      <li style="font-size: 15px; background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Treat_with_Meltdown_Oil_200x.png) 0 0 no-repeat; background-size: 90px; padding: 0 10px 0 100px; margin: 10px 0; min-height: 90px; display: flex; flex-direction: column; justify-content: center;">
+        <strong>Step 3:</strong> Treat acne with Meltdown Acne Oil (1/2oz) Crafted with blue tansy and tamanu oil to calm, clear, prevent, and soothe acne.
+      </li>
+    </ul>
+  </div>
+
+  <button class="accordionc" type="button">Consumer Results</button>
+  <div class="panel">
+    <h3 style="font-size: 20px; font-weight: 600; margin: 20px 0 0;">"Most customers get results in just a few weeks"</h3>
+    <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/c3f11a15-9461-4cf6-8507-74f78ad5bb0b?width=1800" alt="Consumer results image 1">
+    <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/10ea4be0-9f33-4042-8760-d84edc4e3860?width=1800" alt="Consumer results image 2">
+    <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/dec38ba8-8e6e-4acb-b31b-d580bd0d0925?width=1800" alt="Consumer results image 3">
+    <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/29612757-cfca-4cd1-a110-3fa93f186d3d?width=1800" alt="Consumer results image 4">
+    <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/0b3a10fd-30fb-41c5-9854-a99737f3eacd?width=1800" alt="Consumer results image 5">
+  </div>
+
+  <button class="accordionc" type="button">Why Clear Skin Kit?</button>
+  <div class="panel">
+    <p><strong>Clear Skin Without the Harsh Side Effects</strong><br>The only routine on the market that is a clean and natural way to fight your hormonal acne in 3 easy steps.</p>
+    <p><strong>A Simple Routine You’ll Actually Stick To</strong><br>Made with ceramides to protect and build your skin's natural barrier.</p>
+    <p><strong>Supports Your Skin’s Natural Barrier</strong><br>A simple 3 step regime that takes less than 5 minutes a day.</p>
+  </div>
+</div>
+
+<script>
+  var acc = document.getElementsByClassName("accordionc");
+  var i;
+
+  for (i = 0; i < acc.length; i++) {
+    acc[i].addEventListener("click", function() {
+      this.classList.toggle("active");
+      var panel = this.nextElementSibling;
+
+      if (panel.style.maxHeight) {
+        panel.style.maxHeight = null;
+      } else {
+        panel.style.maxHeight = panel.scrollHeight + "px";
+      }
+    });
+  }
+</script>
+
+<style>
+  .lazyloadxx {
+    width: 100%;
+    display: block;
+  }
+
+  .accordionc {
+    background: transparent;
+    cursor: pointer;
+    padding: 10px 18px 18px;
+    width: 100%;
+    border: none;
+    text-align: left;
+    outline: none;
+    font-size: 16px;
+    transition: 0.4s;
+    border-bottom: 1px solid #333;
+    font-weight: 600;
+    letter-spacing: 0;
+  }
+
+  .active,
+  .accordionc:hover {
+    color: rgb(49, 49, 49);
+  }
+
+  .accordionc:after {
+    content: '\002B';
+    color: #000;
+    font-weight: bold;
+    float: right;
+    margin-left: 5px;
+  }
+
+  .active:after {
+    content: "\2212";
+  }
+
+  .panel {
+    padding: 0 18px;
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.2s ease-out;
+    margin-top: 10px;
+    text-align: left;
+  }
+  .panel p {    font-size: 15px; }
+</style>
+          
+
+
+  
+<div class="bm-docquote-m14">
+  <div class="bm-docquote-m14__media">
+    <img
+      src="https://www.blume.com/cdn/shop/files/Image_9_400x500_crop_center.png?v=1683281722"
+      alt="Dr. Leela Athalye"  
+    >
+  </div>
+
+  <div class="bm-docquote-m14__content"> 
+    <blockquote class="bm-docquote-m14__quote">
+      “Blume products focus on hydration to protect the skin barrier, yet also deliver gentle active ingredients to benefit the skin. Blume’s emphasis on moisturizing ingredients and gentle actives means you get the most out of each product.”
+    </blockquote>
+
+    <div class="bm-docquote-m14__author">Dr. Leela Athalye</div>
+    <div class="bm-docquote-m14__role">Board Certified Dermatologist</div>
+  </div>
+</div>
+
+<style>
+  .bm-docquote-m14,
+  .bm-docquote-m14 * {
+    box-sizing: border-box;
+  }
+
+  .bm-docquote-m14 {
+    --bm-doc-bg: #fffaf6;
+    --bm-doc-text: #061c3d;
+    --bm-doc-muted: #7b6d66;
+    --bm-doc-border: #e8d9cf;
+    --bm-doc-accent: #061c3d;
+    margin: 0 auto 40px;
+    display: grid;
+    grid-template-columns: minmax(0, 190px) minmax(0, 1fr);
+    gap: 7px;
+    align-items: center;
+    padding: 0px;
+    border-radius: 8px;
+    background: var(--bm-doc-bg);
+    box-shadow: var(--bm-doc-shadow);
+}
+
+  .bm-docquote-m14__media {
+    width: 100%;
+  }
+
+  .bm-docquote-m14__media img {
+    width: 100%;
+    display: block;
+    object-fit: cover;
+}
+
+  .bm-docquote-m14__content {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .bm-docquote-m14__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    min-height: 30px;
+    padding: 8px 12px;
+    margin-bottom: 14px;
+    border-radius: 999px;
+    background: #f7e0d8;
+    color: var(--bm-doc-accent);
+    font-size: 12px;
+    line-height: 1;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    font-weight: 700;
+}
+
+  .bm-docquote-m14__quote {
+    margin: 0 0 18px;
+    font-size: 14px;
+    line-height: 1.25;
+    letter-spacing: -0.02em;
+    max-width: 36ch; text-align:left
+}
+
+  .bm-docquote-m14__author {
+    color: var(--bm-doc-text);
+    font-size: 14px;
+    line-height: 1.2;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .bm-docquote-m14__role {
+    color: var(--bm-doc-muted);
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  @media (max-width: 749px) {
+    .bm-docquote-m14 {
+      grid-template-columns: 1fr;
+      gap: 10px;
+      padding: 6px;
+      border-radius: 22px;
+    }
+
+    .bm-docquote-m14__quote {
+      font-size: 15px;
+      max-width: none;
+    }
+
+    .bm-docquote-m14__media img {
+      border-radius: 8px;
+    }
+  }
+</style>
+
+
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+   
+  .srm-section {
+    padding: 28px 10px;
+  }
+
+  .srm-layout {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: stretch;
+  }
+
+  .srm-media-col,
+  .srm-content-col {
+    min-width: 0;
+  }
+
+  #srm-media {
+    position: sticky;
+    top: 24px;
+  }
+
+  .srm-box {  
+    height: 100%;
+  }
+ 
+  #srm-content .srm-box p + p {
+    margin-top: 16px;
+  }
+
+  @media (max-width: 768px) {
+    .srm-layout {
+      grid-template-columns: 1fr;
+    }
+     .srm-section {
+        padding: 5px;
+      }
+    #srm-media {
+      position: static;
+      top: auto;
+    }
+  }
+</style>
+{% comment %}
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const media = document.getElementById("srm-media");
+    const content = document.getElementById("srm-content");
+
+    if (!media || !content) return;
+
+    function syncMinHeight() {
+      media.style.minHeight = content.offsetHeight + "px";
+    }
+
+    syncMinHeight();
+    window.addEventListener("resize", syncMinHeight);
+  });
+</script>
+{% endcomment %}
+
+</div>
+</div>
+
+
+ 
+    {% comment %}
+
+    Commenting out social sharing for now
+
+    {% if section.settings.show_share_buttons %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
+
+    {% endcomment %}
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    {% endunless %}
+  </div>
+</div>

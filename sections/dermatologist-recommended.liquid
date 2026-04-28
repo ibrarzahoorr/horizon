@@ -1,0 +1,142 @@
+<style>
+  .recommended-wrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 128px;
+    padding-bottom: 144px;
+  }
+
+  .recommended-text {
+    flex-basis: 50%;
+  }
+
+  .recommended-text-wrapper{
+    max-width: 473px !important;
+    width:100%;
+    font-size: 20px;
+  }
+
+  h4.name, p.role, .recommended-text-body {
+    font-size: 20px;
+  }
+
+  .value-props{
+    font-size: 13px;
+    line-height: 1.84em;
+    letter-spacing: 2px;
+    font-weight: 900;
+    text-transform: uppercase;
+    margin-top: 20px;
+  }
+
+
+  .recommended-image {
+    flex-basis: 50%;
+    text-align: center;
+
+  }
+
+  .recommended-text-body{
+    margin: 20px 0;
+  }
+
+
+
+  @media only screen and (max-width: 767px) {
+    .recommended-wrapper {
+      flex-direction: column;
+      padding: 2em;
+      gap: 2em;
+    }
+    .recommended-text-wrapper{
+        text-align: start;
+        font-size: 18px;
+    }
+    
+    h4.name, p.role, .recommended-text-body {
+      font-size: 18px;
+    }
+
+    .recommended-text,
+    .recommended-image {
+      flex-basis: 100%;
+      text-align: center;
+    }
+
+    .recommended-image {
+        max-width: 100%;
+    }
+    .recommended-image img{
+        max-width: 100%;
+    }
+
+    .value-props{
+      font-size: 11px;
+      line-height: 1.63em;
+      margin-top: 15px;
+    }
+  }
+</style>
+
+<div class="recommended-wrapper container--xl mha px2 phm4">
+  <div class="recommended-text">
+    <div class="recommended-text-wrapper">
+        <h2 class="mx0 px0 serif">{{ section.settings.title }}</h2>
+        <p class="recommended-text-body">{{ section.settings.paragraph }}</p>
+        <h4 class="mx0 caps bold name">{{ section.settings.name }}</h4>
+        <p class="mx0 px0 role">{{ section.settings.role }}</p>
+        {% if section.settings.value_props != blank %}
+        <p class="mx0 value-props">{{ section.settings.value_props }}</p>
+        {% endif %}
+    </div>
+  </div>
+  <div class="recommended-image">
+    <img src="{{ section.settings.image | img_url: '500x500' }}" alt="">
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Dermatologist Recommended",
+    "settings": [
+      {
+        "type": "text",
+        "label": "Title",
+        "id": "title"
+      },
+      {
+        "type": "textarea",
+        "label": "Paragraph",
+        "id": "paragraph"
+      },
+      {
+        "type": "text",
+        "label": "Name",
+        "id": "name"
+      },
+      {
+        "type": "text",
+        "label": "Role",
+        "id": "role"
+      }, 
+      {
+        "type": "text",
+        "id": "value_props",
+        "label": "Value Props"
+      },
+      {
+        "type": "image_picker",
+        "label": "Image",
+        "id": "image"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Dermatologist Recommended",
+        "category": "sections"
+      }
+    ]
+  }
+{% endschema %}

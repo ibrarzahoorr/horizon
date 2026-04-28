@@ -1,0 +1,41 @@
+<script>
+  if ((typeof Shopify) === 'undefined') { window.Shopify = {}; }
+  if ((typeof Shopify.getCart) === 'undefined') {
+    Shopify.getCart = function (callback, cart) {
+      if (!cart) {
+        return jQuery.getJSON('/cart.js', function (cart, textStatus, xhr) {
+          if ((typeof callback) === 'function') {
+            callback(cart, textStatus, xhr);
+          } else if (typeof Shopify.onCartUpdate === 'function') {
+            Shopify.onCartUpdate(cart);
+          }
+        });
+      } else {
+        if ((typeof callback) === 'function') {
+          callback(cart);
+        } else if (typeof Shopify.onCartUpdate === 'function') {
+          Shopify.onCartUpdate(cart);
+        }
+      }
+    };
+  }
+
+  const {fetch: oldFetch} = window
+  window.fetch = async (...args) => {
+    try {
+      const _url = args[0]
+      if (_url?.includes("/cart/change") || (_url?.includes("/cart/update") && !_url?.includes("sca_attr_cart"))) {
+          setTimeout(async () => {
+            await Shopify.getCart(() => {
+              document.querySelector(".js-cart-drawer-toggle").click(); 
+              document.querySelector(".js-cart-drawer-toggle").click();
+            });
+          }, 500);
+      }
+
+      return await oldFetch(...args)
+    } catch (e) {
+      return await oldFetch(...args)
+    }
+  }
+</script>

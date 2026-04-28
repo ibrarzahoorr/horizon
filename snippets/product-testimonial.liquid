@@ -1,0 +1,83 @@
+{% if product.metafields.blume.customer_name %}
+  <section class='product__testimonials al bg-lb rel z3' data-module='productTestimonials'>
+    <div class='abs left fill-x fill-y clb bg-p talk__bar'>
+      <svg class='fill-x abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+    </div>
+    <div class='container--xl mha pv2 pm60 px15 rel z4 product__testimonials-inner'>
+      <div class='f jcb aie product__testimonials-header rel mb05'>
+        <h2 class="caps outline pt05 pb0 mt0 line-header mb0">
+          <span class="rel z2 inline-block">Before & After</span>
+        </h2>
+        <div>
+          <div class='real__controls ar mr1 right f jce aic'>
+            <div class='real__controls-left cw inline-block f jcc bg-w co aic rotate js-before-left'>
+              <svg width="9px" height="15px" viewBox="0 0 9 15">
+                <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                    transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                    points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                </g>
+              </svg>
+            </div>
+            <div class='real__controls-right ml1 cw inline-block f bg-w  co jcc aic js-before-right'>
+              <svg width="9px" height="15px" viewBox="0 0 9 15">
+                <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                    transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                    points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                </g>
+              </svg>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class='product__testimonials-wrapper x jcb ais'>
+        <div class='product__testimonials-ba x f jcb ais js-testimonials-images'>
+          {% for slideBlocks in product.metafields.blume.customer_name limit: 2 %}
+            <div class='f jcb x ais mr1 pr1'>
+              <div class='x product__testimonials-single'>
+                <div class='product__before-slideshow no-drag x js-before-slideshow o-h'>
+                  {% for slides in product.metafields.blume.customer_name %}
+                    <div class='x product__testimonials-single-slide' style="background-image: url({{product.metafields.blume.customer_before_image[forloop.index0]}})">
+                      <img class="lazyload" data-src="{{product.metafields.blume.customer_before_image[forloop.index0]}}" />
+                    </div>
+                  {% endfor %}
+                </div>
+                <h5 class='caps small mv05 px0'>Before</h5>
+              </div>
+              <div class='x product__testimonials-single'>
+                <div class='product__before-slideshow no-drag x js-after-slideshow o-h'>
+                  {% for slides in product.metafields.blume.customer_name %}
+                    <div class='x product__testimonials-single-slide' style='background-image: url({{product.metafields.blume.customer_after_image[forloop.index0]}})'>
+                      <img class="lazyload" data-src="{{product.metafields.blume.customer_after_image[forloop.index0]}}" />
+                    </div>
+                  {% endfor %}
+                </div>
+                <h5 class='caps small mv05 px0'>After</h5>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <div class='product__testimonials-bios rel'>
+          <div class='js-testimonials-text x'>
+            {% for slides in product.metafields.blume.customer_name %}
+              <div class='product__testimonials-bios-single x'>
+                <div>
+                  <p class='s18'>{{product.metafields.blume.customer_bio[forloop.index0]}}</p>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+          <div class='product__testimonials-name x js-name-slideshow'>
+            {% for slides in product.metafields.blume.customer_name %}
+              <div class='x'>
+                <h5 class='caps s16 mb0 pb0'>{{product.metafields.blume.customer_name[forloop.index0]}}</h5>
+                <span class='small'>{{product.metafields.blume.customer_product[forloop.index0]}}</span>
+              </div>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

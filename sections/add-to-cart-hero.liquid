@@ -1,0 +1,352 @@
+{% comment %}
+* Duplicated hero.liquid and adjusted the layout and styling according to the Blume Babies LP Figma
+* Tried including/rendering the add-to-cart-form snippet, however was injecting more than needed
+* Referenced the <form> from the snippet. ATC functionality is working, however not with the cart drawer
+{% endcomment %}
+{%- liquid
+  assign press_logos = section.blocks | map: 'settings'
+  assign set_bg_mobile = section.settings.set_background_color_mobile
+  assign bg_mobile = section.settings.background_color_mobile
+  assign product = section.settings.product
+  assign current_variant = product.selected_or_first_available_variant
+-%}
+
+
+<section class="hero__home atc__hero {{ section.id }}" data-module="atcHero">
+  {% if product != blank %}
+<script class='js-product-json' type='text/template'>
+  {
+  "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+    "variants": [
+    {% for variant in product.variants %}
+      {
+      "id": {{ variant.id | json }},
+      "title": {{ variant.title | json }},
+      "price": {{ variant.price | json }},
+      "available": {{ variant.available | json }},
+      "sku": {{ variant.sku | json }},
+      "option1": {{ variant.option1 | json }},
+      "option2": {{ variant.option2 | json }},
+      "option3": {{ variant.option3 | json }},
+      "quantity": 1,
+      "interval": "month",
+      "intervalFreq": 1,
+      "subscription": false,
+      "discount": 0 
+            }{% unless forloop.last %},{% endunless %}
+    {% endfor %}
+    ]
+  }
+</script>
+{% endif %}
+  <div class="hero__module f px2 phm4 aic hero_bg">
+    <div class="container--xl mha fill-x hero__text_desktop">
+      <div class="container--ms">
+        {% if section.settings.heading != blank %}
+          <h1 class="mx0 px0 serif hero-heading">{{ section.settings.heading }}</h1>
+        {% endif %}
+        {% if section.settings.subheading != blank %}
+          <h2 class="hero-subheading">{{ section.settings.subheading }}</h2>
+        {% endif %}
+
+        <div class="hero__btn">
+          {% if product != blank %}
+            {% if product.handle != 'jade-roller' %}
+              <div class='collection__item_atc fill-x z5 {% if productTags contains 'no-add' %}none{% endif %}'>
+                <div
+                  class='js-hero-add-to-cart btn btn__blue bold mt0'
+                  {% if subscription_variant %}
+                  data-subscription-variant="{{ subscription_variant }}"
+                  {% endif %}
+                  {% if subscription_discount %}
+                  data-subscription-discount="{{ subscription_discount }}"
+                  {% endif %}>
+                  Add to Cart
+                </div>
+              </div>
+            {% endif %}
+          {% elsif section.settings.button_url != blank %}
+            <a href="{{ section.settings.button_url }}" class="btn btn__blue bold">
+              {{- section.settings.button_text -}}
+            </a>
+          {% endif %}
+        </div>
+
+        {% if section.settings.subcontent != blank %}
+          <p class="hero__social hero__label">{{ section.settings.subcontent }}</p>
+        {% endif %}
+        <div class="hero__logos">
+          {%- for logo in press_logos -%}
+            <div>{{ logo.logo | image_url: width: 400 | image_tag: height: 70 }}</div>
+          {%- endfor -%}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="hero__text_mobile {% if set_bg_mobile != false %}bg_mobile{% else %}bg-lp{% endif %}">
+    <div class="container--s">
+      {% if section.settings.product != blank and section.settings.product.available %}
+        <div class="hero__btn">
+          {% if product != blank %}
+            {% if product.handle != 'jade-roller' %}
+              <div class=''>
+                <a
+                  href=''
+                  class='js-hero-add-to-cart btn btn__blue bold mt0'
+                  {% if subscription_variant %}
+                  data-subscription-variant="{{ subscription_variant }}"
+                  {% endif %}
+                  {% if subscription_discount %}
+                  data-subscription-discount="{{ subscription_discount }}"
+                  {% endif %}>
+                  Add to Cart</a>
+              </div>
+            {% endif %}
+          {% elsif section.settings.button_url != blank %}
+            <a href="{{ section.settings.button_url }}" class="btn btn__blue bold">
+              {{- section.settings.button_text -}}
+            </a>
+          {% endif %}
+        </div>
+      {% elsif section.settings.button_url != blank %}
+        <a href="{{ section.settings.button_url }}" class="btn btn__blue bold">{{ section.settings.button_text }}</a>
+      {% endif %}
+
+      {% if section.settings.heading != blank %}
+        <h1 class="mx0 mt1 px0 serif hero-heading">{{ section.settings.heading }}</h1>
+      {% endif %}
+      {% if section.settings.subheading != blank %}
+        <p class="hero-subheading">{{ section.settings.subheading }}</p>
+      {% endif %}
+      {% if section.settings.subcontent != blank %}
+        <p class="hero__social hero__label">{{ section.settings.subcontent }}</p>
+      {% endif %}
+      <div class="hero__logos">
+        {%- for logo in press_logos -%}
+          <div>{{ logo.logo | image_url: width: 400 | image_tag: height: 70 }}</div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+</section>
+
+{% style %}
+  .w-full {
+    width: 100%;
+  }
+
+  .hero_bg {
+    background-image: url('{{ section.settings.image | img_url: '2000x' }}');
+  }
+
+  .js-hero-add-to-cart.btn{
+    line-height: normal;
+  }
+
+  .hero-heading p {
+    font-size: 60px;
+    font-style: normal;
+    font-weight: 300;
+    line-height: 1.1em;
+    letter-spacing: -1px;
+    margin: 0;
+  }
+
+  .hero-heading strong {
+    font-family: 'New Kansas';
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  .atc__hero .hero__module .hero__text_desktop .container--ms h2{
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: -0.5px;
+    margin: 20px 0 24px;
+    max-width: 434px;
+  }
+
+  .hero__home .hero__text_desktop .hero__social.hero__label {
+    margin: 24px 0 0 !important;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: 1.5em;
+    letter-spacing: 0.5px;
+  }
+
+  .hero__home .hero__social.hero__label {
+    text-transform: uppercase;
+  }
+
+  .hero__home.{{ section.id }} .hero__text_mobile .hero__social.hero__label {
+    color: #fff;
+    background-color: #001E42;
+    border-radius: 40px;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 600;
+    letter-spacing: 0.5px;
+    margin: 0 auto;
+    min-height: 26px;
+    padding: 8px 10px;
+    line-height: 1em;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  {%- if set_bg_mobile == true -%}
+    .bg_mobile {
+      background-color: {{ bg_mobile }};
+    }
+  {%- endif -%}
+  
+  .hero__home.{{ section.id }} .hero__text_mobile{
+    padding-top: 24px;
+    padding-left: 24px;
+    padding-right: 24px;
+    padding-bottom: 58px;
+  }
+
+  .hero__home.{{ section.id }} .hero__text_mobile .hero-heading{
+    max-width: 290px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__home.{{ section.id }} .hero__text_mobile .hero-subheading{
+    max-width: 325px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .hero__home.{{ section.id }} .hero__text_mobile .hero__btn{
+    max-width: 280px;
+    margin: 0 auto;
+  }
+
+  .hero__home.{{ section.id }} .hero__text_mobile .hero__btn .js-add-to-cart.btn{
+    line-height: normal;
+  }
+
+  @media screen and (max-width: 1199px) {
+
+    .hero-heading p {
+      font-size: 42px;
+    }
+  }
+
+  @media screen and (max-width: 991px) {
+    .hero-heading p {
+      font-size: 40px;
+    }
+
+    .hero__btn form .btn {
+      min-width: 240px;
+    }
+  }
+
+  @media screen and (max-width: 768px) {
+    .hero_bg {
+      background-image: url('{{ section.settings.image_mobile | img_url: '2000x' }}');
+    }
+
+    .hero-heading p {
+      font-size: 34px;
+      line-height: 1.2em;
+    }
+  }
+
+  @media screen and (max-width: 576px) {
+
+    .hero-heading p {
+      font-size: 28px;
+      line-height: 1.2em;
+    }
+  }
+
+  @media screen and (max-width: 37.5em){
+
+    .hero__home.atc__hero.{{ section.id }} .hero__module{
+      background-position: 50% 50% !important;
+    }
+  }
+{% endstyle %}
+
+{% schema %}
+  {
+    "name": "Hero Add-to-Cart",
+    "settings": [
+      {
+        "type": "richtext",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading"
+      },
+      {
+        "type": "text",
+        "id": "subcontent",
+        "label": "Subcontent"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      }, {
+        "type": "image_picker",
+        "id": "image_mobile",
+        "label": "Mobile Background Image"
+      }, {
+        "type": "checkbox",
+        "id": "set_background_color_mobile",
+        "label": "Set Background Color",
+        "default": false
+      }, {
+        "type": "color",
+        "id": "background_color_mobile",
+        "label": "Content Background Color",
+        "default": "#FBECE3"
+      }, {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop Bundles"
+      }, {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button Link"
+      }, {
+        "type": "product",
+        "id": "product",
+        "label": "Product"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "press",
+        "name": "Press Logo",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "logo",
+            "label": "Logo",
+            "info": "Please upload a transparent PNG"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero Add-to-Cart",
+        "category": "Hero"
+      }
+    ]
+  }
+{% endschema %}

@@ -1,0 +1,39 @@
+{% assign my_image = product.metafields.sf_extended_informat.image %}
+{% assign p_title = product.metafields.sf_extended_informat.title %}
+{% assign benefits = product.metafields.sf_extended_informat.benefits %}
+
+<div className='rel' data-module='animateIn'>
+  {% if my_image %}
+  <section class='bg-p pv1 pm60 pl100 o-h rel'>
+    <div class='container--xl mha pt2 ph2 rel z3 pb1 phm4'>
+      <div class='f fw jcb aic js-animate'>
+        <div class='rel z5 product__features ti__image'>
+          {% if my_image %}
+          {%
+            include 'image' with
+            src: my_image,
+            size: '800x',
+            alt: '',
+            className: 'x'
+          %}
+          {% endif %}
+        </div>
+        <div class='rel z2 product__features pt2 ti__text'>
+          {% if p_title %}
+          <h3 class='mx0 px0 serif'>{{ p_title }}</h3>
+          <div class='product__listicle'>
+            {% if benefits %}
+            {{ benefits }}
+            {% endif %}
+          </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class='product__features-shape abs z2 top left co js-shape-two' data-module='shapeTwo'>
+      {% include 'shape-two' %}
+    </div>
+  </section>
+
+  {% endif %}
+</div>

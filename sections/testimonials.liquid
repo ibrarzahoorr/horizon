@@ -1,0 +1,32 @@
+<section class='testimonial'>
+  <h4>Testimonial</h4>
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      <h3>{{block.settings.name}}</h3>
+      <p>{{block.settings.testimonial}}</p>
+    {% endfor %}
+  {% endif %}
+</section>
+
+{% schema %}
+  {
+    "name": "Testimonials",
+    "max_blocks": 9,
+    "blocks": [{
+      "name": "Testimonial",
+      "type": "text",
+      "settings": [
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        },
+        {
+          "type": "richtext",
+          "id": "testimonial",
+          "label": "Testimonial"
+        }
+      ]
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,20 @@
+<div class="product__card-featured" data-module="collectionItem">
+  {%- assign current_variant = product.selected_or_first_available_variant -%}
+  <script class='js-product-json' type='text/template'>
+    {
+      "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+      "product": {{ product | json }}
+    }
+  </script>
+
+  <h3 class="heading caps outline ac line-header">{{ heading }}</h3>
+  <div class="product ac">
+    <img class="lazyload" data-src="{{ image | img_url: '840x' }}">
+    <h4 class="title serif mb0 mt0">{{ product.title }}</h4>
+    <p class="description">{{ description }}</p>
+    <p class="price bold mt0">{{ price }}</p>
+    <a href='' class='btn btn__blue bold js-add-to-cart fill-x'>
+      Add to Cart
+    </a>
+  </div>
+</div>

@@ -1,0 +1,71 @@
+<section class='why__organic bg-lp pv1 pm60 pl100 rel'>
+  <div class='o-h'>
+    <div class='container--xl mha px2 phm4 js-animate'>
+      <div class='f fw jcb aic why__organic_container'>
+        <div class='rel z2 ti__image'>
+          <img class='fill-x lazyload' data-src="{{ section.settings.image | img_url: '600x' }}" />
+        </div>
+        <div class='rel z2 why__organic_text ti__text'>
+          <h2 class='mx0 px0 serif'>{{ section.settings.title }}</h2>
+          <p>{{ section.settings.subTitle }}</p>
+          <div>
+          {% if section.blocks.size > 0 %}
+            <ul class='cross__list'>
+              {% for block in section.blocks %}
+                <li class='rel'>
+                  <svg class='abs left' width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Home---Landing" transform="translate(-843.000000, -3826.000000)"><g id="Chemical-Warfare" transform="translate(112.000000, 3457.000000)"><g id="Text" transform="translate(728.000000, 103.000000)"><g id="No-Chlorine" transform="translate(3.000000, 266.000000)"><g id="Icon/No-Chemicals"><g id="Icon/x"><circle id="Oval" fill="#162D4A" cx="12" cy="12" r="12"></circle><path d="M15.6,8.4 L8.4,15.6 L15.6,8.4 Z M8.4,8.4 L15.6,15.6 L8.4,8.4 Z" id="x-circle" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></g></g></g></g></svg>
+                  <h6 class='small bold caps'>{{ block.settings.title }}</h6>
+                </li>
+              {% endfor %}
+            </ul>
+          {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='why__organic_shape_left abs bottom left chp'>
+      {% include 'shape-two' %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "How Safe",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don't wage.."
+      },
+      {
+        "id": "subTitle",
+        "type": "text",
+        "label": "Sub Heading",
+        "default": "Our tampons.."
+      }
+    ],
+    "blocks": [{
+      "type": "list",
+      "name": "Bullets",
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Bullet Point"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "How Safe",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

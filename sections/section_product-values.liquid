@@ -1,0 +1,508 @@
+{% comment %}
+    * Flickity slider on mobile tweaks needed to match Blume Babies LP Figma
+    * Mobile styling from slider breaks with flickity, unable to adjust
+    * JS can be found in /src/js/components/pages/product-values-slideshow.js
+{% endcomment %}
+<section class="product-values" data-module="productValuesSlideshow" style="background-color: {{ section.settings.background_color }};">
+    <div class="container--xl mxa mt0 mb0">
+        {% if section.settings.heading != blank or section.settings.subheading != blank %}
+            <div class="section-heading ac">
+                {% if section.settings.heading != blank %}
+                    <h2 class="serif">{{ section.settings.heading }}</h2>
+                {% endif %}
+
+                {% if section.settings.subheading != blank %}
+                    <h4>{{ section.settings.subheading }}</h4>
+                {% endif %}
+            </div>
+        {% endif %}
+        <div class="product-values__grid">
+                {% for block in section.blocks %}
+                    {% case block.type %}
+                        {% when 'product_value'%}
+                            <div class="product-values__grid-item">
+                                {% if block.settings.before_after_image != blank or block.settings.product_image != blank %}
+                                    <div class="pv__grid-item-media">
+                                        <div class="ba-image">
+                                            {{ block.settings.before_after_image | image_url: width: 384 | image_tag }}
+                                        </div>
+                                        <div class="ba-product-image">
+                                            {{ block.settings.product_image | image_url: width: 384 | image_tag }}
+                                        </div>
+                                    </div>
+                                {% endif %}
+
+                                {% if block.settings.product_title != blank or block.settings.bullets != blank %}
+                                    <div class="pv__grid-item-content">
+                                        <h4 class="serif">{{ block.settings.product_title }}</h4>
+                                        <div class="rte">{{ block.settings.bullets }}</div>
+                                    </div>
+                                {% endif %}
+
+                                {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+                                    <div class="pv__grid-item-button">
+                                        <a href="{{ block.settings.button_url }}" class="btn btn__blue">{{ block.settings.button_text }}</a>
+                                    </div>
+                                {% endif %}
+                            </div>
+                    {% endcase %}
+                {% endfor %}
+            </div>
+            <div class="pv__carousel fill-x js-slideshow">
+                    {% for block in section.blocks %}
+                        {% case block.type %}
+                            {% when 'product_value'%}
+                                <div class="product-values__grid-item">
+                                    {% if block.settings.before_after_image != blank or block.settings.product_image != blank %}
+                                        <div class="pv__grid-item-media">
+                                            {{ block.settings.before_after_image | image_url: width: 384 | image_tag }}
+                                            {{ block.settings.product_image | image_url: width: 384 | image_tag }}
+                                        </div>
+                                    {% endif %}
+    
+                                    {% if block.settings.product_title != blank or block.settings.bullets != blank %}
+                                        <div class="pv__grid-item-content">
+                                            <h4 class="serif">{{ block.settings.product_title }}</h4>
+                                            <div class="rte">{{ block.settings.bullets }}</div>
+                                        </div>
+                                    {% endif %}
+                                   {% comment %} {% if block.settings.button_url != blank and block.settings.button_text != blank %}
+                                        <div class="pv__grid-item-button">
+                                            <a href="{{ block.settings.button_url }}" class="btn btn__blue">{{ block.settings.button_text }}</a>
+                                        </div>
+                                    {% endif %} {% endcomment %}
+                                </div>
+                        {% endcase %}
+                    {% endfor %}
+                </div>
+                {% if section.settings.mobile_button_url != blank and section.settings.mobile_button_text != blank %}
+                    <div class="section-cta">
+                        <a href="{{ section.settings.mobile_button_url }}" class="btn btn__blue">{{ section.settings.mobile_button_text }}</a>
+                    </div>
+                {% endif %}
+    </div>
+</section>
+{% style %}
+.product-values{
+    padding-top: 100px;
+    padding-bottom: 100px;
+}
+
+.product-values .section-cta{
+    display: none;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 32px;
+    padding-top: 32px;
+    max-width: 280px;
+    width: 100%;
+}
+
+.product-values .section-cta .btn{
+    text-align: center;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 600;
+    line-height: normal;
+}
+
+.product-values .section-heading{
+    margin-bottom: 40px;
+}
+
+.product-values .section-heading h2{
+    margin: 0 0;
+}
+
+.product-values .section-heading h2 p{
+    font-size: 45px;
+    line-height: 1.11em;
+    font-weight: 500;
+    margin: 0 0;
+}
+
+.product-values .section-heading h4{
+    font-size: 30px;
+    line-height: 1.33em;
+    margin-top: 12px;
+    margin-bottom: 0;
+    margin-left: 0;
+    margin-right: 0;
+}
+
+.product-values__grid{
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    gap: 33px;
+}
+
+.pv__carousel{
+    display: none;
+}
+
+.product-values__grid-item{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    max-width: 384px;
+    width: 100%;
+    height: 100%;
+}
+
+.pv__grid-item-media{
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    height: 100%;
+    width: 100%;
+    gap: 33px;
+}
+
+.pv__grid-item-media img{
+    display: block;
+    height: 100%;
+    width: 100%;
+}
+
+.pv__grid-item-content{
+    margin-top: 30px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.pv__grid-item-content h4{
+    margin: 0 0;
+}
+
+.pv__grid-item-content h4 p{
+    font-size: 32px;
+    font-weight: 600;
+    line-height: 1.2em;
+    text-align: center;
+    margin: 0 0;
+}
+
+.pv__grid-item-content h4 p strong{
+    font-family: 'New Kansas';
+      font-weight: 600;
+      font-style: normal;
+}
+
+.pv__grid-item-content .rte{
+    font-size: 16px;
+    line-height: 1.25em;
+    font-weight: 400;
+    letter-spacing: -0.123px;
+    margin: 12px 0 0;
+    max-width: 300px;
+    text-align: left;
+}
+
+.pv__grid-item-content .rte ul li{
+    position: relative;
+    padding-left: 20px;
+    font-size: 16px;
+    line-height: 1.25em;
+    font-weight: 400;
+    letter-spacing: -0.123px;
+}
+
+.pv__grid-item-content .rte ul li strong{
+    position: absolute;
+    left: -4px;
+}
+
+.pv__grid-item-button{
+    margin-top: 25px;
+}
+
+.pv__grid-item-button a.btn{
+        min-width: 240px;
+        max-height: 60px;
+        padding: 20px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 600;
+        line-height: normal;
+    }
+
+@media screen and (max-width: 1280px){
+
+    .product-values{
+        padding: 80px 0;
+    }
+
+    .product-values .section-heading h2 p{
+        font-size: 40px;
+        line-height: 1.3em;
+    }
+
+    .product-values .section-heading h4{
+        font-size: 20px;
+    }
+
+    .product-values__grid{
+        gap: 20px;
+    }
+
+    .product-values__grid-item{
+        max-width: 290px;
+    }
+
+    .pv__grid-item-media{
+        gap: 20px;
+    }
+
+    .pv__grid-item-content h4 p{
+        font-size: 26px;
+    }
+
+    .pv__grid-item-content .rte,
+    .pv__grid-item-content .rte ul li{
+        font-size: 15px;
+    }
+
+    .pv__grid-item-content .rte ul li{
+        padding-left: 15px;
+    }
+}
+
+@media screen and (max-width: 991px){
+
+    .product-values .section-heading h2 p{
+        font-size: 32px;
+    }
+
+    .product-values__grid{
+        gap: 15px;
+    }
+
+    .product-values__grid-item{
+        max-width: 245px;
+    }
+
+    .pv__grid-item-content{
+        margin-top: 20px;
+    }
+
+    .pv__grid-item-media{
+        gap: 20px;
+    }
+
+    .pv__grid-item-content h4 p{
+        font-size: 22px;
+    }
+}
+
+@media screen and (max-width: 767px){
+
+    .product-values .section-cta{
+        display: block;
+    }
+
+    .product-values .section-heading{
+        max-width: 324px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-values .section-heading h2{
+        max-width: 247px;
+        margin-left: auto;
+        margin-right: auto;
+    }
+
+    .product-values{
+        padding: 52px 0 68px;
+    }
+
+    .product-values .section-heading h2 p{
+        font-size: 26px;
+        line-height: 1.3em;
+    }
+
+    .product-values .section-heading h4{
+        font-size: 18px;
+        font-style: normal;
+        font-weight: 300;
+        line-height: 1.55em;
+        letter-spacing: -0.5px;
+    }
+
+    .product-values__grid{
+        display: none;
+    }
+
+    .pv__carousel{
+        display: block !important;
+        text-align: center;
+        height: 100%;
+    }
+
+    .pv__carousel .flickity-viewport {
+        height: 100% !important;
+        height: 593px !important;
+        /*min-height: 733px;*/
+      }
+
+    .product-values__grid-item{
+        max-width: 200px;
+        margin-right: 50px;
+        justify-content: flex-start;
+        height: auto;
+    }
+
+    .pv__carousel.flickity-enabled img{
+        opacity: 1 !important;
+    }
+
+    .pv__grid-item-media img{
+        height: auto;
+    }
+
+    .pv__grid-item-media img:first-child{
+        max-height: 200px;
+    }
+
+    .pv__grid-item-media img:last-child{
+        max-height: 215px;
+    }
+
+    .pv__carousel.flickity-enabled .flickity-page-dots{
+        display: none;
+    }
+
+    .pv__grid-item-media{
+        gap: 17px;
+        justify-content: flex-start;
+        min-height: 432px;
+        height: auto;
+    }
+
+    .pv__grid-item-content h4{
+        max-width: 160px;
+    }
+
+    .pv__grid-item-content h4 p{
+        font-size: 18px;
+        letter-spacing: -0.419px;
+    }
+
+    .pv__grid-item-content .rte,
+    .pv__grid-item-content .rte p,
+    .pv__grid-item-content .rte ul li{
+        text-align: center;
+        font-size: 12px;
+        font-style: normal;
+        font-weight: 400;
+        line-height: 16px; /* 133.333% */
+    }
+
+    .pv__grid-item-content .rte ul li strong{
+        position: relative;
+        left: inherit;
+    }
+
+    .pv__grid-item-content .rte ul li{
+        padding-left: 7px;
+        padding-right: 7px;
+    }
+
+    .pv__grid-item-button a.btn{
+        max-width: 200px;
+        min-width: 200px;
+        max-height: 50px;
+        padding: 15px;
+        font-size: 16px;
+        font-style: normal;
+        font-weight: 700;
+        line-height: normal;
+    }
+}
+
+{% endstyle %}
+{% schema %}
+{
+    "name": "Product Values",
+    "settings": [
+        {
+            "type": "richtext",
+            "id": "heading",
+            "label": "Heading"
+        },
+        {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading",
+            "default": "2 Week Routine for Clear Skin"
+        },
+        {
+            "type": "text",
+            "id": "mobile_button_text",
+            "label": "Mobile Button Text",
+            "default": "TRY FOR FREE"
+        },
+        {
+            "type": "url",
+            "id": "mobile_button_url",
+            "label": "Mobile Button URL"
+        },
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#FDF8F5"
+        }
+    ],
+    "blocks": [
+        {
+            "type": "product_value",
+            "name": "Product Value",
+            "settings": [
+                {
+                    "type": "image_picker",
+                    "id": "before_after_image",
+                    "label": "Before and After Image"
+                },
+                {
+                    "type": "image_picker",
+                    "id": "product_image",
+                    "label": "Product Image"
+                },
+                {
+                    "type": "richtext",
+                    "id": "product_title",
+                    "label": "Product Title"
+                },
+                {
+                    "type": "richtext",
+                    "id": "bullets",
+                    "label": "Bullets"
+                },
+                {
+                    "type": "text",
+                    "id": "button_text",
+                    "label": "Button Label"
+                },
+                {
+                    "type": "url",
+                    "id": "button_url",
+                    "label": "Button URL"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "Product Values"
+        }
+    ]
+}
+{% endschema %}

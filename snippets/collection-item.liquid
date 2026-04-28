@@ -1,0 +1,181 @@
+<style>
+  .atc-button a.js-add-to-cart {
+    display:block !important;
+    opacity: 1 !important;
+    padding:0.5rem 0 !important;
+  }
+
+@media screen and (max-width: 768px) {
+  .collection_item_atc {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+    min-height: 563px;
+    padding: 0 4px;
+  }
+  .collection_item_atc_button{
+    margin-top: 5px;
+  }
+  .collection__item_info-wrapper{
+    min-height: 220px !important;
+  }
+  .collection__item_info-wrapper h3 { font-size: 18px; }
+}
+@media screen and (min-width: 768px) {
+    .atc-button a.js-add-to-cart {
+      display:none !important;
+      opacity: 0 !important;
+    }
+}
+</style>
+{% assign productTags = product.tags | join:',' %}
+<div class='collection__item  mb15 rel' data-module='collectionItem'>
+  <div class="collection_item_atc">
+    <div>
+      {% if heading %}
+      <h4 class="serif ac">{{ heading }}</h4>
+    {% endif %}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    <script class='js-product-json' type='text/template'>
+      {
+        "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+        "product": {{ product | json }}
+      }
+    </script>
+    <a href="{{ product.url }}" class='abs z2 fill-x fill fill-y'></a>
+    <div class='rel collection__item_image'>
+      {% if product.handle != 'jade-roller' %}
+        {% comment %}<div class='collection__item_atc abs bottom left fill-x z5 px1 {% if productTags contains 'no-add' %}none{% endif %}'>
+          <a href='' class='btn btn__white-fill js-add-to-cart bold fill-x' 
+            {% if subscription_variant %} data-subscription-variant="{{ subscription_variant }}" {% endif %}
+            {% if subscription_discount %} data-subscription-discount="{{ subscription_discount }}" {% endif %}
+          >
+            Add to Cart</a>
+        </div>{% endcomment %}
+           <div class='collection__item_atc abs bottom left fill-x z5 px1 {% if productTags contains 'no-add' %}none{% endif %}'>
+                <button onclick="addItemToCart({{ product.variants.first.id }},1);" class="btn btn__white-fill  bold fill-x">Add to cart - {{ product.variants.first.price | money }} </button>
+           </div>
+      {% endif %}
+
+      
+      {% assign flag = product.metafields.sf_extended_informat.collection_flag %}
+      
+      {% if flag %}
+        <div class='collection__flag-wrapper hide hidden flag'>
+          <h5> {% if cart.currency.iso_code == "USD" and product.price_min >= 7500  %} FREE SHIPPING {% else %} {{ flag }} {% endif %}</h5>
+        </div>
+        {% comment %}{% else %}
+        <div class='collection__flag-wrapper hide hidden flag'>
+          <h5> &nbsp;</h5>
+        </div>{% endcomment %}
+      {% endif %}
+      {% if offer %}
+        <div class='collection__flag-wrapper offer'>
+          <h5> {% comment %}{{ offer }} {% endcomment %}  {% if cart.currency.iso_code == "USD" and product.price_min >= 7500  %} FREE SHIPPING {% else %} {{ offer }} {% endif %} </h5>
+        </div>
+      {% endif %}
+      {% assign hover__image = product.metafields.sf_extended_informat.image %}
+      {% assign c_hover = product.metafields.sf_extended_informat.collection_hover_image %}
+      {% if hover__image %}
+        <div class="collection__item_image-wrapper">
+          {% if c_hover %}
+            {%
+              render 'image' with
+              src: c_hover,
+              size: '600x',
+              alt: product.title | escape,
+              fill: true,
+              className: 'collection__hover_image'
+            %}
+          {% else %}
+            {%
+              render 'image' with
+              src: hover_image,
+              size: '600x',
+              alt: product.title | escape,
+              fill: true,
+              className: 'collection__hover_image'
+            %}
+          {% endif %}
+        </div>
+      {% endif %}
+      {% if product_image %}
+        <div class="collection__item_image-wrapper">
+          <img alt="{{ product.title }}" class="lazyload" data-src="{{ product_image | img_url: '880x800' }}">
+        </div>
+      {% else %}
+        <div class="collection__item_image-wrapper">
+          <img alt="{{ product.title }}" class="lazyload" data-src="{{ product.featured_image.src  | img_url: '880x800' }}">
+        </div>
+      {% endif %}
+    </div>
+
+    <div class='collection__item_info-wrapper'>
+      <h3 class='medium pt0 serif mx0 mb0 pb0 mt05 ac'>
+        {% if prodTitle %}
+          {{ prodTitle }}
+        {% else %}
+          {{ product.title }}
+        {% endif %}
+      </h3>
+      {% render 'junip-product-summary', product: product %}
+      <div class='z3 ac top al left px05'>
+        {% assign kicker = product.metafields.sf_extended_informat.kicker %}
+        {% if alt_description != blank %}
+          <h5 class='mx0 s16 sm12 pb0 mb0 {% if productTags contains 'no-add' %}none{% endif %}'>{{ alt_description }}</h5>
+        {% else %}
+          {% if kicker %}
+            <h5 class='mx0 s16 sm12 pb0 mb0 {% if productTags contains 'no-add' %}none{% endif %}'>{{ kicker }}</h5>
+          {% endif %}
+        {% endif %}
+        <span class='s16 sm12 block {% if productTags contains 'no-add' %}none{% endif %}'>
+          {% if context == 'landing' %}
+            Regular price – {{ product.price | money }}
+          {% else %}
+            {% if product.compare_at_price > product.price %}
+              {% if product.price_varies %}
+                {%- assign sale_price = product.price | money -%}
+                {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+              {% else %}
+                {{ product.price | money }}
+                <span> - Save {{ product.compare_at_price_max | minus: product.price | times: 100.0 | divided_by: product.compare_at_price_max | money_without_currency | times: 100 | remove: '.0'}}%</span>
+              {% endif %}
+            {% else %}
+              {% if product.price_varies %}
+                {%- assign price = product.price | money -%}
+                {{ 'products.product.from_text_html' | t: price: price }}
+              {% else %}
+                {{ product.price | money }}
+              {% endif %}
+            {% endif %}
+          {% endif %}
+        </span>
+      </div>
+    </div>
+
+    </div>
+    {% comment %}<div class='atc-button collection_item_atc_button {% if productTags contains 'no-add' %}none{% endif %}'>
+      <a href='' class='btn btn__outline js-add-to-cart bold fill-x' 
+        {% if subscription_variant %} data-subscription-variant="{{ subscription_variant }}" {% endif %}
+        {% if subscription_discount %} data-subscription-discount="{{ subscription_discount }}" {% endif %}
+      >
+        Add to Cart</a>
+    </div>{% endcomment %}
+    
+    {%  if product.tags contains "__oos" %}
+      <div class='atc-button collection_item_atc_button {% if productTags contains 'no-add' %}none{% endif %}'>
+        <a href="{{ product.url }}" class="btn btn__outline bold fill-x">Out Of Stock </a>
+      </div>
+    {% elsif product.tags contains "__preorder" or product.tags contains "pre-order" or product.tags contains "__pre_order"  or product.tags contains "__mix-match" %}
+      <div class='atc-button collection_item_atc_button {% if productTags contains 'no-add' %}none{% endif %}'>
+        <a href="{{ product.url }}" class="btn btn__outline bold fill-x">Shop Now - {{ product.variants.first.price | money }} </a>
+      </div> 
+      {% else %}
+       <div class='atc-button collection_item_atc_button {% if productTags contains 'no-add' %}none{% endif %}'>
+        <button onclick="addItemToCart({{ product.variants.first.id }},1);" class="btn btn__outline bold fill-x">Add to cart - {{ product.variants.first.price | money }} </button>
+      </div>
+      {% endif %}
+      
+  </div>
+</div>

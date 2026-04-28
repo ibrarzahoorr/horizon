@@ -1,0 +1,31 @@
+<!-- Global site tag (gtag.js) - Google Analytics -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-PNNFBNH9CH"></script>
+<script>
+window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-PNNFBNH9CH');
+</script>
+
+<script>
+  window.theme = {
+    strings: {
+      addToCart: {{ 'products.product.add_to_cart' | t | json }},
+      soldOut: {{ 'products.product.sold_out' | t | json }},
+      unavailable: {{ 'products.product.unavailable' | t | json }}
+    },
+    moneyFormat: {{ shop.money_format | json }}
+  }
+</script>
+
+{% comment %}
+<! -- Hidden by Simon @ baggy -- >
+<!-- OneTrust Cookies Consent Notice start for blume.com -->
+<script type="text/javascript" src="https://cdn.cookielaw.org/consent/a9447919-2d1d-41e0-b4b8-1cb05d4665d8/OtAutoBlock.js" ></script>
+<script src="https://cdn.cookielaw.org/scripttemplates/otSDKStub.js"  type="text/javascript" charset="UTF-8" data-domain-script="a9447919-2d1d-41e0-b4b8-1cb05d4665d8"></script>
+<script type="text/javascript">
+function OptanonWrapper() {}
+</script>
+
+<!-- OneTrust Cookies Consent Notice end for blume.com -->
+{% endcomment %}

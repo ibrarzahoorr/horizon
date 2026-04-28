@@ -1,0 +1,198 @@
+{%- assign config = section.settings -%}
+{%- assign products = section.blocks | map: 'settings' -%}
+
+<div id="giveaway-entry" class="giveaway__entry">
+  <div id="giveaway-entry-hero" class="giveaway__entry-hero">
+    <svg class="giveaway__entry-hero--clip" width="1440" height="126" viewBox="0 0 1440 126" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+      <path d="M68.9747 6.04737C30.4509 8.90549 2.42006 14.745 2.42006 14.745L0 126L1440 126V0.213107C1440 0.213107 1371.21 25.4903 1310.52 33.7482C1249.83 42.0062 1215.83 47.4604 1153.21 51.6336C1105.86 54.7894 1078.82 54.9264 1030.99 55.5461C998.397 55.9683 980.077 56.1487 947.496 55.5461C897.785 54.6266 869.56 52.7765 821.196 49.6063L818.017 49.3979C736.809 44.0767 612.302 29.8358 612.302 29.8358L404.168 10.8326C404.168 10.8326 277.109 -1.77749 197.244 0.213107C117.378 2.20371 106.592 3.25649 68.9747 6.04737Z" fill="#FCECE4"/>
+    </svg>
+    {%- if config.hero_background_mobile != blank -%}
+      <div class="giveaway__entry-hero--image mobile">
+        {{ config.hero_background_mobile | image_url: width: nil | image_tag: sizes: '100vw' }}
+      </div>
+    {%- endif -%}
+    {%- if config.hero_background != blank -%}
+      <div class="giveaway__entry-hero--image desktop">
+        {{ config.hero_background | image_url: width: nil | image_tag: sizes: '100vw' }}
+      </div>
+    {%- endif -%}
+    <div class="giveaway__entry-hero--content">
+      {%- if config.hero_heading != blank -%}
+        <h1>{{ config.hero_heading }}</h1>
+      {%- endif -%}
+      <div>
+        {%- if config.hero_description != blank -%}
+          <div class="giveaway__entry-hero--description">
+            {{ config.hero_description }}
+          </div>
+        {%- endif -%}
+        {%- if config.list_id != blank -%}
+          <form class="giveaway__entry-hero--form" data-id="{{ config.list_id }}" data-module='klaviyo' novalidate autocomplete="off">
+            <input id="giveaway-email" type="email" placeholder="Your Email" aria-label="Email Address">
+            <button type="submit">Submit</button>
+            <p class="message js-klaviyoMessage"></p>
+          </form>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div id="giveaway-entry-products" class="giveaway__entry-products">
+    {%- if config.products_heading != blank -%}
+      <h2 class="giveaway__entry-products--heading">{{ config.products_heading }}</h2>
+    {%- endif -%}
+    <div class="giveaway__entry-products--products">
+      {%- for prod in products -%}
+        {%- assign product = all_products[prod] -%}
+        <div class="giveaway__entry-product">
+          <div class="giveaway__entry-product--image">
+            <div>
+              {%- if prod.image != blank -%}
+                {{ prod.image | image_url: width: nil | image_tag: sizes: '50vw' }}
+              {%- else -%}
+                {{ product.image | image_url: width: nil | image_tag: sizes: '50vw' }}
+              {%- endif -%}
+            </div>
+          </div>
+          <div class="giveaway__entry-product--content">
+            <h3>
+              {%- if prod.heading != blank -%}
+                {{ prod.heading }}
+              {%- else -%}
+                {{ product.title }}
+              {%- endif -%}
+            </h3>
+            {%- if prod.description != blank -%}
+              <div class="description">{{ prod.description }}</div>
+            {%- endif -%}
+            <a href="{{ product.url}}" class="giveaway__entry-product--button" data-content="Shop Now">
+              Shop Now
+            </a>
+          </div>
+        </div>
+      {%- endfor -%}
+    </div>
+  </div>
+  {%- if config.before_image != blank or config.after_image != blank -%}
+    <div id="giveaway-entry-before-after" class="giveaway__entry-banda">
+      <div class="giveaway__entry-banda--images">
+        {%- if config.before_after_label != blank -%}
+          <div class="giveaway__entry-banda--label">
+            <svg width="307" height="311" viewBox="0 0 307 311" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M89.1881 20.6156L114.726 33.5379C123.283 37.868 133.674 36.0067 140.196 28.9753L159.66 7.99151C168.767 -1.82679 184.965 0.983962 190.232 13.2965L201.489 39.6109C205.261 48.4286 214.417 53.6816 223.933 52.4876L252.331 48.9242C265.619 47.2569 276.221 59.8222 272.341 72.6397L264.05 100.033C261.271 109.213 264.909 119.122 272.966 124.324L297.011 139.849C308.261 147.112 308.306 163.553 297.095 170.878L273.135 186.533C265.107 191.779 261.523 201.708 264.352 210.872L272.792 238.22C276.742 251.016 266.208 263.639 252.912 262.044L224.494 258.636C214.972 257.493 205.845 262.796 202.121 271.634L191.008 298.01C185.808 310.351 169.625 313.25 160.464 303.481L140.887 282.604C134.326 275.608 123.926 273.803 115.392 278.18L89.925 291.241C78.0091 297.352 63.7489 289.171 63.0107 275.8L61.4329 247.222C60.9042 237.646 54.097 229.578 44.7465 227.446L16.8421 221.081C3.78561 218.104 -1.8794 202.67 6.15005 191.952L23.3106 169.047C29.061 161.371 29.0322 150.815 23.2402 143.171L5.95507 120.359C-2.13264 109.685 3.44823 94.2212 16.4883 91.1723L44.3576 84.6561C53.6963 82.4725 60.4596 74.3677 60.9361 64.789L62.3582 36.2034C63.0236 22.8281 77.239 14.5692 89.1881 20.6156Z" fill="#FDF8F5" stroke="#1D4165" stroke-width="3"/>
+            </svg>
+            <span>{{ config.before_after_label }}</span>
+          </div>
+        {%- endif -%}
+        <div class="giveaway__entry-banda--image">
+          <div>
+            {{ config.before_image | image_url: width: nil | image_tag: sizes: '500px' }}
+          </div>
+        </div>
+        <div class="giveaway__entry-banda--image">
+          <div>
+            {{ config.after_image | image_url: width: nil | image_tag: sizes: '500px' }}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>
+
+{%- schema -%}
+  {
+    "name": "Giveaway Entry",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background_mobile",
+        "label": "Background Image (mobile)"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background",
+        "label": "Background Image (desktop)"
+      },
+      {
+        "type": "text",
+        "id": "hero_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "hero_description",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "list_id",
+        "label": "List ID",
+        "default": "RDNpQ9"
+      },
+      {
+        "type": "header",
+        "content": "Products"
+      },
+      {
+        "type": "text",
+        "id": "products_heading",
+        "label": "Products Heading"
+      },
+      {
+        "type": "header",
+        "content": "Before and After"
+      },
+      {
+        "type": "image_picker",
+        "id": "before_image",
+        "label": "Before"
+      },
+      {
+        "type": "image_picker",
+        "id": "after_image",
+        "label": "After"
+      },
+      {
+        "type": "text",
+        "id": "before_after_label",
+        "label": "Label",
+        "info": "Eg: Before and after..."
+      }
+    ],
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "Heading"
+          },
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "Description"
+          }
+        ]
+      }
+    ]
+  }
+{%- endschema -%}

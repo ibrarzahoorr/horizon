@@ -1,0 +1,60 @@
+{% if product.handle == "meltdown-acne-oil-3" %}
+<div class="review-card">
+      <div class="review-header">
+          <div class="stars">★★★★★</div>
+          <div class="customer-name">Pam S.</div><div style=" width: 5vw; ">&nbsp;</div>
+          <div class="verified-badge">Verified Customer</div>
+      </div>
+      <div class="review-content">
+          <strong style=" font-size: 16px;color: #3c5c9b; ">Meltdown oil is the “holy grail”!</strong></br>
+        This oil is a game-changer! After lifelong breakouts and three rounds of Accutane, Meltdown Oil prevents outbreaks and clears spots fast—my holy grail for acne!
+      </div>
+  </div>
+
+<style>
+.review-card {
+    border: 1px solid #ffffff;
+    border-radius: 8px;
+    padding: 16px;
+        max-width: 500px;
+    background-color: #fffcfa;
+    margin: 5px 0 20px;
+}
+.review-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.review-header .stars {
+    color: #f5a623;
+    margin-right: 8px;
+    font-size: 16px;
+}
+
+.review-header .customer-name {
+    font-weight: bold;
+    margin-right: 8px;
+    color: #333;
+}
+
+.review-header .verified-badge {
+    display: flex;
+    align-items: center;
+    color: #4caf50;
+    font-size: 14px;
+}
+
+.review-header .verified-badge::before {
+    content: '✔';
+    font-size: 12px;
+    margin-right: 4px;
+}
+
+.review-content {
+    font-size: 14px;
+    color: #555;
+}
+</style>
+
+{% endif %}

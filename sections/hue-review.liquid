@@ -1,0 +1,68 @@
+<!-- HUE INTEGRATION START -->
+ <style>
+    #hue-review-module {
+      width: 100%;
+      max-width: 1024px;
+      margin: 0 auto;
+      padding: 64px 0;
+    }
+    @media screen and (max-width: 568px) {
+      #hue-review-module {
+        width: auto;
+        padding: 20px;
+      }
+    }
+  </style>
+  <script src="https://app.poweredbyhue.app/js/integration.js" defer></script>
+  <script>
+    document.addEventListener('hue-add-to-cart', async (e) => {
+
+      const { variantId } = e.detail
+      const formData = new FormData
+      formData.set('id', variantId)
+      formData.set('quantity', 1)
+      const response = await fetch(`${Shopify.routes.root}cart/add.js`, {
+        body: formData,
+        method: "POST",
+        headers: {
+          "X-Requested-With": "XMLHttpRequest"
+          // Needed for Shopify to check inventory
+        }
+      });
+
+        if (response.ok) {
+          // // We simply trigger an event so the mini-cart can re-render
+          // document.dispatchEvent(new CustomEvent('updated', {
+          //   bubbles: true,
+          //   detail: {
+          //     variant: variantId,
+          //     quantity: 1
+          //   }
+          // }));
+          window._cart.open();
+
+          const data = await response.json();
+        }
+    })
+  </script>
+<!-- HUE INTEGRATION END -->
+
+<div
+  id="{{ section.id }}"
+  style="background-color:{{ section.settings.background_color }}">
+  <div id="hue-review-module"></div>
+</div>
+
+{% schema %}
+  {
+    "name": "hue-review",
+    "settings": [
+          {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background color",
+      "default": "#fbece3"
+      }
+    ]
+  }
+{% endschema %}

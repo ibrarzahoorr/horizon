@@ -1,0 +1,23 @@
+{% case media.media_type %}
+  {% when 'image' %}
+    {%
+      include 'image' with
+      product: media.src,
+      size: '1200x',
+      alt: media.alt | escape,
+      fill: true,
+      className: 'abs fill z0 js-priority'
+    %}
+  {% when 'external_video' %}
+    <div class="product-media__video abs fill z0 js-priority" data-media-id="{{ media.id }}">
+      {{ media | external_video_tag }}
+    </div>
+  {% when 'video' %}
+    <div class="product-media__video abs fill z0 js-priority" data-media-id="{{ media.id }}">
+      {{ media | video_tag: controls: true }}
+    </div>
+  {% else %}
+    <div class="product-media__video abs fill z0 js-priority" data-media-id="{{ media.id }}">
+      {{ media | media_tag }}
+    </div>
+{% endcase %}

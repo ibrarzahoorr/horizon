@@ -1,0 +1,89 @@
+<section class='bg-lb px2 pm100 pl100 ptl160 o-h rel hero f jcc aic hero__tall' data-module='pageHero'>
+  <div class='hero__empty hero__shop fill-x'>
+    <div class='abs fill-x fill-y fill hero__image_background' style="background-image: url({{ section.settings.image | img_url: '2600x' }})"></div>
+    <div class='container--xl mha rel z2 hero__text_desktop'>
+      <div class='f fw jcb aic hero__flex'>
+        <div class='container--m fill-x'>
+          <div class='container--m ac mha rel hero__image hero__a_image'>
+            <!-- <img class='fill-x' src="{{ section.settings.image | img_url: '600x' }}" /> -->
+          </div>
+        </div>
+        <div class='hero__m_first'>
+          <div class='container--ms mha hero__a_text'>
+            <h5>{{ section.settings.subTitle }}</h5>
+            <h2 class='mx0 pt0 pb05 serif'>{{ section.settings.title }}</h2>
+            <p class='pb1'>{{ section.settings.description }}</p>
+            <a href="{{ section.settings.page }}" class='btn bold btn__outline'>{{ section.settings.cta }}</a>
+            <h5 class='caps'>{{ section.settings.starting }}</h5>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- <div class='abs fill-x fill-y cb hero__clp_shape'>
+    {% include 'shape-four' %}
+  </div> -->
+</section>
+<div class='container--xl mha rel px2 bg-lb z2 hero__text_mobile'>
+  <div class='f fw jcb aic hero__flex'>
+    <div class='container--m fill-x'>
+      <div class='container--m ac mha rel hero__image hero__a_image'>
+        <!-- <img class='fill-x' src="{{ section.settings.image | img_url: '600x' }}" /> -->
+      </div>
+    </div>
+    <div class='hero__m_first'>
+      <div class='container--ms mha hero__a_text'>
+        <h5>{{ section.settings.subTitle }}</h5>
+        <h2 class='mx0 pt0 pb05 serif'>{{ section.settings.title }}</h2>
+        <p class='pb1'>{{ section.settings.description }}</p>
+        <a href="{{ section.settings.page }}" class='btn btn__outline'>{{ section.settings.cta }}</a>
+        <h5 class='caps'>{{ section.settings.starting }}</h5>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Blume Box Hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+        "id": "description",
+        "type": "textarea",
+        "label": "Description",
+        "default": "We help taking care of your body, because you're worth it."
+      },
+      {
+        "id": "page",
+        "type": "page",
+        "label": "Page Link"
+      },
+      {
+        "id": "cta",
+        "type": "text",
+        "label": "Link CTA",
+        "default": "Build Your Blume Box"
+      },
+      {
+        "id": "starting",
+        "type": "text",
+        "label": "Callout"
+      }
+    ],
+    "presets": [{
+      "name": "Blume Box Hero",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,68 @@
+<section class='why bg-lp pv2 pmt60 rel' data-module='whyBlume'>
+  <div class='container--xl ac mha px2 rel z2'>
+    <h2 class='mx0 px0 why__animate serif'>{{ section.settings.title }}</h2>
+    <p class='why__animate container--sm mha'>{{ section.settings.subTitle }}</p>
+    <div class='mt2 mt2'>
+
+    {% if section.blocks.size > 0 %}
+      <div class='f jcc ais fw'>
+        {% for block in section.blocks %}
+          <div class='container--s pt2 pb2 ph1 why__single why__animate'>
+            <img class="lazyload" data-src='{{ block.settings.image | img_url: '1200x' }}' />
+            <h5 class='mb0 small bold pt1 caps'>{{ block.settings.title }}</h5>
+            <p class=''>{{ block.settings.subTitle }}</p>
+          </div>
+        {% endfor %}
+      </div>
+    {% endif %}
+    </div>
+  </div>
+  <div class='abs left fill-x fill-y box__flow_wave clp'>
+    <svg class='fill-x abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Why Blume",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Why Blume?"
+      },
+      {
+        "id": "subTitle",
+        "type": "text",
+        "label": "Sub Heading",
+        "default": "You pick the products and the frequency. We take care of the rest"
+      }
+    ],
+    "blocks": [{
+      "type": "list",
+      "name": "features",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "text",
+          "id": "subTitle",
+          "label": "Sub Title"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "Why Blume",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

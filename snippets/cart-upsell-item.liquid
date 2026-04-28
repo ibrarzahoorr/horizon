@@ -1,0 +1,64 @@
+{% assign productHandle = block.settings.product %}
+{% assign productItem = all_products[productHandle] %}
+{% assign featured_image = productItem.images[0].src  %}
+{%- assign current_variant = productItem.selected_or_first_available_variant -%}
+<div class='x cart-drawer__upsells-single js-upsell-single' data-id="{{current_variant.id | json}}">
+  <div class='f jcb aic'>
+    <img class='block px05' src="{{ featured_image | img_url: '300x' }}" alt="{{ featured_image.alt | escape }}"
+      data-product-featured-image>
+    <div class='x px05'>
+      <div class='f jcb aie x'>
+        <div>
+          <h5 class='mx0 px0 serif'>{{productItem.title}}</h5>
+          {% assign kicker = productItem.metafields.sf_extended_informat.kicker %}
+          {% if kicker %}
+          <h5 class='small mx0 px0 mx0 pt05'>{{ kicker }}</h5>
+          {% endif %}
+        </div>
+        <div>
+          <span class='small'>
+            {% if productItem.compare_at_price > productItem.price %}
+            {% if productItem.price_varies %}
+            {%- assign sale_price = productItem.price | money -%}
+            {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+            {% else %}
+            {{ 'products.product.on_sale' | t }}
+            {{ productItem.price | money }}
+            {% endif %}
+            {% else %}
+            {% if productItem.price_varies %}
+            {%- assign price = productItem.price | money -%}
+            {{ 'products.product.from_text_html' | t: price: price }}
+            {% else %}
+            {{ productItem.price | money }}
+            {% endif %}
+            {% endif %}
+          </span>
+        </div>
+      </div>
+      <div class='mt05'>
+        {% if productItem.available %}
+        <div class='f jcs ais'>
+          <button type="submit" name="add" class='js-submit-upsell btn btn__small btn__white bold mt0' data-add-to-cart
+            {% unless productItem.available %}disabled="disabled" {% endunless %}
+            {% if section_onboarding %}disabled="disabled" {% endif %}>
+            <span data-add-to-cart-text>
+              {% if productItem.available %}
+              {{ 'products.product.add_to_cart' | t }}
+              {% else %}
+              {{ 'products.product.sold_out' | t }}
+              {% endif %}
+            </span>
+          </button>
+        </div>
+        {% endif %}
+      </div>
+    </div>
+    <script class='js-product-json' type='text/template'>
+        {
+          "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+          "product": {{ productItem | json }}
+        }
+      </script>
+  </div>
+</div>

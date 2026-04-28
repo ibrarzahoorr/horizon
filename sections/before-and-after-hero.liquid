@@ -1,0 +1,203 @@
+<div class="before-and-after bna-hero pt-xl">
+  <div class="container--xl mxa mt0 mb0 rel">
+    {% if section.settings.heading != blank %}
+        <h1 class="heading section-heading">{{ section.settings.heading }}</h1>
+    {% endif %}
+    {% if section.settings.subheading != blank %}
+      <div class="subheading">{{ section.settings.subheading }}</div>
+    {% endif %}
+    {% if section.settings.sticker != blank %}
+      <div class="sticker mobile-hidden">
+        {{ section.settings.sticker |  image_url: width: 183.5 |  image_tag: height: 184.5 }}
+      </div>
+    {% endif %}
+
+    {% if section.blocks.size > 0 %}
+      <div class="bna-blocks">
+        {% if section.settings.sticker != blank %}
+          <div class="sticker">
+            {{ section.settings.sticker |  image_url: width: 183.5 |  image_tag: height: 184.5 }}
+          </div>
+        {% endif %}    
+        {% for block in section.blocks %}
+          {% if block.settings.image_before != blank and block.settings.paragraph != blank %}
+          {% if block.type == 'block' %}
+          <div class="bna-block{% if block.settings.paragraph != blank %} with-content{% endif %}">
+            <div class="block-container">
+
+              {% if block.settings.image_before != blank %}
+              <div class="block__top">
+                <div class="top-media {% if block.settings.image_orientation == 'vertical' %}vertical{% endif %} {% if block.settings.image_after == blank %}no-after{% endif %}">
+                  <div class="media-container before">
+                    <p class="image-label">{{ block.settings.image_label_before }}</p>
+                    {{ block.settings.image_before | image_url: width: 175 | image_tag }}
+                  </div>
+                  {% if block.settings.image_after != blank %}
+                  <div class="media-container after">
+                    <p class="image-label">{{ block.settings.image_label_after }}</p>
+                    {{ block.settings.image_after | image_url: width: 175 | image_tag }}
+                  </div>
+                {% endif %}
+                  {% if block.settings.image_product_1 != blank %}
+                    <div class="top-products">
+                      <div class="top-product product-1">
+                        {{ block.settings.image_product_1 | image_url: height: 100 | image_tag }}
+                      </div>
+                      {% if  block.settings.image_product_2 != blank %}
+                        <div class="divider">+</div>
+                      <div class="top-product product-2">
+                        {{ block.settings.image_product_2 | image_url: height: 100 | image_tag }}
+                      </div>
+                      {% endif %}
+                      {% if block.settings.duration != blank %}
+                        <p class="duration">{{ block.settings.duration }}</p>
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              </div>
+                {% endif %}
+              {% if block.settings.paragraph != blank %}
+                <div class="block__bottom">
+                  <div class="bottom-content">
+                    {{ block.settings.paragraph }}
+                    {% if block.settings.name != blank %}
+                      <p class="bottom-name">{{ block.settings.name }}</p>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            </div>
+              <div class="block-cta">
+                <a href="{{ section.settings.cta_link }}" target="_self" title="{{ section.settings.cta }}" class="btn btn__blue inline-block">{{ section.settings.cta }}</a>
+              </div>
+            </div>
+          {% endif %}
+          {% endif %}
+        {% endfor %}
+      </div>
+    {% endif %}
+
+    {% if section.settings.cta != blank or section.settings.cta_link != blank %}
+    <div class="cta-container mobile-hidden">
+      <a href="{{ section.settings.cta_link }}" target="_self" title="{{ section.settings.cta }}" class="btn btn__blue inline-block">{{ section.settings.cta }}</a>
+    </div>
+    {% endif %}
+  </div>
+</div>
+
+{%  style %}
+
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "Before And After Hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "sticker",
+        "label": "Sticker"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Treat, fade and prevent acne with Blume"
+      }, {
+        "type": "richtext",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "<p>All before and afters are <strong>100% real customers</strong>. Never retouched or photoshopped.</p>"
+      },
+      {
+        "type": "text",
+        "id": "cta",
+        "label": "CTA",
+        "default": "Try Blume Risk Free"
+      },
+      {
+        "type": "url",
+        "id": "cta_link",
+        "label": "CTA Link"
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "type": "block",
+        "name": "Block",
+        "settings": [
+          {
+            "type": "select",
+            "id": "image_orientation",
+            "label": "Image Orientation",
+            "options": [
+              {
+                "value": "horizontal",
+                "label": "Horizontal"
+              },
+              {
+                "value": "vertical",
+                "label": "Vertical"
+              }
+            ],
+            "default": "horizontal"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_before",
+            "label": "Image Before"
+          },
+          {
+            "type": "text",
+            "id": "image_label_before",
+            "label": "Image Before Label",
+            "default": "BEAUTIFUL Before"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_after",
+            "label": "Image After"
+          },
+          {
+            "type": "text",
+            "id": "image_label_after",
+            "label": "Image After Label",
+            "default": "BEAUTIFUL After"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_product_1",
+            "label": "Product Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_product_2",
+            "label": "Second Product Image"
+          },
+          {
+            "type": "text",
+            "id": "duration",
+            "label": "Duration"
+          },
+          {
+            "type": "richtext",
+            "id": "paragraph",
+            "label": "Paragraph"
+          }, {
+            "type": "text",
+            "id": "name",
+            "label": "Name"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Before And After Hero"
+      }
+    ]
+  }
+{% endschema %}

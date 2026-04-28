@@ -1,0 +1,182 @@
+{%- assign config = section.settings -%}
+{%- assign cards = section.blocks | map: 'settings' -%}
+
+<div id="giveaway-landing">
+  <div id="giveaway-hero" class="giveaway__landing-hero">
+    {%- if config.hero_background_mobile != blank -%}
+      <div class="giveaway__landing-hero--image mobile">
+        {{ config.hero_background_mobile | image_url: width: nil | image_tag: sizes: '100vw' }}
+      </div>
+    {%- endif -%}
+    {%- if config.hero_background != blank -%}
+      <div class="giveaway__landing-hero--image desktop">
+        {{ config.hero_background | image_url: width: nil | image_tag: sizes: '100vw' }}
+      </div>
+    {%- endif -%}
+    <div class="giveaway__landing-hero--content">
+      <div class="giveaway__landing-hero--text">
+        {%- if config.hero_heading != blank -%}
+          <h1>{{ config.hero_heading }}</h1>
+        {%- endif -%}
+        {%- if config.hero_description != blank -%}
+          <div>{{ config.hero_description }}</div>
+        {%- endif -%}
+        {%- if config.hero_cta_text != blank -%}
+          <a href="{{ config.hero_cta_link }}" data-content="{{ config.hero_cta_text }}" class="giveaway__landing-button">
+            {{ config.hero_cta_text }}
+          </a>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+  <div id="giveaway-cards" class="giveaway__landing-cards">
+    <div class="giveaway__landing-cards--hero">
+      <svg class="giveaway__landing-cards--clip" width="0" height="0" viewBox="0 0 800 800" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid meet">
+        <defs>
+          <clipPath id="giveaway-clip-mobile" clip-path-units="objectBoundingBox">
+            <path
+              width="1"
+              height="1"
+              d="M38.3193 3.35965C16.9172 4.9475 0 8.5 0 8.5V800H800V0.118393C800 0.118393 761.783 14.1613 728.067 18.749C694.351 23.3368 675.461 26.3669 640.672 28.6853C614.365 30.4386 599.342 30.5147 572.773 30.8589C554.665 31.0935 544.487 31.1937 526.386 30.8589C498.769 30.3481 483.089 29.3202 456.22 27.559L454.454 27.4433C409.338 24.4871 340.168 16.5754 340.168 16.5754L224.538 6.01809C224.538 6.01809 153.95 -0.987496 109.58 0.118393C65.21 1.22428 59.2178 1.80916 38.3193 3.35965Z"
+              fill="#FCECE4"
+            />
+          </clipPath>
+        </defs>
+      </svg>
+      {%- if config.cards_background_mobile != blank -%}
+        <div class="giveaway__landing-cards--image mobile">
+          {{ config.cards_background_mobile | image_url: width: nil | image_tag: sizes: '100vw' }}
+        </div>
+      {%- endif -%}
+      {%- if config.cards_background != blank -%}
+        <div class="giveaway__landing-cards--image desktop">
+          {{ config.cards_background | image_url: width: nil | image_tag: sizes: '100vw' }}
+        </div>
+      {%- endif -%}
+      {%- if config.cards_heading != blank -%}
+        <h2>{{ config.cards_heading }}</h2>
+      {%- endif -%}
+    </div>
+    <div class="giveaway__landing-cards--cards">
+      <ul>
+        {%- for card in cards -%}
+          <li class="giveaway__landing-cards--card">
+            <a href="{{ card.url }}" target="_blank">
+              {%- if card.image != blank -%}
+                <div class="image">
+                  {{ card.image | image_url: width: nil | image_tag: sizes: '100px' }}
+                </div>
+              {%- endif -%}
+              {%- if card.text != blank -%}
+                <p>{{ card.text }}</p>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+      {%- if config.cards_cta_text != blank -%}
+        <a href="{{ config.cards_cta_link }}" data-content="{{ config.cards_cta_text }}" class="giveaway__landing-button">
+          {{ config.cards_cta_text }}
+        </a>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{%- schema -%}
+  {
+    "name": "Giveaway Landing",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Hero"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background_mobile",
+        "label": "Background Image (mobile)"
+      },
+      {
+        "type": "image_picker",
+        "id": "hero_background",
+        "label": "Background Image (desktop)"
+      },
+      {
+        "type": "text",
+        "id": "hero_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "richtext",
+        "id": "hero_description",
+        "label": "Description"
+      },
+      {
+        "type": "text",
+        "id": "hero_cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "hero_cta_link",
+        "label": "CTA Link"
+      },
+      {
+        "type": "header",
+        "content": "Cards"
+      },
+      {
+        "type": "image_picker",
+        "id": "cards_background_mobile",
+        "label": "Background Image (mobile)"
+      },
+      {
+        "type": "image_picker",
+        "id": "cards_background",
+        "label": "Background Image (desktop)"
+      },
+      {
+        "type": "text",
+        "id": "cards_heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "cards_cta_text",
+        "label": "CTA Text"
+      },
+      {
+        "type": "url",
+        "id": "cards_cta_link",
+        "label": "CTA Link"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "card",
+        "name": "Card",
+        "settings": [
+          {
+            "type": "header",
+            "content": "Content"
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          },
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          },
+          {
+            "type": "url",
+            "id": "url",
+            "label": "URL"
+          }
+        ]
+      }
+    ]
+  }
+{%- endschema -%}

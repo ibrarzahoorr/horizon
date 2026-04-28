@@ -1,0 +1,30 @@
+{% if collection.id == 292993401025 or collection.id == 292993335489  or collection.id == 292993269953 or collection.id == 292993171649  or collection.id == 292993237185 %}
+<style>
+     
+    .stickheader { background: #fbece3; padding: 5px 0; }
+    .stickheaderi { max-width: 860px; margin: 0px auto; padding: 10px 10px; overflow-x: auto; display: flex; }
+    .stickheaderi ul { list-style: none; margin: 0; padding: 0; min-width: 670px; text-align: left; display: block; float: left; width: 930px; }
+    .stickheaderi ul li { display: inline-block; padding: 5px 25px 3px; background: #ffffff; border-radius: 30px; margin: 0 10px; font-size: 15px; }
+    .stickheaderi ul li.csubactive , .stickheaderi ul li:hover { background: #001e42; color: #fff; cursor: pointer}
+  @media screen and (max-width: 767px) {
+    .hero__tall { display: none; }
+    .header__main.fix {position: relative !important; }
+    .is-scrolled .header__main.fix {position: fixed !important; }
+  }
+</style>
+  
+<div class="stickheader" style=" background: #fbece3; padding: 5px 0; ">
+    <div class="stickheaderi clear clearfix">
+      <span style=" font-weight: 900; min-width: 140px; ">Shop by Concern </span>   
+      <ul>
+            <li {% if collection.id == 292993237185 %} class="csubactive"{% endif %}><a href="/collections/best-selling-products-for-acne">Acne</a></li> 
+            <li {% if collection.id == 292993171649 %} class="csubactive"{% endif %}><a href="/collections/product-for-dark-spots">Dark Spots</a></li>
+            <li {% if collection.id == 292993269953 %} class="csubactive"{% endif %}><a href="/collections/best-selling-products-for-sensitive-skin">Sensitive Skin</a></li>
+            <li {% if collection.id == 292993335489 %} class="csubactive"{% endif %}><a href="/collections/best-selling-products-for-dry-skin">Dry Skin</a></li>
+            <li {% if collection.id == 292993401025 %} class="csubactive"{% endif %}><a href="/collections/best-selling-products-for-pores">Pores</a></li>
+         </ul>
+     </div>
+  </div>
+{% endif %}
+	
+	

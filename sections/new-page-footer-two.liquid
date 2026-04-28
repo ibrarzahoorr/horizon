@@ -1,0 +1,56 @@
+<section class='female bg-lb rel'>
+  <div class='container--xl mha px2 phm4  z2'>
+    <div class='f fw jcb aic wrapper__inner rel z3'>
+      <div class='female-image'>
+        <div class='container--m mha pb2'>
+          <img class='fill-x lazyload' data-src="{{ section.settings.image | img_url: '900x' }}" />
+        </div>
+      </div>
+      <div class='female-text'>
+        <div class='container--ms mha'>
+          <h2 class='mx0 pt0 pb1 serif'>{{ section.settings.title }}</h2>
+          <a href="/pages/blume-meltdown-reviews" class='btn btn__outline bold'>{{ section.settings.cta }}</a>
+        </div>
+      </div>
+    </div>
+    <div class='abs z1 left fill-x fill-y clb talk__bar'>
+      <svg class='x abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+    </div>
+    <div class='why__organic_shape_right female__organic abs z1 bottom right cb js-organic js-shape-one' data-module='shapeOne'>
+      {% include 'shape-one' %}
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "How to Use Meltdown",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don't wage.."
+      },
+      {
+        "id": "cta",
+        "type": "text",
+        "label": "Cta Label",
+        "default": "SEE REVIEWS"
+      },
+      {
+        "id": "page",
+        "type": "page",
+        "label": "Page Link"
+      }
+    ],
+    "presets": [{
+      "name": "Reviews CTA",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,230 @@
+<div class='product__hero_bg bg-p rel js-product-hero' data-id="{{ product.selected_or_first_available_variant.id }}">
+  <div class='container--xl mha' data-section-id="{{ section.id }}" data-module="product"
+    data-enable-history-state="true">
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- include 'bold-variant' with current_variant, output: 'none' -%}
+    {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+    <script class='js-product-json' type='text/template'>
+      {
+        "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+        "product": {{ product | json }},
+        "sku": {{ current_variant.sku | json }}
+      }
+    </script>
+    <div class='product__wrapper'>
+      {% assign pdp__hero = product.metafields.sf_extended_informat.pdp_hero %}
+      {% if product.handle contains 'all-in-skin' %}
+        {% include 'product-slideshow-growth' %}
+      {% else %}
+        {% include 'product-slideshow' %}
+      {% endif %}
+      <div class='product__description __desktop px2'>
+        <div>
+          <div class='js-review-jump'>
+            {% render 'junip-product-summary', product: product %}
+          </div>
+          {% if product.tags contains "__20off" %}
+            
+            <span class="product__price" id="cutnshhs"> {{ product.price  | times: 0.8 | money }} </span>
+            <span class="product__savings" id="cutnsjts"> SAVE {{ product.price  | times: 0.2 | money }}</span>
+            {% else %} 
+          {% if product.variants.size == 1 %} 
+          <div data-price-wrapper>
+
+            {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price"> {{ product.price  | money }} </span>
+            <s data-compare-price>
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings" style=" background-size: 250px; "> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+
+          </div>
+            {% else %}
+           <div data-price-wrapper>
+             
+             {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price" id="cutnshhs"> {{ product.price  | money }} </span>
+            <s data-compare-price id="cutnshts">
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings" id="cutnsjts" style=" background-size: 250px; "> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+            </div>
+
+          {% endif %} 
+        
+          {% endif %} 
+        </div>
+        <h1 class='serif mx0 pv0 product__title  '>
+          {% if product.title contains '(Subscription)' %}
+            {% assign prodTitle = product.title | split: ' (' | first %}
+            {{ prodTitle }}
+          {% else %}
+            {{ product.title }}
+          {% endif %}
+        </h1>
+
+        <div class="rte">
+          {% assign kicker = product.metafields.sf_extended_informat.kicker %}
+          {% if kicker %}
+          <h2 class='h5 mx0 pv05'>{{ kicker }}</h2>
+          {% endif %}
+          <div class="dsk_on"> {{ product.description }}</div>
+        </div>
+
+        
+
+        <div>
+          {% if product.tags contains 'always-price' %}
+          <div>
+            <span data-product-price>
+              {{ current_variant.price | money }}
+            </span>
+          </div>
+          {% endif %} 
+          <div class='mt2 mb1'>
+            {% unless product.tags contains "free-sample" %}
+              {%  if product.tags contains "__oos"  %}
+              <button  class=" amaatcbtn btn ml05 btn__blue bold mt0" style="max-width: 385px;" disabled>{{ product.first_available_variant.price | money }} Out of Stock </button>
+              {% if product.available == false %}
+                  {% assign out_of_stock = true %}
+                  {% for variant in product.variants %}
+                    {% if variant.inventory_quantity > 0 %}
+                      {% assign out_of_stock = false %}
+                    {% endif %}
+                  {% endfor %}
+                  {% if out_of_stock %}
+                    <!-- Your out-of-stock message or button goes here -->
+                    <div class="out-of-stock-message">
+                      <button  class=" ama-bis-btn btn" style=" margin: 10px; ">Notify me when available</button>
+                    </div>
+                  {% endif %}
+                {% endif %}
+            {% elsif product.tags contains "__preorder" or product.tags contains "pre-order" or product.tags contains "__pre_order" %}
+               <button onclick="addPreorderVariantToCart({{ product.variants.first.id }})" class=" amaatcbtn btn ml05 btn__blue bold mt0" style="max-width: 385px;">{{ product.first_available_variant.price | money }} PRE-ORDER NOW </button>
+                <script>
+                  function addPreorderVariantToCart(variantId) {
+                           
+                          const cartAttributes = {
+                            'Pre-order': '{{ product.handle }}'
+                          }; 
+                          const lineItemProperties = {
+                            'pre-order': '{% if product.metafields.custom.pre_order_statement != blank %} {{ product.metafields.custom.pre_order_statement }}{% else %}True{% endif %}'
+                          }; 
+                          const cartData = {
+                            items: [
+                              {
+                                id: variantId,
+                                quantity: 1,
+                                properties: lineItemProperties
+                              }
+                            ],
+                            attributes: cartAttributes
+                          }; 
+                          fetch('/cart/add.js', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(cartData)
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                            console.log('Item added to cart:', data); 
+                            //window.location.href = '/cart';
+                          })
+                          .catch(error => {
+                            console.error('Error adding item to cart:', error); 
+                          });
+                        }
+                       </script>
+ 
+              {% else %}
+              {% if product.handle != 'jade-roller' %}
+                
+                {% render 'add-to-cart-form' %}
+                <div>
+                </div>
+              {% endif %}
+              {% endif %}
+            {% endunless %}
+            {% comment %} <div class='f jcs aic'>
+              <a href="mailto:friend@email.com?subject=I'd Like to introduce you to Blume!&body=Hello!%0A%0AWe%E2%80%99re%20Blume%20(https%3A%2F%2Fwww.blume.com).%20We%20provide%20safe%2C%20sustainable%20period%20and%20self-care%20products%20for%20women%20and%20girls%20who%20believe%20in%20the%20power%20of%20their%20choices.%20And%20she%20asked%20us%20to%20pass%20you%20along%20a%20message%20because%20they%E2%80%99re%20interested%20in%20trying%20us%20out.%0A%0A%0A%0AA%20bit%20about%20us%E2%80%A6%0A%0AFEMALE%20FOUNDED%0ATaran%20and%20Bunny%20are%20two%20sisters%20who%20created%20Blume%20with%20the%20dream%20of%20de-stigmatizing%20periods%20and%20creating%20the%20next%20generation%20of%20confident%2C%20tenacious%20and%20conscious%20women.%0A%0ANON-TOXIC%0AMost%20brands%20carry%20period%20products%20that%20take%20centuries%20to%20biodegrade%20and%20have%20ingredients%20you%20can%E2%80%99t%20pronounce.%20At%20Blume%2C%20we%E2%80%99re%20different.%20From%20tampons%20and%20pads%20to%20deodorant%20and%20a%20collection%20of%20other%20self-care%20items%2C%20we%20believe%20in%20products%20that%20are%20not%20a%20threat%20to%20our%20bodies%20or%20the%20environment.%0A%0ACOMMUNITY%0AWe%E2%80%99re%20building%20young%20women%20a%20safe%20space%20to%20learn%2C%20grow%2C%20and%20become%20their%20bad%20ass%20selves.%20A%20place%20to%20celebrate%20womanhood%20and%20give%20advice%20on%20the%20good%2C%20the%20bad%20and%2C%20yes%2C%20even%20the%20ugly%20that%20comes%20with%20it.%20Shopping%20at%20Blume%20means%20joining%20a%20community%20that%20thrives%20on%20female%20empowerment%20and%20positivity.%0A%0ASound%20good%3F%20Learn%20more%20at%20https%3A%2F%2Fwww.blume.com%20or%20shop%20our%20all-natural%20products.%20We%20think%20it%E2%80%99ll%20make%20her%20super%20happy.%0A%0A%0ALove%2C%0ABlume%0A"
+                class="underline">Share Blume</a>
+              <div class='ml05 product__share-tool rel js-share-tool' data-module='share'>
+                <span class='abs top left x y ac z1'>?</span>
+              </div>
+            </div> {% endcomment %}
+          </div>
+        {% comment %}
+           <div class="bctacountdown">
+            <p style="text-align: center;background: #fff;padding: 5px 0px;color: #111;max-width: 400px;"><strong style=" color: #001e42; ">BLACK FRIDAY SALE</strong> <br>
+              <span style="font-size:13px;">SHOP NOW AND SAVE UP TO 50% OFF SITEWIDE</span> 
+              <br> ENDING IN:   
+            
+            <span id="bctatimerx" style=" display: block; font-size: 20px; font-weight: 600; color: #fa0800; "></span>
+            </p>
+            </div>
+            <script>var countDownDate=new Date("Dec 4, 2024 23:59:00").getTime(),x=setInterval(function(){var now=new Date().getTime(),distance=countDownDate-now,totalHours=Math.floor(distance/(1e3*60*60)),minutes=Math.floor((distance%(1e3*60*60))/(1e3*60)),seconds=Math.floor((distance%(1e3*60))/1e3);document.getElementById("bctatimerx").innerHTML="Sale Ending In: "+totalHours+"h "+minutes+"m "+seconds+"s";distance<0&&(clearInterval(x),document.getElementById("bctatimerx").innerHTML="")},1e3);</script>
+                      {% endcomment %}
+          {% if cart.currency.iso_code == "CAD" %}
+                <div class="proud_canadian">🍁 Blume is proudly Canadian and ships from within Canada</div>
+               {% comment %} <div class="proud_canadian">🇨🇦 <strong>We’re still shipping!</strong> We’ve partnered with alternate, trusted carriers for faster delivery options and your order will not be affected by the Canada Post strike.</div>{% endcomment %}
+          {% endif %}
+          {% comment %}
+           <div style=" margin: 10px 0; padding: 10px; max-width: 460px; background: #FFF9F9FF; border: 1px solid #DD3636FF; border-radius: 4px; "> <strong style=" color: #dd3636; "> ℹ️ </strong> We’re overwhelmed with all the love (in the best way!) and our small team is working hard around the clock to catch up on orders. Please allow up to 7 business days for your order to ship 🩵. Don’t worry, it’ll be on its way before you know it! </div>
+           {% endcomment %}
+          
+          <div class="icons__wrap">
+            <div class="icons">
+                {% render 'icons-pdp' %}
+              </div>
+          </div>
+          {%  comment %}
+          {% if cart.currency.iso_code == "USD" and product.handle == "clear-skin-kit-3xx" %}
+                <div class="proud_canadian">Selling fast! This bundle ships free!</div>
+          {% endif %} 
+           {% if product.handle == 'clear-skin-kit-3xx' %} 
+          <div style=" margin: 10px 0; padding: 10px; max-width: 460px; background: #FFF9F9FF; border: 1px solid #DD3636FF; border-radius: 4px; "> <strong style=" color: #dd3636; "> ℹ️ LOW STOCK:</strong> We sold out of this product 5x. this product is currently low stock and shipping in 10 business day </div>
+          {% endif %}{% endcomment %}
+
+          <div class="mbl_on rte"> {{ product.description }}</div>
+          
+          <div class='mt1'>
+            {% include 'banana-stand-product-page-container' %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+
+    Commenting out social sharing for now
+
+    {% if section.settings.show_share_buttons %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
+
+    {% endcomment %}
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    {% endunless %}
+  </div>
+</div>

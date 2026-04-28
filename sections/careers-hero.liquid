@@ -1,0 +1,53 @@
+<section class='bg-p px2 pm60  o-h rel f jcc aic hero__tall' data-module='pageHero'>
+  <div class='hero__empty rel z4 hero__shop fill-x f jcc aic'>
+    <div class='container--xl mha rel z2'>
+      <div class='f fw jcb aic ac'>
+        <div class='container--s mha '>
+          <h5 class='caps bold s1'>{{ section.settings.subheading }}</h5>
+          <h1 class='mx0 pt0 pb0 h1-hero  serif'>{{ section.settings.heading }}</h1>
+          <p class='pb0 h4 mb0'>{{ section.settings.description }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class='abs z3 fill-x fill-y co collection__hero-shape'>
+    {% include 'shape-four' %}
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Careers Hero",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "Blume Careers"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Lorem ipsum dolor sit amet"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Mini Description",
+        "default": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sem duis fusce erat est."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      }
+    ],
+    "presets": [{
+      "name": "Careers Hero",
+      "category": "Hero"
+    }]
+  }
+{% endschema %}

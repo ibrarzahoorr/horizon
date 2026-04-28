@@ -1,0 +1,29 @@
+{% if product.tags contains "__superbalm" %}
+  <div class="stickheaderi">
+     <ul>
+      {% unless product.handle == "superbalm" %} {% endunless %}
+        <li {% if product.handle == "superbalm" %} class="csubactive" {% endif %}><a  href="/products/superbalm">Vanilla </a></li> 
+        
+        {% unless product.handle == "superbalm-tripeptide-1-toffee-lip-tint" %} {% endunless %}
+        <li {% if product.handle == "superbalm-tripeptide-1-toffee-lip-tint" %} class="csubactive" {% endif %}><a   href="/products/superbalm-tripeptide-1-toffee-lip-tint">Toffee </a></li>
+        
+        {% unless product.handle == "superbalm-tripeptide-1-lip-tint-in-bubblegum" %} {% endunless %}
+        <li {% if product.handle == "superbalm-tripeptide-1-lip-tint-in-bubblegum" %} class="csubactive" {% endif %}><a   href="/products/superbalm-tripeptide-1-lip-tint-in-bubblegum">Bubblegum </a></li>
+         
+         {% unless product.handle == "superbalm-tripeptide-1-lip-tint-in-plum" %} {% endunless %}
+       <li {% if product.handle == "superbalm-tripeptide-1-lip-tint-in-plum" %} class="csubactive" {% endif %}><a   href="/products/superbalm-tripeptide-1-lip-tint-in-plum">Wild Plum </a></li>
+            
+      </ul>
+ </div>
+
+ <style> 
+    .stickheaderi { max-width: 1130px; margin: 0px auto; padding: 10px 0; }
+    .stickheaderi ul { list-style: none; margin: 0; padding: 0;   text-align: left;}
+    .stickheaderi ul li { display: inline-block; padding: 3px 20px; background: #ffffff; border-radius: 30px; margin: 0 5px;     border: 1px solid #001e42;}
+    .stickheaderi ul li.csubactive { background:  {% if product.handle == "superbalm-tripeptide-1-lip-tint-in-bubblegum" %} #e5508c; {% elsif product.handle == "superbalm-tripeptide-1-lip-tint-in-plum" %} #8e4179; {% else %} #001e42; {% endif %} }
+    .stickheaderi ul li a { color: #000; text-decoration: none; font-size: 14px; }
+    .stickheaderi ul li.csubactive a { color: #fff; }
+  
+    @media screen and (max-width: 768px) { 
+   .stickheaderi ul li { padding: 1px 11px; }}
+</style>{% endif %}

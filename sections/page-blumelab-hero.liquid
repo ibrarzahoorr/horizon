@@ -1,0 +1,129 @@
+<div class="page-blumelab__template f bg-o o-h rel" data-module="blumelab">
+  <div class="blumelab-heading">
+    <div class="blumelab-heading__container container--m pm100 ptl160">
+      <div class="logo">
+        {% include 'blumelabs.svg' %}
+      </div>
+      <h2 class="blumelab-heading__text cooper mb0">{{ section.settings.heading }}</h2>
+    </div>
+  </div>
+  <div class="blumelab-signup bg-bb rel">
+    <div class="blumelab-signup__images">
+      <div class="image-container rel fill">
+        {% for block in section.blocks %}
+          <img class="image-{{forloop.index}} abs lazyload" data-src="{{ block.settings.image | img_url: '400x' }}" srcset="{{ block.settings.image | img_url: '800x' }} 2x">
+        {% endfor %}
+      </div>
+      <div class="image-container rel fill">
+        {% for block in section.blocks %}
+          <img class="image-{{forloop.index}} abs" src="{{ block.settings.image | img_url: '400x' }}" srcset="{{ block.settings.image | img_url: '800x' }} 2x">
+        {% endfor %}
+      </div>
+    </div>
+    <div class="blumelab-signup__content">
+      <div class="signup-form rel">
+        <div class="signup-form-inner bg-w">
+          <div class="mt0">{{ section.settings.description }}</div>
+          <div class="border-bottom mt1 mb1">
+            <div id='lightbox-inline-form-d393d21f-d18f-4200-9f8f-ee9570888500'></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .blumelab-heading__text {
+    font-size: {{ section.settings.heading_size_d }}px;
+  }
+
+  @media only screen and (max-width: 800px) {
+    .blumelab-heading__text {
+      font-size: {{ section.settings.heading_size_t }}px;
+    }
+  }
+
+  @media only screen and (max-width: 640px) {
+    .blumelab-heading__text {
+      font-size: {{ section.settings.heading_size_m }}px;
+    }
+  }
+  
+</style>
+
+
+
+{% schema %}
+  {
+    "name": "Hero",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "range",
+        "id": "heading_size_d",
+        "label": "Heading Size (desktop)",
+        "min": 20,
+        "max": 40,
+        "step": 2,
+        "unit": "px",
+        "default": 34
+      },
+      {
+        "type": "range",
+        "id": "heading_size_t",
+        "label": "Heading Size (tablet)",
+        "min": 20,
+        "max": 30,
+        "step": 1,
+        "unit": "px",
+        "default": 27
+      },
+      {
+        "type": "range",
+        "id": "heading_size_m",
+        "label": "Heading Size (mobile)",
+        "min": 16,
+        "max": 26,
+        "step": 1,
+        "unit": "px",
+        "default": 22
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Help us pick our next products"
+      },
+      {
+        "type": "richtext",
+        "id": "description",
+        "label": "Signup Form Description"
+      },
+      {
+        "type": "header",
+        "content": "Images"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Image"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

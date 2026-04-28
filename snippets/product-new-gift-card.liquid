@@ -1,0 +1,260 @@
+<div class='product__hero_bg bg-p rel js-product-hero' data-id="{{ product.selected_or_first_available_variant.id }}">
+  <div class='container--xl mha' data-section-id="{{ section.id }}" data-module="product"
+    data-enable-history-state="true">
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- include 'bold-variant' with current_variant, output: 'none' -%}
+    {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+    <script class='js-product-json' type='text/template'>
+      {
+        "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+        "product": {{ product | json }},
+        "sku": {{ current_variant.sku | json }}
+      }
+    </script>
+    <div class='product__wrapper'>
+      {% assign pdp__hero = product.metafields.sf_extended_informat.pdp_hero %}
+      {% if product.handle contains 'all-in-skin' %}
+        {% include 'product-slideshow-growth' %}
+      {% else %}
+        {% include 'product-slideshow' %}
+      {% endif %}
+      <div class='product__description __desktop px2'>
+        <div>
+          <div class='js-review-jump'>
+            {% render 'junip-product-summary', product: product %}
+          </div>
+          {% if product.variants.size == 1 %}
+
+          <div data-price-wrapper>
+
+            {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price"> {{ product.price  | money }} </span>
+            <s data-compare-price>
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings"> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+
+          </div>
+            {% else %}
+           <div data-price-wrapper>
+             
+             {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price" id="cutnshhs"> {{ product.price  | money }} </span>
+            <s data-compare-price id="cutnshts">
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings" id="cutnsjts"> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+            </div>
+            
+          {% endif %}
+        </div>
+        <h1 class='serif mx0 pv0 product__title  '>
+          {% if product.title contains '(Subscription)' %}
+            {% assign prodTitle = product.title | split: ' (' | first %}
+            {{ prodTitle }}
+          {% else %}
+            {{ product.title }}
+          {% endif %}
+        </h1>
+
+        <div class="rte">
+          {% assign kicker = product.metafields.sf_extended_informat.kicker %}
+         {% comment %} {% if kicker %}
+          <h2 class='h5 mx0 pv05'>{{ kicker }}</h2>
+          {% endif %}{% endcomment %}
+        
+          {% comment %}<div class="dsk_on"> {{ product.description }}</div>{% endcomment %}
+         
+        </div>
+
+        
+
+        <div>
+          {% if product.tags contains 'always-price' %}
+          <div>
+            <span data-product-price>
+              {{ current_variant.price | money }}
+            </span>
+          </div>
+          {% endif %} 
+          <style>
+            /*.jcb.fw.mha.aic {display: none;}*/ .mha.px2.phm4.rel , #blob , .pv1.product__included.pm60 {display: none;}
+          </style>
+          <div class='mt2 mb1'>
+             {% comment %} AMAIS -- Added Pre order Tag {% endcomment %}
+              {% if product.tags contains "__preorder" or product.tags contains "pre-order" or product.tags contains "__pre_order" %}
+               <button onclick="addPreorderVariantToCart(47735084024001)" class=" btn ml05 btn__blue bold mt0" style="max-width: 385px;">{{ product.first_available_variant.price | money }} PRE-ORDER NOW </button>
+                <script>
+                  function addPreorderVariantToCart(variantId) {
+                           
+                          const cartAttributes = {
+                            'Pre-order': 'clear-skin-kit-3'
+                          }; 
+                          const lineItemProperties = {
+                            'pre-order': '{% if product.metafields.custom.pre_order_statement != blank %} {{ product.metafields.custom.pre_order_statement }}{% else %}True{% endif %}'
+                          }; 
+                          const cartData = {
+                            items: [
+                              {
+                                id: variantId,
+                                quantity: 1,
+                                properties: lineItemProperties
+                              }
+                            ],
+                            attributes: cartAttributes
+                          }; 
+                          fetch('/cart/add.js', {
+                            method: 'POST',
+                            headers: {
+                              'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify(cartData)
+                          })
+                          .then(response => response.json())
+                          .then(data => {
+                            console.log('Item added to cart:', data); 
+                            //window.location.href = '/cart';
+                          })
+                          .catch(error => {
+                            console.error('Error adding item to cart:', error); 
+                          });
+                        }
+                       </script>
+ 
+                <style>
+                                     
+                    @keyframes beat {
+                      0%, 50%, 100% { transform: scale(1, 1); }
+                      30%, 80% { transform: scale(0.92, 0.95); }
+                    }
+                    
+                    @keyframes pulse {
+                      0%, 50%, 100% {  background: #fee; }
+                      30%, 80% { background: #fff; }
+                    }
+                  .gift-banner-container { display: flex ; flex-direction: row; align-items: center; position: relative; margin-bottom: -10px; max-width: 450px; margin-top: 10px; }
+                  .gift-banner-image { display: block; position: relative; z-index: 2; } 
+                  .gift-banner-text { display: block; position: absolute; background: #f6ebff; font-size: 16px; font-weight: 900; left: 25px; padding: 5px 10px 4px 30px; z-index: 1; color: #001e42; margin-right: 50px;line-height: 1.4; }
+                  .gift-banner-subtext { font-weight: 400; font-size: 15px; display: block; line-height: 1.1 !important; }
+                </style>
+                <style> /* Tooltip container */ .cskgwp-tooltip { position: relative; display: inline-block; cursor: pointer; border-bottom: 1px dotted #ff85a2; /* Blume brand pink */ } /* Tooltip text */ .cskgwp-tooltip .cskgwp-tooltiptext { visibility: hidden; width: 220px; background-color: #001e42; color: #fff; text-align: left; border-radius: 4px; padding: 12px; position: absolute; z-index: 1000; bottom: 125%; left: 50%; transform: translateX(-50%); opacity: 0; transition: all 0.3s ease;  font-size: 13px; line-height: 1.4; box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15); } /* Tooltip arrow */ .cskgwp-tooltip .cskgwp-tooltiptext::after { content: ""; position: absolute; top: 100%; left: 50%; margin-left: -8px; border-width: 8px; border-style: solid; border-color: #333 transparent transparent transparent; } /* Show tooltip on hover */ .cskgwp-tooltip:hover .cskgwp-tooltiptext { visibility: visible; opacity: 1; } /* Highlight style for the trigger text */ .cskgwp-highlight { color: #311450; font-weight: 600; } </style> 
+
+                
+              <div style="margin: 10px 0;padding: 10px;max-width: 400px;background: #f4fcff;border: 1px solid #90cbf3;border-radius: 4px;font-size: 14px;"> <strong style="color: #001e42;"> ℹ️ 3x Sold Out—Next Batch Ships in 2 Weeks! </strong>  We’re hustling to get yours out ASAP! Thank you for the love & patience.  Pre-order yours now (free $32 sunscreen included) before we run out again. <br> *Please note: If your order includes multiple items, everything will ship together once the pre-order is ready.   </div>
+            
+              {% else %}
+
+                <!-- ADD TO CART -->
+                 {%- assign current_variant = product.selected_or_first_available_variant -%}
+<form action="/cart/add" method="post" enctype="multipart/form-data">
+  <input type="hidden" name="id" id="variant-id" value="{{ current_variant.id }}">
+  <input type="hidden" name="quantity" value="1">
+  <div class="variant-selector size-selector">
+    <fieldset class="size-selector__fields f jcs aic">
+    {% for variant in product.variants %}
+      {% assign value = variant.title %}
+      {% if value contains variant.title %}
+        {% unless variant.available %}
+          {% assign is_sold_out = true %} 
+        {% endunless %}
+        <div class='inline mr1'>
+          <input type='radio' 
+                 {% if variant.available %}{% else %} disabled {% endif %} 
+                 class='f jcs abs aic'
+                 id="{{ value | escape}}"
+                 value="{{ variant.id }}"
+                 data-price="{{ variant.price | money_without_trailing_zeros | remove: '<span class=money>' | remove: '</span>' }}"
+                 data-comparedat="{{ variant.compare_at_price | money_without_trailing_zeros | remove: '<span class=money>' | remove: '</span>' }}"
+                 data-variant-id="{{ variant.id }}"
+                 {% if current_variant.id == variant.id %}checked="checked"{% endif %} 
+                 name='id' />
+          <label class='bg-w f jcs aic' for='{{ value | escape }}'>
+            {{value}}
+            <img class='ml1 lazyload' data-src='{{ product.metafields.blume.variant_image }}' />
+          </label>
+        </div>
+      {% endif %}
+    {% endfor %}
+    </fieldset>
+  </div>
+   
+  <button type="submit" class="js-submit-cart btn btn__blue bold mt0" {% unless current_variant.available %}disabled{% endunless %}>
+    {% if current_variant.available %}
+      Add to Cart
+    {% else %}
+      Sold Out
+    {% endif %}
+  </button>
+</form>
+
+<script>
+document.addEventListener('change', function(e) {
+  if (e.target.matches('input[type="radio"]')) {
+    const variantId = e.target.value;
+    document.getElementById('variant-id').value = variantId;
+    
+    const submitBtn = document.querySelector('.js-submit-cart');
+    submitBtn.disabled = !e.target.checked || e.target.disabled;
+    submitBtn.textContent = e.target.disabled ? 'Sold Out' : 'Add to Cart';
+  }
+});
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
+
+
+                 
+                <div>
+                </div>
+              {% endif %} 
+ 
+          </div> 
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+
+    Commenting out social sharing for now
+
+    {% if section.settings.show_share_buttons %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
+
+    {% endcomment %}
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script> 
+    {% endunless %}
+  </div>
+</div>
+ 

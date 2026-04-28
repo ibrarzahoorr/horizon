@@ -1,0 +1,183 @@
+<nav role="navigation">
+  <ul class='f jcs'>
+    {% for link in linklists.main-menu-bfcm-2025.links %}
+      {% assign child_list_handle = link.title | handleize %}
+
+      {% comment %}For sub-menus{% endcomment %}
+      {% if menus[child_list_handle].links != blank %}
+        <li class="has-submenu{% if link.active %} active{% endif %}">
+          <a href="{{ link.url }}" class="site-nav__link bold caps">
+            {{ link.title }}
+          </a>
+          <ul class="site-nav__submenu">
+            {% for childlink in menus[child_list_handle].links %}
+              <li {% if childlink.active %}class="site-nav--active"{% endif %}>
+                <a href="{{ childlink.url }}" class="site-nav__link bold caps">{{ childlink.title | escape }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        </li>
+      {% else %}
+        <li class=" {% if link.active %}active{% endif %} mr1 {% if link.url contains 'pages/shop' %} megalevel{% endif %}" {% if link.url contains 'pages/shop' %} data-megalevel="1"{% endif %} >
+
+
+          
+          <a href="{{ link.url }}" class="bold caps" {% if link.url contains 'pages/skin-quiz' %} target="_blank" {% endif %}>
+            {% if link.url contains 'pages/shop' %} <span style="background: #001e42; color: #ffffff;padding: 10px 10px 6px;background-size: 160px;animation: movebg 14s ease-in-out infinite;">SHOP </span>{% else  %} {{ link.title }}{% endif %}
+          </a>
+
+          <div class="megamenu megamenu-1" style="display:none;">
+            <div class="fill-x container--xl mha pt2 pb2 ac">
+              <div class="megamenui">
+                <div class="megamenur">
+                  <div class="megamenic megamenic1">
+                    <div class="megamenicrca">
+                            
+                            <a href="/pages/shop" style=" color: #001e42; "><h4 class="bold">
+                               Best Sellers
+                            </h4></a>
+                             <a href="/collections/bundles"><h4 class="bold">
+                             Bundles <span style="font-size: 10px; font-weight: 600;color: #0e1f40;padding: 4px 9px;"  ></span>
+                            </h4> </a>
+                            <a href="/collections/meet-the-gang"><h4 class="bold">
+                             Products <span style="font-size: 10px; font-weight: 600;color: #0e1f40;padding: 4px 9px;"  ></span>
+                            </h4> </a>  
+                            <a href="/pages/gifts"><h4 class="bold">
+                             Gift <span style="font-size: 10px; font-weight: 600;color: #0e1f40;padding: 4px 9px;"  ></span>
+                            </h4> </a>                   
+                      </div>
+                  </div>
+                  <div class="megamenic megamenic2">
+                   <div class="megamenicrca">
+                            <h4 class="bold">Shop by Concern</h4>
+                            
+                              <div>
+                                <a href="/collections/best-selling-products-for-acne">Acne</a>
+                              </div>
+                            
+                              <div>
+                                <a href="/collections/product-for-dark-spots">Dark Spots</a>
+                              </div>
+                            
+                              <div>
+                                <a href="/collections/best-selling-products-for-sensitive-skin">Sensitive Skin</a>
+                              </div>
+                            
+                              <div>
+                                <a href="/collections/best-selling-products-for-dry-skin">Dry Skin</a>
+                              </div>
+                            
+                              <div>
+                                <a href="/collections/best-selling-products-for-pores">Pores</a>
+                              </div>
+                            
+                      </div>
+                  </div>
+
+
+                  <div class="megamenic megamenic4"> 
+                      <div class="megamenicrca">
+                     <a href="/products/the-ultimate-clear-skin-edit"><img src="https://www.blume.com/cdn/shop/files/hf_20260405_210014_928431ea-7f6c-4769-b0e2-8dc40b6848fa_900x900_crop_center.png?v=1775422935"></a>
+                       <div class="nttrtag">BEST DEAL</div>    
+                       <h4 class="bold">  <a href="/products/the-ultimate-clear-skin-edit"> The Ultimate Clear Skin Edit</a></h4>
+                     </div> 
+                  </div>
+                  <div class="megamenic megamenic3"> 
+                    <div class="megamenicrca">
+                     <a href="/products/clear-skin-kit-3"><img src="https://www.blume.com/cdn/shop/files/clear-skin-kit_800x800_crop_center.png?v=1760562375"></a>
+                       <div class="nttrtag">BEST SELLER</div>    
+                       <h4 class="bold">  <a href="/products/clear-skin-kit-3"> Clear Skin Kit: Acne Essentials</a></h4>
+                     </div>
+                  </div>
+                  
+                  {% comment %}<div class="megamenic megamenic4">
+                    <div class="megamenicrca">
+                     <a href="/products/the-ultimate-essentials-bundl"><img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_300x.png?v=1731013011"></a>
+                       <div class="nttrtag">Most Popular</div>    
+                       <h4 class="bold">  <a href="/products/the-ultimate-essentials-bundl"> The Ultimate Essentials Bundle</a></h4>
+                     </div>
+                  </div>{% endcomment %}
+                </div>
+              </div>
+            </div>
+          </div>
+
+          
+        </li>
+      {% endif %}
+    {% endfor %}
+    {% comment %}<li class="mr1">
+      <a href='#smile-referral-program-details' class='js-open-smile bold caps'>Get $10</a>
+    </li>{% endcomment %}
+  </ul>
+</nav>
+
+<script>
+  // Get all elements with the megalevel class
+  var megaLevelItems = document.querySelectorAll('li.megalevel');
+
+  // Add event listeners for hover
+  megaLevelItems.forEach(function(item) {
+    // Get the data-megalevel value
+    var megaLevelValue = item.getAttribute('data-megalevel');
+    var megamenuClass = '.megamenu-' + megaLevelValue;
+    var megamenu = document.querySelector(megamenuClass);
+
+    // When the item is hovered over
+    item.addEventListener('mouseenter', function() {
+      if (megamenu) {
+        megamenu.style.display = 'block';  // Show the corresponding megamenu
+      }
+    });
+
+    // When the item is no longer hovered over
+    item.addEventListener('mouseleave', function() {
+      if (megamenu) {
+        megamenu.style.display = 'none';  // Hide the megamenu
+      }
+    });
+  });
+</script>
+<style>
+  .header__logo svg { 
+    color: #001e42;
+}
+ .megamenu  { display: block; position: absolute; background: rgb(255, 255, 255); width: 100%; left: 0px; }
+/* Ensure the .megamenui takes full width */
+.megamenui , .megamenicrca img  {
+  width: 100%;
+}
+.megamenic h4  { margin: 10px 0;  }
+.megamenic a:before {display: none;}  
+.megamenic h4 a , .megamenic h4   { text-transform: none; font-size: 18px; letter-spacing: 0;line-height: 1;}
+ .nttrtag { background: #001e42; color: #fff; display: inline-block; padding: 3px 10px; font-size: 12px; font-weight: 600; }
+/* .megamenur will act as the row */
+.megamenur {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+/* Each column (megamenic) will take up 23-24% width for a four-column layout */
+.megamenic {
+  width: 24%; /* Adjust this if you need more spacing */
+  box-sizing: border-box; /* Ensure padding is included in width calculation */
+  padding: 10px; /* Add some padding */
+  margin-bottom: 15px; /* Space between rows, if content wraps */
+  text-align: left;
+}
+ 
+/* Optional responsiveness for smaller screens */
+@media (max-width: 768px) {
+  .megamenic {
+    width: 48%; /* Switch to two columns on smaller screens */
+  }
+}
+
+@media (max-width: 480px) {
+  .megamenic {
+    width: 100%; /* Stack the columns on very small screens */
+  }
+
+  
+</style>

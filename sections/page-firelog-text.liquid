@@ -1,0 +1,132 @@
+<div class="page-fire__banner bg-lb">
+  <div class="container--xl mxa ac" style="padding: 16px;">
+    Share this on your Instagram Story and we'll DM you a promo code ;)
+  </div>
+</div>
+
+<div class="page-fire__text-section bg-lp">
+  <div class="container--xl px2 mxa">
+    {% for block in section.blocks %}
+      <h4 class="serif ac">{{ block.settings.text }}</h4>
+    {% endfor %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Text",
+    "blocks": [
+      {
+        "type": "text_block",
+        "name": "Text Block",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ],
+    "default": {
+      "blocks": [
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "We're Blume"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "We’re world shapers and change makers"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Truth-tellers and taboo-breakers"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Dreamers and doers who are all about reaching new heights"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "And shattering glass ceilings on our way up here"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "We cherish our bodies"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Because they’re as sacred as our values"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "And as beautiful as our minds"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "We bleed every month, but it doesn’t hold us back"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "It only makes us stronger, smarter and so much more capable"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "We put self care and love first"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Which is why we run the world"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "A brighter future is what it’s all about"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "And we follow the light, not the leader"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Because we work as one"
+          }
+        },
+        {
+          "type": "text_block",
+          "settings": {
+            "text": "Together, we’ll leave the world better than we found it"
+          }
+        }
+      ]
+    }
+  }
+{% endschema %}

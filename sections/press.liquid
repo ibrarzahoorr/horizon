@@ -1,0 +1,49 @@
+<div class='press content content__wrapper container--l mha'>
+
+  <div class='press__wrapper fw f jcb ais'>
+  {% for block in section.blocks %}
+    {% assign press = block.settings %}
+    <div class='press__single_item'>
+      <a href='{{press.press_url}}' target='_blank'>
+        <div class='press__single_item_image x bg-w px1'>
+          <img class="lazyload" data-src='{{press.press_image | img_url: 'large'}}' />
+        </div>
+        <p class='px1  small'>{{press.press_snippet}}</p>
+      </a>
+    </div>
+  {% endfor %}
+  </ul>
+  <div class='ac fill-x'>
+    <h5 class='ac mt2'>Interested in featuring us? <a href='mailto:press@meetblume.com'>press@meetblume.com</a></h5>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Press",
+    "settings": [],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Press",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "press_image",
+            "label": "Logo"
+          },
+          {
+            "type": "text",
+            "id": "press_url",
+            "label": "Press URL"
+          },
+          {
+            "type": "text",
+            "id": "press_snippet",
+            "label": "Press Snippet (Optional)"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

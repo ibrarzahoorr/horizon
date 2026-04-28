@@ -1,0 +1,72 @@
+<section class='bg-lb px2 pm100 pl100 ptl160 o-h rel hero hero__tall tallest' data-module='pageHero'>
+  <div class='hero__empty hero__story px2'>
+    <div class='abs fill-x fill-y fill hero__image_background' style="background-image: url({{ section.settings.image | img_url: '1800x' }})"></div>
+    <div class='container--xl mha rel fill-y f aic z2 hero__text_tab_desk pv2'>
+      <div class='f fw jcb aic hero__flex'>
+        <div>
+          <div class='container--m mha hero__a_text'>
+            <h2 class='pb1 serif'>{{ section.settings.title }}</h2>
+          </div>
+        </div>
+        <div class='container--ms fill-x f jce'>
+          <div class='container--s rel hero__image hero__a_image'>
+            <img class='fill-x ' src="{{ section.settings.image | img_url: '600x' }}" />
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% comment %} <!-- <div class='abs fill-x fill-y cb hero__our_shape'>
+    {% include 'shape-one' %}
+  </div> --> {% endcomment %}
+</section>
+<div class='container--xl mha rel z2 hero__text_tablet pt2 ph2 bg-lp'>
+  <div class='f fw jcb aic hero__flex'>
+    <div class='fill-x'>
+      <div class='container--ms mha hero__a_text'>
+        <h2 class='pb0 serif'>{{ section.settings.title }}</h2>
+      </div>
+    </div>
+  </div>
+</div>
+{% schema %}
+  {
+    "name": "Blume Page Hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+         "type": "select",
+         "id": "alignment",
+         "label": "Alignment",
+         "options": [
+           {
+             "group": "value",
+             "value": "left",
+             "label": "Left"
+           },
+           {
+             "group": "value",
+             "value": "right",
+             "label": "Right"
+           }
+         ],
+         "default":   "left",
+         "info":      "Alignment"
+      }
+    ],
+    "presets": [{
+      "name": "Blume Page Hero",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

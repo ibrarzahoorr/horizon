@@ -1,0 +1,14 @@
+<script>
+  /**
+   * Enable wisepops() function
+   */
+  if (!window['WisePopsObject']) {
+    window['WisePopsObject'] = 'wisepops';
+    window['wisepops'] = window['wisepops'] || function () {
+      (window['wisepops'].q = window['wisepops'].q || []).push(arguments)
+    };
+    window['wisepops'].l = 1 * new Date();
+  } else {
+    window['wisepops'] = window[window['WisePopsObject']];
+  }
+</script>

@@ -1,0 +1,33 @@
+<div class='product__image ac rel'>
+  <img src="{{ featured_image | img_url: '1400x' }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+  <div class='product__image-slider js-pdp-hero-slideshow abs x y top left'>
+    {% for image in product.images %}
+      {%- assign alt = image.alt | escape -%}
+      {%- assign slide_title = alt | split: ': ' | last -%}
+      {%- assign slide_subtitle = alt | split: ': ' | first -%}
+      <div class="js-slide __frame x y abs fill" data-title="{{ slide_title }}" data-subtitle="{{ slide_subtitle }}">
+        {%
+          include 'image' with
+          product: image.src,
+          size: '1200x',
+          alt: image.alt | escape,
+          fill: true,
+          className: 'abs fill z0 js-priority'
+        %}
+      </div>
+    {% endfor %}
+  </div>
+  <div class="product__image-navigation bg-hp">
+    <div class="rel f aic jcc">
+      <div class="product__image-navigation-arrow arrow-left js-navArrow prev"></div>
+      <div>
+        {% assign default_alt = product.images[1].alt | escape %}
+        {% assign default_slide_title = default_alt | split: ': ' | last %}
+        {% assign default_slide_subtitle = default_alt | split: ': ' | first %}
+        <p class="product__image-navigation-subtitle js-slideSubtitle caps small black">{{ default_slide_subtitle }}</p>
+        <p class="product__image-navigation-title js-slideTitle">{{ default_slide_title }}</p>
+      </div>
+      <div class="product__image-navigation-arrow arrow-right js-navArrow next"></div>
+    </div>
+  </div>
+</div>

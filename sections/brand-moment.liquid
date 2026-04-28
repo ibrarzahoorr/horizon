@@ -1,0 +1,45 @@
+<section class='moment pv2 pm60 rel z4'>
+  <div class='container--m moment__container ac mha px2'>
+    <img src='{{ section.settings.image | img_url: '600x' }}' />
+    <h3 class='mb1'>{{ section.settings.description }}</h3>
+    <div class='f jcc fw aic'>
+      {% for values in section.blocks %}
+        <h5 class='caps mh05 ph05 mv05 x moment__value black s1'>{{values.settings.name}}</h5>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Brand Moment",
+    "settings": [
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Description",
+        "default": "We provide safe..."
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Background Image"
+      }
+    ],
+    "blocks": [
+    {
+      "type": "values",
+      "name": "Values",
+      "settings": [
+      {
+        "label": "Name",
+        "type": "text",
+        "id": "name"
+      }]
+    }],
+    "presets": [{
+      "name": "Brand Moment",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

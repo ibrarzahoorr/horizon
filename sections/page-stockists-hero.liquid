@@ -1,0 +1,60 @@
+<section class='bg-lb px2 pm100 pl100 ptl160 o-h rel hero hero__tall tallest' data-module='pageHero'>
+    <div class='hero__empty hero__story'>
+      <div class='abs fill-x fill-y fill hero__image_background desktop' style="background-image: url({{ section.settings.image | img_url: '1800x' }})"></div>
+      <div class='abs fill-x fill-y fill hero__image_background mobile' style="background-image: url({{ section.settings.mobileimage | img_url: '1800x' }})"></div>
+      <div class='hero__text-wrapper container--xl mha pt2 pb2 rel fill-y f aic z2'>
+        <div class='hero__text-inner f fw jcb aic'>
+            <div class='mha hero__a_text'>
+                <h2 class='pb1 serif'>{{ section.settings.title }}</h2>
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% schema %}
+    {
+      "name": "Blume Stockists Page Hero",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Desktop Image"
+        },
+        {
+            "type": "image_picker",
+            "id": "mobileimage",
+            "label": "Mobile Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Find Blume in a store near you."
+        },
+        {
+           "type": "select",
+           "id": "alignment",
+           "label": "Alignment",
+           "options": [
+             {
+               "group": "value",
+               "value": "left",
+               "label": "Left"
+             },
+             {
+               "group": "value",
+               "value": "right",
+               "label": "Right"
+             }
+           ],
+           "default":   "left",
+           "info":      "Alignment"
+        }
+      ],
+      "presets": [{
+        "name": "Blume Stockists Page Hero",
+        "category": "sections"
+      }]
+    }
+  {% endschema %}
+  

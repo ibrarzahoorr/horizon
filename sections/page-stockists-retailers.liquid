@@ -1,0 +1,41 @@
+<section class='retailers bg-cp rel'>
+    <div class='retailers__inner container--l mha px2 phm4 rel z2'>
+      <div class='wrapper__inner rel z3 ac'>
+        <h2 class='serif container--m mha mt0'>{{section.settings.title}}</h2>
+      </div>
+      {% if section.blocks.size > 0 %}
+      <div class="retailers__logo-wrapper container--m mha f aic">
+        {% for block in section.blocks %}
+            <img class='retailer-logo' src="{{ block.settings.logo | img_url: '400x' }}" />
+        {% endfor %}
+      </div>
+    {% endif %}
+    </div>
+  </section>
+  {% schema %}
+    {
+      "name": "Stockists Page Retailers",
+      "max_blocks": 4,
+      "settings": [
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title",
+          "default": "Clean self care available nationwide at over 300 retail locations"
+        }
+        ],
+        "blocks": [
+        {
+            "type": "item",
+            "name": "Retailer",
+            "settings": [
+            {
+                "type": "image_picker",
+                "id": "logo",
+                "label": "Retailer Logo"
+            }
+            ]
+        }
+        ]
+    }
+  {% endschema %}

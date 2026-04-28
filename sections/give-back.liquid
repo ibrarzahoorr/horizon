@@ -1,0 +1,94 @@
+<section class='bg-w pm0 pv1 pl100 pt160 o-h rel'>
+  <div class='container--xl mha px2 rel z2 js-animate'>
+    <div class='f fw jcb aic give__back_flex reverse'>
+      <div class='container--m fill-x ti__image'>
+        <div class='ac mha'>
+          <img class='fill-x lazyload' data-src="{{ section.settings.image_1 | img_url: '1200x' }}" />
+        </div>
+      </div>
+      <div>
+        <div class='container--ms pv1 mha ti__text'>
+          <p class='caps bold s1 mx0 px0 mb1'>{{ section.settings.subheading_1 }}</p>
+          <h2 class='px0 serif pb05 mx0'>{{ section.settings.title_1 }}</h2>
+          <p>{{ section.settings.description_1 }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+    <div class='container--xl mha px2 rel z2 js-animate'>
+      <div class='f fw jcb aic give__back_flex'>
+        <div class='container--m fill-x ti__image'>
+          <div class='ac mha'>
+            <img class='fill-x lazyload' data-src="{{ section.settings.educate_image | img_url: '1200x' }}" />
+          </div>
+        </div>
+        <div>
+          <div class='container--s pv1 mha ti__text'>
+            <p class='caps bold s1 mx0 px0 mb1'>{{ section.settings.educate_sub }}</p>
+            <h2 class='px0 serif pb05 mx0'>{{ section.settings.educate_title }}</h2>
+            <p>{{ section.settings.educate_description }}</p>
+            <a href='{{section.settings.educate_download}}' download class='btn btn__outline bold mt1'>Download Period Guide</a>
+          </div>
+        </div>
+      </div>
+    </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Giving Back",
+    "settings": [
+      {
+        "type": "text",
+        "id": "subheading_1",
+        "label": "Give Back Sub Heading"
+      },
+      {
+        "type": "text",
+        "id": "title_1",
+        "label": "Give Back Title"
+      },
+      {
+        "type": "textarea",
+        "id": "description_1",
+        "label": "Description 1",
+        "default": "Lorem ipsum"
+      },
+      {
+        "type": "image_picker",
+        "id": "image_1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "educate_sub",
+        "label": "Educate Sub Heading"
+      },
+      {
+        "type": "text",
+        "id": "educate_title",
+        "label": "Educate Title"
+      },
+      {
+        "type": "textarea",
+        "id": "educate_description",
+        "label": "Educate Description"
+      },
+      {
+        "type": "image_picker",
+        "id": "educate_image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "educate_download",
+        "label": "File Download URL"
+      }
+    ],
+    "presets": [{
+      "name": "Giving Back",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

@@ -1,0 +1,43 @@
+{% capture currencyString %}
+  {{ shop.money_format }}{% endcapture %}
+{% assign tempArray = currencyString | split: '{' %}
+{% assign currencySymbol = tempArray.first %}
+<div
+  class="js-search-drawer search-drawer f pv1 ph2 phm4 rel"
+  data-module="searchDrawer"
+  id="searchDrawer">
+
+  <div class="f input-container container--xl mha" data-money="{{ currencySymbol }}">
+    <div class="f input-wrapper">
+      <input type="text" placeholder="Search..." class="text">
+      <button class="search-button">
+        {% render 'icon-search' %}
+      </button>
+    </div>
+    <div class="f jcc">
+      <button class="close-button">
+        {% include 'icon-close' %}
+      </button>
+    </div>
+  </div>
+
+  <div id="searchResults" class="search-results container--xl mha"></div>
+
+  <form action="/search" class="search-drawer-form container--xl mha">
+    <input
+      type="hidden"
+      name="q"
+      value="query" />
+    <input
+      type="hidden"
+      name="type"
+      value="product" />
+    <input
+      type="hidden"
+      name="options[prefix]"
+      value="last" />
+    <button type="submit" class="btn btn__blue bold btn-show-all">
+      See all Results
+    </button>
+  </form>
+</div>

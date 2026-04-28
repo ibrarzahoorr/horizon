@@ -1,0 +1,61 @@
+{% if section.settings.lifestyle %}
+  <div class='collection__accordion bg-lb rel z2'>
+    <div class='f fw jcb aist'>
+      <img class='block x lazyload' data-src="{{ section.settings.lifestyle | img_url: 'large'}}" alt='Blume Lifestyle Image' />
+      <div class='collection__accordion-blocks x px1 f jcc aic' data-module='accordion'>
+        {% for block in section.blocks %}
+        {% assign perk = block.settings %}
+          <div class='x pv1 collection__accordion-single js-a-item  {% if forloop.index0 == 0 %}active{% endif %}'>
+            <div class='collection__accordion-single_header pointer f jcb aic'>
+              <h5 class='bold mx0 px0'>{{ perk.perk }}</h5>
+              <button type='button' class='collection__accordion-control bg-w f jcc aic'>
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <line x1="12.5355" y1="5.46451" x2="5.46445" y2="12.5356" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  <line x1="12.5356" y1="12.5356" x2="5.46449" y2="5.46452" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>                
+              </button>
+            </div>
+            <div class='collection__accordion-body'>
+              {{perk.perk_description}}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </div>
+{% endif %}
+
+{% schema %}
+  {
+    "name": "Careers Accordion",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "lifestyle",
+        "label": "Lifestyle Image"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Perks",
+        "settings": [
+          {
+            "type": "text",
+            "id": "perk",
+            "label": "Perk Title"
+          },
+          {
+            "type": "richtext",
+            "id": "perk_description",
+            "label": "Perk Description"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Careers Accordion",
+      "category": "Accordion"
+    }]
+  }
+{% endschema %}

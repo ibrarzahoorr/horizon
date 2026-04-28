@@ -1,0 +1,143 @@
+<section class="rec-products">
+<h2 class="serif bold heading">{{ section.settings.heading }}</h2>
+    <div class="products">
+        {% if section.blocks.size > 0 %}
+                {% for block in section.blocks %}
+                    <div class="product">
+                        <h5>{{ block.settings.headline }}</h5> 
+                        {% assign product = all_products[block.settings.product] %}
+                            <div>
+                            {%- assign current_variant = product.selected_or_first_available_variant -%}
+                                <script class='js-product-json' type='text/template'>
+                                    {
+                                    "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+                                    "product": {{ product | json }}
+                                    }
+                                </script>
+                                <div class='rel collection__item_image'>
+                                    {% if product.handle != 'jade-roller' %}
+                                    <div class='collection__item_atc abs bottom left fill-x z5 px1 {% if productTags contains 'no-add' %}none{% endif %}'>
+                                        <a href='' class='btn btn__white-fill js-add-to-cart bold fill-x' 
+                                        {% if subscription_variant %} data-subscription-variant="{{ subscription_variant }}" {% endif %}
+                                        {% if subscription_discount %} data-subscription-discount="{{ subscription_discount }}" {% endif %}
+                                        >
+                                        Add to Cart</a>
+                                     </div>
+                                {% endif %} 
+                                {% if offer %}
+                                    <div class='abs z3 right top px1 collection__flag-wrapper'>
+                                        <div class='abs top left collection__flag'>
+                                        <h5 class='caps bold ac'>{{ offer }}</h5>
+                                        </div>
+                                        <svg width="96px" height="97px" viewBox="0 0 96 97">
+                                        <g stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                            <path
+                                            d="M66.5397593,91.0163598 L57.9509225,85.8390409 C55.7968791,84.5403786 53.0274744,84.940096 51.3258861,86.7950084 L44.5440804,94.1895012 C41.8299075,97.1485282 36.9455122,96.1254752 35.6417051,92.3245259 L32.3835819,82.8269046 C31.5662616,80.4436943 29.189059,78.9661375 26.6958137,79.2915019 L16.7574222,80.587369 C12.7801688,81.105604 9.69443599,77.1760743 11.1338123,73.4248801 L14.7305795,64.0508078 C15.6327002,61.6989041 14.7595902,59.035612 12.6412522,57.678809 L4.19635311,52.2694863 C0.816608197,50.1048627 0.974493276,45.1075564 4.48311258,43.1609606 L13.2515924,38.296707 C15.4513835,37.0763111 16.4907471,34.473396 15.7381429,32.069501 L12.7383264,22.4869048 C11.5382882,18.6518538 14.8650329,14.9246985 18.8021177,15.6939449 L28.6389718,17.6153837 C31.1065538,18.0972808 33.5724621,16.7729024 34.5387411,14.4467147 L38.3876781,5.17382965 C39.9285918,1.46344572 44.8671032,0.75066291 47.3899171,3.87516732 L53.6930465,11.6833536 C55.2746868,13.6428075 58.0128492,14.216388 60.2449983,13.056369 L69.1417946,8.43194589 C72.7022984,6.58206486 76.9423218,9.2174046 76.8709109,13.2358225 L76.690152,23.2773949 C76.6449622,25.7964532 78.3750033,27.9996509 80.8286379,28.5486334 L90.610818,30.7372959 C94.5244711,31.6127609 96.0826797,36.3629692 93.4494021,39.3952311 L86.8701132,46.9708545 C85.2192936,48.8716087 85.1311458,51.673544 86.6592279,53.6749263 L92.7486824,61.6519442 C95.18558,64.8440931 93.3311277,69.4864056 89.3700533,70.1130955 L79.4701567,71.6789815 C76.9863957,72.0714313 75.1213433,74.1611428 75.0075322,76.678524 L74.5550771,86.7111516 C74.3743182,90.7256562 69.9764098,93.0881818 66.5397593,91.0163598"
+                                            stroke="#001E42" stroke-width="2" fill="#FBECE3"></path>
+                                        </g>
+                                        </svg>
+                                    </div>
+                                {% endif %}
+                                    {% assign hover__image = product.metafields.sf_extended_informat.image %}
+                                    {% assign c_hover = product.metafields.sf_extended_informat.collection_hover_image %}
+                                {% if hover__image %}
+                                    <div class="collection__item_image-wrapper">
+                                        {% if c_hover %}
+                                        {%
+                                            include 'image' with
+                                            src: c_hover,
+                                            size: '600x',
+                                            alt: product.title | escape,
+                                            fill: true,
+                                            className: 'collection__hover_image'
+                                        %}
+                                        {% else %}
+                                        {%
+                                            include 'image' with
+                                            src: hover_image,
+                                            size: '600x',
+                                            alt: product.title | escape,
+                                            fill: true,
+                                            crop: center,
+                                            className: 'collection__hover_image'
+                                        %}
+                                        {% endif %}
+                                    </div>
+                                {% endif %}
+                                {% if product_image %}
+                                    <div class="collection__item_image-wrapper">
+                                        <img alt="{{ product.title }}" class="lazyload" data-src="{{ product_image | img_url: '880x800' }}">
+                                    </div>
+                                {% else %}
+                                    <div class="collection__item_image-wrapper">
+                                        <img alt="{{ product.title }}" class="lazyload" data-src="{{ product.featured_image.src  | img_url: '880x800' }}">
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                        <div class="product-text">
+                            <h5 class='medium pt0 serif mx0 mb0 pb0 mt05 ac product-title'>
+                            {% if prodTitle %}
+                            {{ prodTitle }}
+                            {% else %}
+                            {{ product.title }}
+                            {% endif %}
+                            </h5>
+                            <div class="paragraph p-short">{{ block.settings.short_description }}</div>
+                            <div class="paragraph">{{ block.settings.description }}</div>
+                        </div>
+                    </div>
+                {% endfor %}
+        {% endif %}
+    </div>
+
+</section>
+
+{% schema %}
+  {
+    "name": "Recommended Products",
+    "settings": [
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Say Goodbye to Acne"
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "type": "product",
+        "name": "Product",
+        "settings": [
+          {
+            "type": "text",
+            "id": "headline",
+            "label": "Headline",
+            "default": "OVERNIGHT RELIEF"
+          },
+          {
+            "type": "product",
+            "id": "product",
+            "label": "Product"
+          },
+          {
+            "type": "text",
+            "id": "short_description",
+            "label": "Short Description"
+          },
+          {
+            "type": "textarea",
+            "id": "description",
+            "label": "Product Description"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Recommended Products"
+      }
+    ]
+  }
+{% endschema %}

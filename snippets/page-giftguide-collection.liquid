@@ -1,0 +1,10 @@
+<div class="page-holiday__collection page-gg__collection page-gg bg-w {% unless show_title == true %}hide_titles{% endunless %}">
+  <div class="container--xl mha px1">
+    <div class='f jcb px1 fw collection__grid'>
+      {% for prod in products %}
+        {% assign product = all_products[prod.settings.product] %}
+        {% include 'collection-item' with heading: prod.settings.heading, product: product, alt_description: prod.settings.description %}
+      {% endfor %}
+    </div>
+  </div>
+</div>

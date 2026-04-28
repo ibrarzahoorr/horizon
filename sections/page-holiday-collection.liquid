@@ -1,0 +1,53 @@
+{%- assign collection = collections[section.settings.collection] -%}
+
+<div class="page-holiday__collection bg-lp">
+  <div class="container--xl mha px1">
+    <div class="holiday-collection__header ac mb2">
+      <h2 class="serif mb0 mt0">{{ section.settings.heading }}</h2>
+      <p>{{ section.settings.description }}</p>
+    </div>
+  
+    <div class='f jcb px1 fw collection__grid'>
+      {% for product in collection.products limit: 6 %}
+        {% include 'collection-item' %}
+      {% endfor %}
+    </div>
+
+    <div class="f jcc px1">
+      <a href='/pages/shop' class='btn btn__blue bold fill-x'>
+        Shop all Products
+      </a>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Collection",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "collection",
+        "id": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "text",
+        "id": "description",
+        "label": "Description"
+      }
+    ]
+  }
+{% endschema %}

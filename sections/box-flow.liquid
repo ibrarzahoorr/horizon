@@ -1,0 +1,57 @@
+{% assign bg_image = 'bg-color.jpg' | file_url %}
+<section class='pm60 pl100 rel box__flow o-h' style='background: #b1e1ea url({{ section.settings.image | img_url: '1800x' }}) right top no-repeat'>
+  <div class='container--xlxxx mha z2'>
+    <div class='f fwxx jcbxx aicxxx box__flow_flexxxx wrapper__inner pb0'>
+      {% comment %}<div class='box__flow_image' style='background-image: url({{ section.settings.image | img_url: '1800x' }})'>
+        <img class='fill-x lazyload medium-up-hide' data-src="{{ section.settings.image | img_url: '1800x' }}" />
+      </div>{% endcomment %}
+      <div class='fill-x'>
+        <div class='container--ms mha pt2 rel z1 ph2'>
+          <img class="fill-x lazyload medium-up-hide is-visible is-loaded" src="{{ section.settings.image | img_url: '1800x' }}">
+          <h2 class='mx0 pt1 serif pb1'>{{ section.settings.title }}</h2>
+          <a href="{{ section.settings.page }}" class='btn btn__outline bold'>{{ section.settings.cta }}</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- <div class='abs left fill-x fill-y box__flow_wave clb'>
+    <svg class='fill-x abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+  </div> -->
+  <style>
+    .medium-up-hide {display: none;}
+    @media (max-width: 767px) { .medium-up-hide {display: block;} }
+  </style>
+</section>
+{% schema %}
+  {
+    "name": "Box Flow",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don't wage.."
+      },
+      {
+        "id": "cta",
+        "type": "text",
+        "label": "Cta Label",
+        "default": "Learn More About Us"
+      },
+      {
+        "id": "page",
+        "type": "page",
+        "label": "Page Link"
+      }
+    ],
+    "presets": [{
+      "name": "Box Flow",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

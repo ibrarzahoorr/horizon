@@ -1,0 +1,61 @@
+<div class="page-landing__story bg-w px2">
+  <div class="container--s ac" style="margin: 0 auto;">
+    {% if section.settings.heading != blank %}
+      <h2 class="serif mt0">{{ section.settings.heading }}</h2>
+    {% endif %}
+    {% if section.settings.image != blank %}
+      <img class="landing-story__image lazyload" data-src="{{ section.settings.image | img_url: '80x' }}" data-srcset="{{ section.settings.image | img_url: '160x' }} 2x">
+    {% endif %}
+    {% if section.settings.description != blank %}
+      <p class="landing-story__description">{{ section.settings.description }}</p>
+    {% endif %}
+    {% if section.blocks.size > 0 %}
+      <div class="landing-story__bullets mt2">
+        {% for block in section.blocks %}
+          <p class="caps bold">{{ block.settings.text }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+
+{% schema %}
+  {
+    "name": "Story",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading"
+      },
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "principle",
+        "name": "Principle",
+        "settings": [
+          {
+            "type": "text",
+            "id": "text",
+            "label": "Text"
+          }
+        ]
+      }
+    ]
+  }
+{% endschema %}

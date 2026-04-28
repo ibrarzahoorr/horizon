@@ -1,0 +1,25 @@
+{% if product.metafields.blume.included_products %}
+{% assign selected_handles = product.metafields.blume.included_products | split: '|'  %}
+  <section class='bg-p pv1 product__included o-h al' data-module='productIncludedInfo'>
+    <div class='fill-x container--xl mha phm4'>
+      <div class='f jcb fw product__included-info js-include-slideshow'>
+        {% for selected_handle in selected_handles %}
+          {% assign handle = selected_handle | remove: '["' | remove: '"]' %}
+          {% assign productItem = all_products[handle] %}
+          {% include 'product-what-includes-single',  product: productItem %}
+        {% endfor %}
+      </div>
+      <div class="f jcc">
+        <div class="box__flow-links js-include-links f jcc aic">
+          {% for selected_handle in selected_handles %}
+            {% assign handle = selected_handle | remove: '["' | remove: '"]' %}
+            {% assign productItem = all_products[handle] %}
+            <a href='' class='px1 rel bold ac'>
+              {{productItem.title}}
+            </a>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endif %}

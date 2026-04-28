@@ -1,0 +1,291 @@
+{%- assign press_logos = section.blocks | map: 'settings' -%}
+
+<section class='hero__home hero_bf desktop' data-module='hero'>
+  <div class="hero__module" data-module='heroSlideshow'>
+  <div class="js-slideshow y" data-speed="{{ section.settings.speed }}">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div class='hero__slide x ac y' style="background-image: url('{{ block.settings.image | img_url: "2048x2048"  }}')">
+          <div class='hero__slide__content'>
+            <div class='container--xl mha fill-x hero__text_desktop' >
+              <div class='container--ms hero_bf_full'>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading_color }}' style="font-size: {{ block.settings.font_size}}px;">{{ block.settings.heading }}</h1>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading2_color }}' style="font-size: {{ block.settings.font_size}}px;">{{ block.settings.heading_2 }}</h1>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading3_color }}' style="font-size: {{ block.settings.font_size}}px;">{{ block.settings.heading_3 }}</h1>
+                <h5 class='ls0' style="font-size: {{ block.settings.font_size_sub }}px;">{{ block.settings.subheading }}</h5>
+                <div class='hero__btn'>
+                  <a href='/pages/shop' class='btn {{ block.settings.color }} bold'>{{ block.settings.button_text }}</a>
+                </div>
+               <div class="stickers">
+                {% if block.settings.sticker %}
+                      <div class="sticker">
+                        <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/black_friday_sale.png?v=1668772674" alt="black_friday_sale">
+                      </div>
+                {% endif %} 
+              {% if block.settings.sticker_cm %}
+                      <div class="sticker_cm">
+                        <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/30_off.png?v=1668772674" alt="30off">
+                      </div>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  </div>
+</section>
+
+<section class='hero__home hero_bf mobile' data-module='hero'>
+  <div class="hero__module" data-module='heroSlideshow'>
+  <div class="js-slideshow y" data-speed="{{ section.settings.speed }}">
+    {% if section.blocks.size > 0 %}
+      {% for block in section.blocks %}
+        <div class='hero__slide x ac y hero__module' style="background-image: url('{{ block.settings.image_mobile | img_url: "1844x1390"  }}')">
+          <div class='hero__slide__content'>
+            <div class='container--xl mha fill-x hero__text_desktop bf_full' >
+              <div class='container--ms hero_bf_full'>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading_color }}' style="font-size: {{ block.settings.font_size_mobile}}px;">{{ block.settings.heading }}</h1>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading2_color }}' style="font-size: {{ block.settings.font_size_mobile}}px;">{{ block.settings.heading_2 }}</h1>
+                <h1 class='mx0 px0 h1-hero {{ block.settings.heading3_color }}' style="font-size: {{ block.settings.font_size_mobile}}px;">{{ block.settings.heading_3 }}</h1>
+                <p class='ls0' style="font-size: {{ block.settings.font_size_sub_mobile }}px;">{{ block.settings.subheading }}</p>
+                <div class='hero__btn'>
+                  <a href='/pages/shop' class='btn {{ block.settings.color }} bold'>{{ block.settings.button_text }}</a>
+                </div>
+
+               <div class="stickers">
+                {% if block.settings.sticker %}
+                      <div class="sticker">
+                        <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/black_friday_sale.png?v=1668772674" alt="black_friday_sale">
+                      </div>
+                {% endif %} 
+              {% if block.settings.sticker_cm %}
+                      <div class="sticker_cm">
+                        <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/30_off.png?v=1668772674" alt="30off">
+                      </div>
+                {% endif %}
+              </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    {% endif %}
+  </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Hero BF",
+    "settings":[
+      {
+        "type": "text",
+        "id": "speed",
+        "label": "Slider Speed In Seconds",
+        "default": "4"
+      }
+    ],
+    "max_blocks": 3,
+    "blocks": [
+      {
+        "type": "slide",
+        "name": "Slide",
+        "settings": [
+          {
+            "type": "text",
+            "id": "heading",
+            "label": "First Line Heading"
+          }, 
+          {
+         "type": "select",
+         "id": "heading_color",
+         "label": "First Line Color",
+         "default": "pink",
+         "options": [
+            {
+              "group": "value",
+              "value": "pink",
+              "label": "Pink"
+            },
+            {
+              "group": "value",
+              "value": "blue",
+              "label": "Blue"
+            },
+            {
+              "group": "value",
+              "value": "green",
+              "label": "Green"
+            }
+           ]
+          },
+          {
+            "type": "text",
+            "id": "heading_2",
+            "label": "Second Line Heading"
+          },
+         {
+         "type": "select",
+         "id": "heading2_color",
+         "label": "Second Line Color",
+         "default": "pink",
+         "options": [
+            {
+              "group": "value",
+              "value": "pink",
+              "label": "Pink"
+            },
+            {
+              "group": "value",
+              "value": "blue",
+              "label": "Blue"
+            },
+            {
+              "group": "value",
+              "value": "green",
+              "label": "Green"
+            }
+           ]
+          }, 
+           {
+            "type": "text",
+            "id": "heading_3",
+            "label": "Third Line Heading"
+          }, 
+         {
+         "type": "select",
+         "id": "heading3_color",
+         "label": "Third Line Color",
+         "default": "pink",
+         "options": [
+            {
+              "group": "value",
+              "value": "pink",
+              "label": "Pink"
+            },
+            {
+              "group": "value",
+              "value": "blue",
+              "label": "Blue"
+            },
+            {
+              "group": "value",
+              "value": "green",
+              "label": "Green"
+            }
+           ]
+          },
+          {
+          "type": "range",
+          "id": "font_size",
+          "min":  35,
+          "max":  70,
+          "step":  1,
+          "unit": "px" ,
+          "label": "Heading Font Size",
+          "default":  35
+          },
+          {
+          "type": "range",
+          "id": "font_size_mobile",
+          "min":  25,
+          "max":  35,
+          "step":  1,
+          "unit": "px" ,
+          "label": "Heading Font Size Mobile",
+          "default":  25
+          },
+          {
+            "type": "text",
+            "id": "subheading",
+            "label": "Subheading"
+          },
+          {
+          "type": "range",
+          "id": "font_size_sub",
+          "min":  16,
+          "max":  35,
+          "step":  1,
+          "unit": "px" ,
+          "label": "Subheading Font Size",
+          "default":  16
+          },
+          {
+          "type": "range",
+          "id": "font_size_sub_mobile",
+          "min":  16,
+          "max":  25,
+          "step":  1,
+          "unit": "px" ,
+          "label": "Subheading Font Size Mobile",
+          "default":  18
+          },
+          {
+            "type": "image_picker",
+            "id": "image",
+            "label": "Background Image"
+          },
+          {
+            "type": "image_picker",
+            "id": "image_mobile",
+            "label": "Background Image Mobile"
+          },
+          {
+            "type": "text",
+            "id": "button_text",
+            "label": "Button Text",
+            "default": "Shop Products"
+          },
+        {
+         "type": "select",
+         "id": "color",
+         "label": "Button Color",
+         "default": "btn__pink",
+         "options": [
+            {
+              "group": "value",
+              "value": "btn__pink",
+              "label": "Pink"
+            },
+            {
+              "group": "value",
+              "value": "btn__blue",
+              "label": "Blue"
+            },
+            {
+              "group": "value",
+              "value": "btn__green",
+              "label": "Green"
+            }
+           ]
+          },
+          {
+            "type": "font_picker",
+            "id": "button_font",
+            "label": "Button font",
+            "default": "helvetica_n4"
+          },
+          {
+            "type": "checkbox",
+            "id": "sticker",
+            "label": "Add BF Sticker"
+          },
+          {
+            "type": "checkbox",
+            "id": "sticker_cm",
+            "label": "Add 30% Sticker"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Hero BF",
+        "category": "Hero"
+      }
+    ]
+  }
+{% endschema %}

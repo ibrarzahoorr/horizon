@@ -1,0 +1,49 @@
+{%- assign product = all_products[section.settings.product] -%}
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+
+<section data-module='collectionItem'>
+  <script class='js-product-json' type='text/template'>
+    {
+      "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+      "product": {{ product | json }}
+    }
+  </script>
+  <div class='container--m f jcb aic mxa p15 product__page-quick'>
+    <div class='x'>
+      {{ product.featured_image.src | img_url: '880x880' | img_tag: product.title }}
+    </div>
+    <div class='x product__page-quick_text ac'>
+      <h1 class='medium pt0 serif mx0 mb0 pb0 mt05'>{{product.title}}</h1>
+      <div class='js-review-jump'>
+        {% render 'junip-product-summary', product: product %}
+      </div>
+      <div class='fill-x px1 {% if productTags contains 'no-add' %}none{% endif %}'>
+        <a href='' class='btn btn__blue btn__checkout js-add-to-cart bold fill-x'>Add to Cart</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class='pv1 pm60 pl100 o-h rel z4'>
+  <div class='container--mm mha pt2 ph2 pb1 phm4'>
+    {% render 'junip-product-review', product: product %}
+  </div>
+</section>
+
+
+{% schema %}
+  {
+    "name": "Product",
+    "settings": [
+      {
+        "type": "product",
+        "id": "product",
+        "label": "product"
+      }
+    ],
+    "presets": [{
+      "name": "Product",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

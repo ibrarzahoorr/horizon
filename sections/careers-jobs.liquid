@@ -1,0 +1,63 @@
+
+<section class='rel bg-w'>
+  <div class="fill-x container--xl rel z2 mha pv2  phm4 ac">
+    <div class='collection__accordion-blocks careers x px1 f jcc aic' data-module='accordion'>
+      <h2 class='caps outline mb1  ac'>
+        <span class='rel z2 ph05 inline-block'>Open Positions</span>
+      </h2>
+      {% for block in section.blocks %}
+      {% assign job = block.settings %}
+        <div class='x pv1 collection__accordion-single js-a-item  {% if forloop.index0 == 0 %}active{% endif %}'>
+          <div class='collection__accordion-single_header pointer f jcb aic'>
+            <h5 class='bold mx0 px0'>{{ job.title }}</h5>
+            <button type='button' class='collection__accordion-control bg-o f jcc aic'>
+              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                <line x1="12.5355" y1="5.46451" x2="5.46445" y2="12.5356" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                <line x1="12.5356" y1="12.5356" x2="5.46449" y2="5.46452" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>                
+            </button>
+          </div>
+          <div class='collection__accordion-body careers al'>
+            {{job.description}}
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+  <div class='abs left fill-x fill-y cw talk__bar collection__extended-bar'>
+    <svg class='fill-x bg-p abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Careers Jobs",
+    "blocks": [
+      {
+        "type": "item",
+        "name": "Jobs",
+        "settings": [
+          {
+            "type": "text",
+            "id": "title",
+            "label": "Job Title"
+          },
+          {
+            "type": "richtext",
+            "id": "description",
+            "label": "Job Description"
+          },
+          {
+            "type": "url",
+            "id": "link",
+            "label": "Job Description"
+          }
+        ]
+      }
+    ],
+    "presets": [{
+      "name": "Careers Jobs",
+      "category": "Job"
+    }]
+  }
+{% endschema %}

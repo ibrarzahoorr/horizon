@@ -1,0 +1,34 @@
+<div class='article__feature fill-x'>
+  <div class='article__feature_image'>
+    {% if article.image %}
+      <a href="{{ article.url }}" class='article__link'>
+        <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1024x1024'}}" />
+      </a>
+    {% endif %}
+  </div>
+  <div class='article__feature_block ph2 pt2 pb2'>
+
+    {% if blog.comments_enabled? or article.tags.size > 0 %}
+      {% if article.tags.size > 0 %}
+        {% for tag in article.tags %}
+          <p class='caps bold s1 mx0 pv1 ls1'>
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+            {% unless forloop.last %}, {% endunless %}
+          </p>
+        {% endfor %}
+      {% endif %}
+    {% endif %}
+
+    <h2 class='mt0 mb05 serif px0'>
+      <a href="{{ article.url }}">{{ article.title }}</a>
+    </h2>
+    <div class="rte">
+      {% if article.excerpt.size > 0 %}
+        <p>{{ article.excerpt | strip_html | truncatewords: 25 }}</p>
+      {% else %}
+        <p>{{ article.content | strip_html | truncatewords: 25 }}</p>
+      {% endif %}
+    </div>
+    <a class='underline caps bold  cb' href="{{ article.url }}">{{ 'blogs.article.read_more' | t }}</a>
+  </div>
+</div>

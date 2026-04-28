@@ -1,0 +1,124 @@
+<script>
+  /**
+   * Enable wisepops() function
+   */
+  if (!window['WisePopsObject']) {
+    window['WisePopsObject'] = 'wisepops';
+    window['wisepops'] = window['wisepops'] || function () {
+      (window['wisepops'].q = window['wisepops'].q || []).push(arguments)
+    };
+    window['wisepops'].l = 1 * new Date();
+  } else {
+    window['wisepops'] = window[window['WisePopsObject']];
+  }
+
+  /**
+   * Helper to read cookies, used for custom property cartDiscount
+   * https://developer.mozilla.org/en-US/docs/Web/API/Document/cookie/Simple_document.cookie_framework
+   */
+    function getCookieValue(sKey) {
+      if (!sKey) { return null; }
+      return decodeURIComponent(document.cookie.replace(new RegExp("(?:(?:^|.*;)\\s*" + encodeURIComponent(sKey).replace(/[\-\.\+\*]/g, "\\$&") + "\\s*\\=\\s*([^;]*).*$)|^.*$"), "$1")) || null;
+    };
+
+
+  /**
+   * Define custom properties
+   */
+    wisepops('properties', {
+      productPrice: {{ product.price | default: 'null' }},
+      productTags: '{{ product.tags | join: ', ' }}',
+      productInventoryManagement: '{{ product.variants.first.inventory_management }}',
+      productInventoryQuantity: {{ product.variants.first.inventory_quantity | default: 'null' }},
+      cartTotalPrice: {{ cart.total_price | default: 'null' }},
+      customerTags: '{{ customer.tags | join: ', ' }}',
+      cartDiscount: getCookieValue('discount_code'),
+  });
+</script>
+
+<script>
+  window.fb2=new function(){return function(){if(0<arguments.length){var e,t,n,o;"string"==typeof arguments[0]&&(e=arguments[0]),"string"==typeof arguments[1]&&(t=arguments[1]),"string"==typeof arguments[2]&&(n=arguments[2]),"object"==typeof arguments[3]&&(o=arguments[3]);var c=[];if("string"==typeof e&&""!=e.replace(/\s+/gi,"")&&"string"==typeof t&&""!=t.replace(/\s+/gi,"")&&"string"==typeof n&&n.replace(/\s+/gi,"")){switch(c.push("id="+encodeURIComponent(t)),n){case"PageView":case"ViewContent":case"Search":case"AddToCart":case"InitiateCheckout":case"AddPaymentInfo":case"Lead":case"CompleteRegistration":case"Purchase":case"AddToWishlist":c.push("ev="+encodeURIComponent(n));break;default:return}if(c.push("dl="+encodeURIComponent(document.location.href)),c.push("rl="+encodeURIComponent(document.referrer)),c.push("if=false"),c.push("ts="+(new Date).getTime()),"object"==typeof o)for(var i in o)if("object"==typeof o[i]&&o[i]instanceof Array){if(0<o[i].length){for(var s=0;s<o[i].length;s++)o[i][s]=(o[i][s]+"").replace(/^\s+|\s+$/gi,"").replace(/\s+/gi," ").replace(/,/gi,"ß");c.push("cd["+i+"]="+encodeURIComponent(o[i].join(",").replace(/^/gi,'["').replace(/$/gi,'"]').replace(/,/gi,'","').replace(/ß/gi,",")))}}else"string"!=typeof o[i]&&"number"!=typeof o[i]||c.push("cd["+i+"]="+encodeURIComponent(o[i]));c.push("v="+encodeURIComponent("2.5.0"));var r=document.createElement("img");r.height=r.width="1",r.style.cssText="display:none;width:1px;height:1px;",r.src="https://www.facebook.com/tr/?"+c.join("&"),document.body.appendChild(r)}}}};
+</script>
+
+<script>
+  window['_fs_debug'] = false;
+  window['_fs_host'] = 'fullstory.com';
+  window['_fs_script'] = 'edge.fullstory.com/s/fs.js';
+  window['_fs_org'] = 'Q20AD';
+  window['_fs_namespace'] = 'FS';
+  (function (m, n, e, t, l, o, g, y) {
+    if (e in m) { if (m.console && m.console.log) { m.console.log('FullStory namespace conflict. Please set window["_fs_namespace"].'); } return; }
+    g = m[e] = function (a, b, s) { g.q ? g.q.push([a, b, s]) : g._api(a, b, s); }; g.q = [];
+    o = n.createElement(t); o.async = 1; o.crossOrigin = 'anonymous'; o.src = 'https://' + _fs_script;
+    y = n.getElementsByTagName(t)[0]; y.parentNode.insertBefore(o, y);
+    g.identify = function (i, v, s) { g(l, { uid: i }, s); if (v) g(l, v, s) }; g.setUserVars = function (v, s) { g(l, v, s) }; g.event = function (i, v, s) { g('event', { n: i, p: v }, s) };
+    g.shutdown = function () { g("rec", !1) }; g.restart = function () { g("rec", !0) };
+    g.log = function (a, b) { g("log", [a, b]) };
+    g.consent = function (a) { g("consent", !arguments.length || a) };
+    g.identifyAccount = function (i, v) { o = 'account'; v = v || {}; v.acctId = i; g(o, v) };
+    g.clearUserCookie = function () { };
+  })(window, document, window['_fs_namespace'], 'script', 'user');
+  // This is an example script - don't forget to change it!
+    FS.identify('{{customer.id}}', {
+      displayName: '{{customer.name}}',
+      email: '{{customer.email}}'
+    });
+</script>
+
+{% if settings.js_extend %}
+  {{settings.js_extend}}
+{% endif %}
+
+{% include 'banana-stand-footer' %}
+{% include 'subscription-theme-footer' %}
+<!-- Bold: CSP Step 1 (theme) -->
+<script type="text/javascript" charset="utf-8">
+var shappify_customer_tags ={{ customer.tags|json }}
+</script>
+<!-- // end bold code -->
+
+<!-- Begin Shopify-Catch JavaScript Snippet -->
+<script type="text/javascript">
+  var catchProductSelector = 'div[class="catch-upfunnel"]';
+</script>
+<script type="text/javascript"merchantPublicKey="MkrtfQqUBv6g6J6hqKDGS2Tx" src="https://js.getcatch.com/shopify.min.js"></script>
+<!-- End Shopify-Catch JavaScript Snippet -->
+
+{% include 'smile-initializer' %}
+
+{% comment %} Klaviyo {% endcomment %}
+<script type="text/javascript">
+var _learnq = _learnq || [];
+function addedToCart() {
+  fetch(`${window.location.origin}/cart.js`)
+  .then(res => res.clone().json().then(data => {
+    console.log('data', data);
+    const cartCount = document.querySelector('.js-cart-count');
+    cartCount.innerHTML = data.item_count;
+    var cart = {
+      total_price: data.total_price/100,
+      $value: data.total_price/100,
+      total_discount: data.total_discount,
+      original_total_price: data.original_total_price/100,
+      items: data.items
+    };
+    if (typeof item !== 'undefined') {
+      cart = Object.assign(cart, item);
+    }
+    _learnq.push(['track', 'Added to Cart', cart]);
+  }));
+}
+
+(function (ns, fetch) {
+  ns.fetch = function() {
+    const response = fetch.apply(this, arguments);
+    response.then(res => {
+      if (`${window.location.origin}/cart/add.js`.includes(res.url)) {
+        addedToCart();
+      }
+    });
+    return response;
+  };
+}(window, window.fetch));
+
+</script>

@@ -1,0 +1,167 @@
+<div class='bg-lp rel o-h pb2 our__story' data-module='ourStory'>
+  <section class='bg-lp pm60 pl100 px1 ptl160 rel our__story_block js-our-story'>
+    <div class='container--xl mha  rel z2'>
+      <div class='f fw jcb aic our__story_flex odd'>
+        <div class='container--m mha fill-x our__story_medium_clear'>
+          <div class='container--s ac mha our__story_flex_image ar'>
+            <img class='fill-x lazyload' data-src="{{ section.settings.about_image_1 | img_url: '1200x' }}" />
+          </div>
+        </div>
+        <div class='container--m mha fill-x'>
+          <div class='container--s ph1 mha'>
+            <h3 class='serif mx0 px0 pt05 our__story_block_text'>{{ section.settings.about_title_1 }}</h3>
+            <p class='pb0 mb0 our__story_block_text'>{{ section.settings.about_description_1 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='pm60 px1 pl100 ptl160 o-h rel our__story_block js-our-story'>
+    <div class='container--xl mha rel z2'>
+      <div class='f fw jcb aic our__story_flex'>
+        <div class='container--m mha fill-x our__story_medium_clear'>
+          <div class='container--s ac mha our__story_flex_image left'>
+            <!-- <div class='our__story_background abs fill-x fill-y fit' style='background-image: url({{ section.settings.about_image_2 | img_url: '1200x' }})'></div> -->
+            <img class='fill-x lazyload' data-src="{{ section.settings.about_image_2 | img_url: '1200x' }}" />
+          </div>
+        </div>
+        <div class='container--m mha'>
+          <div class='container--s ph1 mha'>
+            <h3 class='serif mx0 px0 pt05 our__story_block_text'>{{ section.settings.about_title_2 }}</h3>
+            <p class='pb0 mb0 our__story_block_text'>{{ section.settings.about_description_2 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='px1 pm60 pl100 pt160 o-h rel our__story_block js-our-story'>
+    <div class='container--xl mha rel z2'>
+      <div class='f fw jcb aic our__story_flex odd'>
+        <div class='container--m mha fill-x our__story_medium_clear'>
+          <div class='container--s ac mha our__story_flex_image right'>
+            <img class='fill-x lazyload' data-src="{{ section.settings.about_image_3 | img_url: '1200x' }}" />
+          </div>
+        </div>
+        <div class='container--m mha'>
+          <div class='container--s ph1 mha'>
+            <h3 class='serif mx0 px0 pt05 our__story_block_text'>{{ section.settings.about_title_3 }}</h3>
+            <p class='pb0 mb0 our__story_block_text'>{{ section.settings.about_description_3 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class='bg-lp px1 m60 pl100 pbl160 o-h rel our__story_block js-our-story'>
+    <div class='container--xl mha rel z2'>
+      <div class='f fw jcb aic our__story_flex'>
+        <div class='container--m mha fill-x our__story_medium_clear'>
+          <div class='container--s ac mha our__story_flex_image left'>
+            <img class='fill-x lazyload' data-src="{{ section.settings.about_image_4 | img_url: '1200x' }}" />
+          </div>
+        </div>
+        <div class='container--m mha'>
+          <div class='container--s ph1 mha'>
+            <h3 class='serif mx0 px0 pt05 our__story_block_text'>{{ section.settings.about_title_4 }}</h3>
+            <p class='pb0 mb0 our__story_block_text'>{{ section.settings.about_description_4 }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <div class='abs cb our__story_shape_one'>
+    {% include 'shape-two' %}
+  </div>
+  <div class='abs fill-x fill-y chp our__story_shape_two'>
+    {% include 'shape-one' %}
+  </div>
+  <div class='abs fill-x fill-y cp our__story_shape_three'>
+    {% include 'shape-four' %}
+  </div>
+  <div class='abs fill-x fill-y cb our__story_shape_four'>
+    {% include 'shape-three' %}
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Our Story",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "about_image_1",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "about_title_1",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+        "id": "about_description_1",
+        "type": "textarea",
+        "label": "Description",
+        "default": "We help taking care of your body, because you're worth it."
+      },
+      {
+        "type": "image_picker",
+        "id": "about_image_2",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "about_title_2",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+        "id": "about_description_2",
+        "type": "textarea",
+        "label": "Description",
+        "default": "We help taking care of your body, because you're worth it."
+      },
+      {
+        "type": "image_picker",
+        "id": "about_image_3",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "about_title_3",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+        "id": "about_description_3",
+        "type": "textarea",
+        "label": "Description",
+        "default": "We help taking care of your body, because you're worth it."
+      },
+      {
+        "type": "image_picker",
+        "id": "about_image_4",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "about_title_4",
+        "label": "Heading",
+        "default": "Safe, sustainable period products fro your life"
+      },
+      {
+        "id": "about_description_4",
+        "type": "textarea",
+        "label": "Description",
+        "default": "We help taking care of your body, because you're worth it."
+      }
+    ],
+    "presets": [{
+      "name": "Our Story",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

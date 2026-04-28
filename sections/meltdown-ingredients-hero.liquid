@@ -1,0 +1,61 @@
+<section class='bg-p px2  phm4 pm100 pl100 ptl160 o-h rel hero' data-module='pageHero'>
+  <div class='container--xl mha rel z2'>
+    <div class='f fw jcb aic hero__flex'>
+      <div class='container--m fill-x'>
+        <div class='ac mha hero__image hero__a_image rel'>
+          <div class='abs fill-x fill-y fit hero__image_background' style="background-image: url({{ section.settings.image | img_url: '1200x' }})"></div>
+          <img class='fill-x lazyload' data-src="{{ section.settings.image | img_url: '1200x' }}" />
+        </div>
+      </div>
+      <div class='hero__m_first'>
+        <div class='container--ms mha hero__a_text'>
+          <h1 class='pb1 serif'>{{ section.settings.title }}</h1>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='abs fill-x fill-y co hero__clp_shape'>
+    {% include 'shape-four' %}
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Page Hero",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "This is why you should buy Meltdown"
+      },
+      {
+         "type": "select",
+         "id": "alignment",
+         "label": "Alignment",
+         "options": [
+           {
+             "group": "value",
+             "value": "left",
+             "label": "Left"
+           },
+           {
+             "group": "value",
+             "value": "right",
+             "label": "Right"
+           }
+         ],
+         "default":   "left",
+         "info":      "Alignment"
+      }
+    ],
+    "presets": [{
+      "name": "Page Hero",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

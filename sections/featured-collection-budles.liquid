@@ -1,0 +1,103 @@
+<div class='rel home__featured-collection z3' data-module='collectionSlideshow' style="background-color:{{ section.settings.background_color }};">
+  <div class='fill-x rel container--xl mha pv2  phm4 ac'>
+    {% if section.settings.title != blank %}
+      <h2 class='caps outline pt05 pb05 mt0 line-header mb0'>
+        <span class='rel z2 ph05 inline-block' style="color:{{ section.settings.heading_color }}; -webkit-text-fill-color:{{ section.settings.heading_color }};">{{ section.settings.title | escape }}</span>
+      </h2>
+    {% endif %}
+    <div class='real__controls ar abs top mr1 collection--c right z1 f jce aic'>
+      <div class='real__controls-left bg-b cw inline-block f jcc aic rotate js-left-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+      <div class='real__controls-right ml1 bg-b cw inline-block f jcc aic js-right-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+    </div>
+    {%- assign collection = collections[section.settings.collection] -%}
+    <div class='collection__slideshow fill-x js-slideshow'>
+      {% for product in collection.products limit: 12 %}
+        {% include 'collection-item' with context: 'slideshow' %}
+      {% endfor %}
+    </div>
+    <div class='container--s mxa ph2 pt2'>
+      <div class="hero__btn">
+        <a href="{{ section.settings.button_url }}" class="btn btn__bundle bold" style="background-color:{{ section.settings.button_color }}; color:{{ section.settings.button_text_color }}; box-shadow:8px 8px 0px 0px {{section.settings.button_text_color}};">{{ section.settings.button_text }}</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Blume Bundles",
+    "settings": [
+      {
+        "type": "color",
+        "id": "background_color",
+        "label": "Background Color"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Blume Bundles"
+      },          
+      {
+        "type": "font_picker",
+        "id": "heading_font",
+        "label": "Heading Font",
+        "default": "helvetica_n4"
+      },
+      {
+        "type": "color",
+        "id": "heading_color",
+        "label": "Heading Color"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Shop All Bundles"
+      },  
+      {
+        "type": "url",
+        "id": "button_url",
+        "label": "Button URL"
+      },  
+      {
+        "type": "color",
+        "id": "button_color",
+        "label": "Button Color"
+      },
+      {
+        "type": "color",
+        "id": "button_text_color",
+        "label": "Button Text Color"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Blume Bundles",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

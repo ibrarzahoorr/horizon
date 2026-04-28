@@ -1,0 +1,94 @@
+{% assign i_image = product.metafields.sf_what_how_why.paired_image %}
+{% assign what_does_it = product.metafields.sf_what_how_why.what_does_it_do_ %}
+{% assign how_use = product.metafields.sf_what_how_why.how_to_use_ %}
+{% assign ingredients = product.metafields.sf_what_how_why.ingredients %}
+{% assign claims = product.metafields.sf_what_how_why.claims %}
+
+{% if i_image %}
+<section class='bg-w pv1 pm60 pl100 o-h rel'>
+  <div class='container--xl mha ph2 pv1 phm4'>
+    <div class='f fw jcb aic js_text__image'>
+      <div class='rel z2 fill-x product__ingredients ti__text'>
+        {% if what_does_it %}
+        <div class='product__list fill-x'>
+          <div class='f fw jcb aic'>
+            {% assign what_replace = product.metafields.sf_what_how_why.what_does_it_do_headline %}
+            <h4 class='mx0 pv05 medium'>
+              {% if what_replace %}
+              {{ what_replace }}
+              {% else %}
+              What does it do?
+              {% endif %}
+            </h4>
+            <img src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+          </div>
+          <div class='product__list_info s16'>
+            {{ what_does_it }}
+          </div>
+        </div>
+        {% endif %}
+        {% if how_use %}
+        <div class='product__list fill-x'>
+          <div class='f fw jcb aic'>
+            <h4 class='mx0 pv05 medium'>
+              {% assign how_replacement = product.metafields.sf_what_how_why.how_to_use_headline %}
+              {% if how_replacement %}
+              {{how_replacement}}
+              {% else %}
+              How to use
+              {% endif %}
+            </h4>
+            <img src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+          </div>
+          <div class='product__list_info s16'>
+            {{ how_use }}
+          </div>
+        </div>
+        {% endif %}
+        {% if ingredients %}
+        <div class='product__list fill-x'>
+          <div class='f fw jcb aic'>
+            <h4 class='mx0 pv05 medium'>
+              {% assign ingredients_replacement = product.metafields.sf_what_how_why.ingredients_headline %}
+              {% if ingredients_replacement %}
+              {{ingredients_replacement}}
+              {% else %}
+              Ingredients
+              {% endif %}
+            </h4>
+            <img src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+          </div>
+          <div class='product__list_info s16'>
+            {{ ingredients }}
+          </div>
+        </div>
+        {% endif %}
+        {% if claims %}
+        <div class='product__list fill-x'>
+          <div class='f fw jcb aic'>
+            <h4 class='mx0 pv05 medium'>
+              {% assign claims_replacement = product.metafields.sf_what_how_why.claims_headline %}
+              {% if claims_replacement %}
+              {{claims_replacement}}
+              {% else %}
+              Claims
+              {% endif %}
+            </h4>
+            <img src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+          </div>
+          <div class='product__list_info s16'>
+            {{ claims }}
+          </div>
+        </div>
+        {% endif %}
+      </div>
+      <div class='rel z2  product__ingredients pt2 ti__image'>
+        {% if i_image %}
+        <img class='fill-x' src="{{ i_image }}">
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}
+</div>

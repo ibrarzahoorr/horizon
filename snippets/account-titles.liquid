@@ -1,0 +1,45 @@
+<div class='header-spacer'></div>
+
+<section class='account-titles outer ac' data-module='accountTitle'>
+  <div class='outer'>
+    <div class='container--sm mha'>
+      <h1 class='h2 mb0 caps bold'>{{ title }}</h1>
+
+      <nav class='account-titles__links small mb2'>
+        <ul class='f aic fw jcc'>
+          <li class='account-titles__link p1 mh1'>
+            {% if template contains 'account' %}
+              <span class='chp'>Account</span>
+            {% else %}
+              <a class='link--underline no-ajax' href='/account'>Account</a>
+            {% endif %}
+          </li>
+
+          <li class='account-titles__link p1 mh1'>
+            {% if template contains 'address' %}
+              <span class='chp'>Addresses</span>
+            {% else %}
+              <a class='link--underline no-ajax' href='/account/addresses'>Addresses</a>
+            {% endif %}
+          </li>
+
+          <li class='account-titles__link p1 mh1'>
+            <a class='link--underline js-topia no-ajax' href="">Blumetopia</a>
+          </li>
+
+          {% if customer.metafields.subscriptions.customer_string %}
+          <!--BeginRechargeCode-->
+          <li class='account-titles__link p1 mh1'>
+            <a class='link--underline no-ajax' href="/tools/recurring/customer/{{customer.metafields.subscriptions.customer_string}}/subscriptions/">Subscriptions</a>
+          </li>
+          <!--EndRechargeCode-->
+          {% endif %}
+
+          <li class='account-titles__link p1 mh1'>
+            <a class='link--underline no-ajax' href='/account/logout'>Logout</a>
+          </li>
+        </ul>
+      </nav>
+    </div>
+  </div>
+</section>

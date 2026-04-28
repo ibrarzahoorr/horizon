@@ -1,0 +1,22 @@
+{% if product.metafields.blume.whats_inside_text %}
+<section class='bg-p' data-module='animateIn'>
+  <div class='container--xl mxa px15 pm60 js-animate'>
+    <div class='f jcb aic fw product__inside'>
+      <div class='product__steps-image animate transition-2 s-in o-in'>
+        {%
+          include 'image' with
+          src: product.metafields.blume.whats_inside_image,
+          size: '800x',
+          alt: '',
+          className: 'x'
+        %}
+      </div>
+      <div class='product__steps-text product__editor inside animate transition-4 s-in o-in'>
+        <div>
+          {{product.metafields.blume.whats_inside_text}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% endif %}

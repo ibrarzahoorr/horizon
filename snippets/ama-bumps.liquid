@@ -1,0 +1,279 @@
+{% if product.handle == "clear-skin-kit-3" %}
+{% if all_products["sunburst-mineral-spf-50"].variants.first.available %}
+  <div class="rtvac-vyg">
+  <div class="rtvac-vygi" data-opd="{{ product.first_available_variant.id }}" data-rpd="{{ all_products["sunburst-mineral-spf-50"].variants.first.id }}">
+    <div class="rtvac-vyga">
+      <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/spf50-bump_80x.gif?v=1737115773" alt="Sunburst Mineral SPF 50 Sunscreen">
+    </div>
+    <div class="rtvac-vygb">
+      <p>Complete you bundle with Sunburst Mineral SPF 50 Sunscreen. </p>
+      <div class="btnx btn-primaryx tooltip">Learn More
+          <div class="top"> 
+            <img src="https://www.blume.com/cdn/shop/files/s2780377-av-05_c3b97f32-4897-4289-b97b-49ebdb9a81ee_230x.png?v=1730064044" alt="Sunburst Mineral SPF 50 Sunscreen" style=" display: block; margin: 0 auto 10px; ">
+              <p>Say hello to Sunburst, where skincare meets SPF in a groundbreaking formulation tailored for acne-prone skin. rafted with non-nano minerals that leave absolutely no white cast, Sunburst not only shields your skin from harmful UV rays but also combats acne concerns head-on.</p>
+              <i></i>
+          </div>
+      </div>
+      <div class="rtvac-vygc">
+      <div class="checkbox-wrapper-4">
+        <input class="inp-cbx" id="addon" type="checkbox"  />
+        <label class="cbx" for="addon"><span>
+        <svg width="12px" height="10px">
+          <use xlink:href="#check-4"></use>
+        </svg></span><span>Add for only ${{ all_products["sunburst-mineral-spf-50"].variants.first.price | divided_by: 100 }}! </span></label>
+        <svg class="inline-svg">
+          <symbol id="check-4" viewbox="0 0 12 10">
+            <polyline points="1.5 6 4.5 9 10.5 1"></polyline>
+          </symbol>
+        </svg>
+      </div>
+    </div> 
+    </div>
+    
+  </div>
+</div>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+  <script type="text/javascript">
+  $( document ).ready(function() {
+    {% if product.selected_or_first_available_variant.available == true %}
+      $(".js-submit-cart").replaceWith( ('<a id="bundler-alt"  onclick="newBundler()" class="btn ml05 btn__blue bold">Add to Cart</a>') );
+    {% endif %}
+ });
+    const SmartCart = window.Rebuy.SmartCart;
+    
+  function newBundler() {
+    $("#bundler-alt").css("background","gray").css("pointer-events","none");
+    var bumpVariant = $(".rtvac-vygi:first").data("rpd"); 
+      var currVariant = $(".rtvac-vygi:first").data("opd");
+      
+    if ($('input.inp-cbx').is(':checked')) {
+      jQuery.post('/cart/add.js', {
+      items: [{
+          quantity: 1,
+		  id: bumpVariant
+    },{
+       quantity: 1,
+		  id: currVariant
+    }],
+        attributes: {
+			'bump_order': 'Yes',
+			'bump_combination_p': '{{ product.handle }}',
+			}
+		  
+		}).done(function() {
+			
+			console.log( "success" );
+			
+		});
+    }else {
+      jQuery.post('/cart/add.js', {
+       
+           quantity: 1,
+		  id: currVariant
+      
+		}).done(function() {
+			
+			console.log( "success" );
+			
+		});
+    }
+    setTimeout(function() {
+      //fetch('/cart.js').then(response => response.json()).then(cart => document.dispatchEvent(new CustomEvent('cart:updated', { detail: { cart } })));
+     //  document.dispatchEvent(new CustomEvent('cart:build'));
+     // document.dispatchEvent(new CustomEvent('cart:open'));
+       $("#bundler-alt").css("background","#0e1f40").css("pointer-events","all");
+                          },1200);
+    
+  }
+   
+</script>
+  {% endif %}
+
+  {% endif %}
+
+<style>  
+   .rtvac-vygi { display: flex; flex-wrap: nowrap; justify-content: flex-start; align-items: center; align-content: center; padding: 10px 0;}
+.rtvac-vyga , .rtvac-vygb , .rtvac-vygc{ display: block; flex-grow: 0; flex-shrink: 1; flex-basis: auto; align-self: auto; order: 0; }
+.emp-sug-img { max-width: 100px; padding-right: 5px; }
+.emp-sug-meta { width: calc(100% - 110px); text-align: left; padding-left: 10px; }
+.rtvac-vygb { padding: 0 0 0 10px; font-weight: 700; }
+.rtvac-vygb p { margin: 0; font-size: 16px; color: #000; }
+.rtvac-prc { font-size: 13px; font-weight: 400; }
+.rtvac-vyg {
+    background: #ffffff;
+    padding: 0 10px;
+    border-radius: 5px;
+    max-width: 500px;
+    margin: 0 0 10px;
+}
+.rtvac-vyga { width: 120px; }
+ 
+  .checkbox-wrapper-4 * {
+    box-sizing: border-box;
+  }
+  .checkbox-wrapper-4 .cbx {
+    -webkit-user-select: none;
+    user-select: none;
+    cursor: pointer;
+    padding: 6px 8px;
+    border-radius: 6px;
+    overflow: hidden;
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+  .checkbox-wrapper-4 .cbx:not(:last-child) {
+    margin-right: 6px;
+  }
+  .checkbox-wrapper-4 .cbx:hover {
+    background: rgb(166 133 127 / 12%);
+  }
+  .checkbox-wrapper-4 .cbx span {
+    float: left;
+    vertical-align: middle;
+    transform: translate3d(0, 0, 0);
+  }
+  .checkbox-wrapper-4 .cbx span:first-child {
+    position: relative;
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+    transform: scale(1);
+    border: 1px solid #cccfdb;
+    transition: all 0.2s ease;
+    box-shadow: 0 1px 1px rgba(0,16,75,0.05);
+  }
+  .checkbox-wrapper-4 .cbx span:first-child svg {
+    position: absolute;
+    top: 3px;
+    left: 2px;
+    fill: none;
+    stroke: #2C4063;
+    stroke-width: 2;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+    stroke-dasharray: 16px;
+    stroke-dashoffset: 16px;
+    transition: all 0.3s ease;
+    transition-delay: 0.1s;
+    transform: translate3d(0, 0, 0);
+  }
+  .checkbox-wrapper-4 .cbx span:last-child {
+    padding-left: 8px;
+    line-height: 18px;
+    font-size: 16px;
+  }
+  .checkbox-wrapper-4 .cbx:hover span:first-child {
+    border-color: #07f;
+  }
+  .checkbox-wrapper-4 .inp-cbx {
+    position: absolute;
+    visibility: hidden;
+  }
+  .checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child {
+    background: var(--colorSaleTag);
+    border-color: var(--colorSaleTag);
+    animation: wave-4 0.4s ease;
+  }
+  .checkbox-wrapper-4 .inp-cbx:checked + .cbx span:first-child svg {
+    stroke-dashoffset: 0;
+  }
+  .checkbox-wrapper-4 .inline-svg {
+    position: absolute;
+    width: 0;
+    height: 0;
+    pointer-events: none;
+    user-select: none;
+  }
+  @media screen and (max-width: 640px) {
+    .checkbox-wrapper-4 .cbx {
+      width: 100%;
+      display: inline-block;
+    }
+  }
+  @-moz-keyframes wave-4 {
+    50% {
+      transform: scale(0.9);
+    }
+  }
+  @-webkit-keyframes wave-4 {
+    50% {
+      transform: scale(0.9);
+    }
+  }
+  @-o-keyframes wave-4 {
+    50% {
+      transform: scale(0.9);
+    }
+  }
+  @keyframes wave-4 {
+    50% {
+      transform: scale(0.9);
+    }
+  }
+
+
+
+
+  .tooltip {
+    text-align: left;
+    font-size: 12px;
+    cursor: pointer;
+    position: relative;
+    display: inline-block;
+    background: #000;
+    padding: 0 5px;
+    color: #fff;
+    margin: 8px 0;
+}
+.tooltip .top {
+    min-width:340px; 
+    top:-20px;
+    left:80%;
+    transform:translate(-50%, -100%);
+    padding:10px;
+    color:#var(--colorSaleTag);
+    background-color:#ffffff;
+    font-weight:normal;
+    font-size:13px;
+    line-height: 1.2;
+    border-radius:8px;
+    position:absolute;
+    z-index:99999999;
+    box-sizing:border-box;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+    display:none;
+}
+
+.tooltip:hover .top {
+    display:block;
+}
+
+.tooltip .top i {
+    position:absolute;
+    top:100%;
+    left:50%;
+    margin-left:-12px;
+    width:24px;
+    height:12px;
+    overflow:hidden;
+}
+
+.tooltip .top i::after {
+    content:'';
+    position:absolute;
+    width:12px;
+    height:12px;
+    left:50%;
+    transform:translate(-50%,-50%) rotate(45deg);
+    background-color:#ffffff;
+    box-shadow:0 1px 8px rgba(0,0,0,0.5);
+}
+
+@media screen and (max-width: 750px) {
+  .rtvac-vyg {  padding: 0; }
+  .rtvac-vygb p { font-size: 13px; }
+  .checkbox-wrapper-4 .cbx span:last-child { padding-left: 3px; line-height: 14px; font-size: 13px; margin-top: 5px;}
+  .rtvac-vyga img { max-width: 90px; }
+  .tooltip .top { min-width:200px; }
+}
+</style>

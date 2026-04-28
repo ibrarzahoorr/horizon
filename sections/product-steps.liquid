@@ -1,0 +1,39 @@
+{% if product.metafields.blume.step_text %}
+    <section class='bg-p' data-module='animateIn'>
+        <div class='container--xl mxa px15 pm60 js-animate'>
+            <div class='f jcb aic fw product__steps'>
+                <div class='product__steps-image animate transition-2 s-in o-in'>
+                    {%
+                    include 'image' with
+                    src: product.metafields.blume.step_image,
+                    size: '800x',
+                    alt: '',
+                    className: 'x'
+                    %}
+                </div>
+                <div class='product__steps-text product__editor animate transition-4 s-in o-in'>
+                    {{ product.metafields.blume.step_text }}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endif %}
+
+
+{% schema %}
+{
+    "name": "Product Steps",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Note",
+            "info": "This section uses the product's metafields"
+        }
+    ],
+    "presets": [
+        {
+            "name":"Product Steps"
+        }
+    ]
+}
+{% endschema %}

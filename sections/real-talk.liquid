@@ -1,0 +1,120 @@
+<section class='talk bg-w px2  z5 phm4 pm60 pl100 rel' data-module='realTalk'>
+  <div class='container--xl rel z2 mha'>
+    <div>
+      <div class='al container--sm talk__header x f jcs ais'>
+        <h2 class='mb1 px0 serif'>{{ section.settings.title }}</h2>
+        {% if section.settings.image != blank %}
+          <img class='fill-x talk__icon ' src="{{ section.settings.image | img_url: '600x' }}" />
+        {% endif %}
+      </div>
+      <div class='f jcb ais fw real__wrapper rel'>
+        {% if section.blocks.size > 0 %}
+          <div class='real__controls ar abs top mr1 right f jce aic'>
+            <div class='real__controls-left bg-o cw inline-block f jcc aic rotate js-left-slides'>
+              <svg width="9px" height="15px" viewBox="0 0 9 15">
+                <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                    transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                    points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                </g>
+              </svg>
+            </div>
+            <div class='real__controls-right ml1 bg-o cw inline-block f jcc aic js-right-slides'>
+              <svg width="9px" height="15px" viewBox="0 0 9 15">
+                <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                  <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                    transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                    points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                </g>
+              </svg>
+            </div>
+          </div>
+          <div class='real__slides x rel'>
+            <div class='js-slideshow-active o-h real__slides-main'>
+              {% for block in section.blocks %}
+              <div class='x'>
+                <div class='talk__image y x'>
+                  <img class='x y lazyload' data-src="{{ block.settings.image | img_url: '600x' }}" />
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+            <div class='js-slideshow-inactive o-h real__slides-second'>
+              {% for block in section.blocks %}
+              <div class='x'>
+                <div class='talk__image'>
+                  <img class='x lazyload' data-src="{{ block.settings.image | img_url: '600x' }}" />
+                </div>
+              </div>
+              {% endfor %}
+            </div>
+          </div>
+        {% endif %}
+        {% if section.blocks.size > 0 %}
+          <div class='real__text x'>
+            {% for block in section.blocks %}
+              <div class='f jcb talk__single js-single-text fw pv2 {% if forloop.index0 == 0 %}active{% endif %}'>
+                <div class='talk__single_text_container'>
+                  <div class='talk__single_text'>
+                    <p class=''>{{ block.settings.review }}</p>
+                    <img class=' talk__squiggle mt1' src="{{ block.settings.squiggle | img_url: '600x' }}" />
+                    <h6 class='caps black  mt1 ls1'>{{ block.settings.name }}</h6>
+                  </div>
+                </div>
+              </div>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Real Talk",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Don't wage.."
+      }
+    ],
+    "blocks": [{
+      "type": "list",
+      "name": "Real Talk",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "image_picker",
+          "id": "squiggle",
+          "label": "Squiggle"
+        },
+        {
+          "type": "textarea",
+          "id": "review",
+          "label": "Review"
+        },
+        {
+          "type": "text",
+          "id": "name",
+          "label": "Name"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "Real Talk",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

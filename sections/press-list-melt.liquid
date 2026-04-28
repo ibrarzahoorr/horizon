@@ -1,0 +1,73 @@
+<section class='press bg-lb rel z5' data-module='pressSlides'>
+  <div class='container--xl mha px1'>
+    <div class='press__container ac'>
+      <div class='x ac'>
+        <h5 class='caps bold mt1 pt1 s1'>{{ section.settings.title }}</h5>
+      </div>
+      <div class='f jcc aic x fw js-press-slides press__single_wrap press__main-slideshow mxa'>
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <div class='press__slide x ac js-single-slide'>
+              <div class='press__slide-item f ac jcc aic'>
+                <img class='fill-x lazyload' data-src="{{ block.settings.press_item | img_url: '200x' }}" />
+              </div>
+              <div class='press__slide-text'>
+                <h3 class='serif bold'>"{{ block.settings.quote }}"</h3>
+              </div>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class='press__slide-d-text press__single_wrap mxa'>
+        {% if section.blocks.size > 0 %}
+          {% for block in section.blocks %}
+            <div class='press__slide-text-d js-text-slides'>
+              <h3 class='serif bold'>"{{ block.settings.quote }}"</h3>
+            </div>
+          {% endfor %}
+        {% endif %}
+      </div>
+      <div class='mv1 pv1'>
+        <a href='/products/meltdown' class='btn btn__outline bold'>Shop Meltdown</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Press Items",
+    "max_blocks": 12,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "In the Press"
+      }
+    ],
+    "blocks": [
+      {
+        "type": "image",
+        "name": "Image",
+        "settings": [
+          {
+            "type": "image_picker",
+            "id": "press_item",
+            "label": "Image"
+          }, {
+            "type": "text",
+            "id": "quote",
+            "label": "Quote"
+          }
+        ]
+      }
+    ],
+    "presets": [
+      {
+        "name": "Press Items",
+        "category": "sections"
+      }
+    ]
+  }
+{% endschema %}

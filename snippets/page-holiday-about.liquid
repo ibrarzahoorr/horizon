@@ -1,0 +1,34 @@
+<div class="page-holiday__about bg-w rel">
+  <div class="holiday-about__content rel container--xl mha px1">
+    <div class="holiday-about__content-inner rel">
+      <div class="holiday-about__background abs">
+        <svg width="4808" height="3498" viewBox="0 0 4808 3498" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M716.257 243.74C1346.32 -97.9861 4309.73 -33.912 4544.66 152.97C4779.6 339.851 5105.31 2817.37 4261.67 2790.67C3418.03 2763.97 1949.68 3543.54 716.257 3495.48C-517.162 3447.43 86.1985 585.467 716.257 243.74Z" fill="#F8ECE4"/>
+        </svg>
+      </div>
+      <div class="holiday-about__header">
+        <h2 class="serif">{{ heading }}</h2>
+        <p>{{ description }}</p>
+      </div>
+      <ul class="holiday-about__props cross__list {% if bullet_type == 'tick' %} tick__list {% endif %}">
+        {% for prop in props %}
+          <li class='rel'>
+            {% case bullet_type %}
+              {% when 'cross' %}
+                <svg class='abs left' width="24px" height="24px" viewBox="0 0 24 24" version="1.1"><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Home---Landing" transform="translate(-843.000000, -3826.000000)"><g id="Chemical-Warfare" transform="translate(112.000000, 3457.000000)"><g id="Text" transform="translate(728.000000, 103.000000)"><g id="No-Chlorine" transform="translate(3.000000, 266.000000)"><g id="Icon/No-Chemicals"><g id="Icon/x"><circle id="Oval" fill="#162D4A" cx="12" cy="12" r="12"></circle><path d="M15.6,8.4 L8.4,15.6 L15.6,8.4 Z M8.4,8.4 L15.6,15.6 L8.4,8.4 Z" id="x-circle" stroke="#FFFFFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"></path></g></g></g></g></g></g></g></svg>
+              {% when 'tick' %}
+                <svg class="abs left" width="12" height="10" viewBox="0 0 12 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M1 4.90332L4.5 8.40332L11 1.40332" stroke="#1F4068" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            {% endcase %}
+            <h5 class='caps small black'>{{ prop.settings.text }}</h5>
+          </li>
+        {% endfor %}
+      </ul>
+    </div>
+    <div class="holiday-about__image">
+      <img class="lazyload mobile" data-src="{{ image | img_url: '150x' }}">
+      <img class="lazyload desktop" data-src="{{ image | img_url: '600x' }}">
+    </div>
+  </div>
+</div>

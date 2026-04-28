@@ -1,0 +1,121 @@
+{% style %}
+    .section-{{ section.id }}-padding {
+        padding-top: {{ section.settings.padding_top }}px;
+        padding-bottom: {{ section.settings.padding_bottom }}px;
+    }
+
+    .bg-{{ section.id  }} {
+        background-color: {{ section.settings.background_color }};
+    }
+
+    @media only screen and (max-width: 767px) {
+        .section-{{ section.id }}-padding {
+            paddding-top: {{ section.settings.padding_top |  times: 0.75 }}px;
+            paddding-bottom: {{ section.settings.padding_bottom |  times: 0.75 }}px;
+        }
+    }
+{% endstyle %}
+
+
+<section class="section-{{ section.id }}-padding bg-{{ section.id  }}">
+    <div class="blocks_wrapper">
+        {% for block in section.blocks %}
+            {% case block.type %}
+                {% when 'heading' %}
+                    <h2 class="{{ block.settings.heading_size }} serif">{{ block.settings.heading }}</h2>
+                {% when 'text' %}
+                    <div class="rich_text">
+                        {{ block.settings.text }}
+                    </div>
+                    
+            {% endcase %}
+        {% endfor %}
+    </div>
+</section>
+
+{% schema %}
+{
+    "name": "PBJ Richtext",
+    "class": "pbj-richtext",
+    "settings": [
+        {
+            "type": "color",
+            "id": "background_color",
+            "label": "Background Color",
+            "default": "#ffffff"
+        },
+        {
+            "type": "header",
+            "content": "Padding"
+        },
+        {
+            "type": "range",
+            "id": "padding_top",
+            "label": "Padding Top",
+            "default": 20,
+            "min": 0,
+            "max": 100,
+            "step": 5
+        },
+        {
+            "type": "range",
+            "id": "padding_bottom",
+            "label": "Padding Bottom",
+            "default": 20,
+            "min": 0,
+            "max": 100,
+            "step": 5
+        } 
+    ],
+    "blocks": [
+        {
+            "type": "heading",
+            "name": "Heading",
+            "settings": [
+                {
+                    "type": "inline_richtext",
+                    "id": "heading",
+                    "label": "Heading",
+                    "default": "Heading"
+                },
+                {
+                    "type": "select",
+                    "id": "heading_size",
+                    "label": "Heading Size",
+                    "default": "h2",
+                    "options": [
+                        { "label": "h1", "value": "h1" },
+                        { "label": "h2", "value": "h2" },
+                        { "label": "h3", "value": "h3" },
+                        { "label": "h4", "value": "h4" },
+                    ]
+                }
+                
+            ]
+        },
+        {
+            "type": "text",
+            "name": "Text",
+            "settings": [
+                {
+                    "type": "richtext",
+                    "id": "text",
+                    "label": "Text",
+                    "default": "<p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Vero ullam quod hic? Tempora incidunt corporis temporibus impedit et ipsum quia quam natus dolore optio, esse, repudiandae alias velit necessitatibus nam! ipsum</p>"
+                }
+            ]
+        }
+    ],
+    "presets": [
+        {
+            "name": "PBJ Richtext",
+            "settings": {},
+            "blocks": [
+                {
+                    "type": "heading"
+                }
+            ]
+        }
+    ]
+}
+{% endschema %}

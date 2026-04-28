@@ -1,0 +1,99 @@
+{% assign current_product = product %}
+{% assign exclusions = 'frontpage,all' | split: ',' %}
+
+{% comment %}
+    Looking for a relevant collection.
+{% endcomment %}
+
+{% if product.metafields.c_f['Related Products'] %}
+    {% assign collection = collections[product.metafields.c_f['Related Products']] %}
+{% endif %}
+
+{% assign found_a_collection = false %}
+
+{% if collection and collection.all_products_count > 1 %}
+    {% unless exclusions contains collection.handle %}
+        {% assign found_a_collection = true %}
+    {% endunless %}
+{% endif %}
+
+{% unless found_a_collection %}
+    {% for c in product.collections %}
+        {% unless exclusions contains c.handle %}
+            {% assign found_a_collection = true %}
+            {% assign collection = c %}
+            {% break %}
+        {% endunless %}
+    {% endfor %}
+{% endunless %}
+
+
+{% comment %}
+    If we have a relevant collection.
+{% endcomment %}
+
+
+{% if found_a_collection %}
+
+    {% if product.metafields.blume.related_products %}
+        {% capture related_items %}
+
+        {% assign selected_handles = product.metafields.blume.related_products | split: '|' %}
+        {% for selected_handle in selected_handles %}
+            {% assign product = all_products[selected_handle] %}
+
+            {% include 'collection-item' %}
+        {% endfor %}
+
+        {% endcapture %}
+    {% else %}
+        {% capture related_items %}
+            {% for product in collection.products limit: 4 %}
+                {% if product.handle == current_product.handle %}
+                    {% assign current_product_found = true %}
+                {% else %}
+                    {% unless current_product_found == false %}
+                        {% include 'collection-item' %}
+                    {% endunless %}
+                {% endif %}
+
+            {% endfor %}
+        {% endcapture %}
+    {% endif %}
+
+    {% assign related_items = related_items | trim %}
+
+    {% unless related_items == blank %}
+    <div class='bg-lp rel z3'>
+        <div class='fill-x container--xl product__related mha px1 ac phm4'>
+            <h2 class='caps outline line-header'>
+                <span class='rel z2 ph05 inline-block'>Check These Out</span>
+            </h2>
+            <div class="collection-products">
+                <div class="collection__grid f jcb aic fw">
+                    {{ related_items }}
+                </div>
+            </div>
+        </div>
+    </div>
+    {% endunless %}
+{% endif %}
+
+
+{% schema %}
+{
+    "name": "Related Products",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Note",
+            "info": "This section uses the product's metafields"
+        }
+    ],
+    "presets": [
+        {
+            "name":"Related Products"
+        }
+    ]
+}
+{% endschema %}

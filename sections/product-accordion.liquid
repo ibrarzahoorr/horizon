@@ -1,0 +1,44 @@
+{% if product.metafields.blume_product.accordion_image %}
+    <div class='collection__accordion bg-w rel z3'>
+        <div class='f fw jcb aist'>
+            <img class='block x' src='{{ product.metafields.blume_product.accordion_image }}' alt='Blume Lifestyle Image' />
+            <div class='collection__accordion-blocks x px1 f jcc aic' data-module='accordion'>
+                {% for questions in product.metafields.blume_product.accordion_question %}
+                    <div class='x pv1 collection__accordion-single js-a-item  {% if forloop.index0 == 0 %}active{% endif %}'>
+                        <div class='collection__accordion-single_header pointer f jcb aic'>
+                            <h5 class='bold mx0 px0'>{{ product.metafields.blume_product.accordion_question[forloop.index0] }}</h5>
+                            <button type='button' class='collection__accordion-control bg-w f jcc aic'>
+                                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                                    <line x1="12.5355" y1="5.46451" x2="5.46445" y2="12.5356" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                    <line x1="12.5356" y1="12.5356" x2="5.46449" y2="5.46452" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>                
+                            </button>
+                        </div>
+                        <div class='collection__accordion-body'>
+                            {{ product.metafields.blume_product.accordion_answer[forloop.index0] }}
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}
+
+
+{% schema %}
+{
+    "name": "Product Accordion",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Note",
+            "info": "This section uses the product's metafields"
+        }
+    ],
+    "presets": [
+        {
+            "name":"Product Accordion"
+        }
+    ]
+}
+{% endschema %}

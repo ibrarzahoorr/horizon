@@ -1,0 +1,30 @@
+{% if template == 'index' or template contains 'collection'  %}
+<div id="stickgift">
+ 
+    <div class="tooltip">
+    <div id="close_gwp"><img src="https://cdn.shopify.com/s/files/1/0042/5535/0857/files/close-12_18x.png?v=1688637861" style="width: 20px;"></div><img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/bfcm156.gif?v=1731528379" class="lazy" alt="BFCM"> <div id="badge_gwp">BLACK FRIDAY</div>
+          <span class="tooltiptext"> <a href="/pages/shop?utm_term=flt_bdge" style="color: #fbece3;font-weight: 400;"> Black Friday Sale is HERE. <br> Get up to 50% OFF <br><br><span style=" color: #e1f2fa; font-weight: 800;">SHOP SALE</span> 
+</a> </span> 
+        </div>
+    </div>
+
+<style> 
+    .tooltip { position: relative; display: inline-block; border-bottom: 1px dotted black; } 
+    .tooltip .tooltiptext { visibility: hidden; width: 220px; background-color: #000; color: #fbece3; text-align: center; border-radius: 6px; padding: 5px; position: absolute; z-index: 1; bottom: 30px; left: 100%; font-size: 14px; text-align: left; line-height: 1.4; }
+    .tooltip:hover .tooltiptext { visibility: visible; } 
+  .tooltip a { color: #1f4068;}
+    #stickgift { width: 100%; position: fixed; bottom: 30px; max-width: 100px; z-index: 999999; cursor: pointer; left: 10px; border: 3px solid #000; }  
+    #stickgift img {width: 100%; margin-bottom: -8px;}
+    #close_gwp { position: absolute; right: -7px; top: -16px; cursor: pointer; }
+    #badge_gwp { position: absolute; width: 100%; left: 0; bottom: -11px; font-size: 11px; text-align: center; background: #000; padding: 3px 0 0; color: #fff; font-weight: 800; } 
+@media only screen and (min-width: 1440px) {
+      #stickgift { max-width: 130px; }
+      .tooltip .tooltiptext {  width: 290px;  font-size: 18px; }
+     #badge_gwp {  font-size: 15px; }
+    }
+</style>
+<script>
+sessionStorage.getItem("gwpClosed")&&(document.getElementById("stickgift").style.display="none"),document.getElementById("close_gwp").addEventListener("click",function(){document.getElementById("stickgift").style.display="none",sessionStorage.setItem("gwpClosed","true"),setTimeout(function(){sessionStorage.removeItem("gwpClosed")},6e5)});
+</script>
+
+{% endif %}       

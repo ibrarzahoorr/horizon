@@ -1,0 +1,69 @@
+<section class='box__flow z4 bg-bf rel o-h'>
+  <div class='js-box-slides'>
+  {% if section.blocks.size > 0 %}
+    {% for block in section.blocks %}
+      {% if forloop.first == true %}
+        <div class='f ac jcb blume__box_slideshow fill-x fw  container--xl mha'>
+          <img class='fill-x blume__box_slideshow_large z1 top left lazyload' data-src="{{ block.settings.image | img_url: '1800x' }}" /><br />
+          <!-- <img class='fill-x blume__box_slideshow_hidden' src="{{ block.settings.image | img_url: '1800x' }}" /><br /> -->
+        </div>
+      {% endif %}
+    {% endfor %}
+  {% endif %}
+  </div>
+  <div class='container--l mha rel z3 ph2 box__flow_text'>
+    <div>
+      <div class='ac container--sm mha box__flow_text_simple'>
+        <!-- <img class='fill-x talk__icon' src="{{ section.settings.image | img_url: '600x' }}" /> -->
+        <h2 class='mx0 px0 ph1 pb025 serif'>{{ section.settings.title }}</h2>
+        <p class='box__flow_small'>{{section.settings.description}}</p>
+        <div class='f jcc'>
+          <div class='box__flow-links f jcc aic'>
+            <a href="/pages/build-a-box" class='px1 rel bold'>Shop Meltdown</a>
+            <a href="/pages/build-a-box" class='px1 rel bold'>How to Use Meltdown</a>
+            <a href="/pages/build-a-box" class='px1 rel bold'>Meltdown Ingredients</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+{% schema %}
+  {
+    "name": "Box Upsell Module",
+    "max_blocks": 9,
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "The box that goes with your flow"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      }
+    ],
+    "blocks": [{
+      "type": "list",
+      "name": "Box Upsell Module",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        }
+      ]
+    }],
+    "presets": [{
+      "name": "Box Upsell Module",
+      "category": "sections"
+    }]
+  }
+{% endschema %}

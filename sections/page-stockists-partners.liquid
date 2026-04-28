@@ -1,0 +1,45 @@
+<section class='partnering bg-lb o-h rel'>
+    <div class='hero__empty hero__story'>
+      <div class='hero__text-wrapper container--xl mha rel fill-y f aic z2'>
+        <div class='partnering__inner f fw jcb aic'>
+            <div class='partnering__text mha hero__a_text'>
+                <h2 class='pb1 serif'>{{ section.settings.title }}</h2>
+                <div>
+                    {{ section.settings.subtitle }}
+                </div>
+            </div>
+            <div class="partnering__image">
+                <img src="{{ section.settings.image | img_url: '1600x' }}" />
+            </div>
+        </div>
+      </div>
+    </div>
+  </section>
+  {% schema %}
+    {
+      "name": "Stockists Page Partnering",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "Image"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Heading",
+          "default": "Interested in partnering with us?"
+        },
+        {
+           "type": "richtext",
+           "id": "subtitle",
+           "label": "Text"
+        }
+      ],
+      "presets": [{
+        "name": "Blume Stockists Page Partnering",
+        "category": "sections"
+      }]
+    }
+  {% endschema %}
+  

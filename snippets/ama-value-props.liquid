@@ -1,0 +1,36 @@
+{% if product.handle == "meltdown-acne-oil-3" or  product.handle == "superbalm" or product.handle == "sunburst-mineral-spf-50"  %}
+
+<div class="fsd_valueprops"> 
+  <ul><li>Certified Clean</li><li>Cruelty Free</li><li>Vegan</li><li>Dermatologist Tested</li></ul>
+</div>
+<style>
+  .fsd_valueprops { 
+    padding: 10px;
+    border-radius: 10px;
+    background: #fff6ee;
+    max-width: 500px;
+    margin: 15px 0 0;
+}
+.fsd_valueprops ul { margin: 0; display: flex ; flex-wrap: wrap; justify-content: flex-start; align-content: flex-end; flex-direction: row; padding-left: 0px; }
+
+ .fsd_valueprops ul li { padding-left: 25px; margin: 0 0 5px; font-size: 14px; background-size: 17px !important; font-weight: 300; display: inline-block; width: 50%; color: ##0e1f40;font-weight: 600; }
+   .fsd_valueprops ul li:nth-child(1) {
+    background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/Certified%20Clean.png?v=1737114768) 0px 1px no-repeat;
+    background-size: 25px;
+    
+}
+.fsd_valueprops ul li:nth-child(2) {
+    background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/cruelty-free.png?v=1737114741) 0px 1px no-repeat;
+    background-size: 25px;
+}
+.fsd_valueprops ul li:nth-child(3) {
+    background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/vegan.png?v=1737114759) 0px 1px no-repeat;
+    background-size: 25px;
+}
+.fsd_valueprops ul li:nth-child(4) {
+    background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/test-derma.png?v=1737114750) 0px 1px no-repeat;
+    background-size: 25px;
+}
+</style>
+
+{% endif %}

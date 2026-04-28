@@ -1,0 +1,92 @@
+<style>
+ @media (max-width: 767px) {
+  .button_shop_all {
+      margin-top: 3rem !important;
+  }
+
+  .button_shop_all.hide-cart-buttons{
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+  }
+
+  .collection__slideshow.hide-cart-buttons .collection_item_atc_button{
+    display: none !important;
+  }
+ }
+
+ 
+</style>
+
+<div class='bg-lp rel home__featured-collection z3' data-module='collectionSlideshow'>
+  <div class='fill-x rel container--xl mha pv2  phm4 ac'>
+    {% if section.settings.title != blank %}
+      <h2 class='caps outline pt05 pb05 mt0 line-header mb0'>
+        <span class='rel z2 ph05 inline-block'>{{ section.settings.title | escape }}</span>
+      </h2>
+    {% endif %}
+    <div class='real__controls ar abs top mr1 collection--c right z1 f jce aic'>
+      <div class='real__controls-left bg-b cw inline-block f jcc aic rotate js-left-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+      <div class='real__controls-right ml1 bg-b cw inline-block f jcc aic js-right-slides'>
+        <svg width="9px" height="15px" viewBox="0 0 9 15">
+          <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+            <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+              transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+              points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+          </g>
+        </svg>
+      </div>
+    </div>
+    {%- assign collection = collections[section.settings.collection] -%}
+    <div class='collection__slideshow fill-x js-slideshow {% if section.settings.hide_cart_buttons == true %}hide-cart-buttons{% endif %}'>
+      {% for product in collection.products limit: 12 %}
+        {% include 'collection-item' with context: 'slideshow' %}
+      {% endfor %}
+    </div>
+    <div class='container--s button_shop_all mxa ph2 pt2 {% if section.settings.hide_cart_buttons == true %}hide-cart-buttons{% endif %}'>
+      <div class="hero__btn">
+        <a href="/pages/shop" class="btn btn__blue bold">Shop All Products</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Featured collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Featured collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_cart_buttons",
+        "label": "Hide ATC Buttons",
+        "info": "Enabling this will hide the Add to Cart buttons on mobile.",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "Featured collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

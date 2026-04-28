@@ -1,0 +1,33 @@
+<div class='container--m rel ph2'>
+  <a href="{{ article.url }}" class='abs fill-x fill-y fit'></a>
+    {% if article.image %}
+      <a href="{{ article.url }}" class='article__link'>
+        <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1024x1024', crop: 'center' }}" />
+      </a>
+    {% endif %}
+    <div class='pv1'>
+      {% if blog.comments_enabled? or article.tags.size > 0 %}
+        {% if article.tags.size > 0 %}
+          {% for tag in article.tags %}
+            <a class='caps mx0 xsmall bg-o bold article__tag inline-block mv1 ls1' href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+            {% unless forloop.last %}, {% endunless %}
+          {% endfor %}
+        {% endif %}
+      {% endif %}
+
+
+        <h3 class='mx0 px0 serif'>
+          <a href="{{ article.url }}">{{ article.title }}</a>
+        </h3>
+
+      <div class="rte">
+        {% if article.excerpt.size > 0 %}
+          <p>{{ article.excerpt | strip_html | truncatewords: 25 }}</p>
+        {% else %}
+          <p>{{ article.content | strip_html | truncatewords: 25 }}</p>
+        {% endif %}
+
+        <a href="{{ article.url }}" class='mb1 xsmall bold ls1 underline caps'>Read More</a>
+      </div>
+    </div>
+</div>

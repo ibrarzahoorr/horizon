@@ -1,0 +1,27 @@
+{% if product.metafields.blume.plays_well_text %}
+<section class='bg-p' data-module='animateIn'>
+  <div class='container--l mxa px15 pm60 js-animate'>
+    <div class='f jcb aic fw product__steps'>
+      <div class='product__steps-image animate transition-2 s-in o-in'>
+        {%
+          include 'image' with
+          src: product.metafields.blume.plays_well_image,
+          size: '800x',
+          alt: '',
+          className: 'x'
+        %}
+      </div>
+      <div class='product__steps-text product__editor inside animate transition-2 s-in o-in'>
+        <div>
+          {{product.metafields.blume.plays_well_text}}
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class='container--l rel mxa px1 product__value z6'>
+    <div class='container--s mxa ac'>
+      {{product.metafields.blume.value_statement}}
+    </div>
+  </div>
+</section>
+{% endif %}

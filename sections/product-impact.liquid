@@ -1,0 +1,287 @@
+{% include 'bold-product' with product, hide_action: 'break' %}{% if bold_hidden_product %}{% break %}{%endif %}
+
+<div class='product__hero_bg rel' style='background-image: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Color_Background.jpg?15221187051161038647)'>
+  <div class='container--xl mha' data-page='product' data-section-id="{{ section.id }}" data-component="product" data-enable-history-state="true" itemscope itemtype="http://schema.org/Product">
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- include 'bold-variant' with current_variant, output: 'none' -%}
+    {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+    <meta itemprop="name" content="{{ product.title }}{% unless product.has_only_default_variant %} - {{ current_variant.title }}{% endunless %}">
+    <meta itemprop="url" content="{{ shop.url }}{{ current_variant.url }}">
+    <meta itemprop="brand" content="{{ product.vendor }}">
+    <meta itemprop="image" content="{{ featured_image | img_url: '600x600' }}">
+    <meta itemprop="description" content="{{ product.description | strip_html | escape }}">
+
+    <script class='js-product-json' type='text/template'>
+      {
+        "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+        "product": {{ product | json }}
+      }
+    </script>
+    <div class='product__wrapper'>
+      {% assign pdp__hero = product.metafields.sf_extended_informat.pdp_hero %}
+      <div class='product__image ac' style='background-image: url({{ pdp__hero }})'>
+        {% if pdp__hero %}
+          <img class="lazyload" data-src="{{ pdp__hero }}" alt="{{ featured_image.alt | escape }}" data-product-featured-image>
+        {% endif %}
+      <!-- {% if product.images.size > 1 %}
+        <ul>
+          {% for image in product.images %}
+            <li>
+              <a href="{{ image.src | img_url: '480x480' }}" data-product-single-thumbnail>
+                <img src="{{ image.src | img_url: '160x160' }}" alt="{{ image.alt | escape }}">
+              </a>
+            </li>
+          {% endfor %}
+        </ul>
+      {% endif %} -->
+      </div>
+      <div class='product__description px2'>
+        <div>
+          <div data-price-wrapper>
+            <span data-product-price>
+              <p class='caps bold mt1 pt0 pb0 mt0 s1'>{{ current_variant.price | default: '1999' | money }}</p>
+            </span>
+
+            {% if product.compare_at_price_max > product.price %}
+              <span class="visually-hidden" data-compare-text>{{ 'products.product.regular_price' | t }}</span>
+              <s data-compare-price>
+                {% if current_variant.compare_at_price > current_variant.price %}
+                  {{ current_variant.compare_at_price | money }}
+                {% endif %}
+              </s>
+            {% endif %}
+            
+            {% comment %} <!-- Insert QuadPay Widget --> {% endcomment %}
+            <div style="margin: -10px 0 10px 0;min-height:20px;">
+              <quadpay-widget size="80%" logoSize="80%" amount={{ current_variant.price | divided_by: 100.00 }} ></quadpay-widget>
+            </div>
+            
+          </div>
+        </div>
+        {% render 'junip-product-summary', product: product %}
+        <h1 class='serif mx0 pv05 product__title'>{{ product.title }}</h1>
+
+        <div class="rte">
+          {% assign kicker = product.metafields.sf_extended_informat.kicker %}
+          {% if kicker %}
+            <h2 class='h5 mx0 pv05'>{{ kicker }}</h2>
+          {% endif %}
+          {{ product.description }}
+        </div>
+
+        <div itemprop="offers" itemscope itemtype="http://schema.org/Offer">
+          <meta itemprop="priceCurrency" content="{{ shop.currency }}">
+          <meta itemprop="price" content="{{ current_variant.price | divided_by: 100.00 }}">
+          <link itemprop="availability" href="http://schema.org/{% if current_variant.available %}InStock{% else %}OutOfStock{% endif %}">
+
+          <div class='mt2 mb1'>
+            {% if product.handle != 'jade-roller' %}
+              {% include 'add-to-cart-form' %}
+            {% endif %}
+          </div>
+          <div class='mt1'>
+            {% include 'banana-stand-product-page-container' %}
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+
+      Commenting out social sharing for now
+
+    {% if section.settings.show_share_buttons %}
+      {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
+
+    {% endcomment %}
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    {% endunless %}
+  </div>
+</div>
+
+
+{% assign my_image = product.metafields.sf_extended_informat.image %}
+{% assign p_title = product.metafields.sf_extended_informat.title %}
+{% assign benefits = product.metafields.sf_extended_informat.benefits %}
+
+<div data-module='animateIn'>
+  {% if my_image %}
+  <section class='bg-lp pv1 pm60 pl100 o-h rel'>
+    <div class='container--xl mha pt2 ph2 pb1 phm4'>
+      <div class='f fw jcb aic js-animate'>
+        <div class='rel z2 product__features ti__image'>
+          {% if my_image %}
+            <img class='fill-x lazyload' data-src="{{ my_image }}">
+          {% endif %}
+        </div>
+        <div class='rel z2 product__features pt2 ti__text'>
+          {% if p_title %}
+            <h3 class='mx0 px0 serif'>{{ p_title }}</h3>
+            <div class='product__listicle'>
+              {% if benefits %}
+                {{ benefits }}
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      </div>
+    </div>
+    <div class='abs fill-x fill-y cp hero__clp_shape'>
+      {% include 'shape-four' %}
+    </div>
+  </section>
+  {% endif %}
+
+  <section class='bg-b cw'>
+    <div class='container--xl mha pt2 ph2 ac pb1 phm4'>
+      <h3 class='serif'>The Impact of 1 Period Kit</h3>
+      <div>
+        <div class="mt2 mt2">
+
+    
+      <div class="f jcc ais fw">
+        
+          <div class="container--s pt2 pb2 ph1 why__single">
+            <img class="lazyload" data-src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/impact_products_2.png?3945">
+            <p class="">A 3 year solution to help girls manage their periods</p>
+          </div>
+        
+          <div class="container--s pt2 pb2 ph1 why__single">
+            <img class="lazyload" data-src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/impact_drops.png?3938">
+            <p class="">Helps ensure girls aren't missing school and other opportunities due to their periods</p>
+          </div>
+        
+          <div class="container--s pt2 pb2 ph1 why__single">
+            <img class="lazyload" data-src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/impact_scream.png?3938">
+            <p class="">An important way to spur conversations about health, leadership, & safety</p>
+          </div>
+        
+      </div>
+    
+    </div>
+      </div>
+    </div>
+  </section>
+
+  {% assign i_image = product.metafields.sf_what_how_why.paired_image %}
+  {% assign what_does_it = product.metafields.sf_what_how_why.what_does_it_do_ %}
+  {% assign how_use = product.metafields.sf_what_how_why.how_to_use_ %}
+  {% assign ingredients = product.metafields.sf_what_how_why.ingredients %}
+  {% assign claims = product.metafields.sf_what_how_why.claims %}
+
+  {% if i_image %}
+  <section class='bg-w pv1 pm60 pl100 o-h rel'>
+    <div class='container--xl mha ph2 pv1 phm4'>
+      <div class='f fw jcb aic js-animate'>
+        <div class='rel z2 fill-x product__ingredients ti__text'>
+          {% if what_does_it %}
+            <div class='product__list fill-x'>
+              <div class='f fw jcb aic'>
+                {% assign what_replace = product.metafields.sf_what_how_why.what_does_it_do_headline %}
+                <h4 class='mx0 pv05 medium'>
+                  {% if what_replace %}
+                    {{ what_replace }}
+                  {% else %}
+                    What does it do?
+                  {% endif %}
+                </h4>
+                <img class="lazyload" data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+              </div>
+              <div class='product__list_info s16'>
+                {{ what_does_it }}
+              </div>
+            </div>
+          {% endif %}
+          {% if how_use %}
+            <div class='product__list fill-x'>
+              <div class='f fw jcb aic'>
+                <h4 class='mx0 pv05 medium'>
+                  {% assign how_replacement = product.metafields.sf_what_how_why.how_to_use_headline %}
+                  {% if how_replacement %}
+                    {{how_replacement}}
+                  {% else %}
+                    How to use
+                  {% endif %}
+                </h4>
+                <img class="lazyload" data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+              </div>
+              <div class='product__list_info s16'>
+                {{ how_use }}
+              </div>
+            </div>
+          {% endif %}
+          {% if ingredients %}
+            <div class='product__list fill-x'>
+              <div class='f fw jcb aic'>
+                <h4 class='mx0 pv05 medium'>
+                  {% assign ingredients_replacement = product.metafields.sf_what_how_why.ingredients_headline %}
+                  {% if ingredients_replacement %}
+                    {{ingredients_replacement}}
+                  {% else %}
+                    Ingredients
+                  {% endif %}
+                </h4>
+                <img class="lazyload" data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+              </div>
+              <div class='product__list_info s16'>
+                {{ ingredients }}
+              </div>
+            </div>
+          {% endif %}
+          {% if claims %}
+            <div class='product__list fill-x'>
+              <div class='f fw jcb aic'>
+                <h4 class='mx0 pv05 medium'>
+                  {% assign claims_replacement = product.metafields.sf_what_how_why.claims_headline %}
+                  {% if claims_replacement %}
+                    {{claims_replacement}}
+                  {% else %}
+                    Claims
+                  {% endif %}
+                </h4>
+                <img class="lazyload" data-src='https://cdn.shopify.com/s/files/1/0003/4580/0755/files/plus.png?2506791812528124506' />
+              </div>
+              <div class='product__list_info s16'>
+                {{ claims }}
+              </div>
+            </div>
+          {% endif %}
+        </div>
+        <div class='rel z2  product__ingredients pt2 ti__image'>
+          {% if i_image %}
+            <img class='fill-x lazyload' data-src="{{ i_image }}">
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+  {% endif %}
+</div>
+
+<section class='bg-lp pv1 pm60 pl100 o-h rel'>
+  <div class='container--xl mha pt2 ph2 pb1 phm4'>
+    {% render 'junip-product-review', product: product %}
+  </div>
+</section>
+
+{% schema %}
+  {
+    "name": "Product pages",
+    "settings": [
+      {
+        "type": "checkbox",
+        "id": "show_share_buttons",
+        "label": "Show social sharing buttons",
+        "default": true
+      }
+    ]
+  }
+{% endschema %}

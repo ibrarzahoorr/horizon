@@ -1,0 +1,46 @@
+{% include 'page-giftguide-hero' with 
+  svg_color: section.settings.svg_color,
+  heading: section.settings.heading,
+  subheading: section.settings.subheading,
+  description: section.settings.description
+%}
+
+{% schema %}
+  {
+    "name": "Hero",
+    "class": "page-gg__hero",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Settings"
+      },
+      {
+        "type": "color",
+        "id": "svg_color",
+        "label": "Blob Color",
+        "default": "#BCE0E9"
+      },
+      {
+        "type": "header",
+        "content": "Content"
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Self Care Gift Guide"
+      },
+      {
+        "type": "text",
+        "id": "subheading",
+        "label": "Subheading",
+        "default": "This holiday, self care is the hot gift of the season!"
+      },
+      {
+        "type": "textarea",
+        "id": "description",
+        "label": "Description"
+      }
+    ]
+  }
+{% endschema %}

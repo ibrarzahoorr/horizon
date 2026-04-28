@@ -1,0 +1,289 @@
+{% if template.suffix == 'waitlist' %}
+  {% style %}
+    [data-section-id]:not(.is-scrolled) .header__container {
+      color: #1f4068 !important;
+    }
+  {% endstyle %}
+{% endif %}
+
+<div class="bg-image">
+  <div class="image-overaly"></div>
+  <div class="container d-flex flex-column justify-content-center relative" data-module='waitlist'>
+    <div class="content-wrapper d-flex justify-content-center ">
+      <div class="copy d-flex justify-content-center">
+        <h1 class="heading">
+          {{ section.settings.heading }}
+        </h1>
+        {% if section.settings.content != blank %}
+          <div class="content">{{ section.settings.content }}</div>
+        {% endif %}
+        {% if section.settings.tagline != blank %}
+          <p class="tagline">
+            {{ section.settings.tagline }}
+          </p>
+        {% endif %}
+      </div>
+      <div class="d-flex justify-content-center">
+        <form-widget mode='popup' ucid='{{ section.settings.viral_loops_id }}' component="customButton"></form-widget>
+        <button href="#" class="popup-button vrlps-trigger">
+          {{ section.settings.button_text }}
+        </button> 
+      </div>
+      <div class="content-below-button d-flex justify-content-center">
+          {% if section.settings.below_button_text != blank %}
+            <p class="content">
+              {{ section.settings.below_button_text }}
+            </p>
+          {% endif %}
+
+          {%if section.settings.terms != blank %}
+            <div class="content terms">
+              {{ section.settings.terms }}
+            </div>
+          {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+  <div class="waitlist-footer" {% if section.settings.hide_waitlist-footer %}style='display: none;'{% endif %}>
+    <ul class="social-list">         
+        <li>
+            <a href="https://instagram.com/blume" class="social" rel="noopener" target="_blank">
+                
+                    <i id="instagram" class="fab fa-instagram"></i>
+                
+            </a>
+        </li>
+        <li>
+            <a href="https://facebook.com/meetblume" class="social" rel="noopener" target="_blank">
+                
+                    <i id="facebook" class="fab fa-facebook-f"></i>
+                
+            </a>
+        </li>
+        <li>
+            <a href="https://twitter.com/meetblume" class="social" rel="noopener" target="_blank">
+                
+                    <i id="twitter" class="fab fa-twitter"></i>
+                
+            </a>
+        </li>      
+    </ul>
+    <p class="copyright-wrapper"> 
+        <a class="copyright" href="https://viral-loops.com" rel="noopener" target="_blank">
+            Copyright © Blume Waitlist 2026
+        </a> 
+    </p>
+</div>
+
+{% if section.settings.viral_loops_script != blank %}
+  {{ section.settings.viral_loops_script }}
+{% endif %}
+
+
+
+{% style %}
+  .bg-image {
+    min-height: 800px;
+    height: 100%;
+    color: white;
+    text-align: center;
+    background-size: cover;
+    background-position: center;
+    background-image: url('{{ section.settings.background_image | img_url: '2000x' }}');
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .image-overaly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #1f4068;
+    opacity: 0.5;
+  }
+
+  .container {
+    z-index: 1;
+    max-width: 1140px;
+  }
+
+
+  .heading {
+    font-size: 27px;
+    color: #fff;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    line-height: normal;
+    text-align: center;
+    margin: 20px 0 10px !important;
+    max-width: 655px;
+  }
+
+  .tagline {
+    font-size: 18px;
+    line-height: 1.2;
+    color: #fff;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    line-height: normal;
+    text-align: center;
+    margin-top: 0;
+    margin-bottom: 1rem;
+    max-width: 555px;
+  }
+
+  .content{
+    font-size: 18px;
+    line-height: 1.2;
+    color: #fff;
+    font-weight: 500;
+    font-style: normal;
+    text-decoration: none;
+    line-height: normal;
+    text-align: center;
+    margin-top: 0;
+    max-width: 555px;
+  }
+
+  .content-below-button{
+    margin-top: 1rem;
+  }
+
+  .terms{
+    font-style: italic;
+  }
+
+  .terms *{
+    font-size: 14px;
+  }
+
+  .popup-button {
+    padding: 0.75em 1.5em !important;
+    border: none;
+    color: white;
+    font-size: 16px;
+    font-weight: 700;
+    background-color: #1f4068;
+    border-radius: 25px;
+  }
+.waitlist-footer{
+    background-color: #fff;
+    padding: 30px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.social-list,.copyright-wrapper{
+    display: flex;
+    justify-content: center;
+    margin: 0;
+    list-style: none; 
+}
+.copyright-wrapper{
+    margin-top: 12px !important;
+    justify-content: center;
+    margin-bottom: 1rem;
+}
+.social-list li {
+    margin-left: 8px;
+    margin-right: 8px;
+    width: 44px;
+    height: 44px;
+    border-radius: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
+    font-size: 22px;
+}
+
+.d-flex  {
+    display: flex;
+}
+
+.justify-content-center {
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+{% endstyle %}
+
+
+{% schema %}
+  {
+    "name": "Waitlist",
+    "settings": [
+      {
+        "type": "text",
+        "id": "viral_loops_id",
+        "label": "Viral Loops UCID",
+        "default": "2Tvx5TyOZdq3JUExz4ctYgCFmbc"
+      },
+      {
+        "type": "html",
+        "id": "viral_loops_script",
+        "label": "Viral Loops Campaign Snippet",
+        "info": "Paste in your Viral Loops campaign snippet here."
+      },
+      {
+        "type": "text",
+        "id": "heading",
+        "label": "Heading",
+        "default": "Your skin will love what's coming next…"
+      },
+      {
+        "type": "text",
+        "id": "tagline",
+        "label": "Tagline",
+        "default": "The final addition to your clear skin routine is almost here. Secure your spot on the waitlist for the glowy-ist skin of your life."
+      },
+      {
+        "type": "richtext",
+        "id": "content",
+        "label": "Content"
+      },
+      {
+        "type": "text",
+        "id": "button_text",
+        "label": "Button Text",
+        "default": "Join the waitlist"
+      }, 
+      {
+        "type": "text",
+        "id": "below_button_text",
+        "label": "Below Button Text",
+        "default": "Good luck, besties! 🍀"
+      },
+      {
+        "type": "richtext",
+        "id": "terms",
+        "label": "Terms & Conditions",
+        "default": "<p>Terms and conditions apply. See website for details. Contest ends [End Date].</p>"
+      }, 
+      {
+        "type": "image_picker",
+        "id": "background_image",
+        "label": "Background Image"
+      },
+      {
+        "type": "checkbox",
+        "id": "hide_waitlist-footer",
+        "label": "Hide waitlist footer",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "Waitlist"
+      }
+    ]
+  }
+{% endschema %}

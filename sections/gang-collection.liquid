@@ -1,0 +1,42 @@
+<div class='bg-w collection rel'>
+  <div class='fill-x container--xl mha px2 phm4 ac'>
+    {% if section.settings.title != blank %}
+      <h2 class='caps outline pt05 pb05 mt0 line-header'>
+        <span class='rel z2 ph05 inline-block'>{{ section.settings.title | escape }}</span>
+      </h2>
+    {% endif %}
+
+    {%- assign collection = collections[section.settings.collection] -%}
+    <div class='f jcb fw collection__grid'>
+      {% for product in collection.products limit: 12 %}
+        {% include 'collection-item' %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Gang collection",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Gang collection"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+    ],
+    "presets": [
+      {
+        "name": "Gang collection",
+        "category": "Collection"
+      }
+    ]
+  }
+
+{% endschema %}

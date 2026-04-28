@@ -1,0 +1,728 @@
+{%comment %}<style> 
+  .holiday-gift-guide {
+    max-height: 300px;
+    height: 100vh;
+    max-height: 300px;
+    overflow: hidden;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .parallax-wrapper {
+    position: relative;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .parallax-wrapper::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-image: url('https://cdn.shopify.com/s/files/1/0003/4580/0755/files/1ff3sa.png?v=1765404449');
+    background-size: cover;
+        background-size: cover;
+    background-position: center right;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    z-index: 1;
+  }
+
+  .parallax-wrapper::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.1);
+    z-index: 2;
+  }
+
+  .content-inner {
+    position: relative;
+    z-index: 3;
+    max-width: 800px;
+    margin-left: 8%;
+    padding: 2rem 0;
+    color: white;
+    text-align: left;
+  }
+
+  .content-inner h2 { 
+    font-weight: 700;
+    line-height: 1.1;
+    margin: 0 0 1.5rem 0; 
+    letter-spacing: -0.02em;
+  }
+ 
+
+  .content-inner p {
+    font-size: 1rem;
+    line-height: 1.7;
+    margin: 0 0 1.2rem 0;
+    opacity: 1; 
+    max-width: 600px;
+  }
+
+  @media (max-width: 768px) {
+    .content-inner {
+      margin-left: 6%;
+      padding: 40px 10px;
+    }
+    
+    .holiday-gift-guide {
+      max-height: 300px;
+    }
+    
+    .parallax-wrapper::before {
+      background-attachment: scroll;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .content-inner {
+      margin-left: 5%;
+      padding:40px 10px;
+    }
+  }
+</style>
+<section class="holiday-gift-guide">
+  <div class="parallax-wrapper">
+    <div class="content-inner">
+      <h2>
+        Blume's <span>  Gift Guide</span>
+      </h2>
+      <p>'Tis the season for hydrated skin, stronger barriers, calmer days, and feel-good routines. Gift gentle, acne-safe essentials made for every skin, especially the sensitive ones.</p>
+      <p>Who are you treating this year?</p>
+    </div>
+  </div>
+</section>
+
+ 
+
+
+<div class="stickheader">
+    <div class="stickheaderi">
+         <ul>
+
+ 
+             <li><a href="#product_ha1">“Hand Soap” Boyfriend</a></li>
+			 <li><a href="#product_ha2">Who Has Everything</a></li>
+			 <li><a href="#product_ha3">Built-In Therapist</a></li>
+			 <li><a href="#product_ha4">Always-Glowing Overachiever</a></li>
+			 <li><a href="#product_ha5">Skin-Sensitive Soul</a></li>
+			 <li><a href="#product_ha6">Safe Pick</a></li>
+         </ul>
+     </div>
+</div>
+<script type="text/javascript" src="//code.jquery.com/jquery-1.11.0.min.js"></script>
+
+<script> 
+$(window).scroll(function() {    
+    var scroll = $(window).scrollTop();
+
+    if (scroll >= 560) {
+        $(".stickheader").addClass("activestick");
+    } else {
+        $(".stickheader").removeClass("activestick");
+    }
+});
+</script>
+<style>
+   .header-item.header-item--navigation { opacity: 0; pointer-events: none; }
+   .stickheader { background: #fff;}
+    .stickheader.activestick { overflow-x: auto; overflow-y: hidden; position: fixed; left: 0; right: 0; top: 10px; background: #fff; z-index: 999; }
+    .stickheaderi { max-width: 1530px; overflow-x: auto; overflow-y: hidden; margin: 0 auto; padding: 10px 0;}
+    .stickheaderi ul { list-style: none; margin: 0 auto;width: 1430px;  }
+    .stickheaderi ul li { margin: 0 10px; display: inline; background: #001e42; padding: 7px 10px; border-radius: 7px; font-weight: 600; }
+.stickheaderi ul li  a { text-decoration: none; color: #fff; }
+  @media only screen and (min-width: 769px)  {
+    .stickheader.activestick { top: 70px; background: #fff;   }
+}
+    @media only screen and (max-width: 768px)  {
+    .stickheader.activestick {   top: 62px; background: #fff;   }
+}
+</style>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{% assign product_handles1 = 'meltdown-gel-cleanser-made-with-salicylic-acid,meltdown-gel-cream-for-acne-prone-skin,sunburst-mineral-spf-50' %}
+{%- if product_handles1 -%}
+<div class="bg-w rel gg_wrap" id="product_ha1">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; "> For the “Wash My Face With Hand Soap” Boyfriend</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; "> He believes one product can do it all and that’s all he needs. Time to introduce him to a real routine (that won’t freak him out). </p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles1 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+{% assign product_handles2 = 'fresh-face-edit,meltdown-gel-cream-for-acne-prone-skin,sunburst-mineral-spf-50' %}
+{%- if product_handles2 -%}
+<div class="bg-w rel gg_wrap"  id="product_ha2">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; "> For the Friend Who Has the Best of Everything</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; "> They impulse-shop like it’s cardio. They have the best of everything, before everyone else. The perfect gift for the person who always give the perfect gift.</p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles2 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+
+{% assign product_handles3 = 'the-ultimate-clear-skin-edit,superbalm-tripeptide-1-lip-tint-in-bubblegum' %}
+{%- if product_handles3 -%}
+<div class="bg-w rel gg_wrap"  id="product_ha3">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; ">Your Built-In Therapist</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; "> They talk you off every ledge, spend hours calming you down and take care of you in your most sensitive moment. A gift that says thank you with a lot of love.</p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles3 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+{% assign product_handles4 = 'fresh-face-edit,meltdown-gel-cream-for-acne-prone-skin,sunburst-mineral-spf-50,superbalm-tripeptide-1-lip-tint-in-bubblegum' %}
+{%- if product_handles4 -%}
+<div class="bg-w rel gg_wrap"  id="product_ha4">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; ">The Always-Glowing Overachiever</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; "> Hot yoga at 6AM. Inbox zero by 7. Somehow radiant by 8. They need skincare that keeps up with their main-character energy. </p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles4 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+{% assign product_handles5 = 'the-sensitive-skin-set,blume-buds-power-patches-for-acne' %}
+{%- if product_handles5 -%}
+<div class="bg-w rel gg_wrap"  id="product_ha5">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; ">The Skin-Sensitive Soul</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; ">They read ingredient lists like novels and only trust gentle formulas. Good news: that’s literally our specialty. </p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles5 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+
+{% assign product_handles6 = 'superbalm-tripeptide-1-lip-tint-in-bubblegum,meltdown-gel-cream-for-acne-prone-skin,daydreamer' %}
+{%- if product_handles6 -%}
+<div class="bg-w rel gg_wrap"  id="product_ha6">
+  <div class="fill-x container--xl mha px2 ac">
+  <div class="rtct_title"> 
+	  <h3 class="serif" style=" margin: 0; ">The Skin-Sensitive Soul</h3> 
+	  <p style=" margin: 0 0 20px; font-size: 15px; ">They read ingredient lists like novels and only trust gentle formulas. Good news: that’s literally our specialty. </p> 
+  </div>
+    <div class="collection__grid-clean">
+  {%- assign handles_array = product_handles6 | split: ',' -%}
+  {%- for handle in handles_array -%}
+    {%- assign trimmed_handle = handle | strip -%}
+    {%- assign current_product = all_products[trimmed_handle] -%}
+    <div class="collection__item-clean rel">
+	  
+	  
+    {%- if current_product != blank -%}
+      <div class="product-card" data-product-handle="{{ trimmed_handle }}">
+        {%- if current_product.featured_image -%}
+          <a href="{{ current_product.url }}" class="product-image-link">
+            <img 
+              src="{{ current_product.featured_image | img_url: '400x400' }}"
+              alt="{{ current_product.featured_image.alt | escape }}"
+              loading="lazy"
+              width="400" 
+              height="400"
+            >
+          </a>
+        {%- endif -%}
+        
+        <div class="product-info">
+          <h3 class="product-title serif">
+            <a href="{{ current_product.url }}">{{ current_product.title }}</a>
+          </h3>
+           
+            {% assign kicker = current_product.metafields.sf_extended_informat.kicker %} 
+            {% if kicker %}
+			<div class='collection__item-description'>
+              <h5 style=" margin: 0; font-size: 14px; letter-spacing: 0; ">{{ kicker }}</h5>
+			 </div>
+            {% endif %} 
+       
+          <a href="{{ current_product.url }}" class="btn btn__outline bold fill-x">SHOP NOW - {{ current_product.first_available_variant.price | money }}</a>
+        </div>
+      </div>
+	  </div>
+    {%- endif -%}
+  {%- endfor -%}
+  
+     </div>
+  </div>
+</div>
+{%- endif -%}
+
+
+
+
+
+<style>
+/* Product Card Grid Layout */
+.product-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+  padding: 2rem 0;
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.product-card {
+    background: transparent;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Product Image */
+.product-image-link {
+  display: block;
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.product-image-link img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+ 
+
+.product-info {
+    padding: 10px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-align: left;
+}
+
+/* Product Title */
+.product-title {
+  font-size: 1em;
+  font-weight: 600;
+  line-height: 1.3;
+  color: #1a1a1a;
+  margin: 0;
+  transition: color 0.2s ease;
+}
+
+.product-title a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.product-title a:hover {
+  color: #0066cc;
+}
+
+/* Product Pricing */
+.product-pricing {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+/* Compare At Price (Sale Price) */
+.compare-at-price {
+  font-size: 0.875rem;
+  color: #666;
+  text-decoration: line-through;
+  font-weight: 500;
+}
+
+/* Current Product Price */
+.product-price {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #d63031;
+  font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* Hidden Variant ID */
+.variant-id {
+  font-size: 0.75rem;
+  color: transparent;
+}
+
+/* View Product Button */
+.product-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.5rem;
+  background: linear-gradient(135deg, #0066cc 0%, #0052a3 100%);
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  margin-top: auto;
+  justify-content: center;
+}
+
+.product-link:hover {
+  background: linear-gradient(135deg, #0052a3 0%, #003d7a 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0,102,204,0.3);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .product-cards-grid {
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 1.5rem;
+    padding: 1.5rem 1rem;
+  }
+  
+  .product-info {
+    padding: 1.25rem;
+  }
+  
+  .product-title {
+    font-size: 1rem;
+  }
+  
+  .product-price {
+    font-size: 1.125rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .product-cards-grid {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+}
+.rtct_title {text-align:left;}
+/* Sale Badge (Optional Enhancement) */
+.product-card[data-on-sale="true"]::before {
+  content: 'Sale';
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  background: #d63031;
+  color: white;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  z-index: 10;
+}
+</style>
+
+       
+ {% endcomment %}
+       
+ 
+
+       
+ 
+
+{% for block in section.blocks %}
+  {% assign collectionBlock = block.settings %}
+  <div class='bg-w rel'>
+    <div class='fill-x container--xl mha px2 ac'>
+      {% if collectionBlock.title != blank %}
+      <h2 class='caps outline line-header'>
+        <span class='rel z2 ph05 inline-block'>{{ collectionBlock.title | escape }}</span>
+      </h2>
+      {% endif %}
+
+      {%- assign collection = collections[collectionBlock.collection] -%}
+      <div class='collection__grid-clean'>
+          {% for product in collection.products limit: 24 %}
+            {% include 'collection-item-update' %}
+          {% endfor %}
+        <div class='collection__item mb15 rel'></div>
+      </div>
+    </div>
+  </div>
+{% endfor %}
+
+{% schema %}
+  {
+    "name": "Shop Gifts",
+    "max_blocks": 5,
+    "blocks": [{
+      "type": "list",
+      "name": "Collection",
+      "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Bundle"
+      },
+      {
+        "id": "collection",
+        "type": "collection",
+        "label": "Collection"
+      }
+      ]
+    }],
+    "presets": [{
+      "name": "Shop Gifts",
+      "category": "Shop"
+    }]
+  }
+{% endschema %}

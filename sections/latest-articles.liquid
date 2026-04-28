@@ -1,0 +1,42 @@
+{% assign blog = blogs.Blume-University %}
+
+<div class='bg-w o-h px2 pm60 ac university__container rel'>
+  <div class='university__left js-university-left'></div>
+  <div class='university__right js-university-right'></div>
+  <div class='container--xl mha'>
+    <h2 class='bold serif'><a href='{{ blog.url }}'>Blume University</a></h2>
+    <div class='f jcb university__wrapper js-university-slides fill-x'>
+      {% paginate blog.articles by 8 %}
+        {% for article in blog.articles %}
+          <div class='px1 university__slide'>
+            <div class='university__image rel' style="background-image: url({{ article.image.src | img_url: '1024x1024'}})">
+              <a href="blogs/{{ article.handle }}" class='abs fill top left fill-y fill-x'></a>
+              <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1024x1024'}}" />
+            </div>
+            {% if blog.comments_enabled? or article.tags.size > 0 %}
+              {% if article.tags.size > 0 %}
+                {% for tag in article.tags %}
+                  <h6 class='article__tag inline-block xsmall caps bg-o caps mx0  bold pt1 pb05 ls1'>
+                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                    {% unless forloop.last %}, {% endunless %}
+                  </h6>
+                {% endfor %}
+              {% endif %}
+            {% endif %}
+            <h4 class='mt0 pt0'><a href="blogs/{{ article.handle }}">{{article.title}}</a></h4>
+          </div>
+        {% endfor %}
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+  {
+    "name": "Latest Blume University",
+    "presets": [{
+      "name": "Latest Blume University",
+      "category": "blog"
+    }]
+  }
+{% endschema %}

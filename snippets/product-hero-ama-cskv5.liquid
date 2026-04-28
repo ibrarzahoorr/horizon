@@ -1,0 +1,578 @@
+<div class='product__hero_bg bg-p rel js-product-hero' data-id="{{ product.selected_or_first_available_variant.id }}">
+  <div class='container--xl mha' data-section-id="{{ section.id }}" data-module="product"
+    data-enable-history-state="true">
+
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    {%- include 'bold-variant' with current_variant, output: 'none' -%}
+    {%- assign featured_image = current_variant.featured_image | default: product.featured_image -%}
+
+    <script class='js-product-json' type='text/template'>
+      {
+        "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+        "product": {{ product | json }},
+        "sku": {{ current_variant.sku | json }}
+      }
+    </script>
+    <div class='product__wrapper'>
+      {% assign pdp__hero = product.metafields.sf_extended_informat.pdp_hero %}
+      {% if product.handle contains 'all-in-skin' %}
+        {% include 'product-slideshow-growth' %}
+      {% else %}
+        {% include 'product-slideshow' %}
+      {% endif %}
+      <div class='product__description __desktop px2'>
+        <div>
+          {% comment %}div class='js-review-jump'>
+            {% render 'junip-product-summary', product: product %}
+          </div>{% endcomment %}
+          <div class="review_csk5" style="font-size:14px;"><img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/67be26b94b3eba7d9bbac13b_starshalf.svg?v=1768870464" style="width:75px;"> Rated 4.5 (3800+ Verified Reviews)</div>
+          {% comment %}{% if product.variants.size == 1 %}
+
+          <div data-price-wrapper>
+
+            {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price"> {{ product.price  | money }} </span>
+            <s data-compare-price>
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings"> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+
+          </div>
+            {% else %}
+           <div data-price-wrapper>
+             
+             {% if product.compare_at_price_max > product.price %}
+              {%- capture saved_amount -%}{{ product.compare_at_price | minus: product.price | money }}{%- endcapture -%}
+              
+            {% comment %}<span class="visually-hidden " data-compare-text>{{ 'products.product.regular_price' | t }}</span> {% endcomment %}
+              <span class="product__price" id="cutnshhs"> {{ product.price  | money }} </span>
+            <s data-compare-price id="cutnshts">
+              {% if current_variant.compare_at_price > current_variant.price %}
+              {{ current_variant.compare_at_price | money }}
+              {% endif %}
+            </s>
+              <span class="product__savings" id="cutnsjts"> SAVE {{ saved_amount }}</span>
+            {% endif %} 
+            </div>
+            
+          {% endif %}{% endcomment %}
+        </div>
+        <h1 class='serif mx0 pv0 product__title  '>
+          Save Up To 43% Today + FREE Gift
+        </h1>
+
+        <div class="rte">
+          {% assign kicker = product.metafields.sf_extended_informat.kicker %}
+         {% comment %} {% if kicker %}
+          <h2 class='h5 mx0 pv05'>{{ kicker }}</h2>
+          {% endif %}{% endcomment %}
+        
+          {% comment %}<div class="dsk_on"> {{ product.description }}</div>{% endcomment %}
+        
+          {% if product.handle == 'clear-skin-kit-3' %} 
+          <div class="  rte" style=" max-width: 485px; ">
+            <h2 class="h5 mx0 pv05">Clear Skin Kit: Acne Essentials<br>
+            <span style=" font-size: 13px; ">Your 3-Step Hormonal Acne Solution That Works in Just 3 Days</span>
+            </h2>
+             
+            <ul>
+              <li style=" font-size: 16px; "><strong>90 Day Trial: </strong> Less than $.80 / day</li>
+              <li style=" font-size: 16px; "><strong>Key Benefits: </strong> Cleanses, fights hormonal acne, hydrates skin</li>
+              <li style=" font-size: 16px; "><strong>Results in 90 days,</strong>  or your money back! No Questions Asked!</li>
+            </ul>
+            <br> 
+            
+              <div class="cskf_a1b2">
+  <div class="cskf_d3e4 cskf_f5g6">
+    {% assign days_to_add = 6 %}
+    {% assign seconds = days_to_add | times: 24 | times: 60 | times: 60 %}
+    {% assign now_seconds = 'now' | date: '%s' %}
+
+    <div class="cskf_h7i8">
+      <p class="cskf_j9k0">🎁 {{ 'now' | date: "%B" }}  SPECIAL 🎁</p>
+      <p class="cskf_l1m2" >Exclusive Discount + Free Gift. Order By <span id="shop-by">{{ now_seconds | plus: seconds | date: '%b %d' }}</span></p>
+    </div>
+    <div class="cskf_n3o4" style="margin-bottom: 20px;">
+      <div class="cskf_p5q6">
+        <div class="cskf_r7s8">
+          <div data-gift="container" class="cskf_t9u0">
+            <div class="cskf_v1w2 is-active" data-gift="1">
+              <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/csk-13.png?v=1768871431" class="cskf_x3y4">
+              <div class="cskf_z5a6 is-active" data-gift="1"></div>
+              <div class="cskf_b7c8"> 
+              </div>
+              <div class="cskf_f1g2">
+                <div class="cskf_h3i4">SAVE $9</div>
+              </div>
+            </div>
+            <div class="cskf_j5k6 is-active" data-gift="2">
+              <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/csk-14.png?v=1768871430" class="cskf_x3y4">
+              <div class="cskf_z5a6 is-active" data-gift="2"></div>
+              <div class="cskf_f1g2">
+                <div class="cskf_h3i4">SAVE $13</div>
+              </div>
+            </div>
+            <div class="cskf_j5k6 is-active" data-gift="2">
+              <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/csk-16.png?v=1768871430" class="cskf_x3y4">
+              <div class="cskf_z5a6 is-active" data-gift="2"></div>
+              <div class="cskf_f1g2">
+                <div class="cskf_h3i4">SAVE $11</div>
+              </div>
+            </div>
+          </div>
+          <div data-gift="titles" class="cskf_l7m8">
+            <div class="cskf_n9o0 is-active" data-gift="1">
+              <div class="cskf_p1q2">Meltdown Gel Cream</div>
+            </div>
+            <div class="cskf_n9o0 is-active" data-gift="1">
+              <div class="cskf_p1q2">Meltdown Daily Gel Cleanser</div>
+            </div>
+            <div class="cskf_n9o0 is-active" data-gift="2">
+              <div class="cskf_p1q2">Meltdown Acne Oil Treatment</div>
+            </div>
+          </div>
+        </div>
+        <div class="cskf_r3s4">
+          <div class="cskf_t5u6">
+            <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/691de4caf67669a7c65cff51_plus.svg?v=1771279944" alt="" class="cskf_v7w8">
+          </div>
+          <div class="cskf_t5u6"></div>
+        </div>
+        <div class="cskf_x9y0">
+          <div class="cskf_z1a2 is-active">
+            <span style=" position: absolute; z-index: 99; font-size: 10px; background: #c8202f; border-radius: 20px; width: 30px; line-height: 1; height: 30px; text-align: center; padding: 5px 0 0; color: #fff; right: -3px; top: -5px; font-weight: 600; ">$18 value</span>
+            <img data-bundle-gift="3" id="gift1image" src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/3v31c.png?v=1768871511" class="cskf_b3c4 is-active">
+            <div class="cskf_z5a6 is-active"></div>
+            <div class="cskf_f1g2 cskf_h5i6">
+              <div class="cskf_h3i4 cskf_j7k8 cskf_l9m0">FREE GIFT</div>
+            </div>
+          </div>
+          <div data-bundle-gift="3" class="cskf_n1o2 cskf_p3q4">
+            <div class="cskf_p1q2 cskf_r5s6 cskf_t7u8 is-active">Tripeptide-1 Vanilla Lip Balm</div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+<button onclick="addItemAma(47735084024001,1);" style=" max-width: 390px; " id="stick_cta" class="btn btn__blue btn__dtact bold fill-x">Add to cart -  <span class="money">{{ product.price | money }}</span> &nbsp; <s style="font-size: 12px;"> {{ product.compare_at_price | money }}</s> </button>
+<script>
+      function addItemAma(variantId, quantity) {
+        fetch(window.Shopify.routes.root + 'cart/add.js', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+            items: [{
+              id: variantId,
+              quantity: quantity
+            }]
+          })
+        })
+        .then(response => response.json())
+        .then(data => {
+          console.log('Item added to cart:', data);
+          // Optionally update cart count or show a success message
+        })
+        .catch(error => {
+          console.error('Error adding item to cart:', error);
+        });
+      }
+      </script>
+      <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const stickCta = document.getElementById('stick_cta');
+        if (!stickCta) return;
+
+        let ticking = false;
+
+        function updateSticky() {
+          const scrollY = window.scrollY;
+          const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const scrollPercent = (scrollY / docHeight) * 100;
+
+          if (scrollPercent > 5) {
+            stickCta.classList.add('is_sticky');
+          } else {
+            stickCta.classList.remove('is_sticky');
+          }
+          ticking = false;
+        }
+
+        window.addEventListener('scroll', function() {
+          if (!ticking) {
+            requestAnimationFrame(updateSticky);
+            ticking = true;
+          }
+        });
+      });
+      </script>
+  </div>
+
+</div>
+
+<style>
+  @media (max-width: 640px) {
+ #stick_cta.is_sticky  {
+display: block !important;
+    position: fixed;
+    text-align: center;
+    bottom: 0px;left:0px;
+    padding: 20px;
+    background: #001e42;
+    color: #fff;
+    z-index: 99;
+    width: 100%;max-width: 100% !important;
+}
+}
+
+.cskf_a1b2 {
+    grid-gap: 16px;
+    background-color: #fffaf8;
+    border-radius: 4px;
+    flex-direction: column;
+    padding: 12px;
+    display: flex;
+    overflow: hidden;    max-width: 400px;
+}
+.cskf_d3e4.cskf_f5g6 {
+    position: relative;
+}
+.cskf_j9k0 {
+    font-size: 13px;
+    font-weight: 600;margin:0 !important; text-transform:uppercase;
+}
+.cskf_l1m2 {
+    font-size: 13px;
+    line-height: 1.25;
+    margin: 0 0 20px !important;
+}
+.cskf_p1q2 { font-size: 11px; line-height: 1; text-align: center; }
+.cskf_p5q6 {
+    display: flex;
+    grid-gap: 0.25rem;
+}
+.cskf_t9u0 {
+    position: relative;
+    display: flex;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0.25rem;
+    justify-content: space-between;
+    align-items: stretch;
+    margin-bottom: 0.5rem;
+}
+.cskf_v1w2.is-active, .cskf_j5k6.is-active {
+    border-color: #667eea;
+}
+.cskf_v1w2, .cskf_j5k6 {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    border: 1px dashed #cfcfcf;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    padding: 2px;
+    transition: border-color 0.12s cubic-bezier(0.645, 0.045, 0.355, 1);
+    display: flex;
+    position: relative;
+    overflow: visible;
+}
+.cskf_x3y4 {
+    z-index: 3;
+    border-radius: 4px;
+    opacity: 1;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+}
+.cskf_z5a6.is-active {
+    background: #eff7fe;
+    opacity: 1;
+}
+.cskf_z5a6 {
+    z-index: 2;
+    border-radius: 4px;
+    opacity: 0;
+    pointer-events: none;
+    background-color: #fff;
+    width: 100%;
+    height: 100%;
+    transition: background-color 0.2s;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+.cskf_b7c8 {
+    z-index: 1;
+    aspect-ratio: 1;
+    background-color: #fff;
+    border-radius: 8px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+}
+.cskf_d9e0 {
+    color: #9ca3af;
+    text-align: center;
+    font-size: 0.65rem;
+    font-weight: 700;
+    display: block;
+}
+.cskf_f1g2 {
+    z-index: 5;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    position: absolute;
+    bottom: -8px;
+    left: 0;
+    right: 0;
+}
+.cskf_h3i4 {
+    padding: 0.05rem 0.5rem;
+    padding-left: 0.25rem;
+    padding-right: 0.25rem;
+    font-size: 0.6rem;
+    z-index: 500;
+    border-radius: 4px;
+    color: #fff;
+    background-color: #c8202f;
+    font-family: Inter, sans-serif;
+    font-weight: 700;
+    display: flex;
+}
+.cskf_l7m8 {
+    display: flex;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 0.25rem 1rem;
+    justify-content: space-between;
+    align-items: stretch;
+    position: relative;
+}
+.cskf_r3s4 {
+    flex-direction: column;
+    padding-top: 26px;
+    display: flex;
+}
+.cskf_t5u6 {
+    aspect-ratio: 1;
+    justify-content: center;
+    align-items: center;
+    width: 14px;
+    height: 14px;
+    display: flex;
+}
+.cskf_v7w8 {
+    aspect-ratio: 1;
+    width: 100%;
+    height: 100%;
+}
+.cskf_x9y0 {
+    grid-gap: 0.25rem;
+}
+.cskf_z1a2.is-active {
+    border-color: #667eea;
+}
+.cskf_z1a2 {
+    aspect-ratio: 1;
+    border-radius: 4px;
+    border: 1px dashed #cfcfcf;
+    padding: 2px;
+    position: relative;
+    overflow: visible;    min-width: 70px;
+}
+.cskf_b3c4.is-active {
+    opacity: 1;
+}
+.cskf_b3c4 {
+    z-index: 3;
+    border-radius: 4px;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    object-fit: contain;
+}
+.cskf_f1g2.cskf_h5i6 {
+    bottom: -8px;
+}
+.cskf_h3i4.cskf_j7k8.cskf_l9m0 {
+    background-color: #0e1f40;
+    font-size: 0.45rem;
+}
+.cskf_n1o2.cskf_p3q4 {
+    z-index: 2;
+    color: #9ca3af;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    max-width: 68px;
+    height: 1rem;
+    display: flex;
+    position: relative;margin: 20px 0 0;
+}
+.cskf_p1q2.cskf_r5s6.cskf_t7u8.is-active {
+    color: #000;
+}
+.cskf_v9w0.hide {
+    display: none;
+}
+.cskf_x1y2 {
+    margin: 0;
+}
+</style>
+
+             </div>
+            {% endif %} 
+
+
+            
+        </div>
+
+        
+
+        <div>
+          {% if product.tags contains 'always-price' %}
+          <div>
+            <span data-product-price>
+              {{ current_variant.price | money }}
+            </span>
+          </div>
+          {% endif %} 
+          <style>
+            /*.jcb.fw.mha.aic {display: none;}*/ .mha.px2.phm4.rel , #blob , .pv1.product__included.pm60 {display: none;}
+          </style>
+           
+        {% comment %}
+           <div class="bctacountdown">
+            <p style="text-align: center;background: #fff;padding: 5px 0px;color: #111;max-width: 400px;"><strong style=" color: #001e42; ">BLACK FRIDAY SALE</strong> <br>
+              <span style="font-size:13px;">SHOP NOW AND SAVE UP TO 50% OFF SITEWIDE</span> 
+              <br> ENDING IN:   
+            
+            <span id="bctatimerx" style=" display: block; font-size: 20px; font-weight: 600; color: #fa0800; "></span>
+            </p>
+            </div>
+            <script>var countDownDate=new Date("Dec 4, 2024 23:59:00").getTime(),x=setInterval(function(){var now=new Date().getTime(),distance=countDownDate-now,totalHours=Math.floor(distance/(1e3*60*60)),minutes=Math.floor((distance%(1e3*60*60))/(1e3*60)),seconds=Math.floor((distance%(1e3*60))/1e3);document.getElementById("bctatimerx").innerHTML="Sale Ending In: "+totalHours+"h "+minutes+"m "+seconds+"s";distance<0&&(clearInterval(x),document.getElementById("bctatimerx").innerHTML="")},1e3);</script>
+                      {% endcomment %}
+         {% comment %} {% if cart.currency.iso_code == "CAD" %}
+                <div class="proud_canadian">🍁 Blume is proudly Canadian and ships from within Canada</div>
+          {% endif %}
+          {% if cart.currency.iso_code == "USD" and product.handle == "clear-skin-kit-3" %}
+                <div class="proud_canadian">Selling fast! This bundle ships free </div>
+          {% endif %} {% endcomment %}
+
+          
+          <div class="icons__wrapxx">
+           <div class="fsd_valueprops"> 
+              <ul><li>Certified Clean</li><li>Cruelty Free</li><li>Vegan</li><li>Dermatologist Tested</li></ul>
+            </div>
+            <style> .fsd_valueprops { padding: 10px; border-radius: 10px; background: #fff6ee; max-width: 400px; margin: 15px 0 0; } .fsd_valueprops ul { margin: 0; display: flex ; flex-wrap: wrap; justify-content: flex-start; align-content: flex-end; flex-direction: row; padding-left: 0px; } .fsd_valueprops ul li { padding-left: 25px; margin: 0 0 5px; font-size: 14px; background-size: 17px !important; font-weight: 300; display: inline-block; width: 50%; color: ##0e1f40;font-weight: 600; } .fsd_valueprops ul li:nth-child(1) { background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/Certified%20Clean.png?v=1737114768) 0px 1px no-repeat; background-size: 25px; } .fsd_valueprops ul li:nth-child(2) { background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/cruelty-free.png?v=1737114741) 0px 1px no-repeat; background-size: 25px; } .fsd_valueprops ul li:nth-child(3) { background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/vegan.png?v=1737114759) 0px 1px no-repeat; background-size: 25px; } .fsd_valueprops ul li:nth-child(4) { background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/t/156/assets/test-derma.png?v=1737114750) 0px 1px no-repeat; background-size: 25px; } </style>
+          </div>
+          
+
+          <div class="lp1_sec_23" id="testimonials">
+            <div class="lp1_sec_23i">
+            </div>
+          </div>
+
+          <style>
+            .lp1_sec_23i {
+              width: 100%;    max-width: 400px;
+              height: 170px;
+              top: 0;
+              left: 0;
+              background-repeat: repeat-x;
+              background-size: auto 100%;
+              animation: slideCarousel 39s linear infinite;
+              background-image: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/acne-before-after-slider.png?v=1759167104);
+          }
+          @keyframes slideCarousel {
+                  0% {
+                    background-position: 0;
+                  }
+                  100% {
+                    background-position: -1200px;
+                  }
+                }
+            @media only screen and (max-width: 768px) {
+                  
+                  .lp1_sec_23i { width: 100%; height: 130px; }
+                  .lp1_sec_23i { animation: slideCarousel 30s linear infinite;  } 
+                }
+          </style>
+
+          {% comment %}<div class="mbl_on rte"> {{ product.description }}</div>{% endcomment %}
+
+          {% comment %}{% if product.handle == 'clear-skin-kit-3' %} 
+         
+                <div class="  rte" style=" max-width: 485px; ">
+            <h2 class="h5 mx0 pv05">3-Step Skincare Routine for Clear Skin</h2>
+            <p style="margin:0;">A must-have trio for achieving clear, acne-free skin, the Clear Skin Kit provides a comprehensive 3-step regimen to deeply cleanse (even the toughest dirt like makeup), effectively treat acne, and thoroughly hydrate the skin.</p>
+            <ul>
+              <li style=" font-size: 15px; background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Cleanser_with_Meltdown_Gel_Cleanser_200x.png) 0 0 no-repeat; background-size: 90px; padding: 0px 10px 0px 100px; margin: 10px 0;min-height: 90px;display: flex;flex-direction: column;align-content: center;justify-content: center; "><strong>Step 1: </strong> Deep clean with Meltdown Gel Cleanser (6oz) Formulated with green tea leaf extract and salicylic acid to gently exfoliate, deeply clean, and smooth the skin.</li>
+              <li style=" font-size: 15px; background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/gel_cream_blume112_200x.png?v=1756948642) 0 0 no-repeat; background-size: 90px; padding: 0px 10px 0px 100px; margin: 10px 0;min-height: 90px;display: flex;flex-direction: column;align-content: center;justify-content: center; "><strong>Step 2:  </strong> Intensely hydrate with Meltdown Gel Cream (1.7oz) Infused with ceramides and pentavitin to provide 72 hours of hydration and skin barrier protection.</li>
+              <li style="font-size: 15px;background: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Treat_with_Meltdown_Oil_200x.png) 0 0 no-repeat;background-size: 90px;padding: 0px 10px 0px 100px;margin: 10px 0;min-height: 90px;display: flex;flex-direction: column;align-content: center;justify-content: center;"><strong>Step 3: </strong> Treat acne with Meltdown Acne Oil (1/2oz) Crafted with blue tansy and tamanu oil to calm, clear, prevent, and soothe acne.</li>
+            </ul>
+
+                
+                <h3 style=" font-size: 20px; font-weight: 900; margin: 20px 0 0; ">Why Clear Skin Kit?</h3>
+                <p><strong>Clear Skin Without the Harsh Side Effects </strong>  <br> The only routine on the market that is a clean and natural way to fight your hormonal acne in 3 easy steps.</p>
+
+                <p><strong> A Simple Routine You’ll Actually Stick To </strong>  <br> Made with ceramides to protect and build your skin's natural barrier.</p>
+                <p><strong> Supports Your Skin’s Natural Barrier </strong> <br> A simple 3 step regime that takes less than 5 minutes a day</p>
+            
+                
+                <h3 style=" font-size: 20px; font-weight: 900; margin: 20px 0 0; ">"Most customers get results in just a few weeks"</h3>
+                  <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/c3f11a15-9461-4cf6-8507-74f78ad5bb0b?width=1800">
+                 <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/10ea4be0-9f33-4042-8760-d84edc4e3860?width=1800">
+                 <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/dec38ba8-8e6e-4acb-b31b-d580bd0d0925?width=1800"> 
+                  <p style=" display: block; font-weight: 900; text-align: center; margin: 0 0 20px; font-size: 18px; ">I tried all of the "clinical, medical-grade" brands and they just dried out my skin </p>
+                 <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/29612757-cfca-4cd1-a110-3fa93f186d3d?width=1800">
+                  <img class="lazyloadxx" src="https://assets.replocdn.com/projects/d3ed28a8-f6a7-48c8-990f-a1ab9bf9d7ad/0b3a10fd-30fb-41c5-9854-a99737f3eacd?width=1800">
+                  
+                  <style>.lazyloadxx {width:100%;}</style>
+                </div>
+            {% endif %}{% endcomment %}
+            
+
+        </div>
+      </div>
+    </div>
+
+    {% comment %}
+
+    Commenting out social sharing for now
+
+    {% if section.settings.show_share_buttons %}
+    {% include 'social-sharing', share_title: product.title, share_permalink: product.url, share_image: product %}
+    {% endif %}
+
+    {% endcomment %}
+
+    {% unless product == empty %}
+      <script type="application/json" data-product-json>
+        {{ product | json }}
+      </script>
+    {% endunless %}
+  </div>
+</div>

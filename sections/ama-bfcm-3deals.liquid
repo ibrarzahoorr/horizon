@@ -1,0 +1,178 @@
+<div class="bg-w rel">
+      <div class="fill-x container--xl mha pt2 pb2 ac">
+
+<div class="eof_wrap">
+	<h2 class="caps outline line-header " style=" margin: 0 0 40px; ">
+     <span class="rel z2 ph05 inline-block" style=" padding-left: 70px; ">BEST BUNDLES  </span>
+        <!-- <span style=" display: block; font-size: 20px; -webkit-text-fill-color: #f61d1a; -webkit-text-stroke-color: #f61d1a; ">Up to 50% OFF</span> -->
+    </h2>
+             {% assign price_difference1 = all_products["the-ultimate-clear-skin-edit"].variants.first.compare_at_price | minus: all_products["the-ultimate-clear-skin-edit"].variants.first.price %}
+             {% assign price_difference2 = all_products["the-sensitive-skin-set"].variants.first.compare_at_price | minus: all_products["the-sensitive-skin-set"].variants.first.price %}
+             {% assign price_difference3 = all_products["fresh-face-edit"].variants.first.compare_at_price | minus: all_products["fresh-face-edit"].variants.first.price %}
+	<div class="eof_wrapi">
+		<div class="eof_wrapis"> 
+
+          
+          
+           {% if all_products["the-ultimate-clear-skin-edit"].variants.first.available %}    {% endif %} 
+              
+			<div class="eof_wrapic  ">
+				<div class="eof_bunimg">  
+                  <div class="eof_bnsbadge">53% OFF</div>
+		            <a href="/products/the-ultimate-clear-skin-edit">
+                      <img src="https://www.blume.com/cdn/shop/files/hf_20260405_210014_928431ea-7f6c-4769-b0e2-8dc40b6848fa_900x900_crop_center.png?v=1775422935" alt="The Ultimate Clear Skin Edit">
+                     {% comment %} <img src="{{ all_products["the-ultimate-clear-skin-edit"].featured_image | img_url: '700x700' }}" alt="The Ultimate Clear Skin Edit">{% endcomment %}
+                    </a>
+		        </div>
+		        <div class="eof_bunmeta">
+		            <h4 class="serif "> Ultimate Clear Skin Edit</h4>
+		             <p class="eof_smdsc"> Fight Breakouts. Fade Marks. Stay Clear. </p>
+		            <p class="eof_pricess"><del>{{ all_products["the-ultimate-clear-skin-edit"].variants.first.compare_at_price | money }}</del> <span>{{ all_products["the-ultimate-clear-skin-edit"].variants.first.price | money }}</span></p>
+		        </div>
+		        <div class="eof_bunmetb">
+		            
+		            <ul>
+		                <li class="eof_lisave">Save $52</li>
+		                <li class="eof_liship">Free Shipping</li> 
+		            </ul> 
+		            <div class="eof_bunctaa">
+		            	
+                      {% if all_products["the-ultimate-clear-skin-edit"].variants.first.available %}
+                         <a href="/products/the-ultimate-clear-skin-edit" class="btn btn--full btn__blue  ">SHOP NOW</a>
+                         {% else %}
+                         <button disabled class="btn btn--full btn__blue ">Out of Stock </button>
+                         {% endif %}
+		            </div> 
+		        </div>
+			</div> 
+       
+
+
+		{% comment %}	
+		<div class="eof_wrapic">
+				<div class="eof_bunimg"> 
+		        	<div class="eof_bnsbadge">36% OFF</div>
+		            <a href="/products/the-sensitive-skin-set">
+                      <img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_c7890cb6-e5ff-40c3-87b3-b2ed0a2906e7_800x800_crop_center.png" alt="The Sensitive Skin Set">
+                      {% comment %}<img src="{{ all_products["the-sensitive-skin-set"].featured_image | img_url: '700x700' }}" alt="The Sensitive Skin Set">{% endcomment %}
+                    </a>
+		        </div>
+		        <div class="eof_bunmeta">
+		            <h4 class="serif ">The Sensitive Skin Set </h4>
+		              <p class="eof_smdsc"> A Routine That Loves Sensitive Skin Back </p>
+		              <p class="eof_pricess"><del>{{ all_products["the-sensitive-skin-set"].variants.first.compare_at_price | money }}</del> <span>{{ all_products["the-sensitive-skin-set"].variants.first.price | money }}</span></p>
+		        </div>
+		        <div class="eof_bunmetb">
+		            
+		            <ul>
+		                <li class="eof_lisave">Save $76</li>
+		                <li class="eof_liship">Free Shipping</li> 
+		            </ul> 
+		            <div class="eof_bunctaa">
+		            	{% if all_products["the-sensitive-skin-set"].variants.first.available %}
+                          <a href="/products/the-sensitive-skin-set" class="btn btn--full btn__blue  ">SHOP NOW</a>
+                         {% else %}
+                         <button disabled class="btn btn--full btn__blue ">Out of Stock </button>
+                         {% endif %}
+		            </div> 
+		        </div>
+			</div>
+          {% endcomment %}
+
+		  <div class="eof_wrapic">
+				<div class="eof_bunimg"> 
+		        	<div class="eof_bnsbadge">36% OFF</div>
+		            <a href="/products/clear-skin-kit-3">
+                      <img src="https://www.blume.com/cdn/shop/files/clear-skin-kit_800x800_crop_center.png?v=1760562375" alt="Clear Skin Kit: Acne Essentials">
+                      {% comment %}<img src="{{ all_products["the-sensitive-skin-set"].featured_image | img_url: '700x700' }}" alt="The Sensitive Skin Set">{% endcomment %}
+                    </a>
+		        </div>
+		        <div class="eof_bunmeta">
+		            <h4 class="serif ">Clear Skin Kit: Acne Essentials</h4>
+		              <p class="eof_smdsc"> Leave Hormonal Acne Behind and Get Clear Skin </p>
+		              <p class="eof_pricess"><del>{{ all_products["clear-skin-kit-3"].variants.first.compare_at_price | money }}</del> <span>{{ all_products["clear-skin-kit-3"].variants.first.price | money }}</span></p>
+		        </div>
+		        <div class="eof_bunmetb">
+		            
+		            <ul>
+		                <li class="eof_lisave">Save $76</li>
+		                <li class="eof_liship">Free Shipping</li> 
+		            </ul> 
+		            <div class="eof_bunctaa">
+		            	{% if all_products["clear-skin-kit-3"].variants.first.available %}
+                          <a href="/products/clear-skin-kit-3" class="btn btn--full btn__blue  ">SHOP NOW</a>
+                         {% else %}
+                         <button disabled class="btn btn--full btn__blue ">Out of Stock </button>
+                         {% endif %}
+		            </div> 
+		        </div>
+			</div>
+
+          <div class="eof_wrapic">
+				<div class="eof_bunimg"> 
+		        	<div class="eof_bnsbadge">30% OFF</div>
+		            <a href="/products/fresh-face-edit">
+                      <img src="https://cdn.shopify.com/s/files/1/0003/4580/0755/files/fresh-face-edit-4c.png?v=1769880474" alt="The Fresh Face Edit">
+                      {% comment %}<img src="{{ all_products["fresh-face-edit"].featured_image | img_url: '700x700' }}" alt="The Fresh Face Edit">{% endcomment %}
+                    </a>
+		        </div>
+		        <div class="eof_bunmeta ">
+		            <h4 class="serif ">The Fresh Face Edit</h4>
+		              <p class="eof_smdsc"> Your First Routine, Done Right</p>
+		             <p class="eof_pricess"><del>{{ all_products["fresh-face-edit"].variants.first.compare_at_price | money }}</del> <span>{{ all_products["fresh-face-edit"].variants.first.price | money }}</span></p>
+    		        
+		        </div>
+		        <div class="eof_bunmetb">
+		             
+		            <ul>
+		                <li class="eof_lisave">Save $77</li>
+		                <li class="eof_liship">Free Shipping</li> 
+		            </ul> 
+		            <div class="eof_bunctaa">
+		            	{% if all_products["fresh-face-edit"].variants.first.available %}
+                         <a href="/products/fresh-face-edit" class="btn btn--full btn__blue  ">SHOP NOW</a>
+                         {% else %}
+                         <button disabled class="btn btn--full btn__blue ">Out of Stock </button>
+                         {% endif %}
+		            </div> 
+		        </div>
+			</div>
+            
+			 
+            <div class="cb"></div>
+		</div>
+	</div>
+</div>
+	</div>
+</div>
+ 
+ 
+<style>
+ .desk-hide,.eof_bunmetb ul,.mobile_only{display:none}.desktop_only,.eof_bunmeta h4,.eof_savings,.eof_wrapi,.mobi-hide,a.btn__openmodl{display:block}.cb,.eof_wrapis:after,.eof_wrapis:before{clear:both}.eof_wrapi{width:100%;overflow:auto;max-width:1180px;margin:0 auto}.eof_wrapic{text-align:center;width:30%;float:left;position:relative;margin:10px 1%;overflow:hidden;background:#fbece3}.eof_bunimg img{width:100%}.eof_savings{max-width:220px;font-size:14px;margin:10px auto 0;background:#f2c2a2;color:#000;border-radius:2px;padding:5px 10px}.eof_bunmetb .button{display:block;width:100%;padding:15px;font-size:20px}a.btn__openmodl{background:#fbece3!important;color:#000!important;text-decoration:none;padding:5px 20px!important;border-radius:3px!important;font-size:12px!important;margin:0 auto 20px!important;max-width:120px}.eof_bunmeta h4{font-size:24px;margin:10px 10px 0!important}
+  .eof_bnsbadge.eof_bnsbadge { position: absolute; color:#fff;background: transparent url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/BFCM-BLUME-2025-3_65x.png?v=1762283444) 0 0 no-repeat; font-size: 21px; font-weight: 900; padding: 22px 10px; width: 80px; height: 80px; background-size: 80px; line-height: 20px; text-align: center; right: 10px; top: 8px; }
+  .eof_pricess{margin:0;font-size:14px}.eof_pricess span>span{padding:0 10px;font-size:20px;font-weight:600}.eof_smdsc{padding:0 15px; min-height: 20px;}.modal{color:#000!important}.btn.btn--full{width:100%;font-size:20px;text-transform:uppercase;font-weight:900}@media screen and (max-width:768px){.eof_bunistc,.eof_wrapic{text-align:center;float:left;margin:10px 1%}.desk-hide,.mobile_only{display:block}.desktop_only,.mobi-hide{display:none}.eof_wrapi { overflow-y: scroll; } .eof_wrapis  { width: 1030px; } .eof_wrapic{width:31%;overflow:hidden;background:#fbece3}.eof_bunistc{width:100%;position:relative}}.modaletc{display:none;position:fixed;z-index:99999;padding-top:100px;left:0;top:0;width:100%;height:100%;overflow:auto;background-color:rgba(0,0,0,.4)}.modal-contentetc{background-color:#fefefe;margin:auto;padding:20px;border:1px solid #888;width:90%;max-width:660px}.closeetc,.closeetv,.closeetx{color:#aaa;float:right;font-size:28px;font-weight:700}.closeetc:focus,.closeetc:hover,.closeetv:focus,.closeetv:hover,.closeetx:focus,.closeetx:hover{color:#000;text-decoration:none;cursor:pointer}
+ </style>
+ 
+<script>
+ function addItemToCart(t,n=1){fetch("/cart/add.js",{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify({items:[{id:t,quantity:n}]})}).then(t=>{if(!t.ok)throw Error("Error adding item to cart");return t.json()}).then(t=>{console.log("Item added to cart:",t)}).catch(t=>{console.error("Error adding item to cart:",t)})}var modal=document.getElementById("essentialnModal"),btn=document.getElementById("essnBtn"),span=document.getElementsByClassName("closeetc")[0];btn.onclick=function(){modal.style.display="block"},span.onclick=function(){modal.style.display="none"},window.onclick=function(t){t.target==modal&&(modal.style.display="none")};var modal2=document.getElementById("ultmModal"),btn2=document.getElementById("ultmBtn"),span2=document.getElementsByClassName("closeetv")[0];btn2.onclick=function(){modal2.style.display="block"},span2.onclick=function(){modal2.style.display="none"},window.onclick=function(t){t.target==modal2&&(modal2.style.display="none")};var modal3=document.getElementById("cozynModal"),btn3=document.getElementById("cozymBtn"),span3=document.getElementsByClassName("closeetx")[0];btn3.onclick=function(){modal3.style.display="block"},span3.onclick=function(){modal3.style.display="none"},window.onclick=function(t){t.target==modal3&&(modal3.style.display="none")};
+</script>
+ 
+{% schema %}
+  {
+    "name": "AMA BFCM Deals",
+    "settings": [
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Deals"
+      }
+    ],
+    "presets": [
+      {
+        "name": "AMA BFCM Deals",
+        "category": "Collection"
+      }
+    ]
+  }
+{% endschema %}
