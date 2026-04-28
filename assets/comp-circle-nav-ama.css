@@ -1,14 +1,23 @@
  .circle--nav { overflow-x: auto; }
-  .circle-navigation_wrap { min-width: 510px; display: none; background-color: #ffffff;overflow-x: auto;max-width: 100% !important;padding: 10px 0  0;}
-  .circle-navigation_wrap ul:first-child { align-items: flex-start; display: flex; flex-wrap: nowrap; list-style: none; margin: 0; overflow-x: scroll; padding: 1rem 0 1rem 1rem; } 
-  .circle-navigation_wrap ul:first-child li { padding: 0 1rem 0 0; width: 110px; text-align: center; line-height:1.4; } 
-  .circle-navigation_wrap ul:first-child li img { width: 100%; border-radius: 50px; height: 100%; } 
+  .circle-navigation_wrap { display: none; background-color: #ffffff; max-width: 100% !important; padding: 10px 0 0; position: relative; }
+  .circle-navigation_wrap ul:first-child { align-items: flex-start; display: flex; flex-wrap: nowrap; list-style: none; margin: 0; padding: 1rem 0 1rem 0; transition: transform 0.3s ease; } 
+  .circle-navigation_wrap ul:first-child li { padding: 0 8px; width: 33.333%; max-width: 140px; flex: 0 0 33.333%; text-align: center; line-height:1.4; box-sizing: border-box; } 
+  .circle-navigation_wrap ul:first-child li img { width: 100%; border-radius: 50%; height: auto; aspect-ratio: 1/1; object-fit: cover; display: block; } 
   .circle-navigation_wrap ul:first-child li a { font-size: 12px; line-height: 15px; display: block; position: relative; }
+  .circle-nav-arrow { display: none; }
   @media screen and (max-width: 767px) {
-    .circle-navigation_wrap { display: block;  min-width: 100%;margin-top: -20px; }
-    .circle-navigation_wrap ul:first-child {  min-width: 510px; }
+    .circle-navigation_wrap { display: block; margin-top: -20px; overflow: hidden; }
+    .circle-navigation_wrap ul:first-child { min-width: auto; width: 100%; }
+    .circle-nav-arrow { display: flex; position: absolute; top: 50%; transform: translateY(-50%); width: 36px; height: 36px; border-radius: 50%; background: #1a3a5c; border: none; color: #fff; align-items: center; justify-content: center; cursor: pointer; z-index: 2; padding: 0; }
+    .circle-nav-arrow svg { width: 18px; height: 18px; fill: #fff; }
+    .circle-nav-arrow-prev { left: 4px; }
+    .circle-nav-arrow-next { right: 4px; }
+    .circle-nav-arrow[disabled] { opacity: 0.3; cursor: default; }
     .header__main.fix {position: relative !important; }
     .is-scrolled .header__main.fix {position: fixed !important; }
+  }
+  @media screen and (max-width: 480px) {
+    .circle-navigation_wrap ul:first-child li { flex: 0 0 33.333%; max-width: none; }
   }
   body#blume-make-every-day-a-healthy-skin-day .header__container { color: #001e42 !important; }
   .header__main { background-color: #ffffff !important; }
