@@ -1,79 +1,58 @@
 {{ 'comp-circle-nav-ama.css' | asset_url | stylesheet_tag }}
 
-<div class="circle-navigation_wrap" data-circle-nav>
-  <button class="circle-nav-arrow circle-nav-arrow-prev" aria-label="Previous" data-circle-prev>
-    <svg viewBox="0 0 24 24"><path d="M15.41 7.41L14 6l-6 6 6 6 1.41-1.41L10.83 12z"/></svg>
-  </button>
-  <button class="circle-nav-arrow circle-nav-arrow-next" aria-label="Next" data-circle-next>
-    <svg viewBox="0 0 24 24"><path d="M10 6L8.59 7.41 13.17 12l-4.58 4.59L10 18l6-6z"/></svg>
-  </button>
-  <ul data-circle-track>  
-    <li class="circle--nav-item">
-      <a href="/products/clear-skin-kit-3?utm_term=cic_navi">
-        <img src="https://www.blume.com/cdn/shop/files/clear-skin-kit_200x200_crop_center.png?v=1769119224"> 
-        <span>Clear Skin Kit</span>
-      </a>
-    </li> 
-    <li class="circle--nav-item">
-      <a href="/products/meltdown-acne-oil-3?utm_term=cic_navi">
-        <img src="https://www.blume.com/cdn/shop/files/18_bdc41ad9-a775-4667-a842-9afd4b8b7d2c_200x200_crop_center.png?v=1765919993">
-        <span>Meltdown Acne Oil</span>
-      </a>
-    </li>
-    <li class="circle--nav-item">
-      <a href="/products/meltdown-gel-cream-for-acne-prone-skin?utm_term=cic_navi">
-        <img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_1_ae95df77-ee5c-4484-9658-8b4090f9a6f2_200x200_crop_center.png?v=1762534776">
-        <span>Meltdown Gel Cream</span>
-      </a>
-    </li>
-    <li class="circle--nav-item">
-      <a href="/products/meltdown-gel-cleanser-made-with-salicylic-acid?utm_term=cic_navi">
-        <img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_2_641cd92a-a55b-41f0-bc4e-05ae90328938_200x200_crop_center.png?v=1762533824">
-        <span>Meltdown Gel Cleanser</span>
-      </a>
-    </li>
-  </ul>
-</div>
+<div class="circle-navigation_wrap" >
+      <ul>  
+        <li class="circle--nav-item">
+                <a href="/products/clear-skin-kit-3?utm_term=cic_navi">
+                  <img src="https://www.blume.com/cdn/shop/files/clear-skin-kit_200x200_crop_center.png?v=1769119224"> 
+                  <span>Clear Skin Kit</span>
+                </a>
+          </li> 
+          <li class="circle--nav-item">
+            <a href="/products/meltdown-acne-oil-3?utm_term=cic_navi">
+              <img src="https://www.blume.com/cdn/shop/files/18_bdc41ad9-a775-4667-a842-9afd4b8b7d2c_200x200_crop_center.png?v=1765919993">
+              <span>Meltdown Acne Oil</span>
+            </a>
+          </li>
+          <li class="circle--nav-item">
+            <a href="/products/meltdown-gel-cream-for-acne-prone-skin?utm_term=cic_navi">
+              <img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_1_ae95df77-ee5c-4484-9658-8b4090f9a6f2_200x200_crop_center.png?v=1762534776">
+              <span>Meltdown Gel Cream</span>
+            </a>
+          </li>
+          <li class="circle--nav-item">
+            <a href="/products/meltdown-gel-cleanser-made-with-salicylic-acid?utm_term=cic_navi">
+              <img src="https://www.blume.com/cdn/shop/files/PhotoPDPs_2_641cd92a-a55b-41f0-bc4e-05ae90328938_200x200_crop_center.png?v=1762533824">
+              <span>Meltdown Gel Cleanser</span>
+            </a>
+          </li>
+          
+        {% comment %}<li class="circle--nav-item">
+                <a href="/products/milky-fade-spot-scar-serum?utm_term=cic_navi">
+                  <img src="https://www.blume.com/cdn/shop/products/custom_resized_c962331f-f5b9-46a8-906b-77c7b9c82de4_1200x.jpg?v=1700284615">
+                  <span>Milky Fade Serum</span>
+                </a>
+              </li>
+           <li class="circle--nav-item">
+                <a href="/products/superbalm-tripeptide-1-lip-tint-in-bubblegum?utm_term=cic_navi">
+                  <img src="https://www.blume.com/cdn/shop/files/PDPImages-BlueGradients_bceba057-6e93-4c83-a94f-c0f435a91439_180x180_crop_center.png?">
+                  
+                   <b style=" position: absolute; left: 19px; bottom: 40px; background: #e5508c; display: block; padding: 2px 13px 2px; color: #fff; border-radius: 11px; font-size: 10px; ">NEW</b>
+                  
+                  <span>Superbalm Bubblegum</span>
+                </a>
+              </li>
 
-<script>
-(function() {
-  var wrap = document.querySelector('[data-circle-nav]');
-  if (!wrap) return;
-  var track = wrap.querySelector('[data-circle-track]');
-  var prevBtn = wrap.querySelector('[data-circle-prev]');
-  var nextBtn = wrap.querySelector('[data-circle-next]');
-  if (!track || !prevBtn || !nextBtn) return;
-  var items = track.querySelectorAll('.circle--nav-item');
-  if (items.length === 0) return;
-  var current = 0;
-  function getVisible() {
-    if (window.innerWidth <= 480) return 3;
-    return 4;
-  }
-  function update() {
-    var visible = getVisible();
-    var maxIndex = Math.max(0, items.length - visible);
-    current = Math.min(current, maxIndex);
-    var itemWidth = items[0].offsetWidth;
-    var gap = 0;
-    var style = window.getComputedStyle(items[0]);
-    var padLeft = parseInt(style.paddingLeft || 0, 10);
-    var padRight = parseInt(style.paddingRight || 0, 10);
-    gap = padLeft + padRight;
-    var offset = current * (itemWidth + gap);
-    track.style.transform = 'translateX(-' + offset + 'px)';
-    prevBtn.disabled = current === 0;
-    nextBtn.disabled = current >= maxIndex;
-  }
-  prevBtn.addEventListener('click', function() {
-    if (current > 0) { current--; update(); }
-  });
-  nextBtn.addEventListener('click', function() {
-    var visible = getVisible();
-    var maxIndex = Math.max(0, items.length - visible);
-    if (current < maxIndex) { current++; update(); }
-  });
-  window.addEventListener('resize', update);
-  update();
-})();
-</script>
+			    <li class="circle--nav-item">
+                <a href="/products/sunburst-mineral-spf-50?utm_term=cic_navi">
+                  <img src="https://www.blume.com/cdn/shop/files/1-1-square-ei6a0681-jpg_custom_resized_180x180_crop_center.jpg?v=1710429404">
+                  <span> Mineral Sunscreen</span>
+                </a>
+              </li>
+			{% endcomment %}
+         
+          
+        
+      </ul>
+ 
+    </div>
