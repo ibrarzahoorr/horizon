@@ -1,0 +1,113 @@
+{%- style -%}
+  .product-clinical-section {
+    padding: 48px 0;
+    background: {{ section.settings.background_color }};
+  }
+  .product-clinical-title {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .clinical-results {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .clinical-result {
+    text-align: center;
+    padding: 32px 20px;
+    background: #fff;
+    border-radius: 12px;
+    border: 1px solid #e8e8e8;
+  }
+  .clinical-percentage {
+    font-family: var(--font-heading--family);
+    font-size: 48px;
+    font-weight: 700;
+    color: {{ section.settings.accent_color }};
+    margin-bottom: 12px;
+    line-height: 1;
+  }
+  .clinical-description {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.5;
+  }
+  @media (max-width: 991px) {
+    .clinical-results {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    .clinical-percentage {
+      font-size: 36px;
+    }
+  }
+  @media (max-width: 576px) {
+    .clinical-results {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign results_json = product.metafields.custom.clinical_results
+-%}
+
+{%- if results_json != blank -%}
+  <div class="product-clinical-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <h2 class="product-clinical-title">{{ section.settings.title }}</h2>
+      <div class="clinical-results">
+        {%- assign results = results_json | parse_json -%}
+        {%- for result in results -%}
+          <div class="clinical-result">
+            <div class="clinical-percentage">{{ result.percentage }}%</div>
+            <p class="clinical-description">{{ result.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Clinical Results",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Consumer Perception Study"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Percentage Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Clinical Results"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

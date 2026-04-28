@@ -1,0 +1,69 @@
+{%- style -%}
+  .product-subtitle-section {
+    padding: 0 0 16px;
+    text-align: center;
+  }
+  .product-subtitle-text {
+    font-family: var(--font-heading--family);
+    font-size: 22px;
+    font-weight: 500;
+    color: {{ section.settings.text_color }};
+    line-height: 1.4;
+    margin: 0;
+  }
+  .product-subtitle-publications {
+    font-size: 13px;
+    color: #666;
+    margin-top: 8px;
+    font-style: italic;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign subtitle = product.metafields.custom.subtitle
+  if subtitle == blank
+    assign subtitle = section.settings.fallback_subtitle
+  endif
+  assign publications = product.metafields.custom.publication_mentions
+-%}
+
+{%- if subtitle != blank or publications != blank -%}
+  <div class="product-subtitle-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      {%- if subtitle != blank -%}
+        <p class="product-subtitle-text">{{ subtitle }}</p>
+      {%- endif -%}
+      {%- if publications != blank -%}
+        <p class="product-subtitle-publications">{{ publications }}</p>
+      {%- endif -%}
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Product Subtitle",
+  "settings": [
+    {
+      "type": "text",
+      "id": "fallback_subtitle",
+      "label": "Fallback Subtitle",
+      "info": "Shown if product metafield 'custom.subtitle' is empty"
+    },
+    {
+      "type": "color",
+      "id": "text_color",
+      "label": "Text Color",
+      "default": "#1a3a5c"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Product Subtitle"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

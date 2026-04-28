@@ -1,0 +1,125 @@
+{%- style -%}
+  .product-how-to-section {
+    padding: 48px 0;
+    background: {{ section.settings.background_color }};
+  }
+  .product-how-to-title {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .how-to-steps {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .how-to-step {
+    text-align: center;
+    padding: 32px 24px;
+    background: #fff;
+    border-radius: 16px;
+    border: 1px solid #e8e8e8;
+  }
+  .how-to-step-number {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: {{ section.settings.accent_color }};
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    margin: 0 auto 16px;
+  }
+  .how-to-step-heading {
+    font-family: var(--font-heading--family);
+    font-size: 18px;
+    font-weight: 600;
+    color: #1a3a5c;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
+  .how-to-step-text {
+    font-size: 14px;
+    color: #555;
+    line-height: 1.6;
+  }
+  @media (max-width: 991px) {
+    .how-to-steps {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 576px) {
+    .how-to-steps {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign steps_json = product.metafields.custom.how_to_use_steps
+-%}
+
+{%- if steps_json != blank -%}
+  <div class="product-how-to-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <h2 class="product-how-to-title">{{ section.settings.title }}</h2>
+      <div class="how-to-steps">
+        {%- assign steps = steps_json | parse_json -%}
+        {%- for step in steps -%}
+          <div class="how-to-step">
+            <div class="how-to-step-number">{{ forloop.index }}</div>
+            <h3 class="how-to-step-heading">{{ step.heading }}</h3>
+            <p class="how-to-step-text">{{ step.description }}</p>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume How To Use",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "How It's Done"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "accent_color",
+      "label": "Step Number Background",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume How To Use"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

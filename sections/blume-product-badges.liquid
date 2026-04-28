@@ -1,0 +1,85 @@
+{%- style -%}
+  .product-badges-section {
+    padding: 16px 0;
+  }
+  .product-badges-list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 12px;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  .product-badge-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: {{ section.settings.badge_color }};
+  }
+  .product-badge-item svg {
+    width: 16px;
+    height: 16px;
+    flex-shrink: 0;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign badges = product.metafields.custom.certification_badges | split: ','
+  if badges.size == 0 or product.metafields.custom.certification_badges == blank
+    assign badges = section.settings.default_badges | split: ','
+  endif
+-%}
+
+{%- if badges.size > 0 -%}
+  <div class="product-badges-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <ul class="product-badges-list">
+        {%- for badge in badges -%}
+          {%- assign badge_clean = badge | strip -%}
+          {%- if badge_clean != blank -%}
+            <li class="product-badge-item">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="3 8 6.5 11.5 13 5"></polyline>
+              </svg>
+              {{ badge_clean }}
+            </li>
+          {%- endif -%}
+        {%- endfor -%}
+      </ul>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Product Badges",
+  "settings": [
+    {
+      "type": "text",
+      "id": "default_badges",
+      "label": "Default Badges",
+      "default": "Clean, Vegan, Cruelty Free",
+      "info": "Comma-separated list. Used if product metafield 'custom.certification_badges' is empty"
+    },
+    {
+      "type": "color",
+      "id": "badge_color",
+      "label": "Badge Text Color",
+      "default": "#1a3a5c"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Product Badges"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

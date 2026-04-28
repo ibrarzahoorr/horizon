@@ -1,0 +1,125 @@
+{%- style -%}
+  .product-breakdown-section {
+    padding: 48px 0;
+    background: {{ section.settings.background_color }};
+  }
+  .product-breakdown-title {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .product-breakdown-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .breakdown-item {
+    text-align: center;
+    padding: 24px;
+    border-radius: 12px;
+    background: #fff;
+    border: 1px solid #e8e8e8;
+  }
+  .breakdown-label {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #999;
+    margin-bottom: 8px;
+  }
+  .breakdown-value {
+    font-size: 15px;
+    font-weight: 500;
+    color: #1a3a5c;
+    line-height: 1.4;
+  }
+  @media (max-width: 991px) {
+    .product-breakdown-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 576px) {
+    .product-breakdown-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign skin_type = product.metafields.custom.skin_type
+  assign scent = product.metafields.custom.scent
+  assign amount = product.metafields.custom.amount
+  assign frequency = product.metafields.custom.frequency
+-%}
+
+{%- if skin_type != blank or scent != blank or amount != blank or frequency != blank -%}
+  <div class="product-breakdown-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <h2 class="product-breakdown-title">{{ section.settings.title }}</h2>
+      <div class="product-breakdown-grid">
+        {%- if skin_type != blank -%}
+          <div class="breakdown-item">
+            <div class="breakdown-label">Skin Type</div>
+            <div class="breakdown-value">{{ skin_type }}</div>
+          </div>
+        {%- endif -%}
+        {%- if scent != blank -%}
+          <div class="breakdown-item">
+            <div class="breakdown-label">Scent</div>
+            <div class="breakdown-value">{{ scent }}</div>
+          </div>
+        {%- endif -%}
+        {%- if amount != blank -%}
+          <div class="breakdown-item">
+            <div class="breakdown-label">Amount</div>
+            <div class="breakdown-value">{{ amount }}</div>
+          </div>
+        {%- endif -%}
+        {%- if frequency != blank -%}
+          <div class="breakdown-item">
+            <div class="breakdown-label">Frequency</div>
+            <div class="breakdown-value">{{ frequency }}</div>
+          </div>
+        {%- endif -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Product Breakdown",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "The Breakdown"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Product Breakdown"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

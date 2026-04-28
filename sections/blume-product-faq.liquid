@@ -1,0 +1,145 @@
+{%- style -%}
+  .product-faq-section {
+    padding: 48px 0;
+    background: {{ section.settings.background_color }};
+  }
+  .product-faq-title {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .faq-list {
+    max-width: 800px;
+    margin: 0 auto;
+  }
+  .faq-item {
+    border-bottom: 1px solid #e0e0e0;
+  }
+  .faq-question {
+    width: 100%;
+    background: none;
+    border: none;
+    padding: 20px 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a3a5c;
+    text-align: left;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 16px;
+  }
+  .faq-question svg {
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+    transition: transform 0.3s;
+  }
+  .faq-item.active .faq-question svg {
+    transform: rotate(180deg);
+  }
+  .faq-answer {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease, padding 0.3s ease;
+  }
+  .faq-item.active .faq-answer {
+    max-height: 500px;
+    padding-bottom: 20px;
+  }
+  .faq-answer-text {
+    font-size: 15px;
+    color: #555;
+    line-height: 1.6;
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign faq_json = product.metafields.custom.product_faq
+-%}
+
+{%- if faq_json != blank -%}
+  <div class="product-faq-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <h2 class="product-faq-title">{{ section.settings.title }}</h2>
+      <div class="faq-list">
+        {%- assign faqs = faq_json | parse_json -%}
+        {%- for faq in faqs -%}
+          <div class="faq-item" data-faq-item>
+            <button type="button" class="faq-question" data-faq-toggle>
+              {{ faq.question }}
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <polyline points="6 9 12 15 18 9"></polyline>
+              </svg>
+            </button>
+            <div class="faq-answer">
+              <p class="faq-answer-text">{{ faq.answer }}</p>
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const section = document.querySelector('[data-section-id="{{ section.id }}"]');
+      if (!section) return;
+      
+      const faqItems = section.querySelectorAll('[data-faq-item]');
+      
+      faqItems.forEach(item => {
+        const toggle = item.querySelector('[data-faq-toggle]');
+        toggle.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+          
+          // Close all
+          faqItems.forEach(i => i.classList.remove('active'));
+          
+          // Open clicked if wasn't active
+          if (!isActive) {
+            item.classList.add('active');
+          }
+        });
+      });
+    })();
+  </script>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Product FAQ",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Frequently Asked Questions"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Product FAQ"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}

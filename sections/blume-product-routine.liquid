@@ -1,0 +1,163 @@
+{%- style -%}
+  .product-routine-section {
+    padding: 48px 0;
+    background: {{ section.settings.background_color }};
+  }
+  .product-routine-title {
+    font-family: var(--font-heading--family);
+    font-size: 28px;
+    font-weight: 600;
+    color: {{ section.settings.title_color }};
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  .routine-products {
+    display: grid;
+    grid-template-columns: repeat({{ section.settings.columns }}, 1fr);
+    gap: 24px;
+  }
+  .routine-product {
+    text-decoration: none;
+    color: inherit;
+    text-align: center;
+    background: #fff;
+    border-radius: 12px;
+    padding: 24px;
+    border: 1px solid #e8e8e8;
+    transition: box-shadow 0.2s;
+  }
+  .routine-product:hover {
+    box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+  }
+  .routine-product-image {
+    aspect-ratio: 1/1;
+    background: linear-gradient(135deg, #e8f4fc 0%, #d4ebf7 100%);
+    border-radius: 8px;
+    overflow: hidden;
+    margin-bottom: 16px;
+  }
+  .routine-product-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    padding: 20px;
+  }
+  .routine-product-name {
+    font-family: var(--font-heading--family);
+    font-size: 16px;
+    font-weight: 600;
+    color: #1a3a5c;
+    margin-bottom: 4px;
+  }
+  .routine-product-tagline {
+    font-size: 13px;
+    color: #888;
+    margin-bottom: 8px;
+  }
+  .routine-product-price {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1a3a5c;
+    margin-bottom: 12px;
+  }
+  .routine-product-btn {
+    display: inline-block;
+    background: transparent;
+    color: #1a3a5c;
+    border: 2px solid #1a3a5c;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .routine-product-btn:hover {
+    background: #1a3a5c;
+    color: #fff;
+  }
+  @media (max-width: 991px) {
+    .routine-products {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+  @media (max-width: 576px) {
+    .routine-products {
+      grid-template-columns: 1fr;
+    }
+  }
+{%- endstyle -%}
+
+{%- liquid
+  assign routine_json = product.metafields.custom.suggested_routine
+-%}
+
+{%- if routine_json != blank -%}
+  <div class="product-routine-section" data-section-id="{{ section.id }}">
+    <div class="modern-container">
+      <h2 class="product-routine-title">{{ section.settings.title }}</h2>
+      <div class="routine-products">
+        {%- assign products_list = routine_json | parse_json -%}
+        {%- for item in products_list -%}
+          {%- assign routine_product = all_products[item.handle] -%}
+          {%- if routine_product != blank -%}
+            <a href="{{ routine_product.url }}" class="routine-product">
+              <div class="routine-product-image">
+                {{ routine_product.featured_image | image_url: width: 400 | image_tag: loading: 'lazy', alt: routine_product.title }}
+              </div>
+              <div class="routine-product-name">{{ routine_product.title }}</div>
+              {%- if item.tagline != blank -%}
+                <div class="routine-product-tagline">{{ item.tagline }}</div>
+              {%- endif -%}
+              <div class="routine-product-price">{{ routine_product.price | money }}</div>
+              <span class="routine-product-btn">Add to cart</span>
+            </a>
+          {%- endif -%}
+        {%- endfor -%}
+      </div>
+    </div>
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "Blume Suggested Routine",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Section Title",
+      "default": "Suggested Routine"
+    },
+    {
+      "type": "color",
+      "id": "title_color",
+      "label": "Title Color",
+      "default": "#1a3a5c"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "Background Color",
+      "default": "#faf5f0"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "label": "Products per row",
+      "min": 2,
+      "max": 4,
+      "step": 1,
+      "default": 4
+    }
+  ],
+  "presets": [
+    {
+      "name": "Blume Suggested Routine"
+    }
+  ],
+  "enabled_on": {
+    "templates": ["product"]
+  }
+}
+{% endschema %}
