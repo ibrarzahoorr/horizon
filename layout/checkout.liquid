@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="{{ locale }}" dir="{{ direction }}" class="{{ checkout_html_classes }}">
+  <head>
+<!-- Begin BlackCrow Script Tag: DO NOT MODIFY! -->
+     <script type="text/javascript" async src="https://shopify-init.blackcrow.ai/js/core/blume-box.js?shopify_app_version=1.0.176&shop=blume-box.myshopify.com"></script>
+<!-- End BlackCrow Script Tag -->
+    <!-- Google Tag Manager -->
+      <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-TMQ8XSD');</script>
+    <!-- End Google Tag Manager -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, minimum-scale=1.0, user-scalable=0">
+    <meta name="referrer" content="origin">
+
+    <title>Blume | Make Every Day a Healthy Skin Day</title>
+
+    {{ content_for_header }}
+
+    {{ checkout_stylesheets }}
+    {{ checkout_scripts }}
+    {% comment %} {% include 'catch-pay' %} {% endcomment %}
+    <script type="application/javascript" async src="https://sdk.postscript.io/integrations/sdk-min.js"></script>
+    <!-- Start VWO Async SmartCode -->
+    <script type='text/javascript'>
+      window._vwo_code = window._vwo_code || (function(){
+      var account_id=556101,
+      settings_tolerance=2000,
+      library_tolerance=2500,
+      use_existing_jquery=false,
+      is_spa=1,
+      hide_element='body',
+      
+      /* DO NOT EDIT BELOW THIS LINE */
+      f=false,d=document,code={use_existing_jquery:function(){return use_existing_jquery;},library_tolerance:function(){return library_tolerance;},finish:function(){if(!f){f=true;var a=d.getElementById('_vis_opt_path_hides');if(a)a.parentNode.removeChild(a);}},finished:function(){return f;},load:function(a){var b=d.createElement('script');b.src=a;b.type='text/javascript';b.innerText;b.onerror=function(){_vwo_code.finish();};d.getElementsByTagName('head')[0].appendChild(b);},init:function(){
+      window.settings_timer=setTimeout(function () {_vwo_code.finish() },settings_tolerance);var a=d.createElement('style'),b=hide_element?hide_element+'{opacity:0 !important;filter:alpha(opacity=0) !important;background:none !important;}':'',h=d.getElementsByTagName('head')[0];a.setAttribute('id','_vis_opt_path_hides');a.setAttribute('type','text/css');if(a.styleSheet)a.styleSheet.cssText=b;else a.appendChild(d.createTextNode(b));h.appendChild(a);this.load('[https://dev.visualwebsiteoptimizer.com/j.php?a='+account_id+'&u='+encodeURIComponent(d.URL)+'&f='+(+is_spa)+'&r='+Math.random()](https://dev.visualwebsiteoptimizer.com/j.php?a=%27+account_id+%27&u=%27+encodeURIComponent(d.URL)+%27&f=%27+(+is_spa)+%27&r=%27+Math.random()));return settings_timer; }};window._vwo_settings_timer = code.init(); return code; }());
+    </script>
+    <!-- End VWO Async SmartCode -->
+  
+  {% render 'shogun-head' %}
+</head>
+  <body>
+    <!-- Google Tag Manager (noscript) -->
+      <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-TMQ8XSD"
+      height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <!-- End Google Tag Manager (noscript) -->
+    {{ skip_to_content_link }}
+ 
+    <header class="banner" data-header role="banner">
+      <div class="wrap">
+        {{ content_for_logo }}
+      </div>
+    </header>
+
+    {{ order_summary_toggle }}
+    <div class="content" data-content>
+      <div class="wrap">
+        <div class="main">
+          <header class="main__header" role="banner">
+            {{ content_for_logo }}
+            {{ breadcrumb }}
+            {{ alternative_payment_methods }}
+          </header>
+          <main class="main__content" role="main">
+            {{ content_for_layout }}
+          </main>
+          <footer class="main__footer" role="contentinfo">
+            {{ content_for_footer }}
+          </footer>
+        </div>
+        <aside class="sidebar" role="complementary">
+          <div class="sidebar__header">
+            {{ content_for_logo }}
+          </div>
+          <div class="sidebar__content">
+            {{ content_for_order_summary }}
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    {{ tracking_code }}
+    <script>
+      //Checkout steps for the Checkout Behavior report in Google Analytics
+      var ShopifyCheckoutstep = Shopify.Checkout.step;
+      switch (ShopifyCheckoutstep) {
+        case "contact_information":
+          ga("require", "ec");
+          ga("ec:setAction", "checkout", {
+            "step": 1,
+            "option": "contact_information"
+          });
+          ga('send', 'event', 'checkout', 'contact information', { nonInteraction: true });
+            break; 
+        case "shipping_method":
+          ga("require", "ec");
+          ga("ec:setAction", "checkout", {
+            "step": 2,
+            "option": "shipping_method"
+          });
+          ga('send', 'event', 'checkout', 'shipping method', { nonInteraction: true });
+            break; 
+        case "payment_method":
+          ga("require", "ec");
+          ga("ec:setAction", "checkout", {
+            "step": 3,
+            "option": "payment_method"
+          });
+          ga('send', 'event', 'checkout', 'payment', { nonInteraction: true });
+      };
+
+      ga('require', 'linkid');
+    </script>
+  </body>
+</html>

@@ -1,0 +1,14 @@
+ .circle--nav { overflow-x: auto; }
+  .circle-navigation_wrap { min-width: 510px; display: none; background-color: #ffffff;overflow-x: auto;max-width: 100% !important;padding: 10px 0  0;}
+  .circle-navigation_wrap ul:first-child { align-items: flex-start; display: flex; flex-wrap: nowrap; list-style: none; margin: 0; overflow-x: scroll; padding: 1rem 0 1rem 1rem; } 
+  .circle-navigation_wrap ul:first-child li { padding: 0 1rem 0 0; width: 110px; text-align: center; line-height:1.4; } 
+  .circle-navigation_wrap ul:first-child li img { width: 100%; border-radius: 50px; height: 100%; } 
+  .circle-navigation_wrap ul:first-child li a { font-size: 12px; line-height: 15px; display: block; position: relative; }
+  @media screen and (max-width: 767px) {
+    .circle-navigation_wrap { display: block;  min-width: 100%;margin-top: -20px; }
+    .circle-navigation_wrap ul:first-child {  min-width: 510px; }
+    .header__main.fix {position: relative !important; }
+    .is-scrolled .header__main.fix {position: fixed !important; }
+  }
+  body#blume-make-every-day-a-healthy-skin-day .header__container { color: #001e42 !important; }
+  .header__main { background-color: #ffffff !important; }

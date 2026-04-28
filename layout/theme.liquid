@@ -1,139 +1,324 @@
-<!doctype html>
-<html
-  {% if request.design_mode %}
-    class="shopify-design-mode"
-  {% endif %}
-  lang="{{ request.locale.iso_code }}"
->
+<!DOCTYPE html>
+<html lang="{{ shop.locale }}">
   <head>
-    {%- if settings.favicon != blank -%}
-      <link
-        rel="icon"
-        type="image/png"
-        href="{{ settings.favicon | image_url: width: 32, height: 32 }}"
-      >
-    {%- endif -%}
+    {% unless request.path contains "5-reasons" or request.page_type == "page" %}
+    {% if product and product.metafields.custom.redirect_path != blank  %}
+          <script>
+            window.location.href = '/products/{{ product.metafields.custom.redirect_path }}';
+          </script>
+    {% endif %}
+    {% endunless %}
+   {% comment %}  
+    {% if request.path contains "clear-skin-kit-3" %}
+          <script>
+            window.location.href = '/products/hormonal-acne-kit';
+          </script>
+    {% endif %}{% endcomment %}
+{% render 'replo-head' %}
+    <link rel='preconnect dns-prefetch' href='https://api.config-security.com/' crossorigin />
+    <link rel='preconnect dns-prefetch' href='https://conf.config-security.com/' crossorigin />
+    <link rel='preconnect dns-prefetch' href='https://whale.camera/' crossorigin />
+    <link rel="stylesheet" href="https://ddyx4d1q9295o.cloudfront.net/fontawesome-pro-5.3.1-web/css/all.min.css">
+    <script>
+    /* >> TriplePixel :: start*/
+    window.TriplePixelData={TripleName:"blume-box.myshopify.com",ver:"2.12",plat:"SHOPIFY",isHeadless:false},function(W,H,A,L,E,_,B,N){function O(U,T,P,H,R){void 0===R&&(R=!1),H=new XMLHttpRequest,P?(H.open("POST",U,!0),H.setRequestHeader("Content-Type","text/plain")):H.open("GET",U,!0),H.send(JSON.stringify(P||{})),H.onreadystatechange=function(){4===H.readyState&&200===H.status?(R=H.responseText,U.includes(".txt")?eval(R):P||(N[B]=R)):(299<H.status||H.status<200)&&T&&!R&&(R=!0,O(U,T-1,P))}}if(N=window,!N[H+"sn"]){N[H+"sn"]=1,L=function(){return Date.now().toString(36)+"_"+Math.random().toString(36)};try{A.setItem(H,1+(0|A.getItem(H)||0)),(E=JSON.parse(A.getItem(H+"U")||"[]")).push({u:location.href,r:document.referrer,t:Date.now(),id:L()}),A.setItem(H+"U",JSON.stringify(E))}catch(e){}var i,m,p;A.getItem('"!nC`')||(_=A,A=N,A[H]||(E=A[H]=function(t,e,a){return void 0===a&&(a=[]),"State"==t?E.s:(W=L(),(E._q=E._q||[]).push([W,t,e].concat(a)),W)},E.s="Installed",E._q=[],E.ch=W,B="configSecurityConfModel",N[B]=1,O("https://conf.config-security.com/model",5),i=L(),m=A[atob("c2NyZWVu")],_.setItem("di_pmt_wt",i),p={id:i,action:"profile",avatar:_.getItem("auth-security_rand_salt_"),time:m[atob("d2lkdGg=")]+":"+m[atob("aGVpZ2h0")],host:A.TriplePixelData.TripleName,plat:A.TriplePixelData.plat,url:window.location.href,ref:document.referrer,ver:A.TriplePixelData.ver},O("https://api.config-security.com/event",5,p),O("https://whale.camera/live/dot.txt",5)))}}("","TriplePixel",localStorage);
+    /* << TriplePixel :: end*/
+    </script>
+    <meta name="google-site-verification" content="JO0_ZSzNWt19xFreQfE5Uamy64VBdOpjdBAC7YOW-9s" />
+    <meta name="google-site-verification" content="JO0_ZSzNWt19xFreQfE5Uamy64VBdOpjdBAC7YOW-9s" />
+    
+    <!-- Begin BlackCrow Script Tag: DO NOT MODIFY! -->
+     <script type="text/javascript" async src="https://shopify-init.blackcrow.ai/js/core/blume-box.js?shopify_app_version=1.0.221&shop=blume-box.myshopify.com"></script>
+    <!-- End BlackCrow Script Tag -->
 
-    {% # theme-check-disable RemoteAsset %}
-    {% comment %} This a way to wait for main content to load when navigating to a new page so that the view transitions can work consistently {% endcomment %}
-    {% if settings.transition_to_main_product or settings.page_transition_enabled %}
+    <!-- Global site tag (gtag.js) - Google Ads: 452502113 -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=AW-452502113"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag('js', new Date());
+
+      gtag('config', 'AW-452502113', {'allow_enhanced_conversions': true});
+    </script>
+
+ 
+
+    {% comment %} <script src="https://app.octaneai.com/jrp6xbwkyr9m6y1n/quiz.js" async="" defer="defer"></script> {% endcomment %}
+
+     {% comment %}   {% include 'SEOManager' %} {% endcomment %}
+
+    <meta name="google-site-verification" content="bPYzjzBcm2H1ZaRodcjY5w4zVbnj2U9YvOv1P6gh-K4" />
+    <meta name="google-site-verification" content="lIrjaMwoNIYMWL3pshF-HyUtT56qLEtwYngL-MHbZcs" />
+    <meta name="msvalidate.01" content="E1248FA16A2E123F6918AF16ACE33AA5" />
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_primary }}">
+    <meta name="p:domain_verify" content="f2be7bc5fc36e67baa3edb1e4693d700" />
+    <meta name="google-site-verification" content="7FUm9WcSQbNwB1hwiCA0Cuo5-jez3MtFRceLDeSoqhI" />
+    <link rel="canonical" href="{{ canonical_url }}">
+    {% if settings.favicon != blank %}
       <link
-        rel="expect"
-        href="#MainContent"
-        blocking="render"
-        id="view-transition-render-blocker"
-      >
+        rel="shortcut icon"
+        href="{{ settings.favicon | img_url: '32x32' }}"
+        type="image/png">
     {% endif %}
 
-    {%- render 'meta-tags' -%}
-    {%- render 'stylesheets' -%}
-    {%- render 'fonts' -%}
-    {{ 'blume-custom-fonts.css' | asset_url | stylesheet_tag }}
-    {%- render 'scripts' -%}
-    {%- render 'theme-styles-variables' -%}
-    {%- render 'color-schemes' -%}
+    {% include 'cursor-styles' %}
 
-    {% if request.design_mode %}
-      {%- render 'theme-editor' -%}
+    {% capture seo_title %}
+      {{ page_title }}
+      {% if current_tags %}
+        {%- assign meta_tags = current_tags | join: ', ' %} &ndash; {{ 'general.meta.tags' | t: tags: meta_tags -}}
+      {% endif %}
+      {% if current_page != 1 %}
+        &ndash; {{ 'general.meta.page' | t: page: current_page }}
+      {% endif %}
+      {% unless page_title contains shop.name %}
+        &ndash; {{ shop.name }}
+      {% endunless %}
+    {% endcapture %}
+    
+    <title>{{ page_title }} {% unless page_title contains shop.name %} - Blume Skincare {% endunless %}</title>
+    {% comment %} {% if page_description %}
+        <meta name="description" content="{{ page_description | escape }}">
+    {% endif %}{% endcomment %}
+    <meta property="og:image" content="{% if article.metafields.custom.og_image != blank %}https:{{ article.metafields.custom.og_image | img_url: '1200x630', crop: 'center' }}{%  else %}https://cdn.shopify.com/s/files/1/0003/4580/0755/files/blume_social.png?v=1689614710{% endif %}">
+    <meta property="og:image:secure_url" content="{% if article.metafields.custom.og_image != blank %}https:{{ article.metafields.custom.og_image | img_url: '1200x630', crop: 'center' }}{%  else %}https://cdn.shopify.com/s/files/1/0003/4580/0755/files/blume_social.png?v=1689614710{% endif %}">
+
+    {% include 'head-meta' %}
+    {% include 'header-scripts' %}
+    {% if template.name == 'product' %}
+      {% include 'product-header-scripts' %}
+    {% endif %}
+    {% if template.directory == 'customers' %}
+      <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    {% endif %}
+
+    {{ 'bundle.css' | asset_url | stylesheet_tag }}
+    {{ 'main.css' | asset_url | stylesheet_tag }}
+
+    {% if template.suffix == 'waitlist' %}
+      {% section 'header' %}
     {% endif %}
 
     {{ content_for_header }}
-    {% # theme-check-enable RemoteAsset %}
-  </head>
 
-  <body class="page-width-{{ settings.page_width }} card-hover-effect-{{ settings.card_hover_effect }}">
-    {% render 'skip-to-content-link', href: '#MainContent', text: 'accessibility.skip_to_text' %}
-    <div id="header-group">
-      {% sections 'header-group' %}
-    </div>
+    {% include 'bold-common' %}
 
-    <script>
-      // Inline header height and menu style calculations to prevent layout shift
-      // Note: Updates in calculateHeaderGroupHeight(), updateTransparentHeaderOffset() and setHeaderMenuStyle() utilities.js should be kept in sync with this function
-      (function setHeaderHeighCustomProperties() {
-        /*
-         * Header calculation functions for maintaining CSS variables
-         * Mimic calculateHeaderGroupHeight() in utilities.js
-         */
-        const header = document.querySelector('header-component');
-        const headerGroup = document.querySelector('#header-group');
-        const hasHeaderSection = headerGroup?.querySelector('.header-section');
 
-        if (!header || !headerGroup) return;
-
-        const headerTopRow = header.querySelector('.header__row--top');
-        const headerHeight = header.offsetHeight;
-
-        // Calculate the total height of the header group
-        let headerGroupHeight = 0;
-        const children = headerGroup.children;
-        for (let i = 0; i < children.length; i++) {
-          const element = children[i];
-          if (element === header || !(element instanceof HTMLElement)) continue;
-          headerGroupHeight += element.offsetHeight;
-        }
-
-        // Check for transparent header special case
-        if (header.hasAttribute('transparent') && header.parentElement?.nextElementSibling) {
-          headerGroupHeight += headerHeight;
-        }
-
-        // Set CSS variables
-        document.body.style.setProperty('--header-height', `${headerHeight}px`);
-        document.body.style.setProperty('--header-group-height', `${headerGroupHeight}px`);
-
-        if (headerTopRow) {
-          window.requestAnimationFrame(function () {
-            document.body.style.setProperty('--top-row-height', `${headerTopRow.offsetHeight}px`);
-          });
-        }
-
-        /**
-         * Updates CSS custom properties for transparent header offset calculation
-         * Mimic updateTransparentHeaderOffset() in utilities.js
-         */
-
-        if (!hasHeaderSection || !header?.hasAttribute('transparent')) {
-          document.body.style.setProperty('--transparent-header-offset-boolean', '0');
-          return;
-        }
-
-        const hasImmediateSection = hasHeaderSection.nextElementSibling?.classList.contains('shopify-section');
-
-        const shouldApplyOffset = !hasImmediateSection ? '1' : '0';
-        document.body.style.setProperty('--transparent-header-offset-boolean', shouldApplyOffset);
-      })();
-
-      (function setHeaderMenuStyle() {
-        const headerComponent = document.querySelector('#header-component');
-        if (headerComponent) {
-          const isTouchDevice = 'ontouchstart' in window && navigator.maxTouchPoints > 0;
-          const overflowList = headerComponent?.querySelector('overflow-list');
-          const hasReachedMinimum = overflowList && overflowList.hasAttribute('minimum-reached');
-          headerComponent.dataset.menuStyle = isTouchDevice || hasReachedMinimum ? 'drawer' : 'menu';
-        }
-      })();
+    <!--START Lightbox Javascript-->
+    <script type="text/javascript">
+      (function () {
+      window.setTimeout(function() {
+          var e = document.createElement('script'); e.type = 'text/javascript'; e.async = true;
+          e.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'www.lightboxcdn.com/vendor/9bed9123-32c7-4989-b45b-aa23d365fbec/lightbox.js?mb=' + (new Date().getTime());
+          var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(e, s);
+          }, 500);
+          })();
     </script>
+    <!--END Lightbox Javascript-->
+{% comment %}
+    {% render 'shogun-head' %}
+{% endcomment %}
+    <!-- SlideRule Script Start -->
+    {% include 'sliderule-data' %}
+    <!-- SlideRule Script End -->
+  
 
-    <main
-      id="MainContent"
-      class="content-for-layout"
-      role="main"
-      data-page-transition-enabled="{{ settings.page_transition_enabled }}"
-      data-product-transition="{{ settings.transition_to_main_product }}"
-      data-template="{{ template }}"
-    >
-      {{ content_for_layout }}
+  
+
+
+  <link rel="preload" href="https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}" as="script">
+    <script src="https://cdn.rebuyengine.com/onsite/js/rebuy.js?shop={{ shop.permanent_domain }}"></script>
+  
+{% comment %}
+  <!-- INJECTED CODE BY LUCKY -->
+  <link rel="preconnect" href="https://pif.luckylabs.io">
+  <script>
+    // Define Lucky's variables
+    (function(){
+      {% assign firstVariantId = product.selected_or_first_available_variant.id %}
+      {% assign currentProductId = product.id %}
+      {% assign currentProductTitle = product.title %}
+      {% assign prodMetafields = all_products[product.metafields.lucky.originalProduct] %}
+      {% assign isCloned = product.metafields.lucky.cloned %}
+
+      {% if currentProductId %}
+        window.LUCKY_FIRST_VARIANT_ID = {{ firstVariantId }};
+        window.CURRENT_PRODUCT_ID = {{ currentProductId }};
+        window.CURRENT_PRODUCT_TITLE = `{{ currentProductTitle }}`;
+        window.PROD_METAFIELDS = {{ prodMetafields | json}};
+        window.PROD_IS_CLONED = {{ isCloned | default: 0 }};
+      {% endif %}
+
+      window.Lucky = {
+        appURL: 'https://pif.luckylabs.io'
+      }
+
+      window.Lucky.isLuckyProdPage = function() {
+        const PREFIX_LUCKY_PRODUCT_TITLE = '[Fulfilled by Lucky]';
+        const lcPrefixLuckyPrdTitle = PREFIX_LUCKY_PRODUCT_TITLE.toLowerCase();
+        const lcCurrentProdTitle =
+          window.CURRENT_PRODUCT_TITLE &&
+          window.CURRENT_PRODUCT_TITLE.toLowerCase();
+        return lcCurrentProdTitle.indexOf(lcPrefixLuckyPrdTitle) > -1;
+      }
+
+      window.Lucky.isSingleProdPage = !!window.LUCKY_FIRST_VARIANT_ID && !!window.CURRENT_PRODUCT_ID;
+
+    })()
+  </script>
+
+  <script>
+    // Redirect to original product
+    if (window.Lucky.isSingleProdPage && window.Lucky.isLuckyProdPage()) {
+      if (window.PROD_METAFIELDS && window.PROD_METAFIELDS.handle) {
+        window.location.href= window.location.origin + '/products/' + window.PROD_METAFIELDS.handle;
+      }
+    }
+  </script>
+
+  <script crossorigin src="https://cdn.luckylabs.io/prd/lucky-local/org/integration-scripts/index.js"></script>
+  <script type="module" crossorigin src="https://cdn.luckylabs.io/prd/lucky-local/org/built-sources/index.js"></script>
+  <script id="lk-store-locator-script" type="module" crossorigin src="https://cdn.luckylabs.io/prd/store-locator/org/index.js"></script>
+
+  <!-- INJECTED CODE BY LUCKY -->
+  {%  endcomment %}
+
+  
+ {%- if content_for_header contains "elevateab.app" -%}{%- unless request.design_mode -%} <script>try{window.eab_data={selectors:JSON.parse(`{{shop.metafields.elevateab.select}}`)||{},allTests:JSON.parse(`{{shop.metafields.elevateab.tests}}`)||{},currencyFormat:{% if settings.currency_code_enabled %}"{{ shop.money_with_currency_format}}"{% else %}"{{ shop.money_format}}"{% endif %}};}catch(error){console.log(error);window.eab_data={selectors:{},allTests:{},currencyFormat:{% if settings.currency_code_enabled %}"{{ shop.money_with_currency_format}}"{% else %}"{{ shop.money_format}}"{% endif %}};}</script><script src="https://ds0wlyksfn0sb.cloudfront.net/redirect.js"></script> {%- endunless -%}{%- endif -%} 
+
+
+</head>
+
+  <body id="{{ page_title | handle }}" class="{{ theme.title }}">
+
+  {% assign social_title = 'Blume | Make Every Day a Healthy Skin Day' %}
+  {% assign social_description = 'Blume is a skincare company that creates products for all skin types. We believe that feeling good about your skin starts with feeling good about yourself. That’s why we’re dedicated to creating skincare products that help you feel confident, connected and cared for.' %}
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-TMQ8XSD"
+        height="0"
+        width="0"
+        style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+    {% unless template.suffix == 'waitlist'  %}
+      {% section 'header' %}
+    {% endunless %}
+
+
+
+    <main role="main" id="root">
+  <div class='{% unless template.suffix == 'waitlist' %} main__wrap {% endunless %} o-h'>
+    {% if template == "index" %}
+      {% render 'circle-nav-ama' %}
+    {% endif %}
+        <div class="template-data" data-template="{{ template.name }}" data-template-suffix="{{ template.suffix }}">
+          {{ content_for_layout }}
+        </div>
+      </div>
     </main>
 
-    <footer>
-      {% sections 'footer-group' %}
-    </footer>
+    {% unless template.suffix == 'marketing' or template.suffix == 'waitlist' %}
+      {% section 'footer' %}
+    {% endunless %}
 
-    {% render 'search-modal' %}
+    <div id='pageTransition' class='page-transition z10 cdb'></div>
+    {% section 'cart-drawer' %}
+    {% section 'search-drawer' %}
+    <script src='{{ 'index.js' | asset_url }}' defer='defer'></script>
+    <!--<script src="//static.rechargecdn.com/static/js/widget.js"></script>-->
+    {% include 'footer-scripts' %}
+    {% render 'junip-store-key' %}
 
-    {% if settings.quick_add or settings.mobile_quick_add %}
-      {% render 'quick-add-modal' %}
+        <!-- Begin ReCharge code -->
+    {% include 'subscription-theme-footer' %}
+    <!-- End ReCharge code -->
+    {% include 'smile-initializer' %}
+ 
+    {% if request.path contains 'builder' %}
+      {{ 'boxbuilder-custom.css' | asset_url | stylesheet_tag }}
     {% endif %}
-  </body>
+
+{% render 'freegifts-snippet-change' %}
+{%  if product %}
+ <script src="https://a.klaviyo.com/media/js/onsite/onsite.js"></script>
+<script>
+    var klaviyo = klaviyo || [];
+    klaviyo.init({
+      account: "XQc7JN",
+      list: "UTAFuz",
+      platform: "shopify"
+    });
+    klaviyo.enable("backinstock",{ 
+    trigger: {
+      product_page_text: "Notify Me When Available",
+      product_page_class: "button",
+      product_page_text_align: "center",
+      product_page_margin: "0px",
+      replace_anchor: false
+    },
+    modal: {
+     headline: "{product_name}",
+     body_content: "Register to receive a notification when this item comes back in stock.",
+     email_field_label: "Email",
+     button_label: "Notify me when available",
+     subscription_success_label: "You're in! We'll let you know when it's back.",
+     footer_content: '',
+     additional_styles: "@import url('https://fonts.googleapis.com/css?family=Helvetica+Neue');",
+     drop_background_color: "#000",
+     background_color: "#fff",
+     text_color: "#222",
+     button_text_color: "#fff",
+     button_background_color: "#439fdb",
+     close_button_color: "#ccc",
+     error_background_color: "#fcd6d7",
+     error_text_color: "#C72E2F",
+     success_background_color: "#d3efcd",
+     success_text_color: "#1B9500"
+    }
+  });
+
+  document.querySelector('.ama-bis-btn').addEventListener('click', function () {
+  window._klOnsite = window._klOnsite || [];
+  window._klOnsite.push(['openForm', 'SnYRpv']);
+});
+
+
+</script>
+ 
+{%  endif %}
+<!-- Microsoft Clarity -->
+  <script type="text/javascript">
+    (function(c,l,a,r,i,t,y){
+    c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+    t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+    y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "m5veszw9qz");
+  </script>
+  <!-- Microsoft Clarity -->   
+       <!-- Google Tag Manager -->
+    <script>
+      (function(w, d, s, l, i) {
+        w[l] = w[l] || [];
+        w[l].push({'gtm.start': new Date().getTime(), event: 'gtm.js'});
+        var f = d.getElementsByTagName(s)[0],
+          j = d.createElement(s),
+          dl = l != 'dataLayer'
+            ? '&l=' + l
+            : '';
+        j.async = true;
+        j.src = 'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
+        f.parentNode.insertBefore(j, f);
+      })(window, document, 'script', 'dataLayer', 'GTM-TMQ8XSD');
+    </script>
+    <!-- End Google Tag Manager -->
+     
+</body>
 </html>
