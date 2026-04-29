@@ -13,140 +13,129 @@
       {
         "type": "color_scheme_group",
         "id": "color_schemes",
-        "label": "Color schemes",
-        "default": {
-          "scheme-1": {
-            "settings": {
-              "background": "#ffffff",
-              "foreground": "#121212",
-              "primary": "#121212",
-              "primary_hover": "#444444",
-              "secondary": "#f3f3f3",
-              "secondary_hover": "#e6e6e6",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#e6e6e6",
-              "shadow": "#121212",
-              "button_primary": "#121212",
-              "button_primary_hover": "#444444",
-              "button_primary_text": "#ffffff",
-              "button_secondary": "#f3f3f3",
-              "button_secondary_hover": "#e6e6e6",
-              "button_secondary_text": "#121212",
-              "link": "#121212",
-              "link_hover": "#444444"
-            }
+        "definition": [
+          {
+            "type": "color",
+            "id": "background",
+            "label": "Background",
+            "default": "#FFFFFF"
           },
-          "scheme-2": {
-            "settings": {
-              "background": "#f3f3f3",
-              "foreground": "#121212",
-              "primary": "#121212",
-              "primary_hover": "#444444",
-              "secondary": "#ffffff",
-              "secondary_hover": "#f3f3f3",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#e6e6e6",
-              "shadow": "#121212",
-              "button_primary": "#121212",
-              "button_primary_hover": "#444444",
-              "button_primary_text": "#ffffff",
-              "button_secondary": "#ffffff",
-              "button_secondary_hover": "#f3f3f3",
-              "button_secondary_text": "#121212",
-              "link": "#121212",
-              "link_hover": "#444444"
-            }
+          {
+            "type": "color",
+            "id": "foreground",
+            "label": "Foreground",
+            "default": "#121212"
           },
-          "scheme-3": {
-            "settings": {
-              "background": "#121212",
-              "foreground": "#ffffff",
-              "primary": "#ffffff",
-              "primary_hover": "#e6e6e6",
-              "secondary": "#333333",
-              "secondary_hover": "#444444",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#333333",
-              "shadow": "#000000",
-              "button_primary": "#ffffff",
-              "button_primary_hover": "#e6e6e6",
-              "button_primary_text": "#121212",
-              "button_secondary": "#333333",
-              "button_secondary_hover": "#444444",
-              "button_secondary_text": "#ffffff",
-              "link": "#ffffff",
-              "link_hover": "#e6e6e6"
-            }
+          {
+            "type": "color",
+            "id": "primary",
+            "label": "Primary",
+            "default": "#121212"
           },
-          "scheme-4": {
-            "settings": {
-              "background": "#faf5f0",
-              "foreground": "#1a3a5c",
-              "primary": "#1a3a5c",
-              "primary_hover": "#2d4f75",
-              "secondary": "#fbece3",
-              "secondary_hover": "#f2c2a2",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#e6d5c7",
-              "shadow": "#1a3a5c",
-              "button_primary": "#1a3a5c",
-              "button_primary_hover": "#2d4f75",
-              "button_primary_text": "#ffffff",
-              "button_secondary": "#fbece3",
-              "button_secondary_hover": "#f2c2a2",
-              "button_secondary_text": "#1a3a5c",
-              "link": "#1a3a5c",
-              "link_hover": "#2d4f75"
-            }
+          {
+            "type": "color",
+            "id": "primary_hover",
+            "label": "Primary hover",
+            "default": "#444444"
           },
-          "scheme-5": {
-            "settings": {
-              "background": "#fbece3",
-              "foreground": "#1a3a5c",
-              "primary": "#1a3a5c",
-              "primary_hover": "#2d4f75",
-              "secondary": "#faf5f0",
-              "secondary_hover": "#fbece3",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#e6d5c7",
-              "shadow": "#1a3a5c",
-              "button_primary": "#1a3a5c",
-              "button_primary_hover": "#2d4f75",
-              "button_primary_text": "#ffffff",
-              "button_secondary": "#faf5f0",
-              "button_secondary_hover": "#fbece3",
-              "button_secondary_text": "#1a3a5c",
-              "link": "#1a3a5c",
-              "link_hover": "#2d4f75"
-            }
+          {
+            "type": "color",
+            "id": "secondary",
+            "label": "Secondary",
+            "default": "#f3f3f3"
           },
-          "scheme-6": {
-            "settings": {
-              "background": "#001e42",
-              "foreground": "#ffffff",
-              "primary": "#ffffff",
-              "primary_hover": "#e6e6e6",
-              "secondary": "#1f4068",
-              "secondary_hover": "#2d5a8a",
-              "success": "#317c44",
-              "error": "#c9372c",
-              "border": "#1f4068",
-              "shadow": "#000000",
-              "button_primary": "#ffffff",
-              "button_primary_hover": "#e6e6e6",
-              "button_primary_text": "#001e42",
-              "button_secondary": "#1f4068",
-              "button_secondary_hover": "#2d5a8a",
-              "button_secondary_text": "#ffffff",
-              "link": "#ffffff",
-              "link_hover": "#e6e6e6"
-            }
+          {
+            "type": "color",
+            "id": "secondary_hover",
+            "label": "Secondary hover",
+            "default": "#e6e6e6"
+          },
+          {
+            "type": "color",
+            "id": "success",
+            "label": "Success",
+            "default": "#317c44"
+          },
+          {
+            "type": "color",
+            "id": "error",
+            "label": "Error",
+            "default": "#c9372c"
+          },
+          {
+            "type": "color",
+            "id": "border",
+            "label": "Border",
+            "default": "#e6e6e6"
+          },
+          {
+            "type": "color",
+            "id": "shadow",
+            "label": "Shadow",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "button_primary",
+            "label": "Primary button",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "button_primary_hover",
+            "label": "Primary button hover",
+            "default": "#444444"
+          },
+          {
+            "type": "color",
+            "id": "button_primary_text",
+            "label": "Primary button text",
+            "default": "#ffffff"
+          },
+          {
+            "type": "color",
+            "id": "button_secondary",
+            "label": "Secondary button",
+            "default": "#f3f3f3"
+          },
+          {
+            "type": "color",
+            "id": "button_secondary_hover",
+            "label": "Secondary button hover",
+            "default": "#e6e6e6"
+          },
+          {
+            "type": "color",
+            "id": "button_secondary_text",
+            "label": "Secondary button text",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "link",
+            "label": "Link",
+            "default": "#121212"
+          },
+          {
+            "type": "color",
+            "id": "link_hover",
+            "label": "Link hover",
+            "default": "#444444"
           }
+        ],
+        "role": {
+          "text": "foreground",
+          "background": {
+            "solid": "background"
+          },
+          "links": "link",
+          "icons": "foreground",
+          "primary_button": "button_primary",
+          "on_primary_button": "button_primary_text",
+          "primary_button_border": "button_primary",
+          "secondary_button": "button_secondary",
+          "on_secondary_button": "button_secondary_text",
+          "secondary_button_border": "button_secondary_text"
         }
       }
     ]
