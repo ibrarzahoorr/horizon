@@ -1,0 +1,24 @@
+{% comment %}
+  DO NOT MODIFY MANUALLY
+  This asset is generated automatically by Talkable Integration at 1/20/20 2:03PM
+{% endcomment %}
+<div class='bg-lp px2 rel o-h'>
+  <div class='container--xl mha pm60 pl100 page__header ac rel z2'>
+    <h1 class='caps outline cb'>{{ page.title }}</h1>
+  </div>
+
+  <div class='abs fill-x fill-y cp page__hero_shape'>
+    {% include 'shape-one' %}
+  </div>
+</div>
+<div class="bg-w">
+  <div class='container--l mha px2 pm60'>
+    {% if shop.customer_accounts_enabled %}
+      {% if customer %}
+        <div id="talkable-offer"></div>
+      {% else %}
+        {{ 'Log in' | customer_login_link }}
+      {% endif %}
+    {% endif %}
+  </div>
+</div>

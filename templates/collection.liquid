@@ -1,0 +1,58 @@
+<section class='bg-lb px2 pm60  o-h rel f jcc aic hero__tall' data-module='pageHero'>
+  <!-- <div class='hero__empty hero__shop fill-x'>
+    <div class='abs fill-x fill-y fill hero__image_background' style="background-image: url(https://cdn.shopify.com/s/files/1/0003/4580/0755/files/Shop-Landing-Hero-2.jpg?9062642679798132244)"></div>
+    <div class='container--xl mha rel z2 hero__text_desktop'>
+      <div class='f fw jcb aic hero__flex'>
+        <div class='container--m fill-x'>
+          <div class='container--m ac mha rel hero__image hero__a_image'>
+          </div>
+        </div>
+        <div class='hero__m_first'>
+          <div class='container--ms mha hero__a_text'>
+            <h5>{{ section.settings.subTitle }}</h5>
+            <h2 class='mx0 pt0 pb05 serif'>Safe, sustainable period products for your life</h2>
+            <p class='pb1'>Period products should be safe for our bodies and our planet. The reality is that most of them aren't. We're here to change that.</p>
+            <a href="/pages/build-a-box" class='btn bold btn__outline'>Build your Blume Box</a>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </div> -->
+
+  <!-- <div class='abs fill-x fill-y cb hero__clp_shape'>
+    {% include 'shape-four' %}
+  </div> -->
+</section>
+
+{% paginate collection.products by 12 %}
+<div class='bg-w collection'>
+  {% render 'ama-pill-tabs' %}
+  
+  <div class='fill-x container--xl mha px2-AMA phm4 ac'>
+    <header role="banner" class='px1 container--xl mha'>
+      <h2 class='caps outline pt05 pb05 mt0 mb0 line-header'>
+        <span class='rel z2 ph05 inline-block'>{{ collection.title }}</span>
+      </h2>
+      {% if collection.description != blank %}
+        <div class="rte">
+          {{ collection.description }}
+        </div>
+      {% endif %}
+    </header>
+
+    <div class='container--xl mha px1'>
+      <div class='collection__grid-clean'>
+        {% for product in collection.products limit: 12 %}
+          {% include 'collection-item-update' %}
+        {% endfor %}
+        <div class='collection__item'></div>
+      </div>
+
+    {% if paginate.pages > 1 %}
+      {% include 'pagination' %}
+    {% endif %}
+    </div>
+    </div>
+    </div>
+  {% endpaginate %}

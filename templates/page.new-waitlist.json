@@ -1,0 +1,29 @@
+{
+  "sections": {
+    "main": {
+      "type": "waitlist",
+      "custom_css": [
+        ".tagline {margin-bottom: 5rem;}",
+        ".image-overaly {background-color: #ffffff00;}",
+        ".popup-button {font-weight: 700; background:#ED2982; }",
+        ".heading {font-size: 2.5rem;}",
+        "@media only screen and (max-width: 768px) {.content-wrapper {padding: 0 1rem; }}"
+      ],
+      "settings": {
+        "viral_loops_id": "XbChnwYC3W4NuRPrSV2XodrO37A",
+        "viral_loops_script": "<script type=\"text/javascript\" src=\"https://app.viral-loops.com/widgetsV2/core/loader.js\" data-campaign-id=\"XbChnwYC3W4NuRPrSV2XodrO37A\" id=\"viral-loops-loader\"></script>",
+        "heading": "Saddle up for Something Sweet...",
+        "tagline": "We’re bringing back your childhood favourite — but with a twist. Get on the list to be the first to know.",
+        "content": "",
+        "button_text": "GET ON THE LIST",
+        "below_button_text": "",
+        "terms": "",
+        "background_image": "shopify://shop_images/1442.png",
+        "hide_waitlist-footer": false
+      }
+    }
+  },
+  "order": [
+    "main"
+  ]
+}

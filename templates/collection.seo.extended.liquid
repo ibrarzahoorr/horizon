@@ -1,0 +1,98 @@
+<div class="collection-seo">
+  {% comment %}
+  <section class='hero bg-p px2 pm60  o-h rel f jcc aic hero__tall' data-module='pageHero'>
+    <div class='hero__empty rel z4 hero__shop fill-x f jcc aic'>
+      <div class='container--xl mha rel z2'>
+        <div class='f fw jcb aic ac'>
+          <div class='container--m mha '>
+            <h5 class='caps bold s1'>{{ collection.metafields.blume_collection.sub_header }}</h5>
+            <h1 class='mx0 pt0 pb0 h1-hero  serif'>{{ collection.metafields.blume_collection.collection_title }}</h1>
+            <h2 class='h5 pb0 h2 mb15'>{{ collection.metafields.blume_collection.collection_sub_title }}</h2>
+            {% if collection.metafields.blume_collection.blume_lifestyle_images %}
+              <div class='collection-icons f jcc aic'>
+                {% for questions in collection.metafields.blume_collection.blume_lifestyle_images %}
+                <div class='icon mb15 rel'>
+                  <img src='{{collection.metafields.blume_collection.blume_lifestyle_images[forloop.index0]}}' alt='{{collection.title}}' />
+                </div>
+                {% endfor %}
+              </div>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  
+    <div class='abs z3 fill-x fill-y co collection__hero-shape'>
+      {% include 'shape-four' %}
+    </div>
+    <div class='abs left fill-x fill-y cw talk__bar collection__extended-bar'>
+      <svg class='fill-x bg-p abs' width="1440px" height="1213px" viewBox="0 0 1440 1213"><defs><path d="M0,279.351562 C240,160.1867 480,100.604269 720,100.604269 C960,100.604269 1200,67.0695128 1440,0 L1440,1213 L0,1213 L0,279.351562 Z" id="path-1"></path></defs><g id="All-Pages" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd"><g id="Shop-Products-2---Landing" transform="translate(0.000000, -3911.000000)"><g id="Blume-Box" transform="translate(0.000000, 3134.000000)"><g id="Backgound-Elements" transform="translate(0.000000, 134.000000)"><g id="Cream-Wave-and-Navy-Blob" transform="translate(0.000000, 643.000000)"><mask id="mask-2" fill="white"><use xlink:href="#path-1"></use></mask><use id="Cream-Background-Wave" fill="currentColor" xlink:href="#path-1"></use></g></g></g></g></g></svg>
+    </div> 
+  </section>
+
+  {% endcomment %}
+  <h2 class="caps outline line-header " style=" margin: 0 0 10px;text-align: center; ">
+      <span class="rel z2 ph05 inline-block">{{ collection.metafields.blume_collection.collection_title }}</span>
+      <span style=" display: block; font-size: 20px; -webkit-text-fill-color: #f61d1a; -webkit-text-stroke-color: #f61d1a; ">{{ collection.metafields.blume_collection.collection_sub_title }}</span>
+    </h2>
+  
+  {% paginate collection.products by 12 %}
+  <section>
+    <div class='bg-w collection rel z1'>
+      <div class='fill-x container--xl mha px2 phm4 ac'>
+        <div class='container--xl mha'>
+          <div class='collection__grid-clean'>
+            {% for product in collection.products limit: 12 %}
+              {% include 'collection-item-update' %}
+            {% endfor %}
+            <div class='collection__item'></div>
+          </div>
+    
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        </div>
+      </div>
+    </div>
+  </section>
+{% endpaginate %}
+
+  
+  {% if collection.metafields.blume_collection.accordion_image %}
+    <div class='collection__accordion bg-lb'>
+      <div class='f fw jcb aist'>
+        <img class='block x' src='{{ collection.metafields.blume_collection.accordion_image }}' alt='Blume Lifestyle Image' />
+        <div class='collection__accordion-blocks x px2 f jcc aic' data-module='accordion'>
+          {% for questions in collection.metafields.blume_collection.accordion_question %}
+            <div class='x pv1 collection__accordion-single js-a-item  {% if forloop.index0 == 0 %}active{% endif %}'>
+              <div class='collection__accordion-single_header pointer f jcb aic'>
+                <h5 class='bold mx0 px0'>{{ collection.metafields.blume_collection.accordion_question[forloop.index0]}}</h5>
+                <button type='button' class='collection__accordion-control bg-w f jcc aic'>
+                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                    <line x1="12.5355" y1="5.46451" x2="5.46445" y2="12.5356" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <line x1="12.5356" y1="12.5356" x2="5.46449" y2="5.46452" stroke="#001E42" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>                
+                </button>
+              </div>
+              <div class='collection__accordion-body'>
+                {{collection.metafields.blume_collection.accordion_answer[forloop.index0]}}
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  {% endif %}
+  
+  {% if collection.metafields.blume_collection.video %}
+    <section class='bg-db px2 phm4 pm60 rel'>
+      <div class='container--l mxa x'>
+        <div class='video-wrapper outer x'>
+          <iframe width="560" height="315" src="https://www.youtube.com/embed/{{ collection.metafields.blume_collection.video }}" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+        </div>
+      </div>
+    </section>
+  {% endif %}
+  
+  {% section 'female-forward' %}
+</div>

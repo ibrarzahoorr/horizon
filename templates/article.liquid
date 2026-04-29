@@ -1,0 +1,183 @@
+{% comment %}
+  When a comment is submitted, the browser is redirected to a page that includes
+  the new comment id in its URL.
+  #comments is a required ID and is used as an anchor link by Shopify.
+{% endcomment %}
+
+{%- assign number_of_comments = article.comments_count -%}
+
+{% comment %}
+  If a comment was just submitted but requires moderation, we have an extra comment to count.
+{% endcomment %}
+{% if comment and comment.status != 'published' %}
+  {% assign number_of_comments = article.comments_count | plus: 1 %}
+{% endif %}
+
+<div class='o-h'>
+  <article role="article" itemscope itemtype="http://schema.org/Article">
+    <div class='bg-lb hero article__hero'>
+      <div class='container--xl mha'>
+        <div class='f fw jce hero__flex_article aic'>
+          <div class='hero__article'>
+            {% if article.image %}
+              <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1024x1024' }}" />
+              <img class='fill-x hidden__sizer' src="{{ article.image.src | img_url: '1024x1024' }}" />
+            {% endif %}
+          </div>
+
+          <div class='fill-x px2'>
+            <div class='container--s mha'>
+              {% if article.tags.size > 0 %}
+                {% for tag in article.tags %}
+                  <h6 class='caps bold s1 mx0 pb1'>
+                    <a href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>{% unless forloop.last %}, {% endunless %}
+                  </h6>
+                {% endfor %}
+              {% endif %}
+              <h1 class='mx0 serif px0'>{{ article.title }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class='bg-w px2'>
+      <div class='article__content container--m pm60 mha'>
+        <div class="rte" itemprop="articleBody">
+          {{ article.content }}
+        </div>
+
+        {% if settings.social_sharing_blog %}
+          {% comment %}
+            {% include 'social-sharing', share_title: article.title, share_permalink: article.url, share_image: article.image %}
+          {% endcomment %}
+        {% endif %}
+
+        {% if blog.comments_enabled? %}
+          <h3>{{ 'blogs.comments.with_count' | t: count: number_of_comments }}</h3>
+
+          {% paginate article.comments by 5 %}
+
+          <div id="comments">
+            {% if comment and comment.status and paginate.current_page == 1 %}
+              <p class="form-success">
+                {% if blog.moderated? and comment.status != 'published' %}
+                  {{ 'blogs.comments.success_moderated' | t }}
+                {% else %}
+                  {{ 'blogs.comments.success' | t }}
+                {% endif %}
+              </p>
+            {% endif %}
+
+            {% if number_of_comments > 0 %}
+              <ul>
+                {% comment %}
+                  Display comment from URL parameters if it is waiting moderation
+                {% endcomment %}
+                {% if comment and comment.status != 'published' %}
+                  <li id="{{ comment.id }}">
+                    <div class="rte">
+                      {{ comment.content }}
+                    </div>
+                    {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                    <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+                  </li>
+                {% endif %}
+
+                {% for comment in article.comments %}
+                  <li id="{{ comment.id }}">
+                    <div class="rte">
+                      {{ comment.content }}
+                    </div>
+                    {% capture date %}{{ comment.created_at | time_tag: format: 'month_day_year' }}{% endcapture %}
+                    <p>{{ 'blogs.article.comment_meta_html' | t: author: comment.author, date: date }}</p>
+                  </li>
+
+                {% endfor %}
+              </ul>
+
+              {% if paginate.pages > 1 %}
+                {% include 'pagination' %}
+              {% endif %}
+            {% endif %}
+          </div>
+
+          {% endpaginate %}
+
+        {% endif %}
+      </div>
+    </div>
+    {%- assign product = all_products[article.metafields.product_upsells.linked_products] -%}
+    {%- assign current_variant = product.selected_or_first_available_variant -%}
+    
+    {% if product.title != '' %}
+    <section class='bg-w pv15' data-module='collectionItem'>
+      <script class='js-product-json' type='text/template'>
+          {
+            "selectedOrFirstAvailableVariant": {{ current_variant.id | json }},
+            "product": {{ product | json }}
+          }
+        </script>
+      <div class='container--m f jcb aic mxa p15 product__page-quick'>
+        <div class='x'>
+          <a href='{{product.url}}'>
+            {{ product.featured_image.src | img_url: '880x880' | img_tag: product.title }}
+          </a>
+        </div>
+        <div class='x product__page-quick_text ac'>
+
+          <a href='{{product.url}}'>
+            <h1 class='medium pt0 serif mx0 mb0 pb0 mt05'>{{product.title}}</h1>
+            <p>{{article.metafields.product_upsells.title}}</p>
+            <div class='js-review-jump'>
+              {% render 'junip-product-summary', product: product %}
+            </div>
+          </a>
+          </div>
+          <div class='fill-x px1 {% if productTags contains 'no-add' %}none{% endif %}'>
+            <a href='' class='btn btn__blue btn__checkout js-add-to-cart bold fill-x'>Add to Cart</a>
+          </div>
+        </div>
+      </div>
+    </section>
+    {% endif %}
+    {% comment %}
+      Display additional related articles
+    {% endcomment %}
+    <div class='bg-p px2 pm60'>
+      <div class='container--l mha'>
+        <h2 class='caps outline  ac'>
+          <span class='rel z2 ph05 inline-block'>Related Posts</span>
+        </h2>
+        <div class='f jcc fw article__related'>
+          {% assign currentHandle = article.handle %}
+          {% for article in blogs.blume-university.articles | limit: 2 %}
+            {% if currentHandle != article.handle %}
+
+              {% comment %}
+              <div class='px1 article__related_single rel'>
+                <a href="{{ article.url }}" class='abs fill-x fill-y z1 fit'></a>
+                <div class='article__related_image mb1' style="background-image: url({{ article.image.src | img_url: '1024x1024'}})">
+                  <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1024x1024'}}" />
+                </div>
+                {% if blog.comments_enabled? or article.tags.size > 0 %}
+                  {% if article.tags.size > 0 %}
+                    {% for tag in article.tags %}
+                      <a class='caps mx0 xsmall bg-o bold article__tag inline-block mt1 ls1' href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                      {% unless forloop.last %}, {% endunless %}
+                    {% endfor %}
+                  {% endif %}
+                {% endif %}
+                <h3 class='mt0 pt0 serif'><a href="blogs/{{ article.handle }}">{{article.title}}</a></h3>
+              </div> 
+              {% endcomment %}
+               <div class='article__tease {% include 'u-cx' with cx %}'>
+                {% include 'article-tease' %}
+              </div>
+            {% endif %}
+
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </article>
+</div>

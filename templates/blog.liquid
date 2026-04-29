@@ -1,0 +1,124 @@
+<div class='bg-w rel z2'>
+  <div class='bg-w rel'>
+    {% paginate blog.articles by 10 %}
+
+    {%- assign blog_title = blog.title -%}
+    <div class='blog__header f fw'>
+      {% include 'blog-tag-nav' %}
+      {% if current_tags %}
+        {% capture blog_title %}{{ blog.title | link_to: blog.url }} &mdash; {{ current_tags.first }}{% endcapture %}
+        <div class='bg-lb pv2 x rel'>
+          <div class='fill-x o-h article__header hero__blog-tag px2 f jcc aic ac phm4'>
+            <div class='container--xl fill-x mha  rel z2'>
+              <div class='f fw jcb aie hero__a_text'>
+                <h1 class='serif x inline-block ac'>
+                  {{current_tags}}
+                </h1>
+              </div>
+            </div>
+            <div class='abs fill-x fill-y cdb hero__clp_shape'>
+              {% include 'shape-four' %}
+            </div>
+          </div>
+        </div>
+      {% else %}
+        <div class='bg-lb rel' data-module='blogSlideshow'>
+          <div class='blog__slideshow rel'>
+            <div class='f jcs aic fw blog__slideshow-flex'>
+              <div class='real__controls ar abs bottom mb1 left z1 f jce aie'>
+                <div class='real__controls-left bg-b cw inline-block f jcc aic rotate js-left-slides'>
+                  <svg width="9px" height="15px" viewBox="0 0 9 15">
+                    <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                        transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                        points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                    </g>
+                  </svg>
+                </div>
+                <div class='real__controls-right ml1 bg-b cw inline-block f jcc aic js-right-slides'>
+                  <svg width="9px" height="15px" viewBox="0 0 9 15">
+                    <g id="2019-Site-Updates" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                      <polyline id="Rectangle-11" stroke='currentColor' stroke-width="2"
+                        transform="translate(0.926461, 7.754586) scale(-1, 1) rotate(-315.000000) translate(-0.926461, -7.754586) "
+                        points="5.42646103 12.254586 -3.57353897 12.254586 -3.57353897 3.25458603 -3.57353897 3.25458603"></polyline>
+                    </g>
+                  </svg>
+                </div>
+              </div>
+              <div class='blog__slideshow-images fill-x js-slideshow'>
+                {% for article in blog.articles limit: 3 %}
+                  {% if article.image %}
+                    <img class='fill-x lazyload' data-src="{{ article.image.src | img_url: '1400x'}}" />
+                  {% endif %}
+                {% endfor %}
+              </div>
+              <div class='blog__slideshow-descriptions'>
+                {% for article in blog.articles limit: 3 %}
+                  <div class='px2 js-slideshow-text blog__slideshow-text'>
+                    {% if blog.comments_enabled? or article.tags.size > 0 %}
+                      {% if article.tags.size > 0 %}
+                        {% for tag in article.tags %}
+                          <a class='caps mx0 xsmall bg-o bold article__tag inline-block mv1 ls1' href="{{ blog.url }}/tagged/{{ tag | handle }}">{{ tag }}</a>
+                          {% unless forloop.last %}, {% endunless %}
+                        {% endfor %}
+                      {% endif %}
+                    {% endif %}
+                    <h3 class='mx0 px0 serif'>
+                      <a href="{{ article.url }}">{{ article.title }}</a>
+                    </h3>
+                    <div class="rte">
+                      {% if article.excerpt.size > 0 %}
+                        <p>{{ article.excerpt | strip_html | truncatewords: 25 }}</p>
+                      {% else %}
+                        <p>{{ article.content | strip_html | truncatewords: 25 }}</p>
+                      {% endif %}
+                    </div>
+                    <a href="{{ article.url }}" class='mb1 xsmall bold ls1 underline caps'>Read More</a>
+                  </div>
+                {% endfor %}
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endif %}
+    </div>
+    
+    <div class='bg-w rel z3 pm60'>
+      <!-- {% if blog.all_tags.size > 0 %}
+        <h2>{{ 'blogs.general.categories' | t }}</h2>
+
+      {% endif %} -->
+
+
+      {% comment %}
+
+      Article Previews
+      ====================
+      {% endcomment %}
+      <div class='container--xl blog__container mha bg-w' data-module='blog'>
+        <div class='f fw jcb aic'>
+          {% for article in blog.articles %}
+
+            {% capture cx %}
+              {% if forloop.index == 1 %}mini{% endif %}
+              {% if forloop.index == 4 %}mini{% endif %}
+              {% if forloop.index == 5 %}mini{% endif %}
+              {% if forloop.index == 8 %}mini{% endif %}
+              {% if forloop.index == 10 %}mini{% endif %}
+            {% endcapture %}
+              <div class='article__tease {% include 'u-cx' with cx %}'>
+                {% include 'article-tease' %}
+              </div>
+          {% endfor %}
+        </div>
+
+        {% if paginate.pages > 1 %}
+          {% include 'pagination' %}
+        {% endif %}
+
+      {% endpaginate %}
+    </div>
+  </div>
+</div>
+
+{% section 'newsletter-signup' %}

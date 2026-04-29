@@ -1,0 +1,117 @@
+<style>
+  @media (min-width: 768px) {
+    .search__item .search__item_image-wrapper {
+      min-height: 460px;
+    }
+    .search__item_image-wrapper {
+      min-height: 460px;
+    }
+  }
+
+  .search__item_image-wrapper {
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    min-height: 260px;
+  }
+
+  .search__item h4 {
+    margin-top: 16px;
+    margin-bottom: 8px;
+  }
+  .search__item p {
+    margin-top: 0;
+    margin-bottom: 8px;
+  }
+</style>
+{% paginate search.results by 10 %}
+  <section class='px2 pm60  o-h rel f jcc aic hero__tall bg-w' data-module='pageHero'></section>
+
+
+  {% comment %} <form action="/search" method="get" role="search">
+  <label for="Search" class="label-hidden">
+  {{ 'general.search.placeholder' | t }}
+  </label>
+  <input type="search"
+  name="q"
+  id="Search"
+  value="{{ search.terms | escape }}"
+  placeholder="{{ 'general.search.placeholder' | t }}">
+  <button type="submit" class="btn">
+  {% include 'icon-search' %}
+  <span class="icon-fallback-text">{{ 'general.search.submit' | t }}</span>
+  </button>
+  </form> {% endcomment %}<div class='bg-w collection'>
+    <div class='fill-x container--xl mha px2 phm4 ac'>
+      <header role="banner" class='px1 container--xl mha'>
+        <h1>
+          {% if search.performed %}
+            {% if search.results_count == 0 %}
+              {{ 'general.search.no_results_html' | t: terms: search.terms }}
+            {% else %}
+              {{ 'general.search.results_for_html' | t: terms: search.terms }}
+            {% endif %}
+          {% else %}
+            {{ 'general.search.title' | t }}
+          {% endif %}
+        </h1>
+      </header>
+      <div class='container--xl mha'>
+        {% if search.performed %}
+
+          <ul class='f jcb fw collection__grid'>
+            {% for item in search.results %}
+              <li class="collection__item search__item mb15 rel">
+                {% if item.featured_image %}
+                  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                    <div class="collection__item_image-wrapper search__item_image-wrapper">
+                      <img src='{{ item.featured_image.src | img_url: '600x' }}' />
+                    </div>
+                  </a>
+                {% else %}
+                  <a href="{{ item.url | within: collection }}" title="{{ item.title | escape }}">
+                    <div class="collection__item_image-wrapper search__item_image-wrapper bg-lb"></div>
+                  </a>
+                {% endif %}
+                <h4 class="serif ac">{{ item.title | link_to: item.url }}</h4>
+
+                {% if item.object_type == 'product' %}
+                  <p>
+                    {% if item.compare_at_price > item.price %}
+                      {% if item.price_varies %}
+                        {% assign sale_price = item.price | money %}
+                        {{ 'products.product.on_sale_from_html' | t: price: sale_price }}
+                      {% else %}
+                        {{ 'products.product.on_sale' | t }}
+                        <span itemprop="price">{{ item.price | money }}</span>
+                      {% endif %}
+                      <span class="visually-hidden">{{ 'products.product.regular_price' | t }}</span>
+                      <s>{{ item.compare_at_price | money }}</s>
+                    {% else %}
+                      {% if item.price_varies %}
+                        {% assign price = item.price | money %}
+                        <span itemprop="price">{{ 'products.product.from_text_html' | t: price: price }}</span>
+                      {% else %}
+                        <span itemprop="price">{{ item.price | money }}</span>
+                      {% endif %}
+                    {% endif %}
+                    {% unless item.available %}
+                      {{ 'products.product.sold_out' | t }}
+                    {% endunless %}
+                  </p>
+                {% else %}
+                  <p>{{ item.content | strip_html | truncatewords: 50 }}</p>
+                {% endif %}
+
+              </li>
+            {% endfor %}
+          </ul>
+
+          {% if paginate.pages > 1 %}
+            {% include 'pagination' %}
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+{% endpaginate %}

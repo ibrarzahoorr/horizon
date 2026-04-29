@@ -1,0 +1,88 @@
+
+
+{% include 'subscription-cart-footer' %}
+
+<div class='bg-lp px2 rel o-h pm100 ptl160 cart'>
+  <div class='container--xl mha'>
+    {% if cart.item_count > 0 %}
+      <h2 class='serif pt2'>My Bag</h2>
+
+      <form action="/cart" method="post" novalidate>
+        <div class='js-items rel x'>
+          {% for item in cart.items %}
+            <div class='cart-drawer__item' data-module='cartDrawerItem' data-id="{{ item.product_id }}" data-qty="{{ item.quantity }}" data-title="{{ item.title }}" data-price="{{ item.final_line_price }}">
+              <div class='f aic rel'>
+                <div class='__content_image'>
+                  <a href='{{ item.url }}'>
+                    <img src="{{ item.image | img_url: '400x' }}" />
+                  </a>
+                </div>
+                <div class='__content pl1 fill-x ais jcb'>
+                  <div class=''>
+                    <a href='{{ item.url }}' class='mv0 p1 s20 serif bold mv0'>{{ item.title }}</a>
+                    <div class='f jcs aic'>
+                      {% if item.properties.shipping_interval_frequency %}
+                        <div class='xsmall sans caps cm m025 book'>Ships every {{ item.properties.shipping_interval_frequency }} {{ item.properties.shipping_interval_unit_type }}</div>
+                      {% endif %}
+                    </div>
+                  </div>
+                  <div class='f jcb aic fill-x'>
+                    <div class='__content_info'>
+                      <div class='f aic cart__qty-wrap {% if item.final_line_price < 10 %} hide hidden {% endif %}'>
+                        <div class='cart-quantity js-remove-single px05'>-</div>
+                        <div class='js-single-quantity cart-quantity_circle f jcc aic'><span class='small'>{{ item.quantity }}</span></div>
+                        <div class='cart-quantity js-add-single px05'>+</div>
+                      </div>
+                    </div>
+                    <div class='__cart_price'>
+                      <div class='small track mx0'><span class='money'>{{ item.final_line_price | money }}</span></div>
+                    </div>
+                  </div>
+                  <button class='button--reset abs cb top fit-r'>
+                    <svg viewBox="0 0 16 16" width="16" height="16" fill="none" stroke="currentcolor" stroke-width="3" style="display:inline-block;vertical-align:middle;overflow:visible;"><path d="M1.0606601717798212 1.0606601717798212 L14.939339828220179 14.939339828220179"></path><path d="M14.939339828220179 1.0606601717798212 L1.0606601717798212 14.939339828220179"></path></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+        <footer class='outer--v jcb aic'>
+          <div class='x'>
+            <div class='js-sub x'></div>
+          </div>
+          <div class='x'>
+            <input type="hidden" name="checkout" value="Checkout"/>
+            <button class='x no-ajax btn btn__checkout bold js-prefill-url'>Checkout</button>
+          </div>
+          {% comment %}
+          <!-- Insert QuadPay Widget --> {% endcomment %}
+          <div style="margin:0;line-height: 15px; margin-top: 8px;">
+            <quadpay-widget size="80%" logoSize="85%" alignment="center" amountSelector=".js-sub"
+              amount={{ cart.total_price | divided_by: 100.00 }}></quadpay-widget>
+          </div>
+        </footer>
+      </form>
+    {% else %}
+      <h1>{{ 'cart.general.title' | t }}</h1>
+
+      {% comment %}
+      Cart empty state
+      {% endcomment %}
+      <div class="supports-cookies">
+        <p>{{ 'cart.general.empty' | t }}</p>
+        <p>{{ 'cart.general.continue_browsing_html' | t }}</p>
+      </div>
+
+      {% comment %}
+      Cart no cookies state
+      ---------------------
+      Browser cookies are required to use the cart. If cookies aren't enabled in the
+      browser a message is displayed prompting the user to enable them.
+      {% endcomment %}
+      <div class="supports-no-cookies">
+        <p>{{ 'cart.general.cookies_required' | t }}</p>
+      </div>
+    {% endif %}
+
+  </div>
+</div>
